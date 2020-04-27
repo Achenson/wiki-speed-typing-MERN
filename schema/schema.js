@@ -1,13 +1,13 @@
 const graphql = require('graphql');
 const _ = require('lodash');
 
-const { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLID, GraphQLInt } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLID, GraphQLInt, GraphQLList } = graphql;
 
 // https://www.youtube.com/watch?v=5RGEODLhjhY&list=PL4cUxeGkcC9iK6Qhn-QLcXCXPQUov1U7f&index=10
 // ^ netninjs graphql testing
 
 
-/* 
+/* query examples:
 query relational
 {
   book(id: "2") {
@@ -19,13 +19,27 @@ query relational
   }
 }
 
+{
+  author(id: "2") {
+    name
+    books {
+      name
+      genre
+    }
+  }
+}
+
+
 */
 
 // dummy data
 var books = [
     { name: 'Name of the Wind', genre: 'Fantasy', id: '1', authorId: '1' },
     { name: 'The Final Empire', genre: 'Fantasy', id: '2', authorId: '2'  },
+    { name: 'The Hero of Ages', genre: 'Fantasy', id: '4', authorId: '2' },
     { name: 'The Long Earth', genre: 'Sci-Fi', id: '3', authorId: '3'  },
+    { name: 'The Colour of Magic', genre: 'Fantasy', id: '5', authorId: '3' },
+    { name: 'The Light Fantastic', genre: 'Fantasy', id: '6', authorId: '3' },
 ];
 
 var authors = [
@@ -37,6 +51,10 @@ var authors = [
 
 const BookType = new GraphQLObjectType({
     name: 'Book',
+    // why we have to wrap in a func? because this function
+    // will run after the whole code executes
+    // otherwise AuthorType would be undefined as code run from
+    // top to bottom
     fields: ( ) => ({
         // id: { type: GraphQLString },
         id: { type: GraphQLID },
@@ -60,7 +78,14 @@ const AuthorType = new GraphQLObjectType({
     fields: ( ) => ({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
-        age: { type: GraphQLInt }
+        age: { type: GraphQLInt },
+        books: {
+            type: new GraphQLList(BookType),
+            resolve(parent, args){
+                // parent refers to the Author that we are quering here
+                return _.filter(books, { authorId: parent.id });
+            }
+        }
     })
 });
 
