@@ -29,6 +29,14 @@ query relational
   }
 }
 
+{
+  authors {
+    name
+    books {
+      name
+    }
+  }
+  
 
 */
 
@@ -108,6 +116,20 @@ const RootQuery = new GraphQLObjectType({
             args: { id: { type: GraphQLID } },
             resolve(parent, args){
                 return _.find(authors, { id: args.id });
+            }
+        },
+        books: {
+            type: new GraphQLList(BookType),
+            resolve(parent, args){
+                // we return the whole array,
+                // graphQL will take care of returning specific data
+                return books;
+            }
+        },
+        authors: {
+            type: new GraphQLList(AuthorType),
+            resolve(parent, args){
+                return authors;
             }
         }
 
