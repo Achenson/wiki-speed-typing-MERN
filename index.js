@@ -12,7 +12,8 @@ dotenv.config();
 
 const MONGODB_CONNECTION_STRING = process.env.DB;
 
-mongoose.connect(MONGODB_CONNECTION_STRING, {useNewUrlParser: true})
+mongoose.connect(MONGODB_CONNECTION_STRING, {useNewUrlParser: true,
+    useUnifiedTopology: true })
 .then(() => console.log("connection succesfull"))
 .catch(err => console.log(err));
 
