@@ -48,6 +48,16 @@ query relational
   }
   
 
+//   mutation example
+
+mutation {
+  addAuthor(name: "Tester", age: 99) {
+    //   this will be shown back
+    name
+    age
+  }
+}
+
 */
 
 // dummy data

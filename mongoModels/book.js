@@ -7,5 +7,5 @@ const bookSchema = new Schema({
     genre: String,
     authorId: String
 });
-// we will have a collection named "Book", inside which there will be bookSchema object
+// we will have a collection named "Book" ?? books??, inside which there will be bookSchema object
 module.exports = mongoose.model('Book', bookSchema);

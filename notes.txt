@@ -1,0 +1,5 @@
+'mongodb+srv://Achenson:<password>@mongo-for-fcc-13gh5.mongodb.net/graphql_test?retryWrites=true&w=majority'
+
+^ <password> - without this angle brackets!
+
+^graphql_test - name of the db that the document will we saved to! name of the collection will be infered automatically
