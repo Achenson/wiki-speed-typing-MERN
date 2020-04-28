@@ -58,6 +58,30 @@ mutation {
   }
 }
 
+// after connecting to MongoDb examples
+
+ {
+ books {
+  name
+  genre
+  author {
+    name
+    age
+  }
+}
+}
+
+ {
+ authors {
+  name
+  age
+  books {
+    name
+    
+  }
+}
+}
+
 */
 
 // dummy data
@@ -92,7 +116,9 @@ const BookType = new GraphQLObjectType({
       // parent is the book that we get from current query!
       resolve(parent, args) {
         //  authorID comes from books array
-        return _.find(authors, { id: parent.authorId });
+            // for dummy data only:
+        // return _.find(authors, { id: parent.authorId });
+        return Author.findById(parent.authorId)
       },
     },
   }),
@@ -110,6 +136,8 @@ const AuthorType = new GraphQLObjectType({
         // parent refers to the Author that we are quering here
         // for dummy data only:
         // return _.filter(books, { authorId: parent.id });
+        return Book.find({authorId: parent.id})
+
       },
     },
   }),
@@ -126,6 +154,7 @@ const RootQuery = new GraphQLObjectType({
         // code to get data from db / other source
         // for dummy data only:
         // return _.find(books, { id: args.id });
+        return Book.findById(args.id)
       },
     },
     author: {
@@ -134,6 +163,7 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args) {
         // for dummy data only:
         // return _.find(authors, { id: args.id });
+        return Author.findById(args.id)
       },
     },
     books: {
@@ -143,6 +173,7 @@ const RootQuery = new GraphQLObjectType({
         // graphQL will take care of returning specific data
         // for dummy data only:
         // return books;
+        return Book.find({})
       },
     },
     authors: {
@@ -150,6 +181,7 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args) {
         // for dummy data only:
         // return authors;
+        return Author.find({})
       },
     },
   },
