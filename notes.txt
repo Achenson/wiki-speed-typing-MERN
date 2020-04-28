@@ -3,3 +3,6 @@
 ^ <password> - without this angle brackets!
 
 ^graphql_test - name of the db that the document will we saved to! name of the collection will be infered automatically
+
+
+GraphQLNonNull - preventing users from not entering all data in mutation

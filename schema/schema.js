@@ -12,77 +12,12 @@ const {
   GraphQLID,
   GraphQLInt,
   GraphQLList,
+  GraphQLNonNull
 } = graphql;
 
 // https://www.youtube.com/watch?v=5RGEODLhjhY&list=PL4cUxeGkcC9iK6Qhn-QLcXCXPQUov1U7f&index=10
 // ^ netninjs graphql testing
 
-/* query examples:
-query relational
-{
-  book(id: "2") {
-    name
-    genre
-    author {
-      name
-    }
-  }
-}
-
-{
-  author(id: "2") {
-    name
-    books {
-      name
-      genre
-    }
-  }
-}
-
-{
-  authors {
-    name
-    books {
-      name
-    }
-  }
-  
-
-//   mutation example
-
-mutation {
-  addAuthor(name: "Tester", age: 99) {
-    //   this will be shown back
-    name
-    age
-  }
-}
-
-// after connecting to MongoDb examples
-
- {
- books {
-  name
-  genre
-  author {
-    name
-    age
-  }
-}
-}
-
- {
- authors {
-  name
-  age
-  books {
-    name
-    
-  }
-}
-}
-
-*/
 
 // dummy data
 var books = [
@@ -194,8 +129,8 @@ const Mutation = new GraphQLObjectType({
         addAuthor: {
             type: AuthorType,
             args: {
-                name: { type: GraphQLString },
-                age: { type: GraphQLInt }
+                name: { type: new GraphQLNonNull(GraphQLString) },
+                age: { type: new GraphQLNonNull(GraphQLInt) }
             },
             resolve(parent, args){
                 // Author is a mongoDB model
@@ -213,9 +148,9 @@ const Mutation = new GraphQLObjectType({
         addBook: {
             type: BookType,
             args: {
-                name: { type: GraphQLString },
-                genre: { type: GraphQLString },
-                authorId: { type: GraphQLID }
+                name: { type: new GraphQLNonNull(GraphQLString)  },
+                genre: { type: new GraphQLNonNull(GraphQLString)  },
+                authorId: { type: new GraphQLNonNull(GraphQLID) }
             },
             resolve(parent, args){
                 let book = new Book({
