@@ -1,6 +1,10 @@
 const graphql = require('graphql');
 const _ = require('lodash');
 
+// mongoDB models
+const Book = require('../mongoModels/book');
+const Author = require('../mongoModels/Author');
+
 const { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLID, GraphQLInt, GraphQLList } = graphql;
 
 // https://www.youtube.com/watch?v=5RGEODLhjhY&list=PL4cUxeGkcC9iK6Qhn-QLcXCXPQUov1U7f&index=10
