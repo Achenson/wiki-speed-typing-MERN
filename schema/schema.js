@@ -1,5 +1,8 @@
 const graphql = require("graphql");
 
+const User = require("../mongoModels/user");
+const Score = require("../mongoModels/score");
+
 const {
   GraphQLObjectType,
   GraphQLSchema,
@@ -7,7 +10,6 @@ const {
   GraphQLInt,
   GraphQLString,
   GraphQLList,
-  
 } = graphql;
 
 const UserType = new GraphQLObjectType({
@@ -17,11 +19,7 @@ const UserType = new GraphQLObjectType({
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     password: { type: GraphQLString },
-    score: { type: ScoreType, resolve(parent, args) {
-        
-        
-
-    } },
+    score: { type: ScoreType, resolve(parent, args) {} },
   }),
 });
 
