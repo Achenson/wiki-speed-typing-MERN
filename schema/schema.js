@@ -92,10 +92,10 @@ const Mutation = new GraphQLObjectType({
       args: {
         userId: { type: new GraphQLNonNull(GraphQLString) },
         "5sec": { type: new GraphQLNonNull(GraphQLList) },
-    "30sec": { type: new GraphQLNonNull(GraphQLList) },
-    "1min": { type: new GraphQLNonNull(GraphQLList) },
-    "2min": { type: new GraphQLNonNull(GraphQLList) },
-    "5min": { type: new GraphQLNonNull(GraphQLList) },
+        "30sec": { type: new GraphQLNonNull(GraphQLList) },
+        "1min": { type: new GraphQLNonNull(GraphQLList) },
+        "2min": { type: new GraphQLNonNull(GraphQLList) },
+        "5min": { type: new GraphQLNonNull(GraphQLList) },
       },
       resolve(parent, args) {
         let score = new Score({
@@ -105,9 +105,8 @@ const Mutation = new GraphQLObjectType({
           "1min": Array,
           "2min": Array,
           "5min": Array,
-
-
         });
+        return score.save()
       },
     },
   },
