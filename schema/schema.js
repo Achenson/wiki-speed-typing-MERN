@@ -33,11 +33,11 @@ const ScoreType = new GraphQLObjectType({
   name: "Score",
   fields: () => ({
     id: { type: GraphQLID },
-    "sec_5": { type: GraphQLList },
-    "sec_30": { type: GraphQLList },
-    "min_1": { type: GraphQLList },
-    "min_2": { type: GraphQLList },
-    "min_5": { type: GraphQLList },
+    "sec_5": { type: new GraphQLList(GraphQLInt) },
+    "sec_30": {type: new GraphQLList(GraphQLInt)},
+    "min_1": { type: new GraphQLList(GraphQLInt) },
+    "min_2": { type: new GraphQLList(GraphQLInt)},
+    "min_5": { type: new GraphQLList(GraphQLInt)},
 
     user: {
       type: UserType,
@@ -91,11 +91,11 @@ const Mutation = new GraphQLObjectType({
       type: ScoreType,
       args: {
         userId: { type: new GraphQLNonNull(GraphQLString) },
-        "sec_5": { type: GraphQLList},
-        "sec_30": {  type: GraphQLList },
-        "min_1": {  type: GraphQLList },
-        "min_2": {  type: GraphQLList },
-        "min_5": {  type: GraphQLList },
+        "sec_5": { type: new GraphQLList(GraphQLInt)},
+        "sec_30": {  type: new GraphQLList(GraphQLInt)},
+        "min_1": {  type: new GraphQLList(GraphQLInt)},
+        "min_2": {  type: new GraphQLList(GraphQLInt) },
+        "min_5": {  type: new GraphQLList(GraphQLInt) },
       },
       resolve(parent, args) {
         let score = new Score({
