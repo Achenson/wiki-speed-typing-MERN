@@ -10,6 +10,7 @@ const {
   GraphQLInt,
   GraphQLString,
   GraphQLList,
+  GraphQLNonNull,
 } = graphql;
 
 const UserType = new GraphQLObjectType({
@@ -19,9 +20,12 @@ const UserType = new GraphQLObjectType({
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     password: { type: GraphQLString },
-    score: { type: ScoreType, resolve(parent, args) {
-     return   Score.findById(args.id)
-    } },
+    score: {
+      type: ScoreType,
+      resolve(parent, args) {
+        return Score.findById(args.id);
+      },
+    },
   }),
 });
 
@@ -35,15 +39,79 @@ const ScoreType = new GraphQLObjectType({
     "2min": { type: GraphQLList },
     "5min": { type: GraphQLList },
 
-    user: { type: UserType, resolve(parent, args) {
-        return User.findById(parent.userId)
-
-    } },
+    user: {
+      type: UserType,
+      resolve(parent, args) {
+        return User.findById(parent.userId);
+      },
+    },
   }),
 });
 
+const RootQuery = new GraphQLObjectType({
+  name: "RootQueryType",
+  fields: {
+    user: {
+      type: UserType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return User.findById(args.id);
+      },
+    },
+    score: {
+      type: ScoreType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Score.findById(args.id);
+      },
+    },
+  },
+});
+
+const Mutation = new GraphQLObjectType({
+  name: "Mutation",
+  fields: {
+    addUser: {
+      type: AuthorType,
+      args: {
+        name: { type: GraphQLString },
+        email: { type: new GraphQLNonNull(GraphQLString) },
+        password: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parent, args) {
+        let user = new User({
+          name: args.name,
+          email: args.email,
+          password: args.password,
+        });
+        return user.save();
+      },
+    },
+    addScore: {
+      type: ScoreType,
+      args: {
+        userId: { type: new GraphQLNonNull(GraphQLString) },
+        "5sec": { type: new GraphQLNonNull(GraphQLList) },
+    "30sec": { type: new GraphQLNonNull(GraphQLList) },
+    "1min": { type: new GraphQLNonNull(GraphQLList) },
+    "2min": { type: new GraphQLNonNull(GraphQLList) },
+    "5min": { type: new GraphQLNonNull(GraphQLList) },
+      },
+      resolve(parent, args) {
+        let score = new Score({
+          authorId: args.userId,
+          "5sec": Array,
+          "30sec": Array,
+          "1min": Array,
+          "2min": Array,
+          "5min": Array,
 
 
+        });
+      },
+    },
+  },
+});
 
 module.exports = new GraphQLSchema({
   query: RootQuery,
