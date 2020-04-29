@@ -19,7 +19,9 @@ const UserType = new GraphQLObjectType({
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     password: { type: GraphQLString },
-    score: { type: ScoreType, resolve(parent, args) {} },
+    score: { type: ScoreType, resolve(parent, args) {
+     return   Score.findById(args.id)
+    } },
   }),
 });
 
@@ -33,9 +35,15 @@ const ScoreType = new GraphQLObjectType({
     "2min": { type: GraphQLList },
     "5min": { type: GraphQLList },
 
-    user: { type: UserType, resolve(parent, args) {} },
+    user: { type: UserType, resolve(parent, args) {
+        return User.findById(parent.userId)
+
+    } },
   }),
 });
+
+
+
 
 module.exports = new GraphQLSchema({
   query: RootQuery,
