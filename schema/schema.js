@@ -11,6 +11,7 @@ const {
   GraphQLString,
   GraphQLList,
   GraphQLNonNull,
+  GraphQLFloat
 } = graphql;
 
 const UserType = new GraphQLObjectType({
@@ -33,11 +34,11 @@ const ScoreType = new GraphQLObjectType({
   name: "Score",
   fields: () => ({
     id: { type: GraphQLID },
-    "sec_5": { type: new GraphQLList(GraphQLInt) },
-    "sec_30": {type: new GraphQLList(GraphQLInt)},
-    "min_1": { type: new GraphQLList(GraphQLInt) },
-    "min_2": { type: new GraphQLList(GraphQLInt)},
-    "min_5": { type: new GraphQLList(GraphQLInt)},
+    "sec_5": { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
+    "sec_30": { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
+    "min_1": { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
+    "min_2": { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
+    "min_5": { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
 
     user: {
       type: UserType,
@@ -91,11 +92,11 @@ const Mutation = new GraphQLObjectType({
       type: ScoreType,
       args: {
         userId: { type: new GraphQLNonNull(GraphQLString) },
-        "sec_5": { type: new GraphQLList(GraphQLInt)},
-        "sec_30": {  type: new GraphQLList(GraphQLInt)},
-        "min_1": {  type: new GraphQLList(GraphQLInt)},
-        "min_2": {  type: new GraphQLList(GraphQLInt) },
-        "min_5": {  type: new GraphQLList(GraphQLInt) },
+        "sec_5": { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
+        "sec_30": { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
+        "min_1": { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
+        "min_2": { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
+        "min_5": { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
         
       },
       resolve(parent, args) {

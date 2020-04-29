@@ -113,4 +113,21 @@ mutation {
     }
   }
 
+
+
+
+
+// mutating to second test user
+
+mutation {
+  addScore(userId: "5ea96e3da7011208ac9c795d", sec_5: [[1, 0], [1,0]], sec_30: [[1, 0], [1,0]], min_1: [[1, 0], [1,0]], min_2: [[1, 0], [1,0]], min_5: [[1, 0], [1,0]]) {
+    sec_5
+    sec_30
+    min_1
+    min_2
+    min_5
+  }
+}
+
+
 */
