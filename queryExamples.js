@@ -87,4 +87,30 @@ mutation {
 
 
 
+{
+  user (id: "5ea96db7bd05cc098c731bc9") {
+    name
+    email
+    password
+    score {
+      sec_5
+      sec_30
+      min_1
+      min_2
+      min_5
+    }
+  }
+}
+
+{
+  score (id: "5ea9796e105d8934589f7bf8") {
+    sec_5
+   user {
+    name
+    email
+    password
+  }
+    }
+  }
+
 */

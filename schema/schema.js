@@ -23,7 +23,7 @@ const UserType = new GraphQLObjectType({
     score: {
       type: ScoreType,
       resolve(parent, args) {
-        return Score.findById(args.id);
+        return Score.findOne({userId: parent.id});
       },
     },
   }),
