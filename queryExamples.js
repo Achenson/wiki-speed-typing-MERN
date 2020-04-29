@@ -63,4 +63,13 @@ mutation {
 }
 }
 
+===== wiki typing
+
+mutation {
+  addUser(name: "Tracer", email: "tt@tt.pl", password:"123456") {
+    name
+    email
+    password
+  }
+}
 */
