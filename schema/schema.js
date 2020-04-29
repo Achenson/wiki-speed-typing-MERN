@@ -72,7 +72,7 @@ const Mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
     addUser: {
-      type: AuthorType,
+      type: UserType,
       args: {
         name: { type: GraphQLString },
         email: { type: new GraphQLNonNull(GraphQLString) },
@@ -91,11 +91,11 @@ const Mutation = new GraphQLObjectType({
       type: ScoreType,
       args: {
         userId: { type: new GraphQLNonNull(GraphQLString) },
-        "5sec": { type: new GraphQLNonNull(GraphQLList) },
-        "30sec": { type: new GraphQLNonNull(GraphQLList) },
-        "1min": { type: new GraphQLNonNull(GraphQLList) },
-        "2min": { type: new GraphQLNonNull(GraphQLList) },
-        "5min": { type: new GraphQLNonNull(GraphQLList) },
+        "5sec": { type: GraphQLList},
+        "30sec": {  type: GraphQLList },
+        "1min": {  type: GraphQLList },
+        "2min": {  type: GraphQLList },
+        "5min": {  type: GraphQLList },
       },
       resolve(parent, args) {
         let score = new Score({
