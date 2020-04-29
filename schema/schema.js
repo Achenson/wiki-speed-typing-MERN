@@ -96,15 +96,16 @@ const Mutation = new GraphQLObjectType({
         "min_1": {  type: new GraphQLList(GraphQLInt)},
         "min_2": {  type: new GraphQLList(GraphQLInt) },
         "min_5": {  type: new GraphQLList(GraphQLInt) },
+        
       },
       resolve(parent, args) {
         let score = new Score({
-          authorId: args.userId,
-          "sec_5": Array,
-          "sec_30": Array,
-          "min_1": Array,
-          "min_2": Array,
-          "min_5": Array,
+          userId: args.userId,
+          "sec_5": args.sec_5,
+          "sec_30": args.sec_30,
+          "min_1": args.min_1,
+          "min_2": args.min_2,
+          "min_5": args.min_5,
         });
         return score.save()
       },

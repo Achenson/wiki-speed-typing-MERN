@@ -72,4 +72,19 @@ mutation {
     password
   }
 }
+
+
+
+mutation {
+  addScore(userId: "5ea96db7bd05cc098c731bc9", sec_5: [0, 0], sec_30: [0, 0], min_1: [0, 0], min_2: [0, 0], min_5: [0, 0]) {
+    sec_5
+    sec_30
+    min_1
+    min_2
+    min_5
+  }
+}
+
+
+
 */
