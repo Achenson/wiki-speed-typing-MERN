@@ -6,3 +6,5 @@
 
 
 GraphQLNonNull - preventing users from not entering all data in mutation
+
+client -> clone from repo, then hidden folder .git was deleted so this could be one repo consisting of client and server
