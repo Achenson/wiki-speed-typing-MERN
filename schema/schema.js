@@ -109,6 +109,7 @@ const Mutation = new GraphQLObjectType({
         };
 
         return Score.findOneAndUpdate({ userId: args.userId }, update, {
+          // to return updated object
           new: true,
           upsert: true, // Make this update into an upsert,
           useFindAndModify: false,
