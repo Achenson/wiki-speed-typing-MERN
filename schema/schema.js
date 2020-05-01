@@ -11,7 +11,7 @@ const {
   GraphQLString,
   GraphQLList,
   GraphQLNonNull,
-  GraphQLFloat
+  GraphQLFloat,
 } = graphql;
 
 const UserType = new GraphQLObjectType({
@@ -24,7 +24,7 @@ const UserType = new GraphQLObjectType({
     score: {
       type: ScoreType,
       resolve(parent, args) {
-        return Score.findOne({userId: parent.id});
+        return Score.findOne({ userId: parent.id });
       },
     },
   }),
@@ -34,11 +34,11 @@ const ScoreType = new GraphQLObjectType({
   name: "Score",
   fields: () => ({
     id: { type: GraphQLID },
-    "sec_5": { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
-    "sec_30": { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
-    "min_1": { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
-    "min_2": { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
-    "min_5": { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
+    sec_5: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
+    sec_30: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
+    min_1: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
+    min_2: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
+    min_5: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
 
     user: {
       type: UserType,
@@ -92,23 +92,27 @@ const Mutation = new GraphQLObjectType({
       type: ScoreType,
       args: {
         userId: { type: new GraphQLNonNull(GraphQLString) },
-        "sec_5": { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
-        "sec_30": { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
-        "min_1": { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
-        "min_2": { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
-        "min_5": { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
-        
+        sec_5: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
+        sec_30: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
+        min_1: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
+        min_2: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
+        min_5: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
       },
       resolve(parent, args) {
-        let score = new Score({
-          userId: args.userId,
-          "sec_5": args.sec_5,
-          "sec_30": args.sec_30,
-          "min_1": args.min_1,
-          "min_2": args.min_2,
-          "min_5": args.min_5,
+        // not a new Score!!! to not overwrite id
+        let update = {
+          sec_5: args.sec_5,
+          sec_30: args.sec_30,
+          min_1: args.min_1,
+          min_2: args.min_2,
+          min_5: args.min_5,
+        };
+
+        return Score.findOneAndUpdate({ userId: args.userId }, update, {
+          new: true,
+          upsert: true, // Make this update into an upsert,
+          useFindAndModify: false,
         });
-        return score.save()
       },
     },
   },

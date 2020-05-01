@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const scoreSchema = new Schema({
      // we don't have to pass id, because mongoDB will create it manualy 
+     id: String,
     userId: String,
     "sec_5": Array,
     "sec_30": Array,
