@@ -2,6 +2,9 @@ import React from "react";
 import { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "@apollo/react-hooks";
+
 // import store from "./store.js";
 
 import "./App.css";
@@ -16,6 +19,10 @@ import { fetchWikiApi } from "./redux/fetchPostAction.js";
 
 // import { BrowserRouter, Route, Link, Switch, Redirect, useHistory, HashRouter } from "react-router-dom";
 import { Route, Switch, Redirect, HashRouter } from "react-router-dom";
+
+const client = new ApolloClient({
+  uri: "http://localhost:4000/graphql",
+});
 
 //!!!!! imported actions creators must be passed here as props
 function App({
@@ -212,7 +219,7 @@ function App({
       }
 
       if (keysPressed["Shift"] && event.key === "Delete") {
-        setToReset_true()
+        setToReset_true();
 
         delete keysPressed[event.key];
       }
@@ -290,9 +297,11 @@ function App({
   // ===========================================
 
   return (
-    <HashRouter>
-      <div className="App" onKeyDown={handleKeyPress}>
-        {/*   <Fetch
+    // injecting data from server
+    <ApolloProvider client={client}>
+      <HashRouter>
+        <div className="App" onKeyDown={handleKeyPress}>
+          {/*   <Fetch
           myText={myText}
           wikiTitle={wikiTitle}
           setNewRandomArticle_false={setNewRandomArticle_false}
@@ -300,71 +309,72 @@ function App({
           loremText={loremText}
           focusTextArea={focusTextArea}
         /> */}
-        <div className="app-outer-container">
-          <h3 className="title">Wiki Speed Typing</h3>
-          <Switch>
-            {/* <Route path="/" exact component={Display}/> */}
-            <Route
-              path="/"
-              exact
-              // normally it would be component+ but render is needed is passing props
-              // to a component
-              render={(props) => (
-                <Display
-                  {...props}
-                  // timer
-                  timerValue={timerValue}
-                  constantTimerValue={constantTimerValue}
-                  toggleActive={toggleActive}
-                  setTimerOnSelect={setTimerOnSelect}
-                  isActive={isActive}
-                  toReset={toReset}
-                  displayToReset={displayToReset}
-                  // hints & results visibility
-                  areHintsVisible={areHintsVisible}
-                  areResultsVisible={areResultsVisible}
-                  areStatsVisible={areStatsVisible}
-                  toggleHints={toggleHints}
-                  // toggleResults={toggleResults}
-                  toggleStats={toggleStats}
-                  // disabling select, menaging focus
-                  // isDisabled={isDisabled} isDisabled moved to Display!
-                  focusTextArea={focusTextArea}
-                  putFocusOnTextArea={putFocusOnTextArea}
-                  focusElement={focusElement}
-                  // results
-                  myText={myText}
-                  wikiTitle={wikiTitle}
-                  disablingButton={disablingButton}
-                  isCounterRunning={isCounterRunning}
-                  // for Display => WikiController
-                  setNewRandomArticle_true={setNewRandomArticle_true}
-                  // for Fetch
-                  setNewRandomArticle_false={setNewRandomArticle_false}
-                />
-              )}
-            />
-            {/* route guarding <> & </>!!!!*/}
-            {isAuthenticated ? (
-              <Redirect to="/" />
-            ) : (
-              <>
-                <Route path="/register" component={Register} />
-                <Route path="/login" component={Login} />
-                {/*        render={(props) => (
+          <div className="app-outer-container">
+            <h3 className="title">Wiki Speed Typing</h3>
+            <Switch>
+              {/* <Route path="/" exact component={Display}/> */}
+              <Route
+                path="/"
+                exact
+                // normally it would be component+ but render is needed is passing props
+                // to a component
+                render={(props) => (
+                  <Display
+                    {...props}
+                    // timer
+                    timerValue={timerValue}
+                    constantTimerValue={constantTimerValue}
+                    toggleActive={toggleActive}
+                    setTimerOnSelect={setTimerOnSelect}
+                    isActive={isActive}
+                    toReset={toReset}
+                    displayToReset={displayToReset}
+                    // hints & results visibility
+                    areHintsVisible={areHintsVisible}
+                    areResultsVisible={areResultsVisible}
+                    areStatsVisible={areStatsVisible}
+                    toggleHints={toggleHints}
+                    // toggleResults={toggleResults}
+                    toggleStats={toggleStats}
+                    // disabling select, menaging focus
+                    // isDisabled={isDisabled} isDisabled moved to Display!
+                    focusTextArea={focusTextArea}
+                    putFocusOnTextArea={putFocusOnTextArea}
+                    focusElement={focusElement}
+                    // results
+                    myText={myText}
+                    wikiTitle={wikiTitle}
+                    disablingButton={disablingButton}
+                    isCounterRunning={isCounterRunning}
+                    // for Display => WikiController
+                    setNewRandomArticle_true={setNewRandomArticle_true}
+                    // for Fetch
+                    setNewRandomArticle_false={setNewRandomArticle_false}
+                  />
+                )}
+              />
+              {/* route guarding <> & </>!!!!*/}
+              {isAuthenticated ? (
+                <Redirect to="/" />
+              ) : (
+                <>
+                  <Route path="/register" component={Register} />
+                  <Route path="/login" component={Login} />
+                  {/*        render={(props) => (
               <Register
               path="/register"
             {...props}
               resetTimer={resetTimer}
               />
             )} */}
-              </>
-            )}
-            <Route render={() => <h1>404: page not found</h1>} />
-          </Switch>
+                </>
+              )}
+              <Route render={() => <h1>404: page not found</h1>} />
+            </Switch>
+          </div>
         </div>
-      </div>
-    </HashRouter>
+      </HashRouter>
+    </ApolloProvider>
   );
 }
 
@@ -439,7 +449,7 @@ const mapDispatchToProps = (dispatch) => {
     // for synchronizing select timer with select from Stats
     setCurrentStatsKey: (data) =>
       dispatch({ type: "SET_CURRENT_STATS", payload: data }),
-      // !!! dispatching function instead of object thanks to redux-thunk
+    // !!! dispatching function instead of object thanks to redux-thunk
     fetchingWiki: () => dispatch(fetchWikiApi()),
   };
 };
