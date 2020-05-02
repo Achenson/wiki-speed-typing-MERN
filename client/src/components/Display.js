@@ -58,6 +58,8 @@ function Display({
   notification_false,
   loginError_false,
   registerError_false,
+
+  isAuthenticated
 }) {
   // ===========================================
   // reseting authState, so auth notifications/warnings disappear after going back
@@ -291,8 +293,8 @@ function Display({
           areStatsVisible={areStatsVisible}
           isActive={isActive}
         />
-
-        <Stats areStatsVisible={areStatsVisible} />
+        {isAuthenticated ? <Stats areStatsVisible={areStatsVisible} /> : null}
+        
       </div>
 
       <Results
@@ -313,6 +315,8 @@ const mapStateToProps = (state) => {
 
     liveResults: state.resultsAndTimerState.liveResults,
     finalResults: state.resultsAndTimerState.finalResults,
+
+    isAuthenticated: state.authState.isAuthenticated
   };
 };
 

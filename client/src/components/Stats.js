@@ -38,6 +38,8 @@ function Stats({
   confirmDeleteVisibility_true,
   confirmDeleteVisibility_false,
   // confirmDeleteVisibility,
+
+
 }) {
   useEffect(() => {
     console.log("render");
@@ -125,13 +127,14 @@ function Stats({
     // setCurrentStatsArr(e.target.value)
   }
 
+
   const { loading, error, data } = useQuery(getStatsQuery);
 
   
   if (loading) return <h5>loading...</h5>
   if (error) return <h5>database connection error </h5>
   
-  const {score} = data;
+   const {score} = data;
 
  console.log(score)
 
@@ -185,6 +188,7 @@ const mapStateToProps = (state) => {
     constantTimerValue: state.resultsAndTimerState.counter.constantTimerValue,
     isConfirmDeleteVisible: state.visibilityState.isConfirmDeleteVisible,
     areStatsVisible: state.visibilityState.areStatsVisible,
+    
   };
 };
 
