@@ -3,6 +3,27 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import SingleStat from "./SingleStat";
 
+// parsing graphql queries
+import { gql } from 'apollo-boost';
+// connecting graphql to component
+import { useQuery } from '@apollo/react-hooks';
+
+
+// queries
+const getStatsQuery = gql`
+   {
+    score (userId: "5ea96e3da7011208ac9c795d") {
+      sec_5
+      sec_30
+      min_1
+      min_2
+      min_5
+    }
+  }
+`;
+
+
+
 function Stats({
   areStatsVisible,
   constantTimerValue,
@@ -23,6 +44,10 @@ function Stats({
 
     confirmDeleteVisibility_false();
   }, [areStatsVisible, confirmDeleteVisibility_false]);
+
+
+  
+
 
   function renderDeletion() {
     if (!isConfirmDeleteVisible) {
@@ -99,6 +124,16 @@ function Stats({
     }
     // setCurrentStatsArr(e.target.value)
   }
+
+  const { loading, error, data } = useQuery(getStatsQuery);
+
+  
+  if (loading) return <h5>loading...</h5>
+  if (error) return <h5>database connection error </h5>
+  
+  const {score} = data;
+
+ console.log(score)
 
   return (
     <div

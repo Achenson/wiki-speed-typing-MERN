@@ -61,9 +61,10 @@ const RootQuery = new GraphQLObjectType({
     },
     score: {
       type: ScoreType,
-      args: { id: { type: GraphQLID } },
+      // changed from id to userId
+      args: { userId: { type: GraphQLID } },
       resolve(parent, args) {
-        return Score.findById(args.id);
+        return Score.findOne({userId: args.userId});
       },
     },
   },
