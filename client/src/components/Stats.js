@@ -13,11 +13,11 @@ import { useQuery } from '@apollo/react-hooks';
 const getStatsQuery = gql`
    {
     score (userId: "5ea96e3da7011208ac9c795d") {
-      sec_5
-      sec_30
-      min_1
-      min_2
-      min_5
+      five_s
+      thirty_s
+      one_min
+      two_min
+      five_min
     }
   }
 `;
@@ -31,7 +31,7 @@ function Stats({
   currentStatsKey,
 
   setCurrentStatsKey,
-  currentStats,
+  // currentStats,
   deleteCurrentStatsArr,
 
   isConfirmDeleteVisible,
@@ -137,6 +137,8 @@ function Stats({
 
   
    const {score} = data;
+  
+  let currentStats = score
 
  console.log(score)
 
@@ -186,7 +188,7 @@ function Stats({
 const mapStateToProps = (state) => {
   return {
     currentStatsKey: state.resultsAndTimerState.stats.currentStatsKey,
-    currentStats: state.resultsAndTimerState.stats,
+    // currentStats: state.resultsAndTimerState.stats,
     constantTimerValue: state.resultsAndTimerState.counter.constantTimerValue,
     isConfirmDeleteVisible: state.visibilityState.isConfirmDeleteVisible,
     areStatsVisible: state.visibilityState.areStatsVisible,
