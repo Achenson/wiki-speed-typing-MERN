@@ -5,11 +5,14 @@ const scoreSchema = new Schema({
      // we don't have to pass id, because mongoDB will create it manualy 
      id: String,
     userId: String,
-    "sec_5": Array,
-    "sec_30": Array,
-    "min_1": Array,
-    "min_2": Array,
-    "min_5": Array,
+    "five_s": Array,
+    "thirty_s": Array,
+    "one_min": Array,
+    "two_min": Array,
+    "five_min": Array,
+
+
+
 })
 
 module.exports = mongoose.model('Score', scoreSchema);

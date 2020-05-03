@@ -131,8 +131,10 @@ function Stats({
   const { loading, error, data } = useQuery(getStatsQuery);
 
   
-  if (loading) return <h5>loading...</h5>
+  if (loading) return <h5>connecting to database...</h5>
   if (error) return <h5>database connection error </h5>
+
+
   
    const {score} = data;
 

@@ -235,6 +235,21 @@ function resultsAndTimerReducer(state = initialState, action) {
           [statsStateKey]: updatedAndSortedArr
         }
       };
+
+    // stats from DB
+
+    
+
+
+
+
+
+
+
+
+
+
+
     // for Timer
     case "TIMER_VALUE":
       return {
