@@ -277,6 +277,7 @@ function App({
     if (timerValue <= 0) {
       setFinalResults();
 
+      // change to Mongo here
       setStats();
 
       resultsReset();

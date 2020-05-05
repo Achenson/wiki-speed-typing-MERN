@@ -134,11 +134,12 @@ function Stats({
   if (loading) return <h5>connecting to database...</h5>
   if (error) return <h5>database connection error </h5>
 
+ 
 
   
    const {score} = data;
   
-  let currentStats = score
+  // let currentStats = score
 
  console.log(score)
 
@@ -170,7 +171,8 @@ function Stats({
 
         <ul className="score-list container">
           {/* !! [] not . */}
-          {currentStats[currentStatsKey].map((el, i) => {
+          {/* {currentStats[currentStatsKey].map((el, i) => { */}
+          {score[currentStatsKey].map((el, i) => {
             if (i > 9) {
               return null;
             } else {

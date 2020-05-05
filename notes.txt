@@ -1,4 +1,4 @@
-'mongodb+srv://Achenson:<password>@mongo-for-fcc-13gh5.mongodb.net/graphql_test?retryWrites=true&w=majority'
+DB='mongodb+srv://Achenson:<password>@mongo-for-fcc-13gh5.mongodb.net/graphql_test?retryWrites=true&w=majority'
 
 ^ <password> - without this angle brackets!
 
@@ -13,3 +13,5 @@ client -> clone from repo, then hidden folder .git was deleted so this could be 
 issues:
 1. React: Login <Route> warning
 2. warning: SingleStat "key"
+
+4. changePassword! other repos won't work!
