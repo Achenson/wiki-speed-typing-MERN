@@ -24,6 +24,8 @@ const getStatsQuery = gql`
 
 
 
+
+
 function Stats({
   areStatsVisible,
   constantTimerValue,

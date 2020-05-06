@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 
 import ApolloClient from "apollo-boost";
-import { ApolloProvider } from "@apollo/react-hooks";
+ import { useQuery, useMutation, ApolloProvider } from "@apollo/react-hooks";
 
 // import store from "./store.js";
 
@@ -20,9 +20,68 @@ import { fetchWikiApi } from "./redux/fetchPostAction.js";
 // import { BrowserRouter, Route, Link, Switch, Redirect, useHistory, HashRouter } from "react-router-dom";
 import { Route, Switch, Redirect, HashRouter } from "react-router-dom";
 
-const client = new ApolloClient({
+
+
+import { gql } from 'apollo-boost';
+
+
+// queries
+
+/* const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
 });
+ */
+
+
+const getStatsQuery = gql`
+   {
+    score (userId: "5ea96e3da7011208ac9c795d") {
+      five_s
+      thirty_s
+      one_min
+      two_min
+      five_min
+    }
+  }
+`;
+
+const updateStats = gql`
+mutation  AddScore($userId: String!, $five_s: [[Float]] , $thirty_s: [[Float]] , $one_min: [[Float]] , $two_min: [[Float]], $five_min: [[Float]]){
+
+  addScore(userId: $userId,
+   five_s: $five_s,
+    thirty_s: $thirty_s,
+    one_min: $one_min,
+    two_min: $two_min,
+    five_min: $five_min) {
+    five_s
+    thirty_s
+    one_min
+    two_min
+    five_min
+  }
+}
+`
+
+/* 
+
+  addScore(userId: "5ea96e3da7011208ac9c795d",
+   five_s: [[1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],],
+    thirty_s: [[2, 2], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],],
+    one_min: [[3, 3], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],],
+    two_min: [[4, 4], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],],
+     five_min: [[5, 5], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],]) {
+    five_s
+    thirty_s
+    one_min
+    two_min
+    five_min
+  }
+}
+*/
+
+
+
 
 //!!!!! imported actions creators must be passed here as props
 function App({
@@ -70,6 +129,31 @@ function App({
   // imported actionCreator
   fetchingWiki,
 }) {
+
+  const { loading, error, data } = useQuery(getStatsQuery);
+
+  if (loading) {console.log("loading")}
+  if (error) {console.log("error")}
+
+  if(data) {
+
+    const {score} = data;
+    console.log(score)
+  }
+  
+  // let currentStats = score
+
+
+// In addition to a mutate function, the useMutation hook returns an object that represents
+//  the current state of the mutation's execution.
+ const [addScore, { newData }] = useMutation(updateStats);
+
+
+
+
+
+
+
   // let history = useHistory();
   // disabling random wiki article button in <Fetch/>
   const disablingButton = useRef(null);
@@ -277,8 +361,26 @@ function App({
     if (timerValue <= 0) {
       setFinalResults();
 
+
+
+      // addScore({})
+
+     
+
+      addScore({ variables: {
+        userId: "5ea96e3da7011208ac9c795d",
+        five_s: [[111, 11.5], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],],
+    thirty_s: [[222, 22.2], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],],
+    one_min: [[333, 33.3], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],],
+    two_min: [[444, 44.4], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],],
+     five_min: [[555, 55.5], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],]
+         }
+         });
+
+
+
       // change to Mongo here
-      setStats();
+      // setStats();
 
       resultsReset();
 
@@ -299,7 +401,7 @@ function App({
 
   return (
     // injecting data from server
-    <ApolloProvider client={client}>
+    // <ApolloProvider client={client}>
       <HashRouter>
         <div className="App" onKeyDown={handleKeyPress}>
           {/*   <Fetch
@@ -375,7 +477,7 @@ function App({
           </div>
         </div>
       </HashRouter>
-    </ApolloProvider>
+    // </ApolloProvider>
   );
 }
 

@@ -7,10 +7,25 @@ import "./index.css";
 import AppContainer from "./App";
 import * as serviceWorker from "./serviceWorker";
 
+
+
+
+import { ApolloProvider } from '@apollo/react-hooks';
+
+
+
+import ApolloClient from 'apollo-boost';
+const client = new ApolloClient({
+  uri: "http://localhost:4000/graphql",
+});
+
+
 ReactDOM.render(
+<ApolloProvider client={client}>
   <Provider store={store}>
     <AppContainer />
-  </Provider>,
+  </Provider>
+  </ApolloProvider>,
   document.getElementById("root")
 );
 
