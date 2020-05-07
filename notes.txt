@@ -13,5 +13,5 @@ client -> clone from repo, then hidden folder .git was deleted so this could be 
 issues:
 1. React: Login <Route> warning
 2. warning: SingleStat "key"
-
+3. problems with undefined for disable button itp?
 4. changePassword! other repos won't work!

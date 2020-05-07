@@ -148,3 +148,49 @@ mutation {
 
 
 */
+
+
+
+
+
+/* 
+
+
+
+
+ const [five_s, setFive_s] = useState(null)
+  const [thirty_s, setThirty_s] = useState(null)
+  const [one_min, setOne_min] = useState(null)
+  const [two_min, setTwo_min] = useState(null)
+  const [five_min, setFive_min] = useState(null)
+
+
+    if(data) {
+
+    const {score} = data;
+    console.log(score)
+    setFive_s(score["five_s"])
+    setThirty_s(score["thirty_s"])
+    setOne_min(score["one_min"])
+    setTwo_min(score["two_min"])
+    setFive_min(score["five_min"])
+
+
+
+
+
+  }
+
+
+      addScore({ variables: {
+          userId: "5ea96e3da7011208ac9c795d",
+          five_s: five_s ,
+      thirty_s: thirty_s,
+      one_min: one_min,
+      two_min: two_min,
+       five_min: five_min 
+           },
+           refetchQueries: [{query: getStatsQuery}]
+           });
+
+*/

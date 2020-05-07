@@ -143,6 +143,7 @@ function Stats({
   
   // let currentStats = score
 
+  console.log("stats score")
  console.log(score)
 
   return (
