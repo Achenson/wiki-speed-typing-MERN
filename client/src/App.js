@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 
 import ApolloClient from "apollo-boost";
@@ -130,17 +130,83 @@ function App({
   fetchingWiki,
 }) {
 
+  let arrayOfZeros =[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]]
+
+  const [five_s, setFive_s] = useState(arrayOfZeros)
+  const [thirty_s, setThirty_s] = useState(arrayOfZeros)
+  const [one_min, setOne_min] = useState(arrayOfZeros)
+  const [two_min, setTwo_min] = useState(arrayOfZeros)
+  const [five_min, setFive_min] = useState(arrayOfZeros)
+
   const { loading, error, data } = useQuery(getStatsQuery);
 
-  if (loading) {console.log("loading")}
-  if (error) {console.log("error")}
+  useEffect( () => {
 
-  if(data) {
+    if (loading) {console.log("loading")}
+    if (error) {console.log("error")}
+  
+    if(data) {
+
+      const {score} = data;
+      console.log(score)
+      
+  
+    setFive_s(copyNestedArr(score["five_s"]))
+    setThirty_s( copyNestedArr(score["thirty_s"]))
+    setOne_min(copyNestedArr(score["one_min"]))
+    // setTwo_min(copyNestedArr(score["two_min"]))
+    setFive_min(copyNestedArr(score["five_min"]))
+  
+  
+     }
+
+
+  }, [loading, error, data])
+
+ 
+  
+
+
+if(data) {
 
     const {score} = data;
     console.log(score)
-  }
+    
+
+/*     setFive_s(copyNestedArr(score["five_s"]))
+  setThirty_s( copyNestedArr(score["thirty_s"]))
+  setOne_min(copyNestedArr(score["one_min"]))
+  setTwo_min(copyNestedArr(score["two_min"]))
+  setFive_min(copyNestedArr(score["five_min"])) */
+
+
+   }
+
+
   
+
+  
+
+
+  
+
+
+
+
+
+  function copyNestedArr(arr) {
+    let finalArr=[];
+
+    for (let i = 0; i<arr.length; i++ ) {
+      finalArr.push(arr[i])
+    }
+
+    return finalArr;
+  }
+
+
+
+
   // let currentStats = score
 
 
@@ -367,7 +433,7 @@ function App({
 
      
 
-      addScore({ variables: {
+/*       addScore({ variables: {
         userId: "5ea96e3da7011208ac9c795d",
         five_s: [[88, 11.5], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],],
     thirty_s: [[88, 22.2], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],],
@@ -376,12 +442,30 @@ function App({
      five_min: [[88, 55.5], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],]
          },
          refetchQueries: [{query: getStatsQuery}]
-         });
+         }); */
 
 
 
       // change to Mongo here
       // setStats();
+
+
+
+      console.log('five_s')
+       console.log(five_s)
+
+  addScore({ variables: {
+        userId: "5ea96e3da7011208ac9c795d",
+        five_s: five_s ,
+    thirty_s: thirty_s,
+    one_min: one_min,
+    two_min: two_min,
+     five_min: [[555, 55.5], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],]
+         },
+         refetchQueries: [{query: getStatsQuery}]
+         }); 
+ 
+
 
       resultsReset();
 
