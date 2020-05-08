@@ -451,6 +451,9 @@ function App({
                   setNewRandomArticle_true={setNewRandomArticle_true}
                   // for Fetch
                   setNewRandomArticle_false={setNewRandomArticle_false}
+                  // graphql mutation
+                  addScore={addScore}
+                  
                 />
               )}
             />

@@ -4,15 +4,14 @@ import { connect } from "react-redux";
 import SingleStat from "./SingleStat";
 
 // parsing graphql queries
-import { gql } from 'apollo-boost';
+import { gql } from "apollo-boost";
 // connecting graphql to component
-import { useQuery } from '@apollo/react-hooks';
-
+import { useQuery } from "@apollo/react-hooks";
 
 // queries
 const getStatsQuery = gql`
-   {
-    score (userId: "5ea96e3da7011208ac9c795d") {
+  {
+    score(userId: "5ea96e3da7011208ac9c795d") {
       five_s
       thirty_s
       one_min
@@ -22,10 +21,6 @@ const getStatsQuery = gql`
   }
 `;
 
-
-
-
-
 function Stats({
   areStatsVisible,
   constantTimerValue,
@@ -34,24 +29,20 @@ function Stats({
 
   setCurrentStatsKey,
   // currentStats,
-  deleteCurrentStatsArr,
+  // deleteCurrentStatsArr,
 
   isConfirmDeleteVisible,
   confirmDeleteVisibility_true,
   confirmDeleteVisibility_false,
-  // confirmDeleteVisibility,
-
-
+  // graphql mutation
+  addScore,
+  stats,
 }) {
   useEffect(() => {
     console.log("render");
 
     confirmDeleteVisibility_false();
   }, [areStatsVisible, confirmDeleteVisibility_false]);
-
-
-  
-
 
   function renderDeletion() {
     if (!isConfirmDeleteVisible) {
@@ -81,7 +72,37 @@ function Stats({
           <span
             className="delete-score-confirm"
             onClick={() => {
-              deleteCurrentStatsArr();
+              // deleteCurrentStatsArr();
+
+              let statsObj = {
+                five_s: stats["five_s"],
+                thirty_s: stats["thirty_s"],
+                one_min: stats["one_min"],
+                two_min: stats["two_min"],
+                five_min: stats["five_min"],
+              };
+
+              statsObj[stats.currentStatsKey] = [
+                [0, 0],
+                [0, 0],
+                [0, 0],
+                [0, 0],
+                [0, 0],
+                [0, 0],
+                [0, 0],
+                [0, 0],
+                [0, 0],
+                [0, 0],
+              ];
+
+              addScore({
+                variables: {
+                  userId: "5ea96e3da7011208ac9c795d",
+                  ...statsObj,
+                },
+                refetchQueries: [{ query: getStatsQuery }],
+              });
+
               confirmDeleteVisibility_false();
             }}
           >
@@ -129,22 +150,17 @@ function Stats({
     // setCurrentStatsArr(e.target.value)
   }
 
-
   const { loading, error, data } = useQuery(getStatsQuery);
 
-  
-  if (loading) return <h5>connecting to database...</h5>
-  if (error) return <h5>database connection error </h5>
+  if (loading) return <h5>connecting to database...</h5>;
+  if (error) return <h5>database connection error </h5>;
 
- 
+  const { score } = data;
 
-  
-   const {score} = data;
-  
   // let currentStats = score
 
-  console.log("stats score")
- console.log(score)
+  console.log("stats score");
+  console.log(score);
 
   return (
     <div
@@ -197,7 +213,7 @@ const mapStateToProps = (state) => {
     constantTimerValue: state.resultsAndTimerState.counter.constantTimerValue,
     isConfirmDeleteVisible: state.visibilityState.isConfirmDeleteVisible,
     areStatsVisible: state.visibilityState.areStatsVisible,
-    
+    stats: state.resultsAndTimerState.stats,
   };
 };
 
@@ -205,7 +221,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setCurrentStatsKey: (data) =>
       dispatch({ type: "SET_CURRENT_STATS", payload: data }),
-    deleteCurrentStatsArr: () => dispatch({ type: "DELETE_CURRENT_STATS" }),
+    // deleteCurrentStatsArr: () => dispatch({ type: "DELETE_CURRENT_STATS" }),
     /*  confirmDeleteVisibility: () =>
       dispatch({ type: "CONFIRM_DELETE_VISIBILITY" }), */
     confirmDeleteVisibility_true: () =>

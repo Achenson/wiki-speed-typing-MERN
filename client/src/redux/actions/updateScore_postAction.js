@@ -80,11 +80,11 @@ export const updateScore_postAction = (
 
   dispatch({ type: "UPDATE_STATS", payload: statsObject });
 
+  // graphql mutation
   addScore({
     variables: {
       userId: "5ea96e3da7011208ac9c795d",
       ...statsObject,
-    
     },
     refetchQueries: [{ query: getStatsQuery }],
   });
