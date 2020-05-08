@@ -1,14 +1,8 @@
-
-
-
 const initialState = {
-
-
-
   currentResults: {
     resultsCorrect: 0,
     resultsIncorrect: 0,
-    resultsNoPenalty: 0
+    resultsNoPenalty: 0,
   },
   liveResults: {
     speed: "-",
@@ -16,7 +10,7 @@ const initialState = {
     correct: "-",
     incorrect: "-",
     noPenalty: "-",
-    "timer length": 60
+    "timer length": 60,
   },
   finalResults: {
     speed: "-",
@@ -24,13 +18,11 @@ const initialState = {
     correct: "-",
     incorrect: "-",
     noPenalty: "-",
-    "timer length": ""
+    "timer length": "",
   },
 
   // for Stats
   stats: {
-
-
     currentStatsKey: "one_min",
 
     five_s: makeDefaultStats(1),
@@ -42,8 +34,6 @@ const initialState = {
     two_min: makeDefaultStats(4),
 
     five_min: makeDefaultStats(5),
-
-    
   },
 
   counter: {
@@ -51,11 +41,9 @@ const initialState = {
     constantTimerValue: 60,
     isActive: false,
     toReset: false,
-    isCounterRunning: false
-  }
+    isCounterRunning: false,
+  },
 };
-
-
 
 // !!! change later
 function makeDefaultStats(n) {
@@ -69,20 +57,17 @@ function makeDefaultStats(n) {
     [0, 0],
     [0, 0],
     [0, 0],
-    [0, 0]
+    [0, 0],
   ];
 }
 
-
-
-
 function resultsAndTimerReducer(state = initialState, action) {
   const {
-    counter: { timerValue, isActive, isCounterRunning }
+    counter: { timerValue, isActive, isCounterRunning },
   } = state;
 
   const {
-    currentResults: { resultsCorrect, resultsIncorrect, resultsNoPenalty }
+    currentResults: { resultsCorrect, resultsIncorrect, resultsNoPenalty },
   } = state;
 
   switch (action.type) {
@@ -93,16 +78,16 @@ function resultsAndTimerReducer(state = initialState, action) {
           // ...store.getState().currentResults, <- wrong!!! reducer function
           // already got state
           ...state.currentResults,
-          resultsCorrect: resultsCorrect + 1
-        }
+          resultsCorrect: resultsCorrect + 1,
+        },
       };
     case "RESULTS_INCORRECT":
       return {
         ...state,
         currentResults: {
           ...state.currentResults,
-          resultsIncorrect: resultsIncorrect + 1
-        }
+          resultsIncorrect: resultsIncorrect + 1,
+        },
       };
 
     case "RESULTS_NO_PENALTY":
@@ -110,8 +95,8 @@ function resultsAndTimerReducer(state = initialState, action) {
         ...state,
         currentResults: {
           ...state.currentResults,
-          resultsNoPenalty: resultsNoPenalty + 1
-        }
+          resultsNoPenalty: resultsNoPenalty + 1,
+        },
       };
 
     case "RESULTS_RESET":
@@ -120,8 +105,8 @@ function resultsAndTimerReducer(state = initialState, action) {
         currentResults: {
           resultsCorrect: 0,
           resultsIncorrect: 0,
-          resultsNoPenalty: 0
-        }
+          resultsNoPenalty: 0,
+        },
       };
 
     case "SET_LIVE_RESULTS":
@@ -133,16 +118,16 @@ function resultsAndTimerReducer(state = initialState, action) {
             state.currentResults.resultsIncorrect,
             state.currentResults.resultsNoPenalty,
             state.counter.timerValue
-          )
-        }
+          ),
+        },
       };
 
     case "RESET_LIVE_RESULTS":
       return {
         ...state,
         liveResults: {
-          ...resultsMaker(0, 0, 0, 0)
-        }
+          ...resultsMaker(0, 0, 0, 0),
+        },
       };
 
     case "SET_FINAL_RESULTS":
@@ -156,27 +141,27 @@ function resultsAndTimerReducer(state = initialState, action) {
             state.currentResults.resultsIncorrect,
             state.currentResults.resultsNoPenalty,
             0
-          )
-        }
+          ),
+        },
       };
-      // for reseting results after logging out
-      case "RESET_FINAL_RESULTS":
-        return {
-          ...state,
-          finalResults: {
-            speed: "-",
-    accuracy: "- ",
-    correct: "-",
-    incorrect: "-",
-    noPenalty: "-",
-    "timer length": ""
-          }
-        };
+    // for reseting results after logging out
+    case "RESET_FINAL_RESULTS":
+      return {
+        ...state,
+        finalResults: {
+          speed: "-",
+          accuracy: "- ",
+          correct: "-",
+          incorrect: "-",
+          noPenalty: "-",
+          "timer length": "",
+        },
+      };
 
     // for Stats
 
     case "UPDATE_STATS":
-    /*   let finalResultObj = {
+      /*   let finalResultObj = {
         ...resultsMaker(
           state.currentResults.resultsCorrect,
           state.currentResults.resultsIncorrect,
@@ -231,28 +216,22 @@ function resultsAndTimerReducer(state = initialState, action) {
       return {
         ...state,
         stats: {
-
           // ...action.payload
-         /*  ...state.stats,
+          /*  ...state.stats,
           [statsStateKey]: updatedAndSortedArr */
 
-          ...action.payload
-        }
+          ...action.payload,
+        },
       };
 
-    // stats from DB
-
-    
-
-
-
-
-
-
-
-
-
-
+    case "SET_STATS":
+      return {
+        ...state,
+        stats: {
+          ...state.stats,
+          ...action.payload,
+        },
+      };
 
     // for Timer
     case "TIMER_VALUE":
@@ -260,8 +239,8 @@ function resultsAndTimerReducer(state = initialState, action) {
         ...state,
         counter: {
           ...state.counter,
-          timerValue: action.payload
-        }
+          timerValue: action.payload,
+        },
       };
 
     case "TIMER_VALUE_COUNTDOWN":
@@ -269,8 +248,8 @@ function resultsAndTimerReducer(state = initialState, action) {
         ...state,
         counter: {
           ...state.counter,
-          timerValue: timerValue - 1
-        }
+          timerValue: timerValue - 1,
+        },
       };
 
     case "CONSTANT_TIMER_VALUE":
@@ -278,32 +257,32 @@ function resultsAndTimerReducer(state = initialState, action) {
         ...state,
         counter: {
           ...state.counter,
-          constantTimerValue: action.payload
-        }
+          constantTimerValue: action.payload,
+        },
       };
     case "COUNTER_RUNNING":
       return {
         ...state,
         counter: {
           ...state.counter,
-          isCounterRunning: !isCounterRunning
-        }
+          isCounterRunning: !isCounterRunning,
+        },
       };
     case "TOGGLE_ACTIVE":
       return {
         ...state,
         counter: {
           ...state.counter,
-          isActive: !isActive
-        }
+          isActive: !isActive,
+        },
       };
     case "SET_IS_ACTIVE_TO_FALSE":
       return {
         ...state,
         counter: {
           ...state.counter,
-          isActive: false
-        }
+          isActive: false,
+        },
       };
 
     case "TO_RESET_TRUE":
@@ -311,8 +290,8 @@ function resultsAndTimerReducer(state = initialState, action) {
         ...state,
         counter: {
           ...state.counter,
-          toReset: true
-        }
+          toReset: true,
+        },
       };
 
     case "TO_RESET_FALSE":
@@ -320,8 +299,8 @@ function resultsAndTimerReducer(state = initialState, action) {
         ...state,
         counter: {
           ...state.counter,
-          toReset: false
-        }
+          toReset: false,
+        },
       };
 
     case "SET_CURRENT_STATS":
@@ -329,43 +308,42 @@ function resultsAndTimerReducer(state = initialState, action) {
         ...state,
         stats: {
           ...state.stats,
-          currentStatsKey: changeCurrentStatsKey(action.payload)
-        }
+          currentStatsKey: changeCurrentStatsKey(action.payload),
+        },
       };
 
-      case "DELETE_CURRENT_STATS":
+    case "DELETE_CURRENT_STATS":
       return {
         ...state,
         stats: {
           ...state.stats,
           // currentStatsArr: changeCurrentStatsKey(action.payload)
-          [state.stats.currentStatsKey]: makeDefaultStats(7)
-        }
+          [state.stats.currentStatsKey]: makeDefaultStats(7),
+        },
       };
-
 
       function changeCurrentStatsKey(payload) {
         switch (payload) {
           case "5":
             return "five_s";
-            // setCurrentStatsArr(five_s);
-            // break;
+          // setCurrentStatsArr(five_s);
+          // break;
           case "30":
             // setCurrentStatsArr(thirty_s);
             return "thirty_s";
-            // break;
+          // break;
           case "60":
             // setCurrentStatsArr(one_min);
             return "one_min";
-            // break;
+          // break;
           case "120":
             // setCurrentStatsArr(two_min);
             return "two_min";
-            // break;
+          // break;
           case "300":
             return "five_min";
-            // setCurrentStatsArr(five_min);
-            // break;
+          // setCurrentStatsArr(five_min);
+          // break;
 
           default:
             return "one_min";
@@ -398,7 +376,7 @@ function resultsAndTimerReducer(state = initialState, action) {
       correct: correct,
       incorrect: incorrect,
       noPenalty: noPenaltyKPM,
-      "timer length": state.counter.constantTimerValue.toString()
+      "timer length": state.counter.constantTimerValue.toString(),
     };
 
     function calcSpeed() {
@@ -419,7 +397,7 @@ function resultsAndTimerReducer(state = initialState, action) {
     }
   }
 
-/*   function updateAndSort(arr, speed, accuracy) {
+  /*   function updateAndSort(arr, speed, accuracy) {
     let finalArr = [];
     let arrToAdd = [speed, accuracy];
 

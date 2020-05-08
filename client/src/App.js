@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 
 import ApolloClient from "apollo-boost";
- import { useQuery, useMutation, ApolloProvider } from "@apollo/react-hooks";
+import { useQuery, useMutation, ApolloProvider } from "@apollo/react-hooks";
 
 // import store from "./store.js";
 
@@ -16,15 +16,12 @@ import Login from "./components_links/Login.js";
 import Register from "./components_links/Register.js";
 
 import { fetchWikiApi } from "./redux/actions/fetchPostAction.js";
-import {updateScore_postAction} from "./redux/actions/updateScore_postAction.js";
+import { updateScore_postAction } from "./redux/actions/updateScore_postAction.js";
 
 // import { BrowserRouter, Route, Link, Switch, Redirect, useHistory, HashRouter } from "react-router-dom";
 import { Route, Switch, Redirect, HashRouter } from "react-router-dom";
 
-
-
-import { gql } from 'apollo-boost';
-
+import { gql } from "apollo-boost";
 
 // queries
 
@@ -33,10 +30,9 @@ import { gql } from 'apollo-boost';
 });
  */
 
-
 const getStatsQuery = gql`
-   {
-    score (userId: "5ea96e3da7011208ac9c795d") {
+  {
+    score(userId: "5ea96e3da7011208ac9c795d") {
       five_s
       thirty_s
       one_min
@@ -47,22 +43,30 @@ const getStatsQuery = gql`
 `;
 
 const updateStats = gql`
-mutation  AddScore($userId: String!, $five_s: [[Float]] , $thirty_s: [[Float]] , $one_min: [[Float]] , $two_min: [[Float]], $five_min: [[Float]]){
-
-  addScore(userId: $userId,
-   five_s: $five_s,
-    thirty_s: $thirty_s,
-    one_min: $one_min,
-    two_min: $two_min,
-    five_min: $five_min) {
-    five_s
-    thirty_s
-    one_min
-    two_min
-    five_min
+  mutation AddScore(
+    $userId: String!
+    $five_s: [[Float]]
+    $thirty_s: [[Float]]
+    $one_min: [[Float]]
+    $two_min: [[Float]]
+    $five_min: [[Float]]
+  ) {
+    addScore(
+      userId: $userId
+      five_s: $five_s
+      thirty_s: $thirty_s
+      one_min: $one_min
+      two_min: $two_min
+      five_min: $five_min
+    ) {
+      five_s
+      thirty_s
+      one_min
+      two_min
+      five_min
+    }
   }
-}
-`
+`;
 
 /* 
 
@@ -80,9 +84,6 @@ mutation  AddScore($userId: String!, $five_s: [[Float]] , $thirty_s: [[Float]] ,
   }
 }
 */
-
-
-
 
 //!!!!! imported actions creators must be passed here as props
 function App({
@@ -121,7 +122,7 @@ function App({
   setDisplayToReset_true,
   setConstantTimerValue,
   // for Stats
-  setStats,
+  // setStats,
   setCurrentStatsKey,
   //
   disableFocusTextArea,
@@ -130,98 +131,65 @@ function App({
   // imported actionCreator
   fetchingWiki,
 
-  updateScore
+  updateScore,
+  setStats
 }) {
+  let arrayOfZeros = [
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+  ];
 
-  let arrayOfZeros =[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]]
-
-  const [five_s, setFive_s] = useState(arrayOfZeros)
-  const [thirty_s, setThirty_s] = useState(arrayOfZeros)
-  const [one_min, setOne_min] = useState(arrayOfZeros)
-  const [two_min, setTwo_min] = useState(arrayOfZeros)
-  const [five_min, setFive_min] = useState(arrayOfZeros)
+  const [five_s, setFive_s] = useState(arrayOfZeros);
+  const [thirty_s, setThirty_s] = useState(arrayOfZeros);
+  const [one_min, setOne_min] = useState(arrayOfZeros);
+  const [two_min, setTwo_min] = useState(arrayOfZeros);
+  const [five_min, setFive_min] = useState(arrayOfZeros);
 
   const { loading, error, data } = useQuery(getStatsQuery);
 
-  useEffect( () => {
+  useEffect(() => {
+    if (loading) {
+      console.log("loading");
+    }
+    if (error) {
+      console.log("error");
+    }
 
-    if (loading) {console.log("loading")}
-    if (error) {console.log("error")}
-  
-    if(data) {
+    if (data) {
+      const { score } = data;
+      console.log(score);
 
-      const {score} = data;
-      console.log(score)
-      
-  
-    setFive_s(copyNestedArr(score["five_s"]))
-    setThirty_s( copyNestedArr(score["thirty_s"]))
-    setOne_min(copyNestedArr(score["one_min"]))
-    setTwo_min(copyNestedArr(score["two_min"]))
-    setFive_min(copyNestedArr(score["five_min"]))
-  
-  
-     }
+      setFive_s(copyNestedArr(score["five_s"]));
+      setThirty_s(copyNestedArr(score["thirty_s"]));
+      setOne_min(copyNestedArr(score["one_min"]));
+      setTwo_min(copyNestedArr(score["two_min"]));
+      setFive_min(copyNestedArr(score["five_min"]));
 
-
-  }, [loading, error, data])
-
- 
-  
-
-
-if(data) {
-
-    const {score} = data;
-    console.log(score)
-    
-
-/*     setFive_s(copyNestedArr(score["five_s"]))
-  setThirty_s( copyNestedArr(score["thirty_s"]))
-  setOne_min(copyNestedArr(score["one_min"]))
-  setTwo_min(copyNestedArr(score["two_min"]))
-  setFive_min(copyNestedArr(score["five_min"])) */
-
-
-   }
-
-
-  
-
-  
-
-
-  
-
-
-
-
+      setStats(score)
+    }
+  }, [loading, error, data]);
 
   function copyNestedArr(arr) {
-    let finalArr=[];
+    let finalArr = [];
 
-    for (let i = 0; i<arr.length; i++ ) {
-      finalArr.push(arr[i])
+    for (let i = 0; i < arr.length; i++) {
+      finalArr.push(arr[i]);
     }
 
     return finalArr;
   }
 
-
-
-
-  // let currentStats = score
-
-
-// In addition to a mutate function, the useMutation hook returns an object that represents
-//  the current state of the mutation's execution.
- const [addScore, { newData }] = useMutation(updateStats);
-
-
-
-
-
-
+  // In addition to a mutate function, the useMutation hook returns an object that represents
+  //  the current state of the mutation's execution.
+  const [addScore, { newData }] = useMutation(updateStats);
 
   // let history = useHistory();
   // disabling random wiki article button in <Fetch/>
@@ -430,15 +398,9 @@ if(data) {
     if (timerValue <= 0) {
       setFinalResults();
 
-      
-
-
-
       // addScore({})
 
-     
-
-/*       addScore({ variables: {
+      /*       addScore({ variables: {
         userId: "5ea96e3da7011208ac9c795d",
         five_s: [[88, 11.5], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],],
     thirty_s: [[88, 22.2], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],],
@@ -449,17 +411,13 @@ if(data) {
          refetchQueries: [{query: getStatsQuery}]
          }); */
 
-
-
       // change to Mongo here
       // setStats();
 
+      console.log("five_s");
+      console.log(five_s);
 
-
-      console.log('five_s')
-       console.log(five_s)
-
-/*   addScore({ variables: {
+      /*   addScore({ variables: {
         userId: "5ea96e3da7011208ac9c795d",
         five_s: five_s ,
     thirty_s: thirty_s,
@@ -469,10 +427,8 @@ if(data) {
          },
          refetchQueries: [{query: getStatsQuery}]
          });  */
-         
-         updateScore(addScore, five_s, thirty_s, one_min,
-           two_min, five_min);
 
+      updateScore(addScore, five_s, thirty_s, one_min, two_min, five_min);
 
       resultsReset();
 
@@ -494,16 +450,16 @@ if(data) {
     thirty_s,
     two_min,
     five_min,
-    updateScore
+    updateScore,
   ]);
   // ===========================================
 
   return (
     // injecting data from server
     // <ApolloProvider client={client}>
-      <HashRouter>
-        <div className="App" onKeyDown={handleKeyPress}>
-          {/*   <Fetch
+    <HashRouter>
+      <div className="App" onKeyDown={handleKeyPress}>
+        {/*   <Fetch
           myText={myText}
           wikiTitle={wikiTitle}
           setNewRandomArticle_false={setNewRandomArticle_false}
@@ -511,71 +467,71 @@ if(data) {
           loremText={loremText}
           focusTextArea={focusTextArea}
         /> */}
-          <div className="app-outer-container">
-            <h3 className="title">Wiki Speed Typing</h3>
-            <Switch>
-              {/* <Route path="/" exact component={Display}/> */}
-              <Route
-                path="/"
-                exact
-                // normally it would be component+ but render is needed is passing props
-                // to a component
-                render={(props) => (
-                  <Display
-                    {...props}
-                    // timer
-                    timerValue={timerValue}
-                    constantTimerValue={constantTimerValue}
-                    toggleActive={toggleActive}
-                    setTimerOnSelect={setTimerOnSelect}
-                    isActive={isActive}
-                    toReset={toReset}
-                    displayToReset={displayToReset}
-                    // hints & results visibility
-                    areHintsVisible={areHintsVisible}
-                    areResultsVisible={areResultsVisible}
-                    areStatsVisible={areStatsVisible}
-                    toggleHints={toggleHints}
-                    // toggleResults={toggleResults}
-                    toggleStats={toggleStats}
-                    // disabling select, menaging focus
-                    // isDisabled={isDisabled} isDisabled moved to Display!
-                    focusTextArea={focusTextArea}
-                    putFocusOnTextArea={putFocusOnTextArea}
-                    focusElement={focusElement}
-                    // results
-                    myText={myText}
-                    wikiTitle={wikiTitle}
-                    disablingButton={disablingButton}
-                    isCounterRunning={isCounterRunning}
-                    // for Display => WikiController
-                    setNewRandomArticle_true={setNewRandomArticle_true}
-                    // for Fetch
-                    setNewRandomArticle_false={setNewRandomArticle_false}
-                  />
-                )}
-              />
-              {/* route guarding <> & </>!!!!*/}
-              {isAuthenticated ? (
-                <Redirect to="/" />
-              ) : (
-                <>
-                  <Route path="/register" component={Register} />
-                  <Route path="/login" component={Login} />
-                  {/*        render={(props) => (
+        <div className="app-outer-container">
+          <h3 className="title">Wiki Speed Typing</h3>
+          <Switch>
+            {/* <Route path="/" exact component={Display}/> */}
+            <Route
+              path="/"
+              exact
+              // normally it would be component+ but render is needed is passing props
+              // to a component
+              render={(props) => (
+                <Display
+                  {...props}
+                  // timer
+                  timerValue={timerValue}
+                  constantTimerValue={constantTimerValue}
+                  toggleActive={toggleActive}
+                  setTimerOnSelect={setTimerOnSelect}
+                  isActive={isActive}
+                  toReset={toReset}
+                  displayToReset={displayToReset}
+                  // hints & results visibility
+                  areHintsVisible={areHintsVisible}
+                  areResultsVisible={areResultsVisible}
+                  areStatsVisible={areStatsVisible}
+                  toggleHints={toggleHints}
+                  // toggleResults={toggleResults}
+                  toggleStats={toggleStats}
+                  // disabling select, menaging focus
+                  // isDisabled={isDisabled} isDisabled moved to Display!
+                  focusTextArea={focusTextArea}
+                  putFocusOnTextArea={putFocusOnTextArea}
+                  focusElement={focusElement}
+                  // results
+                  myText={myText}
+                  wikiTitle={wikiTitle}
+                  disablingButton={disablingButton}
+                  isCounterRunning={isCounterRunning}
+                  // for Display => WikiController
+                  setNewRandomArticle_true={setNewRandomArticle_true}
+                  // for Fetch
+                  setNewRandomArticle_false={setNewRandomArticle_false}
+                />
+              )}
+            />
+            {/* route guarding <> & </>!!!!*/}
+            {isAuthenticated ? (
+              <Redirect to="/" />
+            ) : (
+              <>
+                <Route path="/register" component={Register} />
+                <Route path="/login" component={Login} />
+                {/*        render={(props) => (
               <Register
               path="/register"
             {...props}
               resetTimer={resetTimer}
               />
             )} */}
-                </>
-              )}
-              <Route render={() => <h1>404: page not found</h1>} />
-            </Switch>
-          </div>
+              </>
+            )}
+            <Route render={() => <h1>404: page not found</h1>} />
+          </Switch>
         </div>
-      </HashRouter>
+      </div>
+    </HashRouter>
     // </ApolloProvider>
   );
 }
@@ -647,13 +603,24 @@ const mapDispatchToProps = (dispatch) => {
     //  here deleted
 
     // for Stats
-    setStats: () => dispatch({ type: "UPDATE_STATS" }),
+    // setStats: () => dispatch({ type: "UPDATE_STATS" }),
     // for synchronizing select timer with select from Stats
     setCurrentStatsKey: (data) =>
       dispatch({ type: "SET_CURRENT_STATS", payload: data }),
     // !!! dispatching function instead of object thanks to redux-thunk
     fetchingWiki: () => dispatch(fetchWikiApi()),
-    updateScore: (addScore, five_s, thirty_s, one_min, two_min, five_min) => dispatch(updateScore_postAction(addScore, five_s, thirty_s, one_min, two_min, five_min)),
+    updateScore: (addScore, five_s, thirty_s, one_min, two_min, five_min) =>
+      dispatch(
+        updateScore_postAction(
+          addScore,
+          five_s,
+          thirty_s,
+          one_min,
+          two_min,
+          five_min
+        )
+      ),
+    setStats: (data) => dispatch({ type: "SET_STATS", payload: data }),
   };
 };
 
