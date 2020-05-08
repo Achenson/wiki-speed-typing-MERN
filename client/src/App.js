@@ -15,7 +15,8 @@ import Display from "./components/Display.js";
 import Login from "./components_links/Login.js";
 import Register from "./components_links/Register.js";
 
-import { fetchWikiApi } from "./redux/fetchPostAction.js";
+import { fetchWikiApi } from "./redux/actions/fetchPostAction.js";
+import {updateScore_postAction} from "./redux/actions/updateScore_postAction.js";
 
 // import { BrowserRouter, Route, Link, Switch, Redirect, useHistory, HashRouter } from "react-router-dom";
 import { Route, Switch, Redirect, HashRouter } from "react-router-dom";
@@ -128,6 +129,8 @@ function App({
   newRandomArticle,
   // imported actionCreator
   fetchingWiki,
+
+  updateScore
 }) {
 
   let arrayOfZeros =[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]]
@@ -154,7 +157,7 @@ function App({
     setFive_s(copyNestedArr(score["five_s"]))
     setThirty_s( copyNestedArr(score["thirty_s"]))
     setOne_min(copyNestedArr(score["one_min"]))
-    // setTwo_min(copyNestedArr(score["two_min"]))
+    setTwo_min(copyNestedArr(score["two_min"]))
     setFive_min(copyNestedArr(score["five_min"]))
   
   
@@ -427,6 +430,8 @@ if(data) {
     if (timerValue <= 0) {
       setFinalResults();
 
+      
+
 
 
       // addScore({})
@@ -454,17 +459,19 @@ if(data) {
       console.log('five_s')
        console.log(five_s)
 
-  addScore({ variables: {
+/*   addScore({ variables: {
         userId: "5ea96e3da7011208ac9c795d",
         five_s: five_s ,
     thirty_s: thirty_s,
     one_min: one_min,
     two_min: two_min,
-     five_min: [[555, 55.5], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],]
+     five_min: five_min
          },
          refetchQueries: [{query: getStatsQuery}]
-         }); 
- 
+         });  */
+         
+         updateScore(addScore, five_s, thirty_s, one_min,
+           two_min, five_min);
 
 
       resultsReset();
@@ -481,6 +488,12 @@ if(data) {
     setFinalResults,
     setLiveResults,
     setStats,
+    addScore,
+    five_s,
+    one_min,
+    thirty_s,
+    two_min,
+    five_min
   ]);
   // ===========================================
 
@@ -639,6 +652,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "SET_CURRENT_STATS", payload: data }),
     // !!! dispatching function instead of object thanks to redux-thunk
     fetchingWiki: () => dispatch(fetchWikiApi()),
+    updateScore: (addScore, five_s, thirty_s, one_min, two_min, five_min) => dispatch(updateScore_postAction(addScore, five_s, thirty_s, one_min, two_min, five_min)),
   };
 };
 

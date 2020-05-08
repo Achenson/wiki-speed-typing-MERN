@@ -1,6 +1,6 @@
-import store from "./store.js";
+import store from "../store.js";
 
-import loremText from "../components/_defaultText.js";
+import loremText from "../../components/_defaultText.js";
 
 export const fetchWikiApi = () => (dispatch) => {
   
