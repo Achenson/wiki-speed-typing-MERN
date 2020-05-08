@@ -493,7 +493,8 @@ if(data) {
     one_min,
     thirty_s,
     two_min,
-    five_min
+    five_min,
+    updateScore
   ]);
   // ===========================================
 

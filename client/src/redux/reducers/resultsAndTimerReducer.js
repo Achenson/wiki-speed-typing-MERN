@@ -176,7 +176,7 @@ function resultsAndTimerReducer(state = initialState, action) {
     // for Stats
 
     case "UPDATE_STATS":
-      let finalResultObj = {
+    /*   let finalResultObj = {
         ...resultsMaker(
           state.currentResults.resultsCorrect,
           state.currentResults.resultsIncorrect,
@@ -227,12 +227,16 @@ function resultsAndTimerReducer(state = initialState, action) {
       for (let i = 0; i < 10; i++) {
         updatedAndSortedArr.push(upd[i]);
       }
-
+ */
       return {
         ...state,
         stats: {
-          ...state.stats,
-          [statsStateKey]: updatedAndSortedArr
+
+          // ...action.payload
+         /*  ...state.stats,
+          [statsStateKey]: updatedAndSortedArr */
+
+          ...action.payload
         }
       };
 
@@ -415,7 +419,7 @@ function resultsAndTimerReducer(state = initialState, action) {
     }
   }
 
-  function updateAndSort(arr, speed, accuracy) {
+/*   function updateAndSort(arr, speed, accuracy) {
     let finalArr = [];
     let arrToAdd = [speed, accuracy];
 
@@ -441,7 +445,7 @@ function resultsAndTimerReducer(state = initialState, action) {
     console.log("finalArr length");
     console.log(finalArr.length);
     return finalArr;
-  }
+  } */
 }
 
 export default resultsAndTimerReducer;
