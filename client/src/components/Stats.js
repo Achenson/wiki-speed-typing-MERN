@@ -72,7 +72,6 @@ function Stats({
           <span
             className="delete-score-confirm"
             onClick={() => {
-              // deleteCurrentStatsArr();
 
               let statsObj = {
                 five_s: stats["five_s"],
@@ -95,6 +94,7 @@ function Stats({
                 [0, 0],
               ];
 
+              // not adding here, but reseting
               addScore({
                 variables: {
                   userId: "5ea96e3da7011208ac9c795d",

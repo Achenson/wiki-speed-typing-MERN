@@ -172,7 +172,7 @@ function resultsAndTimerReducer(state = initialState, action) {
           ...action.payload,
         },
       };
-
+    // set stats from useStatsQuery apollo hook
     case "SET_STATS":
       return {
         ...state,
@@ -258,16 +258,6 @@ function resultsAndTimerReducer(state = initialState, action) {
         stats: {
           ...state.stats,
           currentStatsKey: changeCurrentStatsKey(action.payload),
-        },
-      };
-
-    case "DELETE_CURRENT_STATS":
-      return {
-        ...state,
-        stats: {
-          ...state.stats,
-          // currentStatsArr: changeCurrentStatsKey(action.payload)
-          [state.stats.currentStatsKey]: makeDefaultStats(7),
         },
       };
 
