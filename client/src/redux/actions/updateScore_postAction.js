@@ -1,10 +1,7 @@
 import store from "../store.js";
 
-import { useQuery, useMutation } from "@apollo/react-hooks";
-
 import { gql } from "apollo-boost";
 
-// import getStatsQuery from "../../App"
 
 const getStatsQuery = gql`
   {
@@ -19,12 +16,7 @@ const getStatsQuery = gql`
 `;
 
 export const updateScore_postAction = (
-  addScore,
-  five_s,
-  thirty_s,
-  one_min,
-  two_min,
-  five_min
+  addScore
 ) => (dispatch) => {
   // const { loading, error, data } = useQuery(getStatsQuery);
 
@@ -80,8 +72,6 @@ export const updateScore_postAction = (
     updatedAndSortedArr.push(upd[i]);
   }
 
-  /* ...state.stats,
-          [statsStateKey]: updatedAndSortedArr */
 
   let statsObject = {
     ...store.getState().resultsAndTimerState.stats,
@@ -94,11 +84,7 @@ export const updateScore_postAction = (
     variables: {
       userId: "5ea96e3da7011208ac9c795d",
       ...statsObject,
-      /*  five_s: five_s,
-      thirty_s: thirty_s,
-      one_min: one_min,
-      two_min: two_min,
-      five_min: five_min, */
+    
     },
     refetchQueries: [{ query: getStatsQuery }],
   });

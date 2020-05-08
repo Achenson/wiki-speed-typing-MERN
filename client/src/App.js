@@ -2,15 +2,13 @@ import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 
-import ApolloClient from "apollo-boost";
-import { useQuery, useMutation, ApolloProvider } from "@apollo/react-hooks";
-
-// import store from "./store.js";
+//ApolloClient & ApolloProvider are in store.js
+import { useQuery, useMutation } from "@apollo/react-hooks";
 
 import "./App.css";
-// import Fetch from "./components/Fetch.js";
+
 import Display from "./components/Display.js";
-// import loremText from "./components/_defaultText.js";
+
 
 import Login from "./components_links/Login.js";
 import Register from "./components_links/Register.js";
@@ -25,10 +23,6 @@ import { gql } from "apollo-boost";
 
 // queries
 
-/* const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql",
-});
- */
 
 const getStatsQuery = gql`
   {
@@ -68,22 +62,6 @@ const updateStats = gql`
   }
 `;
 
-/* 
-
-  addScore(userId: "5ea96e3da7011208ac9c795d",
-   five_s: [[1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],],
-    thirty_s: [[2, 2], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],],
-    one_min: [[3, 3], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],],
-    two_min: [[4, 4], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],],
-     five_min: [[5, 5], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],]) {
-    five_s
-    thirty_s
-    one_min
-    two_min
-    five_min
-  }
-}
-*/
 
 //!!!!! imported actions creators must be passed here as props
 function App({
@@ -122,7 +100,7 @@ function App({
   setDisplayToReset_true,
   setConstantTimerValue,
   // for Stats
-  // setStats,
+  
   setCurrentStatsKey,
   //
   disableFocusTextArea,
@@ -398,37 +376,12 @@ function App({
     if (timerValue <= 0) {
       setFinalResults();
 
-      // addScore({})
 
-      /*       addScore({ variables: {
-        userId: "5ea96e3da7011208ac9c795d",
-        five_s: [[88, 11.5], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],],
-    thirty_s: [[88, 22.2], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],],
-    one_min: [[88, 33.3], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],],
-    two_min: [[88, 44.4], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],],
-     five_min: [[88, 55.5], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1],]
-         },
-         refetchQueries: [{query: getStatsQuery}]
-         }); */
-
-      // change to Mongo here
-      // setStats();
 
       console.log("five_s");
       console.log(five_s);
 
-      /*   addScore({ variables: {
-        userId: "5ea96e3da7011208ac9c795d",
-        five_s: five_s ,
-    thirty_s: thirty_s,
-    one_min: one_min,
-    two_min: two_min,
-     five_min: five_min
-         },
-         refetchQueries: [{query: getStatsQuery}]
-         });  */
-
-      updateScore(addScore, five_s, thirty_s, one_min, two_min, five_min);
+      updateScore(addScore);
 
       resultsReset();
 
@@ -455,18 +408,8 @@ function App({
   // ===========================================
 
   return (
-    // injecting data from server
-    // <ApolloProvider client={client}>
     <HashRouter>
       <div className="App" onKeyDown={handleKeyPress}>
-        {/*   <Fetch
-          myText={myText}
-          wikiTitle={wikiTitle}
-          setNewRandomArticle_false={setNewRandomArticle_false}
-          disablingButton={disablingButton}
-          loremText={loremText}
-          focusTextArea={focusTextArea}
-        /> */}
         <div className="app-outer-container">
           <h3 className="title">Wiki Speed Typing</h3>
           <Switch>
@@ -532,7 +475,6 @@ function App({
         </div>
       </div>
     </HashRouter>
-    // </ApolloProvider>
   );
 }
 
@@ -603,23 +545,18 @@ const mapDispatchToProps = (dispatch) => {
     //  here deleted
 
     // for Stats
-    // setStats: () => dispatch({ type: "UPDATE_STATS" }),
     // for synchronizing select timer with select from Stats
     setCurrentStatsKey: (data) =>
       dispatch({ type: "SET_CURRENT_STATS", payload: data }),
     // !!! dispatching function instead of object thanks to redux-thunk
     fetchingWiki: () => dispatch(fetchWikiApi()),
-    updateScore: (addScore, five_s, thirty_s, one_min, two_min, five_min) =>
+    updateScore: (addScore) =>
       dispatch(
         updateScore_postAction(
-          addScore,
-          five_s,
-          thirty_s,
-          one_min,
-          two_min,
-          five_min
+          addScore
         )
       ),
+      // initially setting stats from setStatsQuery apollo hook
     setStats: (data) => dispatch({ type: "SET_STATS", payload: data }),
   };
 };
