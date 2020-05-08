@@ -31,7 +31,7 @@ export const updateScore_postAction = (
   let finalResultObj = {
     ...resultsMaker(
       store.getState().resultsAndTimerState.currentResults.resultsCorrect,
-      store.getState().resultsAndTimerState.currentResults.resultsncorrect,
+      store.getState().resultsAndTimerState.currentResults.resultsIncorrect,
       store.getState().resultsAndTimerState.currentResults.resultsNoPenalty,
       0
     ),
