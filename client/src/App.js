@@ -9,11 +9,9 @@ import "./App.css";
 
 import Display from "./components/Display.js";
 
-
 import Login from "./components_links/Login.js";
 import Register from "./components_links/Register.js";
 import CustomRoute from "./components_links/CustomRoute.js";
-
 
 import { fetchWikiApi } from "./redux/actions/fetchPostAction.js";
 import { updateScore_postAction } from "./redux/actions/updateScore_postAction.js";
@@ -24,7 +22,6 @@ import { Route, Switch, Redirect, HashRouter } from "react-router-dom";
 import { gql } from "apollo-boost";
 
 // queries
-
 
 const getStatsQuery = gql`
   {
@@ -64,7 +61,6 @@ const updateStats = gql`
   }
 `;
 
-
 //!!!!! imported actions creators must be passed here as props
 function App({
   //  from mapStateToProps
@@ -102,7 +98,7 @@ function App({
   setDisplayToReset_true,
   setConstantTimerValue,
   // for Stats
-  
+
   setCurrentStatsKey,
   //
   disableFocusTextArea,
@@ -112,7 +108,7 @@ function App({
   fetchingWiki,
 
   updateScore,
-  setStats
+  setStats,
 }) {
   let arrayOfZeros = [
     [0, 0],
@@ -153,9 +149,9 @@ function App({
       setTwo_min(copyNestedArr(score["two_min"]));
       setFive_min(copyNestedArr(score["five_min"]));
 
-      setStats(score)
+      setStats(score);
     }
-  }, [loading, error, data]);
+  }, [loading, error, data, setStats]);
 
   function copyNestedArr(arr) {
     let finalArr = [];
@@ -378,8 +374,6 @@ function App({
     if (timerValue <= 0) {
       setFinalResults();
 
-
-
       console.log("five_s");
       console.log(five_s);
 
@@ -455,22 +449,25 @@ function App({
                   setNewRandomArticle_false={setNewRandomArticle_false}
                   // graphql mutation
                   addScore={addScore}
-                  
                 />
               )}
             />
-    
 
             {/* custom routes are used to avoid warning when rendering <Routes> conditionally:
             <Route> elements should not change from controlled to uncontrolled (or vice versa). You provided a "location" prop initially but omitted it on a subsequent render.
             
              */}
-            <CustomRoute isAuthenticated={isAuthenticated} path="/register" component={Register} />
-            <CustomRoute isAuthenticated={isAuthenticated} path="/login" component={Login}/>
+            <CustomRoute
+              isAuthenticated={isAuthenticated}
+              path="/register"
+              component={Register}
+            />
+            <CustomRoute
+              isAuthenticated={isAuthenticated}
+              path="/login"
+              component={Login}
+            />
 
-
-
-            
             <Route render={() => <h1>404: page not found</h1>} />
           </Switch>
         </div>
@@ -551,13 +548,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "SET_CURRENT_STATS", payload: data }),
     // !!! dispatching function instead of object thanks to redux-thunk
     fetchingWiki: () => dispatch(fetchWikiApi()),
-    updateScore: (addScore) =>
-      dispatch(
-        updateScore_postAction(
-          addScore
-        )
-      ),
-      // initially setting stats from setStatsQuery apollo hook
+    updateScore: (addScore) => dispatch(updateScore_postAction(addScore)),
+    // initially setting stats from setStatsQuery apollo hook
     setStats: (data) => dispatch({ type: "SET_STATS", payload: data }),
   };
 };
