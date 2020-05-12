@@ -2,7 +2,7 @@ import React from "react";
 import { Fragment } from "react";
 // import { connect } from "react-redux";
 
-function SingleStat({ speed, accuracy, key }) {
+function SingleStat({ speed, accuracy }) {
   let isThisARecord;
 
   if (speed === 0 && accuracy === 0) {

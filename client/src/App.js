@@ -12,6 +12,8 @@ import Display from "./components/Display.js";
 
 import Login from "./components_links/Login.js";
 import Register from "./components_links/Register.js";
+import CustomRoute from "./components_links/CustomRoute.js";
+
 
 import { fetchWikiApi } from "./redux/actions/fetchPostAction.js";
 import { updateScore_postAction } from "./redux/actions/updateScore_postAction.js";
@@ -457,22 +459,18 @@ function App({
                 />
               )}
             />
-            {/* route guarding <> & </>!!!!*/}
-            {isAuthenticated ? (
-              <Redirect to="/" />
-            ) : (
-              <>
-                <Route path="/register" component={Register} />
-                <Route path="/login" component={Login} />
-                {/*        render={(props) => (
-              <Register
-              path="/register"
-            {...props}
-              resetTimer={resetTimer}
-              />
-            )} */}
-              </>
-            )}
+    
+
+            {/* custom routes are used to avoid warning when rendering <Routes> conditionally:
+            <Route> elements should not change from controlled to uncontrolled (or vice versa). You provided a "location" prop initially but omitted it on a subsequent render.
+            
+             */}
+            <CustomRoute isAuthenticated={isAuthenticated} path="/register" component={Register} />
+            <CustomRoute isAuthenticated={isAuthenticated} path="/login" component={Login}/>
+
+
+
+            
             <Route render={() => <h1>404: page not found</h1>} />
           </Switch>
         </div>
