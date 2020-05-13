@@ -70,7 +70,7 @@ const updateStats = gql`
 }
 `; */
 
-export const addNewUser_postAction = (addUser, username, email, password) => (dispatch) => {
+export const addNewUser_postAction = (addUser, addScore, username, email, password) => (dispatch) => {
   addUser({
     variables: {
       username: username,
@@ -84,7 +84,30 @@ export const addNewUser_postAction = (addUser, username, email, password) => (di
 // workaround: useMutation returns a Promise
 
   }).then(
-    res => console.log(res),
+    res => {
+      console.log(res)
+      console.log(res.data.addUser.id);
+
+      let arrOfZeros = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]];
+
+      addScore({
+        variables: {
+          userId: res.data.addUser.id,
+          five_s: arrOfZeros,
+          thirty_s: arrOfZeros,
+          one_min: arrOfZeros,
+          two_min: arrOfZeros,
+          five_min: arrOfZeros
+        } 
+        // refetchQueries: [{ query: getStatsQuery }],
+      })
+
+
+      
+    
+    
+  },
+      
     err => console.log(err)
     
   )

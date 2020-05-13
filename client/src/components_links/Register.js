@@ -26,6 +26,31 @@ const addNewUserMutation = gql`
   }
 `;
 
+const updateStats = gql`
+  mutation AddScore(
+    $userId: String!
+    $five_s: [[Float]]
+    $thirty_s: [[Float]]
+    $one_min: [[Float]]
+    $two_min: [[Float]]
+    $five_min: [[Float]]
+  ) {
+    addScore(
+      userId: $userId
+      five_s: $five_s
+      thirty_s: $thirty_s
+      one_min: $one_min
+      two_min: $two_min
+      five_min: $five_min
+    ) {
+      five_s
+      thirty_s
+      one_min
+      two_min
+      five_min
+    }
+  }
+`;
 
 
 function Register({
@@ -38,8 +63,8 @@ function Register({
   
 }) {
 
-  const [addUser, { data: data}] = useMutation(addNewUserMutation);
-
+  const [addUser, { newData}] = useMutation(addNewUserMutation);
+  const [addScore, { newData_2 }] = useMutation(updateStats);
 
 
   // reseting authState for Login, so auth notifications/warnings disappear
@@ -94,7 +119,7 @@ function Register({
 
 
 
-    addNewUser(addUser, username, email, password)
+    addNewUser(addUser, addScore, username, email, password)
 
 
 
@@ -220,7 +245,7 @@ const mapDispatchToProps = (dispatch) => {
     notification_false: () => dispatch({ type: "NOTIFICATION_FALSE" }),
     loginError_false: () => dispatch({ type: "LOGIN_ERROR_FALSE" }),
 
-    addNewUser: (addUser, username, email, password) => dispatch(addNewUser_postAction(addUser, username, email, password)),
+    addNewUser: (addUser, addScore, username, email, password) => dispatch(addNewUser_postAction(addUser, username, email, password)),
 
   };
 };
