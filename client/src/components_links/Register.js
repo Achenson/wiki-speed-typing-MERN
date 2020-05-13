@@ -9,13 +9,39 @@ import { useHistory } from "react-router-dom";
 
 import AuthNotification from "./AuthNotification";
 
+import { gql } from "apollo-boost";
+import { useQuery, useMutation } from "@apollo/react-hooks";
+
+
+import { addNewUser_postAction } from "../redux/actions/addNewUser_postAction.js";
+
+const addNewUserMutation = gql`
+  mutation AddNewUser($name: String, $email: String!, $password: String!) {
+    addUser(name: $name, email: $email, password: $password) {
+      id
+      name
+      email
+      password
+    }
+  }
+`;
+
+
+
 function Register({
   showRegisterError,
   registerError_true,
   registerError_false,
   notification_false,
   loginError_false,
+  addNewUser
+  
 }) {
+
+  const [addUser, { data: data}] = useMutation(addNewUserMutation);
+
+
+
   // reseting authState for Login, so auth notifications/warnings disappear
   // when going back to Login
   useEffect(() => {
@@ -62,16 +88,16 @@ function Register({
 
     // else
 
-    
-
-
-
-
-
-
 
 
     registerError_false();
+
+
+
+    addNewUser(addUser, username, email, password)
+
+
+
     history.push("/login");
   }
 
@@ -147,6 +173,12 @@ function Register({
                   e.preventDefault();
                   // history.push("/login");
                   registerValidation();
+
+
+
+
+
+
                 }}
               >
                 Register
@@ -187,6 +219,9 @@ const mapDispatchToProps = (dispatch) => {
     registerError_false: () => dispatch({ type: "REGISTER_ERROR_FALSE" }),
     notification_false: () => dispatch({ type: "NOTIFICATION_FALSE" }),
     loginError_false: () => dispatch({ type: "LOGIN_ERROR_FALSE" }),
+
+    addNewUser: (addUser, username, email, password) => dispatch(addNewUser_postAction(addUser, username, email, password)),
+
   };
 };
 

@@ -10,8 +10,12 @@ GraphQLNonNull - preventing users from not entering all data in mutation
 client -> clone from repo, then hidden folder .git was deleted so this could be one repo consisting of client and server
 
 
+
 issues:
-1. React: Login <Route> warning
-2. warning: SingleStat "key"
-3. problems with undefined for disable button itp?
+DONE 1. React: Login <Route> warning DONE
+DONE 2. warning: SingleStat "key" DONE
+DONE 3. problems with undefined for disable button itp? DONE (if statements moved to useEffect)
 4. changePassword! other repos won't work!
+
+to do:
+1. move graphql queries to different file

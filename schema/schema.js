@@ -98,6 +98,9 @@ const Mutation = new GraphQLObjectType({
         return user.save();
       },
     },
+
+
+
     addScore: {
       type: ScoreType,
       args: {
@@ -126,6 +129,9 @@ const Mutation = new GraphQLObjectType({
         });
       },
     },
+
+
+    
   },
 });
 

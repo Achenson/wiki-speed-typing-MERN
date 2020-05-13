@@ -2,10 +2,10 @@ import store from "../store.js";
 
 import { gql } from "apollo-boost";
 
-
+// score(userId: ${store.getState().authState.authenticatedUserId}) {
 const getStatsQuery = gql`
   {
-    score(userId: "5ea96e3da7011208ac9c795d") {
+     score(userId: "5ea96e3da7011208ac9c795d") {
       five_s
       thirty_s
       one_min

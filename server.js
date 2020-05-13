@@ -5,6 +5,10 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const cors = require('cors')
 
+const bcrypt = require("bcrypt");
+const passport = require("passport");
+
+
 const app = express()
 
 app.use(cors())
