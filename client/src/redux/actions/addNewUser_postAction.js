@@ -77,14 +77,17 @@ export const addNewUser_postAction = (addUser, username, email, password) => (di
       email: email,
       password: password,
     },
-    onCompleted: (data) => {
-     console.log("data.id");
-     console.log(data)
-
-    }
-
     // refetchQueries: [{ query: getStatsQuery }],
-  });
+    
+// useMutation mutate function does not call `onCompleted`!
+// so onCompleted can only be passed to initial hook
+// workaround: useMutation returns a Promise
+
+  }).then(
+    res => console.log(res),
+    err => console.log(err)
+    
+  )
 
 
 
