@@ -24,8 +24,8 @@ import { gql } from "apollo-boost";
 // queries
 
 const getStatsQuery = gql`
-  {
-    score(userId: "5ea96e3da7011208ac9c795d") {
+  query Score($authenticatedUserId: String!) {
+    score(userId: $authenticatedUserId) {
       five_s
       thirty_s
       one_min
@@ -34,6 +34,7 @@ const getStatsQuery = gql`
     }
   }
 `;
+
 
 const updateStats = gql`
   mutation AddScore(
@@ -60,9 +61,6 @@ const updateStats = gql`
     }
   }
 `;
-
-
-
 
 //!!!!! imported actions creators must be passed here as props
 function App({
@@ -112,6 +110,7 @@ function App({
 
   updateScore,
   setStats,
+  authenticatedUserId,
 }) {
   let arrayOfZeros = [
     [0, 0],
@@ -132,7 +131,9 @@ function App({
   const [two_min, setTwo_min] = useState(arrayOfZeros);
   const [five_min, setFive_min] = useState(arrayOfZeros);
 
-  const { loading, error, data } = useQuery(getStatsQuery);
+  const { loading, error, data } = useQuery(getStatsQuery, {
+    variables: { authenticatedUserId },
+  });
 
   useEffect(() => {
     if (loading) {
@@ -497,6 +498,7 @@ const mapStateToProps = (state) => {
     areStatsVisible: state.visibilityState.areStatsVisible,
     // auth
     isAuthenticated: state.authState.isAuthenticated,
+    authenticatedUserId: state.authState.authenticatedUserId,
     //
     disableFocusTextArea: state.displayState.inputArea.disableFocusTextArea,
   };
