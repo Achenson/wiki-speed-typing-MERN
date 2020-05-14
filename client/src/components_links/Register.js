@@ -245,7 +245,7 @@ const mapDispatchToProps = (dispatch) => {
     notification_false: () => dispatch({ type: "NOTIFICATION_FALSE" }),
     loginError_false: () => dispatch({ type: "LOGIN_ERROR_FALSE" }),
 
-    addNewUser: (addUser, addScore, username, email, password) => dispatch(addNewUser_postAction(addUser, username, email, password)),
+    addNewUser: (addUser, addScore, username, email, password) => dispatch(addNewUser_postAction(addUser, addScore, username, email, password)),
 
   };
 };
