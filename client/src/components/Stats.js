@@ -21,8 +21,6 @@ import { useQuery } from "@apollo/react-hooks";
   }
 `; */
 
-
-
 const getStatsQuery = gql`
   query Score($userId: ID) {
     score(userId: $userId) {
@@ -34,8 +32,6 @@ const getStatsQuery = gql`
     }
   }
 `;
-
-
 
 function Stats({
   areStatsVisible,
@@ -54,6 +50,7 @@ function Stats({
   addScore,
   stats,
   authenticatedUserId,
+  setStats,
 }) {
   useEffect(() => {
     console.log("render");
@@ -178,12 +175,28 @@ function Stats({
     variables: { userId: authenticatedUserId },
   });
 
+  useEffect(() => {
+    if (loading) {
+      console.log("loading");
+    }
+    if (error) {
+      console.log("error");
+    }
+
+    if (data) {
+      const { score } = data;
+      console.log(score);
+
+      setStats(score);
+    }
+  }, [loading, error, data, setStats]);
+
   if (loading) return <h5>connecting to database...</h5>;
   if (error) return <h5>database connection error </h5>;
 
   const { score } = data;
 
-  // let currentStats = score
+  
 
   console.log("stats score");
   console.log(score);
@@ -255,6 +268,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "CONFIRM_DELETE_VISIBILITY_TRUE" }),
     confirmDeleteVisibility_false: () =>
       dispatch({ type: "CONFIRM_DELETE_VISIBILITY_FALSE" }),
+    setStats: (data) => dispatch({ type: "SET_STATS", payload: data }),
   };
 };
 

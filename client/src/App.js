@@ -129,22 +129,6 @@ function App({
     variables: { userId: authenticatedUserId },
   });
 
-  useEffect(() => {
-    if (loading) {
-      console.log("loading");
-    }
-    if (error) {
-      console.log("error");
-    }
-
-    if (data) {
-      const { score } = data;
-      console.log(score);
-
-      setStats(score);
-    }
-  }, [loading, error, data, setStats]);
-
   function copyNestedArr(arr) {
     let finalArr = [];
 
