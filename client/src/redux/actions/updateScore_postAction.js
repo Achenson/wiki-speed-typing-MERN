@@ -2,10 +2,9 @@ import store from "../store.js";
 
 import { gql } from "apollo-boost";
 
-// score(userId: ${store.getState().authState.authenticatedUserId}) {
 const getStatsQuery = gql`
-  {
-     score(userId: "5ea96e3da7011208ac9c795d") {
+  query Score($userId: ID) {
+    score(userId: $userId) {
       five_s
       thirty_s
       one_min
@@ -15,9 +14,7 @@ const getStatsQuery = gql`
   }
 `;
 
-export const updateScore_postAction = (
-  addScore
-) => (dispatch) => {
+export const updateScore_postAction = (addScore) => (dispatch) => {
   // const { loading, error, data } = useQuery(getStatsQuery);
 
   let finalResultObj = {
@@ -72,7 +69,6 @@ export const updateScore_postAction = (
     updatedAndSortedArr.push(upd[i]);
   }
 
-
   let statsObject = {
     ...store.getState().resultsAndTimerState.stats,
     [statsStateKey]: updatedAndSortedArr,
@@ -86,7 +82,7 @@ export const updateScore_postAction = (
       userId: "5ea96e3da7011208ac9c795d",
       ...statsObject,
     },
-    refetchQueries: [{ query: getStatsQuery }],
+    refetchQueries: [{ query: getStatsQuery, variables: {userId: store.getState().authState.authenticatedUserId} }],
   });
 
   function updateAndSort(arr, speed, accuracy) {

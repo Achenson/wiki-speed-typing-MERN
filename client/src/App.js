@@ -22,7 +22,7 @@ import { Route, Switch, Redirect, HashRouter } from "react-router-dom";
 import { gql } from "apollo-boost";
 
 // queries
-
+/* 
 const getStatsQuery = gql`
   query Score($authenticatedUserId: String!) {
     score(userId: $authenticatedUserId) {
@@ -34,7 +34,19 @@ const getStatsQuery = gql`
     }
   }
 `;
+ */
 
+const getStatsQuery = gql`
+  query Score($userId: ID) {
+    score(userId: $userId) {
+      five_s
+      thirty_s
+      one_min
+      two_min
+      five_min
+    }
+  }
+`;
 
 const updateStats = gql`
   mutation AddScore(
@@ -112,27 +124,9 @@ function App({
   setStats,
   authenticatedUserId,
 }) {
-  let arrayOfZeros = [
-    [0, 0],
-    [0, 0],
-    [0, 0],
-    [0, 0],
-    [0, 0],
-    [0, 0],
-    [0, 0],
-    [0, 0],
-    [0, 0],
-    [0, 0],
-  ];
-
-  const [five_s, setFive_s] = useState(arrayOfZeros);
-  const [thirty_s, setThirty_s] = useState(arrayOfZeros);
-  const [one_min, setOne_min] = useState(arrayOfZeros);
-  const [two_min, setTwo_min] = useState(arrayOfZeros);
-  const [five_min, setFive_min] = useState(arrayOfZeros);
-
   const { loading, error, data } = useQuery(getStatsQuery, {
-    variables: { authenticatedUserId },
+    // variables: { userId: "5ea96e3da7011208ac9c795d" },
+    variables: { userId: authenticatedUserId },
   });
 
   useEffect(() => {
@@ -146,12 +140,6 @@ function App({
     if (data) {
       const { score } = data;
       console.log(score);
-
-      setFive_s(copyNestedArr(score["five_s"]));
-      setThirty_s(copyNestedArr(score["thirty_s"]));
-      setOne_min(copyNestedArr(score["one_min"]));
-      setTwo_min(copyNestedArr(score["two_min"]));
-      setFive_min(copyNestedArr(score["five_min"]));
 
       setStats(score);
     }
@@ -378,9 +366,6 @@ function App({
     if (timerValue <= 0) {
       setFinalResults();
 
-      console.log("five_s");
-      console.log(five_s);
-
       updateScore(addScore);
 
       resultsReset();
@@ -398,11 +383,7 @@ function App({
     setLiveResults,
     setStats,
     addScore,
-    five_s,
-    one_min,
-    thirty_s,
-    two_min,
-    five_min,
+
     updateScore,
   ]);
   // ===========================================

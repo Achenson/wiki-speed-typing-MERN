@@ -9,7 +9,7 @@ import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
 
 // queries
-const getStatsQuery = gql`
+/* const getStatsQuery = gql`
   {
     score(userId: "5ea96e3da7011208ac9c795d") {
       five_s
@@ -19,7 +19,23 @@ const getStatsQuery = gql`
       five_min
     }
   }
+`; */
+
+
+
+const getStatsQuery = gql`
+  query Score($userId: ID) {
+    score(userId: $userId) {
+      five_s
+      thirty_s
+      one_min
+      two_min
+      five_min
+    }
+  }
 `;
+
+
 
 function Stats({
   areStatsVisible,
@@ -37,6 +53,7 @@ function Stats({
   // graphql mutation
   addScore,
   stats,
+  authenticatedUserId,
 }) {
   useEffect(() => {
     console.log("render");
@@ -72,7 +89,6 @@ function Stats({
           <span
             className="delete-score-confirm"
             onClick={() => {
-
               let statsObj = {
                 five_s: stats["five_s"],
                 thirty_s: stats["thirty_s"],
@@ -100,7 +116,12 @@ function Stats({
                   userId: "5ea96e3da7011208ac9c795d",
                   ...statsObj,
                 },
-                refetchQueries: [{ query: getStatsQuery }],
+                refetchQueries: [
+                  {
+                    query: getStatsQuery,
+                    variables: { userId: authenticatedUserId },
+                  },
+                ],
               });
 
               confirmDeleteVisibility_false();
@@ -150,7 +171,12 @@ function Stats({
     // setCurrentStatsArr(e.target.value)
   }
 
-  const { loading, error, data } = useQuery(getStatsQuery);
+  // const { loading, error, data } = useQuery(getStatsQuery);
+
+  const { loading, error, data } = useQuery(getStatsQuery, {
+    // variables: { userId: "5ea96e3da7011208ac9c795d" },
+    variables: { userId: authenticatedUserId },
+  });
 
   if (loading) return <h5>connecting to database...</h5>;
   if (error) return <h5>database connection error </h5>;
@@ -214,6 +240,7 @@ const mapStateToProps = (state) => {
     isConfirmDeleteVisible: state.visibilityState.isConfirmDeleteVisible,
     areStatsVisible: state.visibilityState.areStatsVisible,
     stats: state.resultsAndTimerState.stats,
+    authenticatedUserId: state.authState.authenticatedUserId,
   };
 };
 
