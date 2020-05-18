@@ -8,30 +8,7 @@ import { gql } from "apollo-boost";
 // connecting graphql to component
 import { useQuery } from "@apollo/react-hooks";
 
-// queries
-/* const getStatsQuery = gql`
-  {
-    score(userId: "5ea96e3da7011208ac9c795d") {
-      five_s
-      thirty_s
-      one_min
-      two_min
-      five_min
-    }
-  }
-`; */
-
-const getStatsQuery = gql`
-  query Score($userId: ID) {
-    score(userId: $userId) {
-      five_s
-      thirty_s
-      one_min
-      two_min
-      five_min
-    }
-  }
-`;
+import { getStatsQuery } from "../graphql/queries.js";
 
 function Stats({
   areStatsVisible,
@@ -195,8 +172,6 @@ function Stats({
   if (error) return <h5>database connection error </h5>;
 
   const { score } = data;
-
-  
 
   console.log("stats score");
   console.log(score);

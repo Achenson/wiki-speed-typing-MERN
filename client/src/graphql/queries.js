@@ -1,18 +1,5 @@
 import { gql } from "apollo-boost";
 
-/* export const getStatsQuery = gql`
-  query Score($authenticatedUserId: String!) {
-    score(userId: $authenticatedUserId) {
-      five_s
-      thirty_s
-      one_min
-      two_min
-      five_min
-    }
-  }
-`; */
-
-
 export const updateStats = gql`
   mutation AddScore(
     $userId: String!
@@ -39,7 +26,6 @@ export const updateStats = gql`
   }
 `;
 
-
 export const addNewUserMutation = gql`
   mutation AddNewUser($name: String, $email: String!, $password: String!) {
     addUser(name: $name, email: $email, password: $password) {
@@ -51,8 +37,7 @@ export const addNewUserMutation = gql`
   }
 `;
 
-
-const getStatsQuery = gql`
+export const getStatsQuery = gql`
   query Score($userId: ID) {
     score(userId: $userId) {
       five_s
@@ -63,10 +48,3 @@ const getStatsQuery = gql`
     }
   }
 `;
-
-
-
-const { loading, error, data } = useQuery(getStatsQuery, {
-  // variables: { userId: "5ea96e3da7011208ac9c795d" },
-   variables: { userId: authenticatedUserId },
-});

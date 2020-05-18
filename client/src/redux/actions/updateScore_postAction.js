@@ -1,18 +1,6 @@
 import store from "../store.js";
 
-import { gql } from "apollo-boost";
-
-const getStatsQuery = gql`
-  query Score($userId: ID) {
-    score(userId: $userId) {
-      five_s
-      thirty_s
-      one_min
-      two_min
-      five_min
-    }
-  }
-`;
+import { getStatsQuery } from "../../graphql/queries.js";
 
 export const updateScore_postAction = (addScore) => (dispatch) => {
   // const { loading, error, data } = useQuery(getStatsQuery);
@@ -82,7 +70,12 @@ export const updateScore_postAction = (addScore) => (dispatch) => {
       userId: "5ea96e3da7011208ac9c795d",
       ...statsObject,
     },
-    refetchQueries: [{ query: getStatsQuery, variables: {userId: store.getState().authState.authenticatedUserId} }],
+    refetchQueries: [
+      {
+        query: getStatsQuery,
+        variables: { userId: store.getState().authState.authenticatedUserId },
+      },
+    ],
   });
 
   function updateAndSort(arr, speed, accuracy) {

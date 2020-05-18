@@ -9,49 +9,12 @@ import { useHistory } from "react-router-dom";
 
 import AuthNotification from "./AuthNotification";
 
-import { gql } from "apollo-boost";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-
 
 import { addNewUser_postAction } from "../redux/actions/addNewUser_postAction.js";
 
-const addNewUserMutation = gql`
-  mutation AddNewUser($name: String, $email: String!, $password: String!) {
-    addUser(name: $name, email: $email, password: $password) {
-      id
-      name
-      email
-      password
-    }
-  }
-`;
-
-const updateStats = gql`
-  mutation AddScore(
-    $userId: String!
-    $five_s: [[Float]]
-    $thirty_s: [[Float]]
-    $one_min: [[Float]]
-    $two_min: [[Float]]
-    $five_min: [[Float]]
-  ) {
-    addScore(
-      userId: $userId
-      five_s: $five_s
-      thirty_s: $thirty_s
-      one_min: $one_min
-      two_min: $two_min
-      five_min: $five_min
-    ) {
-      five_s
-      thirty_s
-      one_min
-      two_min
-      five_min
-    }
-  }
-`;
-
+import { addNewUserMutation } from "../graphql/queries.js";
+import { updateStats } from "../graphql/queries.js";
 
 function Register({
   showRegisterError,
@@ -59,13 +22,10 @@ function Register({
   registerError_false,
   notification_false,
   loginError_false,
-  addNewUser
-  
+  addNewUser,
 }) {
-
-  const [addUser, { newData}] = useMutation(addNewUserMutation);
+  const [addUser, { newData }] = useMutation(addNewUserMutation);
   const [addScore, { newData_2 }] = useMutation(updateStats);
-
 
   // reseting authState for Login, so auth notifications/warnings disappear
   // when going back to Login
@@ -113,15 +73,9 @@ function Register({
 
     // else
 
-
-
     registerError_false();
 
-
-
-    addNewUser(addUser, addScore, username, email, password)
-
-
+    addNewUser(addUser, addScore, username, email, password);
 
     history.push("/login");
   }
@@ -198,12 +152,6 @@ function Register({
                   e.preventDefault();
                   // history.push("/login");
                   registerValidation();
-
-
-
-
-
-
                 }}
               >
                 Register
@@ -245,8 +193,10 @@ const mapDispatchToProps = (dispatch) => {
     notification_false: () => dispatch({ type: "NOTIFICATION_FALSE" }),
     loginError_false: () => dispatch({ type: "LOGIN_ERROR_FALSE" }),
 
-    addNewUser: (addUser, addScore, username, email, password) => dispatch(addNewUser_postAction(addUser, addScore, username, email, password)),
-
+    addNewUser: (addUser, addScore, username, email, password) =>
+      dispatch(
+        addNewUser_postAction(addUser, addScore, username, email, password)
+      ),
   };
 };
 

@@ -25,7 +25,7 @@ to do:
 apollo structure:
 
 in App:
-updating stats after counter reaches 0 -> passing addScore to updateScor_postAction, where getStatsQuerry is refetched
+updating stats after counter reaches 0 -> passing addScore to  !!==updateScor_postAction==!!, where getStatsQuerry is refetched
 
 in Stats:
 getStatsQuery for setting redux state - stats state is being used in Stats for deleting (moved from App)

@@ -19,60 +19,8 @@ import { updateScore_postAction } from "./redux/actions/updateScore_postAction.j
 // import { BrowserRouter, Route, Link, Switch, Redirect, useHistory, HashRouter } from "react-router-dom";
 import { Route, Switch, Redirect, HashRouter } from "react-router-dom";
 
-import { gql } from "apollo-boost";
-
-// queries
-/* 
-const getStatsQuery = gql`
-  query Score($authenticatedUserId: String!) {
-    score(userId: $authenticatedUserId) {
-      five_s
-      thirty_s
-      one_min
-      two_min
-      five_min
-    }
-  }
-`;
- */
-
-const getStatsQuery = gql`
-  query Score($userId: ID) {
-    score(userId: $userId) {
-      five_s
-      thirty_s
-      one_min
-      two_min
-      five_min
-    }
-  }
-`;
-
-const updateStats = gql`
-  mutation AddScore(
-    $userId: String!
-    $five_s: [[Float]]
-    $thirty_s: [[Float]]
-    $one_min: [[Float]]
-    $two_min: [[Float]]
-    $five_min: [[Float]]
-  ) {
-    addScore(
-      userId: $userId
-      five_s: $five_s
-      thirty_s: $thirty_s
-      one_min: $one_min
-      two_min: $two_min
-      five_min: $five_min
-    ) {
-      five_s
-      thirty_s
-      one_min
-      two_min
-      five_min
-    }
-  }
-`;
+import { getStatsQuery } from "./graphql/queries.js";
+import { updateStats } from "./graphql/queries.js";
 
 //!!!!! imported actions creators must be passed here as props
 function App({
