@@ -48,28 +48,31 @@ function Register({
   let [confirmation, setConfirmation] = useState("");
 
   // true by default, so by defaul it is not possible to add user to DB
-  let [isUserInDatabase, setIsUserInDatabase] = useState(true);
+  // let [isUserInDatabase, setIsUserInDatabase] = useState(true);
 
-  const { loading, error, data } = useQuery(getUserByEmailQuery, {
+  /* const { loading, error, data } = useQuery(getUserByEmailQuery, {
     // variables: { userId: "5ea96e3da7011208ac9c795d" },
     variables: { email: email },
-  });
+  }); */
 
-  useEffect(() => {
+
+
+
+/*   useEffect(() => {
     if (loading) {
       console.log("loading user data");
       setIsUserInDatabase(true);
     }
     if (error) {
       console.log("error getting user data");
-      setIsUserInDatabase(true);
+       setIsUserInDatabase(true);
     }
 
     if (data) {
-      // const { score } = data;
-      // console.log(score);
+       const { score } = data;
+      console.log(score);
 
-      // setStats(score);
+      setStats(score);
 
       console.log(data);
 
@@ -79,7 +82,12 @@ function Register({
         setIsUserInDatabase(true);
       }
     }
-  }, [loading, error, data, email]);
+  }, [loading, error, data, email]); */
+
+
+
+
+
 
   function registerValidation() {
     if (username === "") {
@@ -106,11 +114,11 @@ function Register({
       return;
     }
 
-    if (isUserInDatabase) {
+ /*    if (isUserInDatabase) {
       setErrorNotification("User with provided email is already in database");
       registerError_true();
       return;
-    }
+    } */
 
     // else
 

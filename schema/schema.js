@@ -64,7 +64,7 @@ const RootQuery = new GraphQLObjectType({
       type: UserType,
       args: { email: { type: GraphQLString } },
       resolve(parent, args) {
-        return User.findOne({email: args.email});
+        return User.findOne({ email: args.email });
       },
     },
     score: {
@@ -89,16 +89,62 @@ const Mutation = new GraphQLObjectType({
         password: { type: new GraphQLNonNull(GraphQLString) },
       },
       resolve(parent, args) {
-
         let user = new User({
           name: args.name,
           email: args.email,
           password: args.password,
         });
 
+
+        User.findOne({email: args.email}, (err, res) => {
+          if(err)console.log(err)
+
+          console.log("res")
+          console.log(res)
+// if user  with this email is not found
+          if (res === null) {
+            return user.save((err, product) => {
+              if (err) console.log(err);
+    
+              console.log("product")
+              console.log(product)
+    
+              let arrOfZeros = [
+                [0, 0],
+                [0, 0],
+                [0, 0],
+                [0, 0],
+                [0, 0],
+                [0, 0],
+                [0, 0],
+                [0, 0],
+                [0, 0],
+                [0, 0],
+              ];
+    
+              let newScore = new Score({
+                userId: product.id,
+                five_s: arrOfZeros,
+                thirty_s: arrOfZeros,
+                one_min: arrOfZeros,
+                two_min: arrOfZeros,
+                five_min: arrOfZeros,
+              });
+    
+              newScore.save();
+            });
+          } else {
+            return null
+          }
+
+
+
+        })
+
         
-            
-            return user.save();
+
+
+
 
       },
     },

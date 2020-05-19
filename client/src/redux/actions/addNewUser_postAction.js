@@ -13,7 +13,9 @@ export const addNewUser_postAction = (
 ) => (dispatch) => {
 
 
+
   
+
   addUser({
     variables: {
       username: username,
@@ -25,7 +27,11 @@ export const addNewUser_postAction = (
     // useMutation mutate function does not call `onCompleted`!
     // so onCompleted can only be passed to initial hook
     // workaround: useMutation returns a Promise
-  }).then(
+  })
+  
+  
+/*   
+  .then(
     (res) => {
       console.log(res);
       console.log(res.data.addUser.id);
@@ -57,5 +63,8 @@ export const addNewUser_postAction = (
     },
 
     (err) => console.log(err)
-  );
+  ); */
+
+
+
 };
