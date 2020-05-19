@@ -19,7 +19,7 @@ DONE 3. problems with undefined for disable button itp? DONE (if statements move
 5. clicking Login it the article is not loaded yet couse errors
 
 to do:
-1. move graphql queries to different file
+DONE 1. move graphql queries to different file DONE
 
 
 apollo structure:
