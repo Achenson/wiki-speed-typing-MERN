@@ -48,3 +48,12 @@ export const getStatsQuery = gql`
     }
   }
 `;
+
+export const getUserByEmailQuery = gql`
+  query User($email: String) {
+    user(email: $email) {
+      name
+      email
+    }
+  }
+`;

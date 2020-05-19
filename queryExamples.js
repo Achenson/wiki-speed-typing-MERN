@@ -114,7 +114,14 @@ mutation {
   }
 
 
-
+  {
+  user (email: "a@a.pl") {
+  
+    name
+    email
+    password
+  }
+    }
 
 
 // mutating to second test user
@@ -213,4 +220,3 @@ mutation {
 */
 
 
-*/

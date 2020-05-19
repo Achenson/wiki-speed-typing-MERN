@@ -30,7 +30,6 @@ const UserType = new GraphQLObjectType({
   }),
 });
 
-
 /* 
 
  "five_s": Array,
@@ -63,9 +62,9 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     user: {
       type: UserType,
-      args: { id: { type: GraphQLID } },
+      args: { email: { type: GraphQLString } },
       resolve(parent, args) {
-        return User.findById(args.id);
+        return User.findOne({email: args.email});
       },
     },
     score: {
@@ -73,7 +72,7 @@ const RootQuery = new GraphQLObjectType({
       // changed from id to userId
       args: { userId: { type: GraphQLID } },
       resolve(parent, args) {
-        return Score.findOne({userId: args.userId});
+        return Score.findOne({ userId: args.userId });
       },
     },
   },
@@ -90,16 +89,19 @@ const Mutation = new GraphQLObjectType({
         password: { type: new GraphQLNonNull(GraphQLString) },
       },
       resolve(parent, args) {
+
         let user = new User({
           name: args.name,
           email: args.email,
           password: args.password,
         });
-        return user.save();
+
+        
+            
+            return user.save();
+
       },
     },
-
-
 
     addScore: {
       type: ScoreType,
@@ -129,9 +131,6 @@ const Mutation = new GraphQLObjectType({
         });
       },
     },
-
-
-    
   },
 });
 

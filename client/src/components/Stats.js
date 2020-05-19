@@ -145,7 +145,6 @@ function Stats({
     // setCurrentStatsArr(e.target.value)
   }
 
-  // const { loading, error, data } = useQuery(getStatsQuery);
 
   const { loading, error, data } = useQuery(getStatsQuery, {
     // variables: { userId: "5ea96e3da7011208ac9c795d" },

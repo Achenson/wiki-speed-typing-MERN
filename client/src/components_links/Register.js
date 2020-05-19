@@ -15,6 +15,7 @@ import { addNewUser_postAction } from "../redux/actions/addNewUser_postAction.js
 
 import { addNewUserMutation } from "../graphql/queries.js";
 import { updateStats } from "../graphql/queries.js";
+import { getUserByEmailQuery } from "../graphql/queries.js";
 
 function Register({
   showRegisterError,
@@ -46,6 +47,40 @@ function Register({
   let [password, setPassword] = useState("");
   let [confirmation, setConfirmation] = useState("");
 
+  // true by default, so by defaul it is not possible to add user to DB
+  let [isUserInDatabase, setIsUserInDatabase] = useState(true);
+
+  const { loading, error, data } = useQuery(getUserByEmailQuery, {
+    // variables: { userId: "5ea96e3da7011208ac9c795d" },
+    variables: { email: email },
+  });
+
+  useEffect(() => {
+    if (loading) {
+      console.log("loading user data");
+      setIsUserInDatabase(true);
+    }
+    if (error) {
+      console.log("error getting user data");
+      setIsUserInDatabase(true);
+    }
+
+    if (data) {
+      // const { score } = data;
+      // console.log(score);
+
+      // setStats(score);
+
+      console.log(data);
+
+      if (data.user === null) {
+        setIsUserInDatabase(false);
+      } else {
+        setIsUserInDatabase(true);
+      }
+    }
+  }, [loading, error, data, email]);
+
   function registerValidation() {
     if (username === "") {
       setErrorNotification("Invalid username");
@@ -67,6 +102,12 @@ function Register({
 
     if (password !== confirmation) {
       setErrorNotification("Password confirmation does not match");
+      registerError_true();
+      return;
+    }
+
+    if (isUserInDatabase) {
+      setErrorNotification("User with provided email is already in database");
       registerError_true();
       return;
     }
