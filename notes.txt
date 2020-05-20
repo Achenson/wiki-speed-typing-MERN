@@ -4,14 +4,16 @@ DB='mongodb+srv://Achenson:<password>@mongo-for-fcc-13gh5.mongodb.net/graphql_te
 
 ^graphql_test - name of the db that the document will we saved to! name of the collection will be infered automatically
 
-
 GraphQLNonNull - preventing users from not entering all data in mutation
 
 client -> clone from repo, then hidden folder .git was deleted so this could be one repo consisting of client and server
 
 // useMutation mutate function does not call `onCompleted`!
-  // so onCompleted can only be passed to initial hook
-    // workaround: useMutation returns a Promise
+ // so onCompleted can only be passed to initial hook
+// workaround: useMutation returns a Promise
+
+schema.js -> promise used, so that resolve function can return a value from Mongoose method,
+which is needed on the pro
 
 
 

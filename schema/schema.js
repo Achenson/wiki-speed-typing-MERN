@@ -95,57 +95,53 @@ const Mutation = new GraphQLObjectType({
           password: args.password,
         });
 
+        let myPromise = new Promise((resolve, reject) => {
+          User.findOne({ email: args.email }, (err, res) => {
+            if (err) console.log(err);
 
-        User.findOne({email: args.email}, (err, res) => {
-          if(err)console.log(err)
+            console.log("res");
+            console.log(res);
+            // if user  with this email is not found
+            if (res === null) {
+              return user.save((err, product) => {
+                if (err) console.log(err);
 
-          console.log("res")
-          console.log(res)
-// if user  with this email is not found
-          if (res === null) {
-            return user.save((err, product) => {
-              if (err) console.log(err);
-    
-              console.log("product")
-              console.log(product)
-    
-              let arrOfZeros = [
-                [0, 0],
-                [0, 0],
-                [0, 0],
-                [0, 0],
-                [0, 0],
-                [0, 0],
-                [0, 0],
-                [0, 0],
-                [0, 0],
-                [0, 0],
-              ];
-    
-              let newScore = new Score({
-                userId: product.id,
-                five_s: arrOfZeros,
-                thirty_s: arrOfZeros,
-                one_min: arrOfZeros,
-                two_min: arrOfZeros,
-                five_min: arrOfZeros,
+                console.log("product");
+                console.log(product);
+
+                let arrOfZeros = [
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                ];
+
+                let newScore = new Score({
+                  userId: product.id,
+                  five_s: arrOfZeros,
+                  thirty_s: arrOfZeros,
+                  one_min: arrOfZeros,
+                  two_min: arrOfZeros,
+                  five_min: arrOfZeros,
+                });
+
+                newScore.save();
+
+                resolve(product);
               });
-    
-              newScore.save();
-            });
-          } else {
-            return null
-          }
+            } else {
+              resolve(null);
+            }
+          });
+        });
 
-
-
-        })
-
-        
-
-
-
-
+        return myPromise;
       },
     },
 

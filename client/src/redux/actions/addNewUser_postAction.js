@@ -2,8 +2,6 @@ import store from "../store.js";
 
 import { gql } from "apollo-boost";
 
-
-
 export const addNewUser_postAction = (
   addUser,
   addScore,
@@ -11,11 +9,6 @@ export const addNewUser_postAction = (
   email,
   password
 ) => (dispatch) => {
-
-
-
-  
-
   addUser({
     variables: {
       username: username,
@@ -27,10 +20,9 @@ export const addNewUser_postAction = (
     // useMutation mutate function does not call `onCompleted`!
     // so onCompleted can only be passed to initial hook
     // workaround: useMutation returns a Promise
-  })
-  
-  
-/*   
+  });
+
+  /*   
   .then(
     (res) => {
       console.log(res);
@@ -64,7 +56,4 @@ export const addNewUser_postAction = (
 
     (err) => console.log(err)
   ); */
-
-
-
 };

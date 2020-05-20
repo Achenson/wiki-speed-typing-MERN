@@ -11,7 +11,7 @@ import AuthNotification from "./AuthNotification";
 
 import { useQuery, useMutation } from "@apollo/react-hooks";
 
-import { addNewUser_postAction } from "../redux/actions/addNewUser_postAction.js";
+
 
 import { addNewUserMutation } from "../graphql/queries.js";
 import { updateStats } from "../graphql/queries.js";
@@ -23,11 +23,10 @@ function Register({
   registerError_false,
   notification_false,
   loginError_false,
-  addNewUser,
+  
 }) {
   const [addUser, { newData }] = useMutation(addNewUserMutation);
-  const [addScore, { newData_2 }] = useMutation(updateStats);
-
+  
   // reseting authState for Login, so auth notifications/warnings disappear
   // when going back to Login
   useEffect(() => {
@@ -47,47 +46,7 @@ function Register({
   let [password, setPassword] = useState("");
   let [confirmation, setConfirmation] = useState("");
 
-  // true by default, so by defaul it is not possible to add user to DB
-  // let [isUserInDatabase, setIsUserInDatabase] = useState(true);
-
-  /* const { loading, error, data } = useQuery(getUserByEmailQuery, {
-    // variables: { userId: "5ea96e3da7011208ac9c795d" },
-    variables: { email: email },
-  }); */
-
-
-
-
-/*   useEffect(() => {
-    if (loading) {
-      console.log("loading user data");
-      setIsUserInDatabase(true);
-    }
-    if (error) {
-      console.log("error getting user data");
-       setIsUserInDatabase(true);
-    }
-
-    if (data) {
-       const { score } = data;
-      console.log(score);
-
-      setStats(score);
-
-      console.log(data);
-
-      if (data.user === null) {
-        setIsUserInDatabase(false);
-      } else {
-        setIsUserInDatabase(true);
-      }
-    }
-  }, [loading, error, data, email]); */
-
-
-
-
-
+  
 
   function registerValidation() {
     if (username === "") {
@@ -114,19 +73,28 @@ function Register({
       return;
     }
 
- /*    if (isUserInDatabase) {
-      setErrorNotification("User with provided email is already in database");
-      registerError_true();
-      return;
-    } */
 
-    // else
+    addUser({
+      variables: {
+        username: username,
+        email: email,
+        password: password,
+      },
+      // refetchQueries: [{ query: getStatsQuery }],
+      // useMutation mutate function does not call `onCompleted`!
+      // so onCompleted can only be passed to initial hook
+      // workaround: useMutation returns a Promise
+    }).then((res) => {
+      console.log(res);
 
-    registerError_false();
-
-    addNewUser(addUser, addScore, username, email, password);
-
-    history.push("/login");
+      if (res.data.addUser) {
+        registerError_false();
+        history.push("/login");
+      } else {
+        setErrorNotification("User with provided email is already registered");
+        registerError_true();
+      }
+    });
   }
 
   return (
@@ -242,10 +210,10 @@ const mapDispatchToProps = (dispatch) => {
     notification_false: () => dispatch({ type: "NOTIFICATION_FALSE" }),
     loginError_false: () => dispatch({ type: "LOGIN_ERROR_FALSE" }),
 
-    addNewUser: (addUser, addScore, username, email, password) =>
+    /* addNewUser: (addUser, addScore, username, email, password) =>
       dispatch(
         addNewUser_postAction(addUser, addScore, username, email, password)
-      ),
+      ), */
   };
 };
 
