@@ -3,6 +3,8 @@ const graphql = require("graphql");
 const User = require("../mongoModels/user");
 const Score = require("../mongoModels/score");
 
+
+
 const {
   GraphQLObjectType,
   GraphQLSchema,
@@ -173,6 +175,59 @@ const Mutation = new GraphQLObjectType({
         });
       },
     },
+
+    login: {
+
+      type: UserType,
+      args: {
+       
+        email: { type: new GraphQLNonNull(GraphQLString) },
+        password: { type: new GraphQLNonNull(GraphQLString) },
+
+      },
+
+      async resolve(parent, {email, password}, context) {
+
+
+        const { user } = await context.authenticate('graphql-local', { email, password });
+        await context.login(user);
+        console.log("userrrr");
+        
+        console.log(user);
+        
+        return user;
+      
+
+     /*    context.authenticate('graphql-local', { email, password })
+        .then(
+          (user, err) => {
+            
+            if(err) console.log(err)
+            context.login({user})}
+
+        )
+        .then(
+          (user,err) => {
+
+            if(err) console.log(err)
+            return {user}
+          } 
+        ) */
+
+
+
+
+      }
+
+
+
+    }
+
+
+
+
+
+
   },
 });
 

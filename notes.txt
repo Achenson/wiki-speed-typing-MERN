@@ -40,4 +40,4 @@ in Stats:
 getStatsQuery for setting redux state - stats state is being used in Stats for deleting (moved from App)
 updating stats after deleting current stats, refetching getStatsQuery
 
-in Register: adding new user and adding empty score right away -> addNewUser_postAction 
+in Register: adding new user and adding empty score right away (addNewUser_postAction not used anymore!)
