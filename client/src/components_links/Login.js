@@ -6,7 +6,11 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+import { useQuery, useMutation } from "@apollo/react-hooks";
+
 import AuthNotification from "./AuthNotification";
+
+import { loginMutation } from "../graphql/queries.js";
 
 function Login({
   logIn,
@@ -18,6 +22,9 @@ function Login({
   loginError_false,
   registerError_false,
 }) {
+
+  const [loginMut, { newData }] = useMutation(loginMutation);
+
   // reseting authState for Register, so auth notifications/warnings disappear
   // when going back to Register
   useEffect(() => {
@@ -42,23 +49,37 @@ function Login({
 
   let [error, setError] = useState(null);
 
-  let [username, setUsername] = useState("");
+  let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
 
   function loginValidation() {
-    if (username === "" || password === "") {
+    if (email === "" || password === "") {
       setError("Incorrect username of password");
       loginError_true();
       return;
     } else {
       loginError_false();
 
-      logIn();
-      notification_false();
+      loginMut({
+        variables: {email: email,
+          password: password}
+      })
+      .then( res => {
+        console.log("promise res");
+        console.log(res.data.login.id);
 
-      // history.push('/')
-      // no going back! not possible to go back to login when logged in
-      history.replace("/");
+
+        logIn(res.data.login.id);
+        notification_false();
+  
+        // history.push('/')
+        // no going back! not possible to go back to login when logged in
+        history.replace("/");
+
+
+      })
+
+    
     }
   }
 
@@ -91,9 +112,9 @@ function Login({
                   className="input"
                   type="email"
                   onChange={(e) => {
-                    setUsername(e.target.value);
+                    setEmail(e.target.value);
                   }}
-                  value={username}
+                  value={email}
                 />
               </label>
               <br />
@@ -161,7 +182,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    logIn: () => dispatch({ type: "LOG_IN" }),
+    logIn: (userId) => dispatch({ type: "LOG_IN", payload: userId }),
     notification_true: () => dispatch({ type: "NOTIFICATION_TRUE" }),
     notification_false: () => dispatch({ type: "NOTIFICATION_FALSE" }),
     loginError_true: () => dispatch({ type: "LOGIN_ERROR_TRUE" }),

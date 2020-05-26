@@ -1,6 +1,7 @@
 const initialState = {
   isAuthenticated: false,
-  authenticatedUserId: "5ea96e3da7011208ac9c795d",
+  // authenticatedUserId: "5ea96e3da7011208ac9c795d",
+  authenticatedUserId: null,
   isNotificationNeeded: false,
   showLoginError: false,
   showRegisterError: false,
@@ -12,12 +13,16 @@ function authReducer(state = initialState, action) {
       return {
         ...state,
 
+        authenticatedUserId: action.payload,
         isAuthenticated: true,
+
       };
     case "LOG_OUT":
       return {
         ...state,
+        authenticatedUserId: null,
         isAuthenticated: false,
+        
       };
     case "NOTIFICATION_TRUE":
       return {

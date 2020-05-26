@@ -67,7 +67,8 @@ export const updateScore_postAction = (addScore) => (dispatch) => {
   // graphql mutation
   addScore({
     variables: {
-      userId: "5ea96e3da7011208ac9c795d",
+      // userId: "5ea96e3da7011208ac9c795d",
+      userId: store.getState().authState.authenticatedUserId,
       ...statsObject,
     },
     refetchQueries: [

@@ -148,6 +148,7 @@ function Stats({
 
   const { loading, error, data } = useQuery(getStatsQuery, {
     // variables: { userId: "5ea96e3da7011208ac9c795d" },
+    // variables: { userId: "5eccce068b127c21a098920f" },
     variables: { userId: authenticatedUserId },
   });
 
