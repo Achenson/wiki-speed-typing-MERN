@@ -3,8 +3,6 @@ const graphql = require("graphql");
 const User = require("../mongoModels/user");
 const Score = require("../mongoModels/score");
 
-
-
 const {
   GraphQLObjectType,
   GraphQLSchema,
@@ -177,28 +175,25 @@ const Mutation = new GraphQLObjectType({
     },
 
     login: {
-
       type: UserType,
       args: {
-       
         email: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
-
       },
 
-      async resolve(parent, {email, password}, context) {
-
-
-        const { user } = await context.authenticate('graphql-local', { email, password });
+      async resolve(parent, { email, password }, context) {
+        const { user } = await context.authenticate("graphql-local", {
+          email,
+          password,
+        });
         await context.login(user);
         console.log("userrrr");
-        
-        console.log(user);
-        
-        return user;
-      
 
-     /*    context.authenticate('graphql-local', { email, password })
+        console.log(user);
+
+        return user;
+
+        /*    context.authenticate('graphql-local', { email, password })
         .then(
           (user, err) => {
             
@@ -213,21 +208,71 @@ const Mutation = new GraphQLObjectType({
             return {user}
           } 
         ) */
+      },
+    },
+    register: {
+      type: UserType,
+      args: {
+        name: { type: GraphQLString },
+        email: { type: new GraphQLNonNull(GraphQLString) },
+        password: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parent, args, context) {
+        let user = new User({
+          name: args.name,
+          email: args.email,
+          password: args.password,
+        });
 
+        let myPromise = new Promise((resolve, reject) => {
+          User.findOne({ email: args.email }, (err, res) => {
+            if (err) console.log(err);
 
+            console.log("res");
+            console.log(res);
+            // if user  with this email is not found
+            if (res === null) {
+              return user.save((err, product) => {
+                if (err) console.log(err);
 
+                console.log("product");
+                console.log(product);
 
-      }
+                let arrOfZeros = [
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                ];
 
+                let newScore = new Score({
+                  userId: product.id,
+                  five_s: arrOfZeros,
+                  thirty_s: arrOfZeros,
+                  one_min: arrOfZeros,
+                  two_min: arrOfZeros,
+                  five_min: arrOfZeros,
+                });
 
+                newScore.save();
 
-    }
+                resolve(product);
+              });
+            } else {
+              resolve(null);
+            }
+          });
+        });
 
-
-
-
-
-
+        return myPromise;
+      },
+    },
   },
 });
 
