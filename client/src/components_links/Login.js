@@ -8,6 +8,10 @@ import { useHistory } from "react-router-dom";
 
 import AuthNotification from "./AuthNotification";
 
+import { useQuery, useMutation } from "@apollo/react-hooks";
+
+import { loginMutation } from "../graphql/queries.js";
+
 function Login({
   logIn,
   isNotificationNeeded,
@@ -18,6 +22,8 @@ function Login({
   loginError_false,
   registerError_false,
 }) {
+  const [loginMut, { newData }] = useMutation(loginMutation);
+
   // reseting authState for Register, so auth notifications/warnings disappear
   // when going back to Register
   useEffect(() => {
@@ -50,22 +56,31 @@ function Login({
       setError("Email or password not provided");
       loginError_true();
       return;
+    }
 
-    } 
+    loginMut({
+      variables: {
+        email: email,
+        password: password,
+      },
+    }).then((res, err) => {
+      if (err) {
+        setError("loginMut Error");
+        loginError_true();
+        return;
+      }
 
+      console.log("loginMut res");
+      console.log(res);
 
-      
-
-      
-    loginError_false();
-
+      loginError_false();
       logIn();
       notification_false();
 
       // history.push('/')
       // no going back! not possible to go back to login when logged in
       history.replace("/");
-    
+    });
   }
 
   return (

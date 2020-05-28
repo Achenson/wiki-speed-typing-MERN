@@ -76,7 +76,7 @@ const RootQuery = new GraphQLObjectType({
       type: UserType,
       args: { email: { type: GraphQLString } },
       resolve(parent, args, req) {
-       /*  if (!req.isAuth) {
+        /*  if (!req.isAuth) {
           throw new Error("not authenticatedddd");
         } */
 
@@ -89,34 +89,6 @@ const RootQuery = new GraphQLObjectType({
       args: { userId: { type: GraphQLID } },
       resolve(parent, args) {
         return Score.findOne({ userId: args.userId });
-      },
-    },
-
-    login: {
-      // type: UserType,
-      type: AuthData,
-      args: {
-        email: { type: new GraphQLNonNull(GraphQLString) },
-        password: { type: new GraphQLNonNull(GraphQLString) },
-      },
-
-      async resolve(parent, { email, password }) {
-        const user = await User.findOne({ email: email });
-        if (!user) {
-          throw new Error("User does not exist!");
-        }
-        const isEqual = await bcrypt.compare(password, user.password);
-        if (!isEqual) {
-          throw new Error("Password is incorrect!");
-        }
-        const token = jwt.sign(
-          { userId: user.id, email: user.email },
-          "somesupersecretkey",
-          {
-            expiresIn: "1h",
-          }
-        );
-        return { userId: user.id, token: token, tokenExpiration: 1 };
       },
     },
   },
@@ -232,6 +204,34 @@ const Mutation = new GraphQLObjectType({
           upsert: true, // Make this update into an upsert,
           useFindAndModify: false,
         });
+      },
+    },
+
+    login: {
+      // type: UserType,
+      type: AuthData,
+      args: {
+        email: { type: new GraphQLNonNull(GraphQLString) },
+        password: { type: new GraphQLNonNull(GraphQLString) },
+      },
+
+      async resolve(parent, { email, password }) {
+        const user = await User.findOne({ email: email });
+        if (!user) {
+          throw new Error("User does not exist!");
+        }
+        const isEqual = await bcrypt.compare(password, user.password);
+        if (!isEqual) {
+          throw new Error("Password is incorrect!");
+        }
+        const token = jwt.sign(
+          { userId: user.id, email: user.email },
+          "somesupersecretkey",
+          {
+            expiresIn: "1h",
+          }
+        );
+        return { userId: user.id, token: token, tokenExpiration: 1 };
       },
     },
   },
