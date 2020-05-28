@@ -240,6 +240,32 @@ mutation {
  } */
 
 
+// =============== test schema
+
+/*  user: {
+  type: UserType,
+  args: { email: { type: GraphQLString } },
+  resolve(parent, args, req) {
+
+    if(!req.isAuth) {
+      throw new Error("not authenticatedddd")
+    }
+
+    return User.findOne({ email: args.email });
+  },
+},
+score: {
+  type: ScoreType,
+  // changed from id to userId
+  args: { userId: { type: GraphQLID } },
+  resolve(parent, args) {
+    return Score.findOne({ userId: args.userId });
+  },
+}, */
+
+// ======= test schema
+
+  // protected querry
 /*  {
   user (email: "f@f.pl") {
   
@@ -248,7 +274,7 @@ mutation {
     
   }
     }
-    
+    // unprotected querry
     
         {
       score (userId: "5ecd0af6855357093c66b451") {
@@ -259,5 +285,4 @@ mutation {
     
     */
 
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWNlNjU4MzJhOWIzOTEwMTgyNmU4N2MiLCJlbWFpbCI6ImxAbC5wbCIsImlhdCI6MTU5MDY2MDE0OSwiZXhwIjoxNTkwNjYzNzQ5fQ.X3oT46xAKTUlmy4UmNZKUMq6tjxDSoSQs3qogggPvSQ"
-  
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWNlNjU4MzJhOWIzOTEwMTgyNmU4N2MiLCJlbWFpbCI6ImxAbC5wbCIsImlhdCI6MTU5MDY2NjE1MCwiZXhwIjoxNTkwNjY5NzUwfQ.DRk6qO4inKLlkfii6sb5uaMZS6xkezvS4Yai0_sLYoo"

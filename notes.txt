@@ -15,6 +15,13 @@ client -> clone from repo, then hidden folder .git was deleted so this could be 
 schema.js -> promise used, so that resolve function can return a value from Mongoose method,
 which is needed on the pro
 
+testing tokens with postman:
+[body-graphql] 1. login querry to geneterate token, copy the token
+2. [authorisation beaere token] paste token (without ""!)
+3. make protected querry
+no body-pareser being used
+
+
 
 
 
