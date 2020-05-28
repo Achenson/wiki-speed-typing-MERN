@@ -14,6 +14,7 @@ const cors = require("cors");
 const isAuth = require("./middleware/is-auth");
 
 const app = express();
+app.use(cors())
 
 // body parser unnecessary?, express-graphql can parse request according to its body type
 // app.use(bodyParser.json());
@@ -28,7 +29,6 @@ app.use(
   })
 );
 
-// app.use(cors())
 
 dotenv.config();
 

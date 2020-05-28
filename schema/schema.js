@@ -60,15 +60,14 @@ const ScoreType = new GraphQLObjectType({
   }),
 });
 
-
 const AuthData = new GraphQLObjectType({
   name: "Auth",
   fields: () => ({
-    userId: {type: GraphQLID},
-    token: {type: GraphQLString},
-    tokenExpiration: {type: GraphQLInt}
-  })
-})
+    userId: { type: GraphQLID },
+    token: { type: GraphQLString },
+    tokenExpiration: { type: GraphQLInt },
+  }),
+});
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -77,10 +76,9 @@ const RootQuery = new GraphQLObjectType({
       type: UserType,
       args: { email: { type: GraphQLString } },
       resolve(parent, args, req) {
-
-        if(!req.isAuth) {
-          throw new Error("not authenticatedddd")
-        }
+       /*  if (!req.isAuth) {
+          throw new Error("not authenticatedddd");
+        } */
 
         return User.findOne({ email: args.email });
       },
@@ -93,8 +91,6 @@ const RootQuery = new GraphQLObjectType({
         return Score.findOne({ userId: args.userId });
       },
     },
-
-
 
     login: {
       // type: UserType,
@@ -123,12 +119,6 @@ const RootQuery = new GraphQLObjectType({
         return { userId: user.id, token: token, tokenExpiration: 1 };
       },
     },
-
-
-
-
-
-
   },
 });
 
@@ -166,55 +156,46 @@ const Mutation = new GraphQLObjectType({
             console.log(res);
             // if user  with this email is not found
             if (res === null) {
-
-
-              bcrypt
-                .hash(args.password, 12)
-                .then((hashedPassword) => {
-
-
-                  let user = new User({
-                    name: args.name,
-                    email: args.email,
-                    password: hashedPassword,
-                  });
-
-                  return user.save((err, product) => {
-                    if (err) console.log(err);
-
-                    console.log("product");
-                    console.log(product);
-
-                    let arrOfZeros = [
-                      [0, 0],
-                      [0, 0],
-                      [0, 0],
-                      [0, 0],
-                      [0, 0],
-                      [0, 0],
-                      [0, 0],
-                      [0, 0],
-                      [0, 0],
-                      [0, 0],
-                    ];
-
-                    let newScore = new Score({
-                      userId: product.id,
-                      five_s: arrOfZeros,
-                      thirty_s: arrOfZeros,
-                      one_min: arrOfZeros,
-                      two_min: arrOfZeros,
-                      five_min: arrOfZeros,
-                    });
-
-                    newScore.save();
-
-                    resolve(product);
-                  });
-
-
-                  
+              bcrypt.hash(args.password, 12).then((hashedPassword) => {
+                let user = new User({
+                  name: args.name,
+                  email: args.email,
+                  password: hashedPassword,
                 });
+
+                return user.save((err, product) => {
+                  if (err) console.log(err);
+
+                  console.log("product");
+                  console.log(product);
+
+                  let arrOfZeros = [
+                    [0, 0],
+                    [0, 0],
+                    [0, 0],
+                    [0, 0],
+                    [0, 0],
+                    [0, 0],
+                    [0, 0],
+                    [0, 0],
+                    [0, 0],
+                    [0, 0],
+                  ];
+
+                  let newScore = new Score({
+                    userId: product.id,
+                    five_s: arrOfZeros,
+                    thirty_s: arrOfZeros,
+                    one_min: arrOfZeros,
+                    two_min: arrOfZeros,
+                    five_min: arrOfZeros,
+                  });
+
+                  newScore.save();
+
+                  resolve(product);
+                });
+              });
             } else {
               resolve(null);
             }
@@ -253,8 +234,6 @@ const Mutation = new GraphQLObjectType({
         });
       },
     },
-
- 
   },
 });
 

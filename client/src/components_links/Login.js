@@ -42,16 +42,22 @@ function Login({
 
   let [error, setError] = useState(null);
 
-  let [username, setUsername] = useState("");
+  let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
 
   function loginValidation() {
-    if (username === "" || password === "") {
-      setError("Incorrect username of password");
+    if (email === "" || password === "") {
+      setError("Email or password not provided");
       loginError_true();
       return;
-    } else {
-      loginError_false();
+
+    } 
+
+
+      
+
+      
+    loginError_false();
 
       logIn();
       notification_false();
@@ -59,7 +65,7 @@ function Login({
       // history.push('/')
       // no going back! not possible to go back to login when logged in
       history.replace("/");
-    }
+    
   }
 
   return (
@@ -91,9 +97,9 @@ function Login({
                   className="input"
                   type="email"
                   onChange={(e) => {
-                    setUsername(e.target.value);
+                    setEmail(e.target.value);
                   }}
-                  value={username}
+                  value={email}
                 />
               </label>
               <br />
