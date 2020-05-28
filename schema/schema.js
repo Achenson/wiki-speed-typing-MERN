@@ -76,7 +76,12 @@ const RootQuery = new GraphQLObjectType({
     user: {
       type: UserType,
       args: { email: { type: GraphQLString } },
-      resolve(parent, args) {
+      resolve(parent, args, req) {
+
+        if(!req.isAuth) {
+          throw new Error("not authenticatedddd")
+        }
+
         return User.findOne({ email: args.email });
       },
     },
@@ -88,6 +93,9 @@ const RootQuery = new GraphQLObjectType({
         return Score.findOne({ userId: args.userId });
       },
     },
+
+
+
     login: {
       // type: UserType,
       type: AuthData,

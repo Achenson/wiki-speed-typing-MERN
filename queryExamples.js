@@ -220,3 +220,44 @@ mutation {
 */
 
 
+// ======== JWt token
+
+
+/*  mutation {
+  	addUser(name: "l", email: "l@l.pl", password: "l") {
+     name
+     email
+     password
+   }
+ }
+ 
+ {
+   login(email: "l@l.pl", password: "l") {
+     userId
+     token
+     tokenExpiration
+   }
+ } */
+
+
+/*  {
+  user (email: "f@f.pl") {
+  
+    name
+    email
+    
+  }
+    }
+    
+    
+        {
+      score (userId: "5ecd0af6855357093c66b451") {
+        five_s
+      }
+    }
+    
+    
+    */
+
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWNlNjU4MzJhOWIzOTEwMTgyNmU4N2MiLCJlbWFpbCI6ImxAbC5wbCIsImlhdCI6MTU5MDY2MDE0OSwiZXhwIjoxNTkwNjYzNzQ5fQ.X3oT46xAKTUlmy4UmNZKUMq6tjxDSoSQs3qogggPvSQ"
+  

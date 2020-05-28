@@ -6,7 +6,7 @@ const schema = require("./schema/schema");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 
 // bcrypt?
 
@@ -15,9 +15,10 @@ const isAuth = require("./middleware/is-auth");
 
 const app = express();
 
-app.use(bodyParser.json());
+// body parser unnecessary?, express-graphql can parse request according to its body type
+// app.use(bodyParser.json());
 
-// app.use(isAuth);
+app.use(isAuth);
 
 app.use(
   "/graphql",
