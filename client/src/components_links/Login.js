@@ -70,6 +70,18 @@ function Login({
         return;
       }
 
+      if (res.data.login.token === "User does not exist!") {
+        setError(`${res.data.login.token}`);
+        loginError_true();
+        return;
+      }
+
+      if (res.data.login.token === "Password is incorrect!") {
+        setError(`${res.data.login.token}`);
+        loginError_true();
+        return;
+      }
+
       console.log("loginMut res");
       console.log(res);
 

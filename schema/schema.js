@@ -218,11 +218,15 @@ const Mutation = new GraphQLObjectType({
       async resolve(parent, { email, password }) {
         const user = await User.findOne({ email: email });
         if (!user) {
-          throw new Error("User does not exist!");
+          // throw new Error("User does not exist!");
+          return { userId: null, token: "User does not exist!", tokenExpiration: null };
+          
         }
         const isEqual = await bcrypt.compare(password, user.password);
         if (!isEqual) {
-          throw new Error("Password is incorrect!");
+          // throw new Error("Password is incorrect!");
+          return { userId: null, token: "Password is incorrect!", tokenExpiration: null };
+          
         }
         const token = jwt.sign(
           { userId: user.id, email: user.email },
