@@ -28,6 +28,7 @@ function Stats({
   stats,
   authenticatedUserId,
   setStats,
+  logOut,
 }) {
   useEffect(() => {
     console.log("render");
@@ -85,9 +86,12 @@ function Stats({
               ];
 
               // not adding here, but reseting
+
               addScore({
                 variables: {
-                  userId: "5ea96e3da7011208ac9c795d",
+                  // userId: "5ea96e3da7011208ac9c795d",
+                  userId: authenticatedUserId,
+
                   ...statsObj,
                 },
                 refetchQueries: [
@@ -96,6 +100,10 @@ function Stats({
                     variables: { userId: authenticatedUserId },
                   },
                 ],
+              }).then((res) => {
+                if (!res) {
+                  logOut();
+                }
               });
 
               confirmDeleteVisibility_false();
@@ -144,7 +152,6 @@ function Stats({
     }
     // setCurrentStatsArr(e.target.value)
   }
-
 
   const { loading, error, data } = useQuery(getStatsQuery, {
     // variables: { userId: "5ea96e3da7011208ac9c795d" },
@@ -243,6 +250,7 @@ const mapDispatchToProps = (dispatch) => {
     confirmDeleteVisibility_false: () =>
       dispatch({ type: "CONFIRM_DELETE_VISIBILITY_FALSE" }),
     setStats: (data) => dispatch({ type: "SET_STATS", payload: data }),
+    logOut: () => dispatch({ type: "LOG_OUT" }),
   };
 };
 

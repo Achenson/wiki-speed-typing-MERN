@@ -88,7 +88,13 @@ const RootQuery = new GraphQLObjectType({
       // changed from id to userId
       args: { userId: { type: GraphQLID } },
       resolve(parent, args) {
-        return Score.findOne({ userId: args.userId });
+
+        if(args.userId) {
+
+          return Score.findOne({ userId: args.userId });
+        } else {
+          return null;
+        }
       },
     },
   },
@@ -188,8 +194,14 @@ const Mutation = new GraphQLObjectType({
         two_min: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
         five_min: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
       },
-      resolve(parent, args) {
+      resolve(parent, args, req) {
         // not a new Score!!! to not overwrite id
+
+          if (!req.isAuth) {
+          // throw new Error("not authenticatedddd");
+          return null
+        } 
+
         let update = {
           five_s: args.five_s,
           thirty_s: args.thirty_s,

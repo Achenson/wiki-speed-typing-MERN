@@ -67,7 +67,8 @@ export const updateScore_postAction = (addScore) => (dispatch) => {
   // graphql mutation
   addScore({
     variables: {
-      userId: "5ea96e3da7011208ac9c795d",
+      // userId: "5ea96e3da7011208ac9c795d",
+      userId: store.getState().authState.authenticatedUserId,
       ...statsObject,
     },
     refetchQueries: [
@@ -76,7 +77,13 @@ export const updateScore_postAction = (addScore) => (dispatch) => {
         variables: { userId: store.getState().authState.authenticatedUserId },
       },
     ],
+  })
+  .then((res) => {
+    if (!res) {
+      dispatch({ type: "LOG_OUT" })
+    }
   });
+  ;
 
   function updateAndSort(arr, speed, accuracy) {
     let finalArr = [];

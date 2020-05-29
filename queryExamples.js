@@ -283,6 +283,15 @@ score: {
     }
     
     
+ mutation {
+  login (email: "l@l.pl", password: "l") {
+    userId
+    token
+    tokenExpiration
+  }
+}
+
     */
 
   const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWNlNjU4MzJhOWIzOTEwMTgyNmU4N2MiLCJlbWFpbCI6ImxAbC5wbCIsImlhdCI6MTU5MDY2NjE1MCwiZXhwIjoxNTkwNjY5NzUwfQ.DRk6qO4inKLlkfii6sb5uaMZS6xkezvS4Yai0_sLYoo"
+  const token2 =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWNlNjU4MzJhOWIzOTEwMTgyNmU4N2MiLCJlbWFpbCI6ImxAbC5wbCIsImlhdCI6MTU5MDc2MTkxOCwiZXhwIjoxNTkwNzY1NTE4fQ.g5QHbsO1N1JDh309-2CCP0q8iCcOAaXAZLv4WkUcGRM"

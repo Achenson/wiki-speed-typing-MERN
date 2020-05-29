@@ -86,7 +86,7 @@ function Login({
       console.log(res);
 
       loginError_false();
-      logIn();
+      logIn(res.data.login.userId);
       notification_false();
 
       // history.push('/')
@@ -194,7 +194,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    logIn: () => dispatch({ type: "LOG_IN" }),
+    logIn: (userId) => dispatch({ type: "LOG_IN", payload: userId }),
     notification_true: () => dispatch({ type: "NOTIFICATION_TRUE" }),
     notification_false: () => dispatch({ type: "NOTIFICATION_FALSE" }),
     loginError_true: () => dispatch({ type: "LOGIN_ERROR_TRUE" }),
