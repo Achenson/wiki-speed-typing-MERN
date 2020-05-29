@@ -197,10 +197,10 @@ const Mutation = new GraphQLObjectType({
       resolve(parent, args, req) {
         // not a new Score!!! to not overwrite id
 
-          if (!req.isAuth) {
+        /*   if (!req.isAuth) {
           // throw new Error("not authenticatedddd");
           return null
-        } 
+        }  */
 
         let update = {
           five_s: args.five_s,
