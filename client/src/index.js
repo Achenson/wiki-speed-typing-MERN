@@ -1,22 +1,37 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import store from "./redux/store";
+import store from "./redux/store.js";
 import { Provider } from "react-redux";
 
 import "./index.css";
 import AppContainer from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-
-
-
 import { ApolloProvider } from '@apollo/react-hooks';
-
-
-
 import ApolloClient from 'apollo-boost';
+
+
+
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
+  // 02:03
+  credentials: "include",
+  request: operation => {
+    let accessToken = store.getState().authState.accessToken;
+
+
+    // const accessToken = getAccessToken();
+    if (accessToken) {
+
+      console.log("acccesssss");
+      
+      operation.setContext({
+        headers: {
+          authorization: `Bearer ${accessToken}`
+        }
+      })
+    }
+  }
 });
 
 

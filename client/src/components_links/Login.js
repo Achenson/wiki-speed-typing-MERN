@@ -10,7 +10,7 @@ import AuthNotification from "./AuthNotification";
 
 import { useQuery, useMutation } from "@apollo/react-hooks";
 
-import { loginMutation } from "../graphql/queries.js";
+import { loginMutation, getUserByEmailQuery } from "../graphql/queries.js";
 
 function Login({
   logIn,
@@ -23,6 +23,14 @@ function Login({
   registerError_false,
 }) {
   const [loginMut, { newData }] = useMutation(loginMutation);
+
+  /*   const {loading, err, data} = useQuery(getUserByEmailQuery, {
+    variables: {email: "l@l.pl" }, });
+
+  if (data) {
+    console.log('dataaaa')
+    console.log(data)
+  } */
 
   // reseting authState for Register, so auth notifications/warnings disappear
   // when going back to Register
@@ -86,7 +94,10 @@ function Login({
       console.log(res);
 
       loginError_false();
-      logIn(res.data.login.userId);
+      logIn({
+        authenticatedUserId: res.data.login.userId,
+        token: res.data.login.token,
+      });
       notification_false();
 
       // history.push('/')
@@ -194,7 +205,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    logIn: (userId) => dispatch({ type: "LOG_IN", payload: userId }),
+    logIn: (dataObj) => dispatch({ type: "LOG_IN", payload: dataObj }),
     notification_true: () => dispatch({ type: "NOTIFICATION_TRUE" }),
     notification_false: () => dispatch({ type: "NOTIFICATION_FALSE" }),
     loginError_true: () => dispatch({ type: "LOGIN_ERROR_TRUE" }),

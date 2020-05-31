@@ -72,10 +72,33 @@ function App({
   setStats,
   authenticatedUserId,
 }) {
-  const { loading, error, data } = useQuery(getStatsQuery, {
+/*   const { loading, error, dataaa } = useQuery(getStatsQuery, {
     // variables: { userId: "5ea96e3da7011208ac9c795d" },
     variables: { userId: authenticatedUserId },
   });
+
+  
+
+    if (dataaa) {
+      console.log("dataaaa from App.js");
+      
+      console.log(dataaa);
+      
+    }
+  
+    if (!dataaa) {
+      console.log("no dataaa");
+      
+    }
+ */
+ 
+
+
+
+ 
+
+
+
 
   function copyNestedArr(arr) {
     let finalArr = [];

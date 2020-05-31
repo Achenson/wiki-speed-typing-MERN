@@ -8,7 +8,9 @@ import { gql } from "apollo-boost";
 // connecting graphql to component
 import { useQuery } from "@apollo/react-hooks";
 
-import { getStatsQuery } from "../graphql/queries.js";
+import { getStatsQuery, getUserByEmailQuery } from "../graphql/queries.js";
+
+
 
 function Stats({
   areStatsVisible,
@@ -30,10 +32,46 @@ function Stats({
   setStats,
   logOut,
 }) {
+
+
+  const { loadinggg, errorrr, dataaa } = useQuery(getUserByEmailQuery, {
+    // variables: { userId: "5ea96e3da7011208ac9c795d" },
+    variables: { email: "l@l.pl" },
+  });
+
+
+  useEffect( () => {
+
+    if (dataaa) {
+      console.log("dataaaaa");
+      console.log(data);
+      
+ 
+    } else {
+      console.log("no dataaaa");
+      
+    }
+
+  }, [dataaa])
+
+
+
+
   useEffect(() => {
     console.log("render");
+    if (dataaa) {
+      console.log("dataaaaa");
+      console.log(data);
+      
+ 
+    } else {
+      console.log("no dataaaa");
+      
+    }
 
     confirmDeleteVisibility_false();
+
+
   }, [areStatsVisible, confirmDeleteVisibility_false]);
 
   function renderDeletion() {
@@ -152,6 +190,8 @@ function Stats({
     }
     // setCurrentStatsArr(e.target.value)
   }
+
+
 
   const { loading, error, data } = useQuery(getStatsQuery, {
     // variables: { userId: "5ea96e3da7011208ac9c795d" },

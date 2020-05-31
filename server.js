@@ -10,24 +10,51 @@ const cors = require("cors");
 
 // bcrypt?
 
+const app = express();
+
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}))
+
+
+/* app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+}); */
+
+
 
 const isAuth = require("./middleware/is-auth");
 
-const app = express();
-app.use(cors())
 
 // body parser unnecessary?, express-graphql can parse request according to its body type
 // app.use(bodyParser.json());
 
 app.use(isAuth);
 
-app.use(
+/* app.use(
   "/graphql",
   graphqlHttp({
     schema,
     graphiql: true,
   })
 );
+ */
+
+
+ const apolloServer = new ApolloServer({
+   schema: schema,
+   playground: true,
+  context: ({req, res}) => ({req, res}) 
+
+ })
+
 
 
 dotenv.config();
@@ -65,6 +92,8 @@ app.use('/graphql', graphqlHTTP(
 }); */
 
 // server.applyMiddleware({ app });
+
+apolloServer.applyMiddleware({app, cors: false})
 
 app.listen(4000, () => {
   console.log("now listening for requests on port 4000");

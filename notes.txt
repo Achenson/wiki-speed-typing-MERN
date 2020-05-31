@@ -37,6 +37,15 @@ but problems with addingScore to user automatically
 to do:
 DONE 1. move graphql queries to different file DONE
 
+2. set headers in apollo (index.js in client)
+3. context, req, res?
+4. login -> res send cookie with refresh token
+(5. revoking tokens (at the end?) )
+5. refresh token api route
+6. persisiting session after refresh -> in the top of the App, refresh token will be used (migrating from apollo-boost!)
+7. 
+
+
 
 apollo structure:
 
