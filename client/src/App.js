@@ -72,34 +72,6 @@ function App({
   setStats,
   authenticatedUserId,
 }) {
-/*   const { loading, error, dataaa } = useQuery(getStatsQuery, {
-    // variables: { userId: "5ea96e3da7011208ac9c795d" },
-    variables: { userId: authenticatedUserId },
-  });
-
-  
-
-    if (dataaa) {
-      console.log("dataaaa from App.js");
-      
-      console.log(dataaa);
-      
-    }
-  
-    if (!dataaa) {
-      console.log("no dataaa");
-      
-    }
- */
- 
-
-
-
- 
-
-
-
-
   function copyNestedArr(arr) {
     let finalArr = [];
 
@@ -122,6 +94,39 @@ function App({
   useEffect(() => {
     document.addEventListener("keypress", handleKeyPress);
   });
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      setStats({
+        // currentStatsKey: "one_min",
+
+        five_s: makeDefaultStats(1),
+
+        thirty_s: makeDefaultStats(2),
+
+        one_min: makeDefaultStats(3),
+
+        two_min: makeDefaultStats(4),
+
+        five_min: makeDefaultStats(5),
+      });
+    }
+  }, [isAuthenticated, setStats]);
+
+  function makeDefaultStats(n) {
+    return [
+      [n, n],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+    ];
+  }
 
   // fetching WikiApi
 

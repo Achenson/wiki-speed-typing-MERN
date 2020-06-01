@@ -79,8 +79,13 @@ export const updateScore_postAction = (addScore) => (dispatch) => {
     ],
   })
   .then((res) => {
-    if (!res) {
+    if (!res.data.addScore) {
+      console.log('there is no res');
       dispatch({ type: "LOG_OUT" })
+    } else {
+      console.log('there is a res');
+      console.log(res);
+      
     }
   });
   ;

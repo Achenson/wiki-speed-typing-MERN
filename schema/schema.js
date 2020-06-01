@@ -88,9 +88,7 @@ const RootQuery = new GraphQLObjectType({
       // changed from id to userId
       args: { userId: { type: GraphQLID } },
       resolve(parent, args) {
-
-        if(args.userId) {
-
+        if (args.userId) {
           return Score.findOne({ userId: args.userId });
         } else {
           return null;
@@ -194,28 +192,31 @@ const Mutation = new GraphQLObjectType({
         two_min: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
         five_min: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
       },
-      resolve(parent, args, req) {
+      resolve(parent, args, { req, res }) {
         // not a new Score!!! to not overwrite id
 
-        /*   if (!req.isAuth) {
+        if (req.isAuth) {
           // throw new Error("not authenticatedddd");
-          return null
-        }  */
+          console.log("not authenticatedddd");
+          return null;
+        } else {
+          console.log("authenticated");
 
-        let update = {
-          five_s: args.five_s,
-          thirty_s: args.thirty_s,
-          one_min: args.one_min,
-          two_min: args.two_min,
-          five_min: args.five_min,
-        };
+          let update = {
+            five_s: args.five_s,
+            thirty_s: args.thirty_s,
+            one_min: args.one_min,
+            two_min: args.two_min,
+            five_min: args.five_min,
+          };
 
-        return Score.findOneAndUpdate({ userId: args.userId }, update, {
-          // to return updated object
-          new: true,
-          upsert: true, // Make this update into an upsert,
-          useFindAndModify: false,
-        });
+          return Score.findOneAndUpdate({ userId: args.userId }, update, {
+            // to return updated object
+            new: true,
+            upsert: true, // Make this update into an upsert,
+            useFindAndModify: false,
+          });
+        }
       },
     },
 
@@ -231,14 +232,20 @@ const Mutation = new GraphQLObjectType({
         const user = await User.findOne({ email: email });
         if (!user) {
           // throw new Error("User does not exist!");
-          return { userId: null, token: "User does not exist!", tokenExpiration: null };
-          
+          return {
+            userId: null,
+            token: "User does not exist!",
+            tokenExpiration: null,
+          };
         }
         const isEqual = await bcrypt.compare(password, user.password);
         if (!isEqual) {
           // throw new Error("Password is incorrect!");
-          return { userId: null, token: "Password is incorrect!", tokenExpiration: null };
-          
+          return {
+            userId: null,
+            token: "Password is incorrect!",
+            tokenExpiration: null,
+          };
         }
         const token = jwt.sign(
           { userId: user.id, email: user.email },
