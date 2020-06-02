@@ -275,7 +275,7 @@ score: {
   }
     }
     // unprotected querry
-    
+    {
         {
       score (userId: "5ecd0af6855357093c66b451") {
         five_s

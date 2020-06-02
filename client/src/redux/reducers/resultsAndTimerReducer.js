@@ -177,7 +177,7 @@ function resultsAndTimerReducer(state = initialState, action) {
       return {
         ...state,
         stats: {
-          ...state.stats,
+          currentStatsKey: state.stats.currentStatsKey,
           ...action.payload,
         },
       };

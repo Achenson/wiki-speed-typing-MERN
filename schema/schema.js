@@ -87,7 +87,9 @@ const RootQuery = new GraphQLObjectType({
       type: ScoreType,
       // changed from id to userId
       args: { userId: { type: GraphQLID } },
-      resolve(parent, args) {
+
+
+      resolve(parent, args, {req, res}) {
         if (args.userId) {
           return Score.findOne({ userId: args.userId });
         } else {
@@ -195,14 +197,14 @@ const Mutation = new GraphQLObjectType({
       resolve(parent, args, { req, res }) {
         // not a new Score!!! to not overwrite id
 
-        if (req.isAuth) {
+        if (!req.isAuth) {
           // throw new Error("not authenticatedddd");
           console.log("not authenticatedddd");
           return null;
         } else {
           console.log("authenticated");
-
-          let update = {
+          
+            let update = {
             five_s: args.five_s,
             thirty_s: args.thirty_s,
             one_min: args.one_min,
@@ -215,7 +217,10 @@ const Mutation = new GraphQLObjectType({
             new: true,
             upsert: true, // Make this update into an upsert,
             useFindAndModify: false,
-          });
+          }); 
+
+
+
         }
       },
     },

@@ -162,7 +162,7 @@ function Stats({
     variables: { userId: authenticatedUserId },
   });
 
-   useEffect(() => {
+  //  useEffect(() => {
     if (loading) {
       console.log("loading");
     }
@@ -173,12 +173,13 @@ function Stats({
     if (data) {
       const { score } = data;
       console.log("score");
+      console.log(data);
       
       console.log(score);
 
-      setStats(score);
+      // setStats(score);
     }
-   }, [loading, error, data, setStats]);
+  //  }, [loading, error, data, setStats]);
 
   if (loading) return <h5>connecting to database...</h5>;
   if (error) return <h5>database connection error </h5>;
