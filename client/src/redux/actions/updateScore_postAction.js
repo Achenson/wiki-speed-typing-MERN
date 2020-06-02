@@ -2,7 +2,7 @@ import store from "../store.js";
 
 import { getStatsQuery } from "../../graphql/queries.js";
 
-export const updateScore_postAction = (addScore) => (dispatch) => {
+export const updateScore_postAction = (addScore, history) => (dispatch) => {
   // const { loading, error, data } = useQuery(getStatsQuery);
 
   let finalResultObj = {
@@ -82,6 +82,7 @@ export const updateScore_postAction = (addScore) => (dispatch) => {
     if (!res.data.addScore) {
       console.log('there is no res');
       dispatch({ type: "LOG_OUT" })
+      history.replace("/login");
     } else {
       console.log('there is a res');
       console.log(res);

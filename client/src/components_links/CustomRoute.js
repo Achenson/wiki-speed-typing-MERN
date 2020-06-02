@@ -2,6 +2,8 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
 const CustomRoute = (props) => {
+
+  
   if (props.isAuthenticated) {
     return <Redirect to="/" />;
 
