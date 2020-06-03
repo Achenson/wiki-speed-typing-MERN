@@ -160,9 +160,11 @@ function Stats({
   const { loading, error, data } = useQuery(getStatsQuery, {
     // variables: { userId: "5ea96e3da7011208ac9c795d" },
     variables: { userId: authenticatedUserId },
+    fetchPolicy: "no-cache"
+
   });
 
-  //  useEffect(() => {
+   useEffect(() => {
     if (loading) {
       console.log("loading");
     }
@@ -177,9 +179,9 @@ function Stats({
       
       console.log(score);
 
-      // setStats(score);
+      setStats(score);
     }
-  //  }, [loading, error, data, setStats]);
+   }, [loading, error, data, setStats]);
 
   if (loading) return <h5>connecting to database...</h5>;
   if (error) return <h5>database connection error </h5>;
