@@ -33,35 +33,39 @@ function App({
   // ===========================================
 
   return (
-    <HashRouter>
-      <Switch>
-        {/* <Route path="/" exact component={Display}/> */}
-        <Route
-          path="/"
-          exact
-          // normally it would be component+ but render is needed is passing props
-          // to a component
-          render={(props) => <Main />}
-        />
+    <div className="app-outer-container">
+      <h3 className="title">Wiki Speed Typing</h3>
 
-        {/* custom routes are used to avoid warning when rendering <Routes> conditionally:
+      <HashRouter>
+        <Switch>
+          {/* <Route path="/" exact component={Display}/> */}
+          <Route
+            path="/"
+            exact
+            // normally it would be component+ but render is needed is passing props
+            // to a component
+            render={(props) => <Main />}
+          />
+
+          {/* custom routes are used to avoid warning when rendering <Routes> conditionally:
             <Route> elements should not change from controlled to uncontrolled (or vice versa). You provided a "location" prop initially but omitted it on a subsequent render.
             
              */}
-        <CustomRoute
-          isAuthenticated={isAuthenticated}
-          path="/register"
-          component={Register}
-        />
-        <CustomRoute
-          isAuthenticated={isAuthenticated}
-          path="/login"
-          component={Login}
-        />
+          <CustomRoute
+            isAuthenticated={isAuthenticated}
+            path="/register"
+            component={Register}
+          />
+          <CustomRoute
+            isAuthenticated={isAuthenticated}
+            path="/login"
+            component={Login}
+          />
 
-        <Route render={() => <h1>404: page not found</h1>} />
-      </Switch>
-    </HashRouter>
+          <Route render={() => <h1>404: page not found</h1>} />
+        </Switch>
+      </HashRouter>
+    </div>
   );
 }
 

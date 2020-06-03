@@ -17,7 +17,13 @@ import { fetchWikiApi } from "../redux/actions/fetchPostAction.js";
 import { updateScore_postAction } from "../redux/actions/updateScore_postAction.js";
 
 // import { BrowserRouter, Route, Link, Switch, Redirect, useHistory, HashRouter } from "react-router-dom";
-import { Route, Switch, Redirect, HashRouter, useHistory } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  Redirect,
+  HashRouter,
+  useHistory,
+} from "react-router-dom";
 
 import { getStatsQuery } from "../graphql/queries.js";
 import { updateStats } from "../graphql/queries.js";
@@ -72,7 +78,6 @@ function Main({
   setStats,
   authenticatedUserId,
 }) {
-
   let history = useHistory();
 
   function copyNestedArr(arr) {
@@ -89,7 +94,6 @@ function Main({
   //  the current state of the mutation's execution.
   const [addScore, { newData }] = useMutation(updateStats);
 
-  
   // disabling random wiki article button in <Fetch/>
   const disablingButton = useRef(null);
 
@@ -353,47 +357,49 @@ function Main({
 
   return (
     <div className="App" onKeyDown={handleKeyPress}>
-      <div className="app-outer-container">
-        <h3 className="title">Wiki Speed Typing</h3>
-        <Display
-          // timer
-          timerValue={timerValue}
-          constantTimerValue={constantTimerValue}
-          toggleActive={toggleActive}
-          setTimerOnSelect={setTimerOnSelect}
-          isActive={isActive}
-          toReset={toReset}
-          displayToReset={displayToReset}
-          // hints & results visibility
-          areHintsVisible={areHintsVisible}
-          areResultsVisible={areResultsVisible}
-          areStatsVisible={areStatsVisible}
-          toggleHints={toggleHints}
-          // toggleResults={toggleResults}
-          toggleStats={toggleStats}
-          // disabling select, menaging focus
-          // isDisabled={isDisabled} isDisabled moved to Display!
-          focusTextArea={focusTextArea}
-          putFocusOnTextArea={putFocusOnTextArea}
-          focusElement={focusElement}
-          // results
-          myText={myText}
-          wikiTitle={wikiTitle}
-          disablingButton={disablingButton}
-          isCounterRunning={isCounterRunning}
-          // for Display => WikiController
-          setNewRandomArticle_true={setNewRandomArticle_true}
-          // for Fetch
-          setNewRandomArticle_false={setNewRandomArticle_false}
-          // graphql mutation
-          addScore={addScore}
-        />
-        )} />
-        {/* custom routes are used to avoid warning when rendering <Routes> conditionally:
+      {/* <div className="app-outer-container">
+        <h3 className="title">Wiki Speed Typing</h3> */}
+
+      <Display
+        // timer
+        timerValue={timerValue}
+        constantTimerValue={constantTimerValue}
+        toggleActive={toggleActive}
+        setTimerOnSelect={setTimerOnSelect}
+        isActive={isActive}
+        toReset={toReset}
+        displayToReset={displayToReset}
+        // hints & results visibility
+        areHintsVisible={areHintsVisible}
+        areResultsVisible={areResultsVisible}
+        areStatsVisible={areStatsVisible}
+        toggleHints={toggleHints}
+        // toggleResults={toggleResults}
+        toggleStats={toggleStats}
+        // disabling select, menaging focus
+        // isDisabled={isDisabled} isDisabled moved to Display!
+        focusTextArea={focusTextArea}
+        putFocusOnTextArea={putFocusOnTextArea}
+        focusElement={focusElement}
+        // results
+        myText={myText}
+        wikiTitle={wikiTitle}
+        disablingButton={disablingButton}
+        isCounterRunning={isCounterRunning}
+        // for Display => WikiController
+        setNewRandomArticle_true={setNewRandomArticle_true}
+        // for Fetch
+        setNewRandomArticle_false={setNewRandomArticle_false}
+        // graphql mutation
+        addScore={addScore}
+      />
+
+      {/* custom routes are used to avoid warning when rendering <Routes> conditionally:
             <Route> elements should not change from controlled to uncontrolled (or vice versa). You provided a "location" prop initially but omitted it on a subsequent render.
             
              */}
-      </div>
+
+      {/* </div> */}
     </div>
   );
 }
@@ -471,7 +477,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "SET_CURRENT_STATS", payload: data }),
     // !!! dispatching function instead of object thanks to redux-thunk
     fetchingWiki: () => dispatch(fetchWikiApi()),
-    updateScore: (addScore, history) => dispatch(updateScore_postAction(addScore, history)),
+    updateScore: (addScore, history) =>
+      dispatch(updateScore_postAction(addScore, history)),
     // initially setting stats from setStatsQuery apollo hook
     setStats: (data) => dispatch({ type: "SET_STATS", payload: data }),
   };
