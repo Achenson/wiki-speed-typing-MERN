@@ -29,8 +29,28 @@ function App({
   //  from mapStateToProps
 
   isAuthenticated,
+
+  // imported actionCreator
+  fetchingWiki,
+  newRandomArticle,
+  setNewRandomArticle_false,
 }) {
   // ===========================================
+
+  // disabling random wiki article button in <Fetch/>
+  const disablingButton = useRef(null);
+
+  // fetching WikiApi
+
+  useEffect(() => {
+    fetchingWiki();
+
+    setTimeout(() => {
+      if (disablingButton.current) {
+        disablingButton.current.removeAttribute("disabled");
+      }
+    }, 500);
+  }, [newRandomArticle, setNewRandomArticle_false, fetchingWiki]);
 
   return (
     <div className="app-outer-container">
@@ -44,7 +64,7 @@ function App({
             exact
             // normally it would be component+ but render is needed is passing props
             // to a component
-            render={(props) => <Main />}
+            render={(props) => <Main disablingButton={disablingButton} />}
           />
 
           {/* custom routes are used to avoid warning when rendering <Routes> conditionally:
@@ -73,11 +93,21 @@ const mapStateToProps = (state) => {
   return {
     // auth
     isAuthenticated: state.authState.isAuthenticated,
+    newRandomArticle: state.displayState.textDisplay.newRandomArticle,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // fetch & wikiController
+    setNewRandomArticle_false: () => dispatch({ type: "RANDOM_ARTICLE_FALSE" }),
+    // !!! dispatching function instead of object thanks to redux-thunk
+    fetchingWiki: () => dispatch(fetchWikiApi()),
   };
 };
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
   // Your component will receive dispatch by default, i.e., when you do not supply a second parameter to connect():
 )(App);

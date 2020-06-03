@@ -77,6 +77,7 @@ function Main({
   updateScore,
   setStats,
   authenticatedUserId,
+  disablingButton,
 }) {
   let history = useHistory();
 
@@ -94,8 +95,7 @@ function Main({
   //  the current state of the mutation's execution.
   const [addScore, { newData }] = useMutation(updateStats);
 
-  // disabling random wiki article button in <Fetch/>
-  const disablingButton = useRef(null);
+ 
 
   // for keyboard shortcuts
   useEffect(() => {
@@ -108,13 +108,9 @@ function Main({
         // currentStatsKey: "one_min",
 
         five_s: makeDefaultStats(1),
-
         thirty_s: makeDefaultStats(2),
-
         one_min: makeDefaultStats(3),
-
         two_min: makeDefaultStats(4),
-
         five_min: makeDefaultStats(5),
       });
     }
@@ -135,15 +131,6 @@ function Main({
     ];
   }
 
-  // fetching WikiApi
-
-  useEffect(() => {
-    fetchingWiki();
-
-    setTimeout(() => {
-      disablingButton.current.removeAttribute("disabled");
-    }, 500);
-  }, [newRandomArticle, setNewRandomArticle_false, fetchingWiki]);
 
   // display
 

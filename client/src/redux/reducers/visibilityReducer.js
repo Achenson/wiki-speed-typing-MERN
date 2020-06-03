@@ -3,7 +3,8 @@ const initialState = {
   areResultsVisible: false,
   areStatsVisible: false,
   isConfirmDeleteVisible: false,
-  isWikiLinkClickable: false
+  isWikiLinkClickable: false,
+  
 };
 
 function visibilityReducer(state = initialState, action) {
