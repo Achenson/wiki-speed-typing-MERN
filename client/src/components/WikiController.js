@@ -1,10 +1,26 @@
 import React from "react";
-// import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { connect } from "react-redux";
 
 function WikiController(props) {
   // console.log(props.wikiTitle);
+
+  const [wikiButtonCSSClass, setWikiButtonClass] =useState("btn btn-control btn-wiki")
+
+  useEffect( () => {
+
+    if (props.isWikiButtonClickable) {
+      setWikiButtonClass("btn btn-control btn-wiki")
+    } else {
+      setWikiButtonClass("btn btn-wiki-not-active")
+    }
+
+
+    
+  }, [props.isWikiButtonClickable])
+
+
 
   return (
     <div className="wiki-controler container">
@@ -26,18 +42,21 @@ function WikiController(props) {
         </div>
       </div>
       <button
-        className="btn btn-control btn-wiki"
+        // className=`btn btn-control btn-wiki`
+        className = {wikiButtonCSSClass}
         onClick={() => {
           console.log("button clicked");
           if (!props.isCounterRunning) {
             props.disableFocusTextArea();
             props.setNewRandomArticle_true();
             props.disablingButton.current.setAttribute("disabled", true);
+            // props.setWikiButtonClickable_false();
           } else {
             props.disableFocusTextArea();
             props.setToReset_true();
             props.setNewRandomArticle_true();
             props.disablingButton.current.setAttribute("disabled", true);
+            // props.setWikiButtonClickable_false();
           }
         }}
         ref={props.disablingButton}
@@ -51,6 +70,8 @@ function WikiController(props) {
 const mapStateToProps = (state) => {
   return {
     isWikiLinkClickable: state.visibilityState.isWikiLinkClickable,
+    isWikiButtonClickable: state.visibilityState.isWikiButtonClickable
+
   };
 };
 
@@ -58,6 +79,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     disableFocusTextArea: () => dispatch({ type: "DISABLE_FOCUS_TEXT_AREA" }),
     setToReset_true: () => dispatch({ type: "TO_RESET_TRUE" }),
+    setWikiButtonClickable_false: () => dispatch({type: "WIKI_BTN_CLICKABLE_FALSE"})
   };
 };
 

@@ -30,9 +30,9 @@ DONE 1. React: Login <Route> warning DONE
 DONE 2. warning: SingleStat "key" DONE
 DONE 3. problems with undefined for disable button itp? DONE (if statements moved to useEffect)
 4. changePassword! other repos won't work!
-5. clicking Login it the article is not loaded yet couse errors
-6. checking if email is already taken: is in Register component, but it would be better if it was in schema.js?
-but problems with addingScore to user automatically
+DONE 5. clicking Login it the article is not loaded yet couse errors DONE
+DONE 6. checking if email is already taken: is in Register component, but it would be better if it was in schema.js?
+but problems with addingScore to user automatically DONE (partially checked in schema, partially on the frontend)
 7. noCache in getStatsQuerry in Stats.js -> only temporary solution? https://github.com/apollographql/react-apollo/issues/2202
 
 

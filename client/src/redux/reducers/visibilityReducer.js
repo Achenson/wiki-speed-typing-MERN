@@ -4,7 +4,7 @@ const initialState = {
   areStatsVisible: false,
   isConfirmDeleteVisible: false,
   isWikiLinkClickable: false,
-  
+  isWikiButtonClickable: true,
 };
 
 function visibilityReducer(state = initialState, action) {
@@ -44,22 +44,29 @@ function visibilityReducer(state = initialState, action) {
         isConfirmDeleteVisible: false,
       };
 
-      case "WIKILINK_CLICKABLE_TRUE":
-        return {
-          ...state,
-          isWikiLinkClickable: true,
-        };
+    case "WIKILINK_CLICKABLE_TRUE":
+      return {
+        ...state,
+        isWikiLinkClickable: true,
+      };
 
-        case "WIKILINK_CLICKABLE_FALSE":
-          return {
-            ...state,
-            isWikiLinkClickable: false,
-          };
+    case "WIKILINK_CLICKABLE_FALSE":
+      return {
+        ...state,
+        isWikiLinkClickable: false,
+      };
 
+    case "WIKI_BTN_CLICKABLE_TRUE":
+      return {
+        ...state,
+        isWikiButtonClickable: true,
+      };
 
-
-
-
+    case "WIKI_BTN_CLICKABLE_FALSE":
+      return {
+        ...state,
+        isWikiButtonClickable: false,
+      };
 
     default:
       return state;

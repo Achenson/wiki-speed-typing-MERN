@@ -286,9 +286,24 @@ body {
 }
 
 .btn-wiki {
-  display: inline-block;
+  /* display: inline-block; */
   height: 1.95em;
+  display: block;
+  margin-left: auto;
 }
+
+.btn-wiki-not-active {
+  /* background-color: steelblue; */
+  background-color: darkgrey;
+  border-radius: 0.5em;
+  color: white;
+  border: 1px solid black;
+  height: 1.95em;
+  display: block;
+  margin-left: auto;
+  cursor: default;
+}
+
 /* bnt-results in lower UI below results-row-container*/
 .btn-results {
   display: inline-block;
@@ -329,10 +344,7 @@ body {
   color: rgb(37, 111, 172);
 }
 
-.btn-wiki {
-  display: block;
-  margin-left: auto;
-}
+/*  */
 
 .wiki-title-display {
   background-color: aliceblue;
@@ -557,7 +569,7 @@ body {
   color: green;
 }
 
-.fa-chart-bar-black{
+.fa-chart-bar-black {
   color: black;
 }
 
@@ -705,5 +717,3 @@ body {
   border: 1px solid firebrick;
   background-color: tomato;
 }
-
-

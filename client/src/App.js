@@ -34,6 +34,8 @@ function App({
   fetchingWiki,
   newRandomArticle,
   setNewRandomArticle_false,
+  setWikiButtonClickable_true,
+  setWikiButtonClickable_false,
 }) {
   // ===========================================
 
@@ -43,14 +45,29 @@ function App({
   // fetching WikiApi
 
   useEffect(() => {
-    fetchingWiki();
+    // checking if fetchingWiki returns true of false! and calling fetchingWiki right in this line
+    if (newRandomArticle) {
+      fetchingWiki();
+    }
+  }, [
+    newRandomArticle,
+    fetchingWiki,
+    setWikiButtonClickable_false,
+    setWikiButtonClickable_true,
+  ]);
 
-    setTimeout(() => {
+  useEffect(() => {
+    if (newRandomArticle) {
+      setWikiButtonClickable_false();
+    } else {
+      // setTimeout(() => {
       if (disablingButton.current) {
         disablingButton.current.removeAttribute("disabled");
       }
-    }, 500);
-  }, [newRandomArticle, setNewRandomArticle_false, fetchingWiki]);
+      setWikiButtonClickable_true();
+      // }, 5000);
+    }
+  }, [newRandomArticle]);
 
   return (
     <div className="app-outer-container">
@@ -103,6 +120,10 @@ const mapDispatchToProps = (dispatch) => {
     setNewRandomArticle_false: () => dispatch({ type: "RANDOM_ARTICLE_FALSE" }),
     // !!! dispatching function instead of object thanks to redux-thunk
     fetchingWiki: () => dispatch(fetchWikiApi()),
+    setWikiButtonClickable_true: () =>
+      dispatch({ type: "WIKI_BTN_CLICKABLE_TRUE" }),
+    setWikiButtonClickable_false: () =>
+      dispatch({ type: "WIKI_BTN_CLICKABLE_FALSE" }),
   };
 };
 

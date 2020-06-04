@@ -21,7 +21,7 @@ export const fetchWikiApi = () => (dispatch) => {
 
   let wikiApiUrl = `https://en.wikipedia.org/w/api.php?format=json&action=query&generator=random&grnnamespace=0&prop=extracts&grnlimit=1&origin=*&explaintext&exsectionformat=plain`;
 
-  fetchingData();
+  return fetchingData();
 
   function fetchingData() {
     if (store.getState().displayState.textDisplay.newRandomArticle) {
@@ -84,6 +84,10 @@ export const fetchWikiApi = () => (dispatch) => {
 
           dispatch({ type: "RANDOM_ARTICLE_FALSE" });
           dispatch({ type: "WIKILINK_CLICKABLE_TRUE" });
+          dispatch({ type: "WIKILINK_CLICKABLE_TRUE" });
+          
+          
+       
 
         })
 
@@ -97,7 +101,15 @@ export const fetchWikiApi = () => (dispatch) => {
           dispatch({ type: "ENABLE_FOCUS_TEXT_AREA" });
           dispatch({ type: "RANDOM_ARTICLE_FALSE" });
           dispatch({ type: "WIKILINK_CLICKABLE_FALSE" });
+          
+          
+          
+
         });
     }
   }
+
+
+
+
 };
