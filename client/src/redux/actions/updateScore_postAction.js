@@ -82,6 +82,11 @@ export const updateScore_postAction = (addScore, history) => (dispatch) => {
     if (!res.data.addScore) {
       console.log('there is no res');
       dispatch({ type: "LOG_OUT" })
+
+      
+      dispatch({ type: "LOGIN_ERROR_TRUE" })
+      dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: "Your session has expired" })
+
       history.replace("/login");
     } else {
       console.log('there is a res');
