@@ -75,11 +75,7 @@ const RootQuery = new GraphQLObjectType({
     user: {
       type: UserType,
       args: { email: { type: GraphQLString } },
-      resolve(parent, args, req) {
-        /*  if (!req.isAuth) {
-          throw new Error("not authenticatedddd");
-        } */
-
+      resolve(parent, args, { req, res }) {
         return User.findOne({ email: args.email });
       },
     },
@@ -88,12 +84,18 @@ const RootQuery = new GraphQLObjectType({
       // changed from id to userId
       args: { userId: { type: GraphQLID } },
 
-
-      resolve(parent, args, {req, res}) {
-        if (args.userId) {
-          return Score.findOne({ userId: args.userId });
+      resolve(parent, args, { req, res }) {
+        if (!req.isAuth) {
+          console.log("not authenticated - user isAuth false");
+          throw new Error("not authenticated");
+          // return null;
         } else {
-          return null;
+          if (args.userId) {
+            return Score.findOne({ userId: args.userId });
+          }
+          console.log("user not fount");
+          throw new Error("user not found");
+          // return null;
         }
       },
     },
@@ -203,8 +205,8 @@ const Mutation = new GraphQLObjectType({
           return null;
         } else {
           console.log("authenticated");
-          
-            let update = {
+
+          let update = {
             five_s: args.five_s,
             thirty_s: args.thirty_s,
             one_min: args.one_min,
@@ -217,10 +219,7 @@ const Mutation = new GraphQLObjectType({
             new: true,
             upsert: true, // Make this update into an upsert,
             useFindAndModify: false,
-          }); 
-
-
-
+          });
         }
       },
     },

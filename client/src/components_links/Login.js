@@ -21,6 +21,8 @@ function Login({
   loginError_true,
   loginError_false,
   registerError_false,
+  loginErrorMessage,
+  setLoginErrorMessage
 }) {
   const [loginMut, { newData }] = useMutation(loginMutation);
 
@@ -54,14 +56,15 @@ function Login({
     }
   }, [isNotificationNeeded]);
 
-  let [error, setError] = useState(null);
+  // let [error, setError] = useState(null);
 
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
 
   function loginValidation() {
     if (email === "" || password === "") {
-      setError("Email or password not provided");
+      // setError("Email or password not provided");
+      setLoginErrorMessage("Email or password not provided");
       loginError_true();
       return;
     }
@@ -73,19 +76,22 @@ function Login({
       },
     }).then((res, err) => {
       if (err) {
-        setError("loginMut Error");
+        // setError("loginMut Error");
+        setLoginErrorMessage("loginMut Error");
         loginError_true();
         return;
       }
 
       if (res.data.login.token === "User does not exist!") {
-        setError(`${res.data.login.token}`);
+        // setError(`${res.data.login.token}`);
+        setLoginErrorMessage(`${res.data.login.token}`);
         loginError_true();
         return;
       }
 
       if (res.data.login.token === "Password is incorrect!") {
-        setError(`${res.data.login.token}`);
+        // setError(`${res.data.login.token}`);
+        setLoginErrorMessage(`${res.data.login.token}`);
         loginError_true();
         return;
       }
@@ -116,7 +122,7 @@ function Login({
       ) : null}
       {showLoginError ? (
         <AuthNotification
-          notification={error}
+          notification={loginErrorMessage}
           colorClass={"auth-notification-danger"}
         />
       ) : null}
@@ -200,6 +206,8 @@ const mapStateToProps = (state) => {
   return {
     isNotificationNeeded: state.authState.isNotificationNeeded,
     showLoginError: state.authState.showLoginError,
+    loginErrorMessage: state.authState.loginErrorMessage,
+    
   };
 };
 
@@ -211,6 +219,7 @@ const mapDispatchToProps = (dispatch) => {
     loginError_true: () => dispatch({ type: "LOGIN_ERROR_TRUE" }),
     loginError_false: () => dispatch({ type: "LOGIN_ERROR_FALSE" }),
     registerError_false: () => dispatch({ type: "REGISTER_ERROR_FALSE" }),
+    setLoginErrorMessage: (error) => dispatch({type: "SET_LOGIN_ERROR_MESSAGE", payload: error})
   };
 };
 

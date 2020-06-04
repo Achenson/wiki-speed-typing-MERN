@@ -41,6 +41,8 @@ DONE 1. move graphql queries to different file DONE
 
 DONE 2. set headers in apollo (index.js in client) DONE
 DONE 3. context, req, res? DONE
+3.5 all route guarding
+3.6 more error displays when redirected to login
 4. login -> res send cookie with refresh token
 (5. revoking tokens (at the end?) )
 5. refresh token api route

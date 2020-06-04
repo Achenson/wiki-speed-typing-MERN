@@ -19,7 +19,13 @@ import { fetchWikiApi } from "./redux/actions/fetchPostAction.js";
 import { updateScore_postAction } from "./redux/actions/updateScore_postAction.js";
 
 // import { BrowserRouter, Route, Link, Switch, Redirect, useHistory, HashRouter } from "react-router-dom";
-import { Route, Switch, Redirect, HashRouter } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  Redirect,
+  HashRouter,
+  BrowserRouter,
+} from "react-router-dom";
 
 import { getStatsQuery } from "./graphql/queries.js";
 import { updateStats } from "./graphql/queries.js";
@@ -73,7 +79,8 @@ function App({
     <div className="app-outer-container">
       <h3 className="title">Wiki Speed Typing</h3>
 
-      <HashRouter>
+      {/* <HashRouter> */}
+      <BrowserRouter>
         <Switch>
           {/* <Route path="/" exact component={Display}/> */}
           <Route
@@ -101,7 +108,8 @@ function App({
 
           <Route render={() => <h1>404: page not found</h1>} />
         </Switch>
-      </HashRouter>
+      </BrowserRouter>
+      {/* </HashRouter> */}
     </div>
   );
 }

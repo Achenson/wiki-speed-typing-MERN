@@ -10,6 +10,8 @@ import { useQuery } from "@apollo/react-hooks";
 
 import { getStatsQuery, getUserByEmailQuery } from "../graphql/queries.js";
 
+import { useHistory } from "react-router-dom";
+
 function Stats({
   areStatsVisible,
   constantTimerValue,
@@ -29,16 +31,16 @@ function Stats({
   authenticatedUserId,
   setStats,
   logOut,
+  setLoginErrorMessage,
+  loginError_true,
 }) {
-
+  let history = useHistory();
 
   useEffect(() => {
     console.log("render");
 
     confirmDeleteVisibility_false();
   }, [areStatsVisible, confirmDeleteVisibility_false]);
-
-  
 
   function renderDeletion() {
     if (!isConfirmDeleteVisible) {
@@ -160,11 +162,10 @@ function Stats({
   const { loading, error, data } = useQuery(getStatsQuery, {
     // variables: { userId: "5ea96e3da7011208ac9c795d" },
     variables: { userId: authenticatedUserId },
-    fetchPolicy: "no-cache"
-
+    fetchPolicy: "no-cache",
   });
 
-   useEffect(() => {
+  useEffect(() => {
     if (loading) {
       console.log("loading");
     }
@@ -174,17 +175,26 @@ function Stats({
 
     if (data) {
       const { score } = data;
+
       console.log("score");
       console.log(data);
-      
+
       console.log(score);
 
       setStats(score);
     }
-   }, [loading, error, data, setStats]);
+  }, [loading, error, data, setStats]);
 
   if (loading) return <h5>connecting to database...</h5>;
-  if (error) return <h5>database connection error </h5>;
+  if (error) {
+    logOut();
+    loginError_true();
+    setLoginErrorMessage("database connection error");
+    history.replace("/login");
+
+    return null;
+    // return <h5>database connection error </h5>
+  }
 
   const { score } = data;
 
@@ -260,6 +270,9 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "CONFIRM_DELETE_VISIBILITY_FALSE" }),
     setStats: (data) => dispatch({ type: "SET_STATS", payload: data }),
     logOut: () => dispatch({ type: "LOG_OUT" }),
+    setLoginErrorMessage: (error) =>
+      dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: error }),
+    loginError_true: () => dispatch({ type: "LOGIN_ERROR_TRUE" }),
   };
 };
 

@@ -5,6 +5,7 @@ const initialState = {
   accessToken: null,
   isNotificationNeeded: false,
   showLoginError: false,
+  loginErrorMessage: "",
   showRegisterError: false,
 };
 
@@ -16,15 +17,14 @@ function authReducer(state = initialState, action) {
 
         isAuthenticated: true,
         authenticatedUserId: action.payload.authenticatedUserId,
-        accessToken: action.payload.token
+        accessToken: action.payload.token,
       };
     case "LOG_OUT":
       return {
         ...state,
         isAuthenticated: false,
         authenticatedUserId: null,
-        accessToken: null
-
+        accessToken: null,
       };
     case "NOTIFICATION_TRUE":
       return {
@@ -46,6 +46,13 @@ function authReducer(state = initialState, action) {
         ...state,
         showLoginError: false,
       };
+
+    case "SET_LOGIN_ERROR_MESSAGE":
+      return {
+        ...state,
+        loginErrorMessage: action.payload,
+      };
+
     case "REGISTER_ERROR_TRUE":
       return {
         ...state,
@@ -57,14 +64,11 @@ function authReducer(state = initialState, action) {
         showRegisterError: false,
       };
 
-      case "SET_AUTHENTICATED_USER_ID":
-        return {
-          ...state,
-          authenticatedUserId: action.payload
-        };
-
-
-
+    case "SET_AUTHENTICATED_USER_ID":
+      return {
+        ...state,
+        authenticatedUserId: action.payload,
+      };
 
     default:
       return state;
