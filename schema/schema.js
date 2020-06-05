@@ -6,6 +6,9 @@ const Score = require("../mongoModels/score");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+const createAccessToken = require("../middleware/accessToken.js");
+const createRefreshToken = require("../middleware/refreshToken.js");
+
 const {
   GraphQLObjectType,
   GraphQLSchema,
@@ -232,7 +235,7 @@ const Mutation = new GraphQLObjectType({
         password: { type: new GraphQLNonNull(GraphQLString) },
       },
 
-      async resolve(parent, { email, password }, {req, res}) {
+      async resolve(parent, { email, password }, { req, res }) {
         const user = await User.findOne({ email: email });
         if (!user) {
           // throw new Error("User does not exist!");
@@ -254,32 +257,31 @@ const Mutation = new GraphQLObjectType({
 
         // if user is authenticated correctly
 
-        
         res.cookie(
           "jid",
-           jwt.sign(
+          /*    jwt.sign(
             { userId: user.id, email: user.email },
             "secretKeyForRefreshToken",
             {
               expiresIn: "7d",
             }
-           ),
-           {
+           ), */
+          createRefreshToken(user),
+          {
             //  not accessible by JS
-             httpOnly: true
-           }
-        )
-       
-       
+            httpOnly: true,
+          }
+        );
 
-
-        const token = jwt.sign(
+        /*    const token = jwt.sign(
           { userId: user.id, email: user.email },
           "somesupersecretkey",
           {
             expiresIn: "1h",
           }
-        );
+        ); */
+
+        const token = createAccessToken(user);
 
         return { userId: user.id, token: token, tokenExpiration: 1 };
       },

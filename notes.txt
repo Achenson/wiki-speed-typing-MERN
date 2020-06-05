@@ -53,6 +53,7 @@ DONE 3.6 more error displays when redirected to login DONE
 8. [old problem?] changing stats don't change timer setting automatically.
 
 10. token will require only ID, not email?
+11. changing module.export to imports?
 
 
 
