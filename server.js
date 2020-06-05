@@ -6,6 +6,7 @@ const schema = require("./schema/schema");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const cookieParser = require("cookie-parser")
 // const bodyParser = require("body-parser");
 
 // bcrypt?
@@ -46,7 +47,17 @@ app.use(isAuth);
   })
 );
  */
+app.use(cookieParser())
 
+app.post("/refresh_token", req => {
+// 1. testing sending test cookie in request using postman 
+  // console.log(req.headers);
+
+  // testing sending cookie after cookie-parser is applied
+  console.log(req.cookies);
+  
+  
+})
 
  const apolloServer = new ApolloServer({
    schema: schema,
