@@ -78,8 +78,33 @@ function Main({
   setStats,
   authenticatedUserId,
   disablingButton,
+
+  logOut,
+  setLoginErrorMessage,
+    
+  loginError_true
+
+
 }) {
   let history = useHistory();
+
+
+  const { loading, error, data } = useQuery(getStatsQuery, {
+    // variables: { userId: "5ea96e3da7011208ac9c795d" },
+    variables: { userId: authenticatedUserId },
+    // fetchPolicy: "no-cache",
+  });
+
+  if(error) {
+    if(isAuthenticated) {
+    logOut();
+    loginError_true();
+    setLoginErrorMessage("querying database connection error");
+    history.replace("/login");
+    }
+  }
+
+
 
   function copyNestedArr(arr) {
     let finalArr = [];
@@ -468,6 +493,11 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(updateScore_postAction(addScore, history)),
     // initially setting stats from setStatsQuery apollo hook
     setStats: (data) => dispatch({ type: "SET_STATS", payload: data }),
+
+    logOut: () => dispatch({ type: "LOG_OUT" }),
+    setLoginErrorMessage: (error) =>
+      dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: error }),
+    loginError_true: () => dispatch({ type: "LOGIN_ERROR_TRUE" }),
   };
 };
 
