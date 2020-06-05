@@ -162,7 +162,7 @@ function Stats({
   const { loading, error, data } = useQuery(getStatsQuery, {
     // variables: { userId: "5ea96e3da7011208ac9c795d" },
     variables: { userId: authenticatedUserId },
-    fetchPolicy: "no-cache",
+    // fetchPolicy: "no-cache",
   });
 
   useEffect(() => {
@@ -187,13 +187,13 @@ function Stats({
 
   if (loading) return <h5>connecting to database...</h5>;
   if (error) {
-    logOut();
+   /*  logOut();
     loginError_true();
     setLoginErrorMessage("database connection error");
     history.replace("/login");
 
-    return null;
-    // return <h5>database connection error </h5>
+    return null; */
+    return <h5>database connection error </h5>
   }
 
   const { score } = data;
