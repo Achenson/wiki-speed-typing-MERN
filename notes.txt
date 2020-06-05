@@ -33,7 +33,8 @@ DONE 3. problems with undefined for disable button itp? DONE (if statements move
 DONE 5. clicking Login it the article is not loaded yet couse errors DONE
 DONE 6. checking if email is already taken: is in Register component, but it would be better if it was in schema.js?
 but problems with addingScore to user automatically DONE (partially checked in schema, partially on the frontend)
-7. noCache in getStatsQuerry in Stats.js -> only temporary solution? https://github.com/apollographql/react-apollo/issues/2202
+XX 7. noCache in getStatsQuerry in Stats.js -> only temp solution? 
+https://github.com/apollographql/react-apollo/issues/2202 XX noCache deleted
 
 
 to do:
@@ -41,14 +42,18 @@ DONE 1. move graphql queries to different file DONE
 
 DONE 2. set headers in apollo (index.js in client) DONE
 DONE 3. context, req, res? DONE
-3.5 all route guarding
-3.6 more error displays when redirected to login
+DONE 3.5 all route guarding DONE?
+3.55. Test guarding with short lived TOKEN
+DONE 3.6 more error displays when redirected to login DONE
 4. login -> res send cookie with refresh token
 (5. revoking tokens (at the end?) )
 5. refresh token api route
 6. persisiting session after refresh -> in the top of the App, refresh token will be used (migrating from apollo-boost!)
 7. put secrets in .env file
 8. [old problem?] changing stats don't change timer setting automatically.
+
+10. token will require only ID, not email?
+
 
 
 

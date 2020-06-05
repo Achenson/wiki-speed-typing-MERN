@@ -232,7 +232,7 @@ const Mutation = new GraphQLObjectType({
         password: { type: new GraphQLNonNull(GraphQLString) },
       },
 
-      async resolve(parent, { email, password }) {
+      async resolve(parent, { email, password }, {req, res}) {
         const user = await User.findOne({ email: email });
         if (!user) {
           // throw new Error("User does not exist!");
@@ -251,6 +251,28 @@ const Mutation = new GraphQLObjectType({
             tokenExpiration: null,
           };
         }
+
+        // if user is authenticated correctly
+
+        
+        res.cookie(
+          "jid",
+           jwt.sign(
+            { userId: user.id, email: user.email },
+            "secretKeyForRefreshToken",
+            {
+              expiresIn: "7d",
+            }
+           ),
+           {
+            //  not accessible by JS
+             httpOnly: true
+           }
+        )
+       
+       
+
+
         const token = jwt.sign(
           { userId: user.id, email: user.email },
           "somesupersecretkey",
@@ -258,6 +280,7 @@ const Mutation = new GraphQLObjectType({
             expiresIn: "1h",
           }
         );
+
         return { userId: user.id, token: token, tokenExpiration: 1 };
       },
     },
