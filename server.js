@@ -7,6 +7,11 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser")
+
+const jwt = require("jsonwebtoken");
+const User = require("./mongoModels/user");
+const createAccessToken = require("./middleware/accessToken")
+
 // const bodyParser = require("body-parser");
 
 // bcrypt?
@@ -49,14 +54,45 @@ app.use(isAuth);
  */
 app.use(cookieParser())
 
-app.post("/refresh_token", req => {
+app.post("/refresh_token", async (req, res) => {
 // 1. testing sending test cookie in request using postman 
+// cookies -> add domain: localhost -> coookie name: jid
   // console.log(req.headers);
 
   // testing sending cookie after cookie-parser is applied
   console.log(req.cookies);
+
+  const token = req.cookies.jid;
+
+  if (!token) {
+    return res.send({ok: false, accessToken: ""})
+    console.log("refresh token erorr");
+  }
   
+  let payload = null;
+
+  try {
+    payload = jwt.verify(token, "secretKeyForRefreshToken")
+  } catch (err) {
+    console.log(err);
+    console.log("refresh token erorr2");
+    return res.send({ok: false, accessToken: ""})
+  }
+
+
+  // token is valid
+  // we can send access token
+  const user = await User.findById(payload.userId)
+
+  if (!user) {
+
+    console.log("refresh token erorr3");
+    return res.send({ok: false, accessToken: ""})
+    
+  }
   
+  return res.send({ok: true, accessToken: createAccessToken(user)})
+  //  testing: send login mutation in graphql, get accessToken
 })
 
  const apolloServer = new ApolloServer({
