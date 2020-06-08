@@ -11,6 +11,7 @@ const cookieParser = require("cookie-parser")
 const jwt = require("jsonwebtoken");
 const User = require("./mongoModels/user");
 const createAccessToken = require("./middleware/accessToken")
+const createRefreshToken = require("./middleware/refreshToken")
 
 // const bodyParser = require("body-parser");
 
@@ -91,8 +92,18 @@ app.post("/refresh_token", async (req, res) => {
     
   }
   
+  res.cookie("jid", createRefreshToken(user), {
+    httpOnly: true
+  } )
+
+
+
   return res.send({ok: true, accessToken: createAccessToken(user)})
+
+
+
   //  testing: send login mutation in graphql, get accessToken
+  // testin2: take refresh cookie from res (sieć) 
 })
 
  const apolloServer = new ApolloServer({
