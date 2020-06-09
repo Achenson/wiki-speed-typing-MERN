@@ -27,6 +27,7 @@ const UserType = new GraphQLObjectType({
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     password: { type: GraphQLString },
+    tokenVersion: { type: GraphQLInt },
     score: {
       type: ScoreType,
       resolve(parent, args) {
@@ -144,6 +145,7 @@ const Mutation = new GraphQLObjectType({
                   name: args.name,
                   email: args.email,
                   password: hashedPassword,
+                  tokenVersion: 0,
                 });
 
                 return user.save((err, product) => {
@@ -186,6 +188,29 @@ const Mutation = new GraphQLObjectType({
         });
 
         return myPromise;
+      },
+    },
+
+    revokeRefreshTokensForUser: {
+      type: UserType,
+      args: {
+        userId: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args, { req, res }) {
+        return User.findOneAndUpdate(
+          { _id: args.userId },
+          { $inc: { tokenVersion: 1 } },
+          {new: true},
+          (err, response) => {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log("response");
+              console.log(response);
+              
+            }
+          }
+        );
       },
     },
 

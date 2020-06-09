@@ -35,6 +35,8 @@ DONE 6. checking if email is already taken: is in Register component, but it wou
 but problems with addingScore to user automatically DONE (partially checked in schema, partially on the frontend)
 XX 7. noCache in getStatsQuerry in Stats.js -> only temp solution? 
 https://github.com/apollographql/react-apollo/issues/2202 XX noCache deleted
+8. revokingRefreshTokens -> inc tokenVersion about 3 times instead of 1??
+9. revoikingRefreshTokens -> no refreshing, but what about login?
 
 
 to do:
@@ -45,8 +47,8 @@ DONE 3. context, req, res? DONE
 DONE 3.5 all route guarding DONE?
 3.55. Test guarding with short lived TOKEN
 DONE 3.6 more error displays when redirected to login DONE
-4. login -> res send cookie with refresh token
-(5. revoking tokens (at the end?) )
+DONE 4. login -> res send cookie with refresh token DONE
+DONE (5. revoking tokens (at the end?) ) TOKEN
 5. refresh token api route
 6. persisiting session after refresh -> in the top of the App, refresh token will be used (migrating from apollo-boost!)
 7. put secrets in .env file
