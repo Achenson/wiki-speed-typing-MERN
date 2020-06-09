@@ -45,11 +45,29 @@ function App({
   setNewRandomArticle_false,
   setWikiButtonClickable_true,
   setWikiButtonClickable_false,
+  logIn,
 }) {
   // ===========================================
 
   // disabling random wiki article button in <Fetch/>
   const disablingButton = useRef(null);
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/refresh_token", {
+      method: "POST",
+      credentials: "include",
+    }).then((res) =>
+      res.json().then((data) => {
+        console.log(data);
+
+        // logIn(dataObj)
+
+        setIsLoading(false);
+      })
+    );
+  }, []);
 
   // fetching WikiApi
 
@@ -78,14 +96,22 @@ function App({
     }
   }, [newRandomArticle]);
 
+  if (isLoading) {
+    return (
+      <div>
+        <h3 className="title"> loading...</h3>
+      </div>
+    );
+  }
+
   return (
     <div className="app-outer-container">
       <h3 className="title">Wiki Speed Typing</h3>
 
       {/* <HashRouter> */}
       <BrowserRouter>
-      {/* testing headers */}
-      {/* <Link to="/test">Test</Link> */}
+        {/* testing headers */}
+        <Link to="/test">Test</Link>
         <Switch>
           {/* <Route path="/" exact component={Display}/> */}
           <Route
@@ -111,10 +137,7 @@ function App({
             component={Login}
           />
           {/* testing isAuth, has to be clicked on Link to work */}
-          <Route
-          path="/test"
-          component={Test}
-          />
+          <Route path="/test" component={Test} />
 
           <Route render={() => <h1>404: page not found</h1>} />
         </Switch>
@@ -142,6 +165,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "WIKI_BTN_CLICKABLE_TRUE" }),
     setWikiButtonClickable_false: () =>
       dispatch({ type: "WIKI_BTN_CLICKABLE_FALSE" }),
+    logIn: (dataObj) => dispatch({ type: "LOG_IN", payload: dataObj }),
   };
 };
 
