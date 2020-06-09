@@ -15,6 +15,8 @@ import Login from "./components_links/Login.js";
 import Register from "./components_links/Register.js";
 import CustomRoute from "./components_links/CustomRoute.js";
 
+import Test from "./components/Test.js";
+
 import { fetchWikiApi } from "./redux/actions/fetchPostAction.js";
 import { updateScore_postAction } from "./redux/actions/updateScore_postAction.js";
 
@@ -25,6 +27,7 @@ import {
   Redirect,
   HashRouter,
   BrowserRouter,
+  Link,
 } from "react-router-dom";
 
 import { getStatsQuery } from "./graphql/queries.js";
@@ -81,6 +84,8 @@ function App({
 
       {/* <HashRouter> */}
       <BrowserRouter>
+      {/* testing headers */}
+      {/* <Link to="/test">Test</Link> */}
         <Switch>
           {/* <Route path="/" exact component={Display}/> */}
           <Route
@@ -104,6 +109,11 @@ function App({
             isAuthenticated={isAuthenticated}
             path="/login"
             component={Login}
+          />
+          {/* testing isAuth, has to be clicked on Link to work */}
+          <Route
+          path="/test"
+          component={Test}
           />
 
           <Route render={() => <h1>404: page not found</h1>} />
