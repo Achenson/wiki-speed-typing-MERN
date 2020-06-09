@@ -1,6 +1,9 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
+  
+  // headers are being set in indes.js on the client side!!!
+  // and in there the access token is being taken from the redux store
   const authHeader = req.get('Authorization');
   console.log(req.headers)
   // const authHeader = req.headers.authorisation;

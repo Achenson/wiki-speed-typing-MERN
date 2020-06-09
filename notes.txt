@@ -37,6 +37,7 @@ XX 7. noCache in getStatsQuerry in Stats.js -> only temp solution?
 https://github.com/apollographql/react-apollo/issues/2202 XX noCache deleted
 8. revokingRefreshTokens -> inc tokenVersion about 3 times instead of 1??
 9. revoikingRefreshTokens -> no refreshing, but what about login?
+10. same-site cookies?
 
 
 to do:
@@ -49,7 +50,8 @@ DONE 3.5 all route guarding DONE?
 DONE 3.6 more error displays when redirected to login DONE
 DONE 4. login -> res send cookie with refresh token DONE
 DONE (5. revoking tokens (at the end?) ) TOKEN
-5. refresh token api route
+DONE 5. refresh token api route DONE
+5.5. token is being refreshed, but the login does not persist yet
 6. persisiting session after refresh -> in the top of the App, refresh token will be used (migrating from apollo-boost!)
 7. put secrets in .env file
 8. [old problem?] changing stats don't change timer setting automatically.
@@ -58,6 +60,8 @@ DONE (5. revoking tokens (at the end?) ) TOKEN
 11. changing module.export to imports?
 [optional] 12. createrefreshToken in a new file 1:15:00
 12. check: network-only policy for useQuery?
+13. style initiall loading in the App
+
 
 
 

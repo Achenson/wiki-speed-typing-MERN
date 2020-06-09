@@ -103,7 +103,7 @@ app.post("/refresh_token", async (req, res) => {
     httpOnly: true,
   });
 
-  return res.send({ ok: true, accessToken: createAccessToken(user) });
+  return res.send({ ok: true, accessToken: createAccessToken(user), userId: payload.userId});
 
   //  testing: send login mutation in graphql, get accessToken
   // testin2: take refresh cookie from res (sieć)

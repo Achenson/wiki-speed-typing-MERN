@@ -5,6 +5,7 @@ const initialState = {
   isConfirmDeleteVisible: false,
   isWikiLinkClickable: false,
   isWikiButtonClickable: true,
+  isMainRendered: false,
 };
 
 function visibilityReducer(state = initialState, action) {
@@ -67,6 +68,14 @@ function visibilityReducer(state = initialState, action) {
         ...state,
         isWikiButtonClickable: false,
       };
+
+      case "MAIN_RENDERED_TRUE":
+        return {
+          ...state,
+          isMainRendered: true,
+        };
+
+
 
     default:
       return state;

@@ -32,6 +32,7 @@ import {
 
 import { getStatsQuery } from "./graphql/queries.js";
 import { updateStats } from "./graphql/queries.js";
+import { loginMutation } from "./graphql/queries.js";
 
 //!!!!! imported actions creators must be passed here as props
 function App({
@@ -46,13 +47,16 @@ function App({
   setWikiButtonClickable_true,
   setWikiButtonClickable_false,
   logIn,
+  isMainRendered,
+  mainRenderedTrue,
 }) {
   // ===========================================
 
   // disabling random wiki article button in <Fetch/>
   const disablingButton = useRef(null);
 
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [loginMut, { newData }] = useMutation(loginMutation);
 
   useEffect(() => {
     fetch("http://localhost:4000/refresh_token", {
@@ -62,12 +66,25 @@ function App({
       res.json().then((data) => {
         console.log(data);
 
-        // logIn(dataObj)
+        if (data.accessToken) {
+          logIn({
+            authenticatedUserId: data.userId,
+            token: data.accessToken,
+          });
 
-        setIsLoading(false);
+          mainRenderedTrue();
+        } else {
+          mainRenderedTrue();
+        }
+
+        // setIsLoading(false);
+
+        // loginMut()
+
+        // logIn(dataObj)
       })
     );
-  }, []);
+  }, [logIn]);
 
   // fetching WikiApi
 
@@ -96,7 +113,7 @@ function App({
     }
   }, [newRandomArticle]);
 
-  if (isLoading) {
+  if (!isMainRendered) {
     return (
       <div>
         <h3 className="title"> loading...</h3>
@@ -152,6 +169,7 @@ const mapStateToProps = (state) => {
     // auth
     isAuthenticated: state.authState.isAuthenticated,
     newRandomArticle: state.displayState.textDisplay.newRandomArticle,
+    isMainRendered: state.visibilityState.isMainRendered,
   };
 };
 
@@ -166,6 +184,7 @@ const mapDispatchToProps = (dispatch) => {
     setWikiButtonClickable_false: () =>
       dispatch({ type: "WIKI_BTN_CLICKABLE_FALSE" }),
     logIn: (dataObj) => dispatch({ type: "LOG_IN", payload: dataObj }),
+    mainRenderedTrue: () => dispatch({ type: "MAIN_RENDERED_TRUE" }),
   };
 };
 

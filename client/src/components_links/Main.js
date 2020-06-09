@@ -95,7 +95,7 @@ function Main({
     // fetchPolicy: "no-cache",
   });
 
-  if(error) {
+ /*  if(error) {
     if(isAuthenticated) {
     logOut();
     loginError_true();
@@ -103,7 +103,7 @@ function Main({
     history.replace("/login");
     }
   }
-
+ */
 
 
   function copyNestedArr(arr) {
