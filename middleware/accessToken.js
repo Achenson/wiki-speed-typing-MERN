@@ -5,7 +5,7 @@ module.exports = (user) => {
     { userId: user.id, email: user.email },
     "somesupersecretkey",
     {
-      expiresIn: "15m",
+      expiresIn: "10s",
     }
   );
 };

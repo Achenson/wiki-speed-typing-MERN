@@ -91,7 +91,7 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args, { req, res }) {
         if (!req.isAuth) {
           console.log("not authenticated - user isAuth false");
-          throw new Error("not authenticated");
+          // throw new Error("not authenticated");
           // return null;
         } else {
           if (args.userId) {

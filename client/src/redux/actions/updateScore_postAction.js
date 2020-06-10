@@ -80,14 +80,36 @@ export const updateScore_postAction = (addScore, history) => (dispatch) => {
   })
   .then((res) => {
     if (!res.data.addScore) {
+
+
       console.log('there is no res');
+
+      dispatch({ type: "TO_RESET_TRUE" })
+      dispatch({ type: "DISPLAY_TO_RESET_TRUE" })
+      
+      if (store.getState().visibilityState.areResultsVisible) {
+        dispatch({ type: "RESULTS_VISIBILITY" })
+       
+      }
+      dispatch({ type: "RESET_FINAL_RESULTS" })
+     
+      
       dispatch({ type: "LOG_OUT" })
+
+      if (store.getState().visibilityState.areStatsVisible) {
+        toggleStats();
+      }
+
+
 
       
       dispatch({ type: "LOGIN_ERROR_TRUE" })
       dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: "Your session has expired" })
 
       history.replace("/login");
+
+
+
     } else {
       console.log('there is a res');
       console.log(res);
@@ -95,6 +117,26 @@ export const updateScore_postAction = (addScore, history) => (dispatch) => {
     }
   });
   ;
+
+  function toggleStats() {
+    if (!store.getState().authState.isAuthenticated) {
+      return;
+    }
+   
+    if (!store.getState().resultsAndTimerState.counter.isActive) {
+      // toggleAreHintsVisible(h => !h);
+
+
+      dispatch({ type: "STATS_VISIBILITY" })
+
+    } else {
+      
+      dispatch({ type: "STATS_VISIBILITY" })
+      dispatch({ type: "TOGGLE_ACTIVE" })
+      
+    }
+  }
+
 
   function updateAndSort(arr, speed, accuracy) {
     let finalArr = [];

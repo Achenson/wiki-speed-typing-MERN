@@ -65,6 +65,8 @@ function App({
     }).then((res) =>
       res.json().then((data) => {
         console.log(data);
+        console.log("refreshhhinggggg");
+        
 
         if (data.accessToken) {
           logIn({
@@ -72,16 +74,10 @@ function App({
             token: data.accessToken,
           });
 
-          mainRenderedTrue();
-        } else {
-          mainRenderedTrue();
-        }
-
-        // setIsLoading(false);
-
-        // loginMut()
-
-        // logIn(dataObj)
+        } 
+        
+        mainRenderedTrue();
+        
       })
     );
   }, [logIn]);

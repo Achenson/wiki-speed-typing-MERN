@@ -181,25 +181,60 @@ function Stats({
 
       console.log(score);
 
-      setStats(score);
+      if (score) {
+        setStats(score);
+      } else {
+        setStats({
+          five_s: makeDefaultStats(1),
+          thirty_s: makeDefaultStats(2),
+          one_min: makeDefaultStats(3),
+          two_min: makeDefaultStats(4),
+          five_min: makeDefaultStats(5),
+        });
+      }
     }
   }, [loading, error, data, setStats]);
 
   if (loading) return <h5>connecting to database...</h5>;
   if (error) {
-   /*  logOut();
+    /*  logOut();
     loginError_true();
     setLoginErrorMessage("database connection error");
     history.replace("/login");
 
     return null; */
-    return <h5>database connection error </h5>
+    return <h5>database connection error </h5>;
   }
 
-  const { score } = data;
+  // const { score } = data;
 
-  console.log("stats score");
-  console.log(score);
+  if (!stats) {
+    /*    setStats( { five_s: makeDefaultStats(1),
+    thirty_s: makeDefaultStats(2),
+    one_min: makeDefaultStats(3),
+    two_min: makeDefaultStats(4),
+    five_min: makeDefaultStats(5),
+  }) */
+    return null;
+  }
+
+  function makeDefaultStats(n) {
+    return [
+      [n, n],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+    ];
+  }
+
+  // console.log("stats score");
+  // console.log(score);
 
   return (
     <div
@@ -230,7 +265,7 @@ function Stats({
         <ul className="score-list container">
           {/* !! [] not . */}
           {/* {currentStats[currentStatsKey].map((el, i) => { */}
-          {score[currentStatsKey].map((el, i) => {
+          {stats[currentStatsKey].map((el, i) => {
             if (i > 9) {
               return null;
             } else {

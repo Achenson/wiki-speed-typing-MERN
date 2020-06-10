@@ -51,8 +51,9 @@ DONE 3.6 more error displays when redirected to login DONE
 DONE 4. login -> res send cookie with refresh token DONE
 DONE (5. revoking tokens (at the end?) ) TOKEN
 DONE 5. refresh token api route DONE
-5.5. token is being refreshed, but the login does not persist yet
+DONE 5.5. token is being refreshed, but the login does not persist yet DONE
 6. persisiting session after refresh -> in the top of the App, refresh token will be used (migrating from apollo-boost!)
+6.5 persisting session after accessToken expired
 7. put secrets in .env file
 8. [old problem?] changing stats don't change timer setting automatically.
 

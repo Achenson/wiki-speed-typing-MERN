@@ -22,8 +22,40 @@ function Login({
   loginError_false,
   registerError_false,
   loginErrorMessage,
-  setLoginErrorMessage
+  setLoginErrorMessage,
+  isAuthenticated,
+  setStats
 }) {
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      setStats({
+        // currentStatsKey: "one_min",
+
+        five_s: makeDefaultStats(1),
+        thirty_s: makeDefaultStats(2),
+        one_min: makeDefaultStats(3),
+        two_min: makeDefaultStats(4),
+        five_min: makeDefaultStats(5),
+      });
+    }
+  }, [isAuthenticated, setStats]);
+
+  function makeDefaultStats(n) {
+    return [
+      [n, n],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+    ];
+  }
+
   const [loginMut, { newData }] = useMutation(loginMutation);
 
   /*   const {loading, err, data} = useQuery(getUserByEmailQuery, {
@@ -207,6 +239,7 @@ const mapStateToProps = (state) => {
     isNotificationNeeded: state.authState.isNotificationNeeded,
     showLoginError: state.authState.showLoginError,
     loginErrorMessage: state.authState.loginErrorMessage,
+    isAuthenticated: state.authState.isAuthenticated
     
   };
 };
@@ -219,7 +252,10 @@ const mapDispatchToProps = (dispatch) => {
     loginError_true: () => dispatch({ type: "LOGIN_ERROR_TRUE" }),
     loginError_false: () => dispatch({ type: "LOGIN_ERROR_FALSE" }),
     registerError_false: () => dispatch({ type: "REGISTER_ERROR_FALSE" }),
-    setLoginErrorMessage: (error) => dispatch({type: "SET_LOGIN_ERROR_MESSAGE", payload: error})
+    setLoginErrorMessage: (error) => dispatch({type: "SET_LOGIN_ERROR_MESSAGE", payload: error}),
+    setStats: (data) => dispatch({ type: "SET_STATS", payload: data }),
+
+
   };
 };
 
