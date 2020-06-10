@@ -61,7 +61,8 @@ function Display({
 
   isAuthenticated,
   // graphql mutation
-  addScore
+  addScore,
+  mainHistory
 }) {
   // ===========================================
   // reseting authState, so auth notifications/warnings disappear after going back
@@ -295,7 +296,7 @@ function Display({
           areStatsVisible={areStatsVisible}
           isActive={isActive}
         />
-        {isAuthenticated ? <Stats areStatsVisible={areStatsVisible} addScore={addScore} /> : null}
+        {isAuthenticated ? <Stats areStatsVisible={areStatsVisible} addScore={addScore} mainHistory={mainHistory} /> : null}
         
       </div>
 

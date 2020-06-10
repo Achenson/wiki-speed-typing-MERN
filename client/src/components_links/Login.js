@@ -27,7 +27,7 @@ function Login({
   setStats
 }) {
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (!isAuthenticated) {
       setStats({
         // currentStatsKey: "one_min",
@@ -39,9 +39,9 @@ function Login({
         five_min: makeDefaultStats(5),
       });
     }
-  }, [isAuthenticated, setStats]);
+  }, [isAuthenticated, setStats]); */
 
-  function makeDefaultStats(n) {
+ /*  function makeDefaultStats(n) {
     return [
       [n, n],
       [0, 0],
@@ -54,7 +54,7 @@ function Login({
       [0, 0],
       [0, 0],
     ];
-  }
+  } */
 
   const [loginMut, { newData }] = useMutation(loginMutation);
 

@@ -347,9 +347,9 @@ function Main({
 
       updateScore(addScore, history);
 
-      resultsReset();
+      // resultsReset();
 
-      resetLiveResults();
+      // resetLiveResults();
     }
   }, [
     timerValue,
@@ -404,6 +404,7 @@ function Main({
         setNewRandomArticle_false={setNewRandomArticle_false}
         // graphql mutation
         addScore={addScore}
+        mainHistory={history}
       />
 
       {/* custom routes are used to avoid warning when rendering <Routes> conditionally:

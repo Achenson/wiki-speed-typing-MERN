@@ -9,6 +9,7 @@ import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
 
 import { getStatsQuery, getUserByEmailQuery } from "../graphql/queries.js";
+import { deleteScore_postAction } from "../redux/actions/deleteScore_postAction.js";
 
 import { useHistory } from "react-router-dom";
 
@@ -33,8 +34,10 @@ function Stats({
   logOut,
   setLoginErrorMessage,
   loginError_true,
+  mainHistory,
+  deleteScore
 }) {
-  let history = useHistory();
+  // let history = useHistory();
 
   useEffect(() => {
     console.log("render");
@@ -70,47 +73,56 @@ function Stats({
           <span
             className="delete-score-confirm"
             onClick={() => {
-              let statsObj = {
-                five_s: stats["five_s"],
-                thirty_s: stats["thirty_s"],
-                one_min: stats["one_min"],
-                two_min: stats["two_min"],
-                five_min: stats["five_min"],
-              };
 
-              statsObj[stats.currentStatsKey] = [
-                [0, 0],
-                [0, 0],
-                [0, 0],
-                [0, 0],
-                [0, 0],
-                [0, 0],
-                [0, 0],
-                [0, 0],
-                [0, 0],
-                [0, 0],
-              ];
+              
+              // let statsObj = {
+              //   five_s: stats["five_s"],
+              //   thirty_s: stats["thirty_s"],
+              //   one_min: stats["one_min"],
+              //   two_min: stats["two_min"],
+              //   five_min: stats["five_min"],
+              // };
+
+              // statsObj[stats.currentStatsKey] = [
+              //   [0, 0],
+              //   [0, 0],
+              //   [0, 0],
+              //   [0, 0],
+              //   [0, 0],
+              //   [0, 0],
+              //   [0, 0],
+              //   [0, 0],
+              //   [0, 0],
+              //   [0, 0],
+              // ];
 
               // not adding here, but reseting
 
-              addScore({
-                variables: {
-                  // userId: "5ea96e3da7011208ac9c795d",
-                  userId: authenticatedUserId,
+              // addScore({
+              //   variables: {
+              //     // userId: "5ea96e3da7011208ac9c795d",
+              //     userId: authenticatedUserId,
 
-                  ...statsObj,
-                },
-                refetchQueries: [
-                  {
-                    query: getStatsQuery,
-                    variables: { userId: authenticatedUserId },
-                  },
-                ],
-              }).then((res) => {
-                if (!res) {
-                  logOut();
-                }
-              });
+              //     ...statsObj,
+              //   },
+              //   refetchQueries: [
+              //     {
+              //       query: getStatsQuery,
+              //       variables: { userId: authenticatedUserId },
+              //     },
+              //   ],
+              //   update: {
+
+              //   }
+              // }).then((res) => {
+              //   if (!res) {
+              //     logOut();
+              //   }
+
+
+              // });
+
+              deleteScore(addScore, mainHistory)
 
               confirmDeleteVisibility_false();
             }}
@@ -162,7 +174,7 @@ function Stats({
   const { loading, error, data } = useQuery(getStatsQuery, {
     // variables: { userId: "5ea96e3da7011208ac9c795d" },
     variables: { userId: authenticatedUserId },
-    // fetchPolicy: "no-cache",
+    fetchPolicy: "no-cache",
   });
 
   useEffect(() => {
@@ -308,7 +320,10 @@ const mapDispatchToProps = (dispatch) => {
     setLoginErrorMessage: (error) =>
       dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: error }),
     loginError_true: () => dispatch({ type: "LOGIN_ERROR_TRUE" }),
+    deleteScore: (addScore, history) =>
+      dispatch(deleteScore_postAction(addScore, history)),
   };
+  
 };
 
 export default connect(
