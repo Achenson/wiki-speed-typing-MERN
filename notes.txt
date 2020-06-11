@@ -52,8 +52,8 @@ DONE 4. login -> res send cookie with refresh token DONE
 DONE (5. revoking tokens (at the end?) ) TOKEN
 DONE 5. refresh token api route DONE
 DONE 5.5. token is being refreshed, but the login does not persist yet DONE
-6. persisiting session after refresh -> in the top of the App, refresh token will be used (migrating from apollo-boost!)
-6.5 persisting session after accessToken expired
+DONE 6. persisiting session after refresh -> in the top of the App, refresh token will be used DONE
+DONE 6.5 persisting session after accessToken expired (migrating from apollo-boost to apollo-client with apollo-link!) DONE
 7. put secrets in .env file
 8. [old problem?] changing stats don't change timer setting automatically.
 
@@ -62,6 +62,7 @@ DONE 5.5. token is being refreshed, but the login does not persist yet DONE
 [optional] 12. createrefreshToken in a new file 1:15:00
 12. check: network-only policy for useQuery?
 13. style initiall loading in the App
+14 . clean deleteScore postaction!
 
 
 

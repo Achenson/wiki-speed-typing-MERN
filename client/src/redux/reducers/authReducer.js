@@ -19,6 +19,14 @@ function authReducer(state = initialState, action) {
         authenticatedUserId: action.payload.authenticatedUserId,
         accessToken: action.payload.token,
       };
+      case "SET_ACCESS_TOKEN":
+        return {
+          ...state,
+          accessToken: action.payload,
+        };
+
+
+
     case "LOG_OUT":
       return {
         ...state,
