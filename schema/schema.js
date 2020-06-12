@@ -18,6 +18,8 @@ const {
   GraphQLList,
   GraphQLNonNull,
   GraphQLFloat,
+  GraphQLBoolean
+
 } = graphql;
 
 const UserType = new GraphQLObjectType({
@@ -72,6 +74,8 @@ const AuthData = new GraphQLObjectType({
     tokenExpiration: { type: GraphQLInt },
   }),
 });
+
+
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -295,6 +299,8 @@ const Mutation = new GraphQLObjectType({
           {
             //  not accessible by JS
             httpOnly: true,
+            // to prevent sending cookie in every request
+            path: "/refresh_token"
           }
         );
 
@@ -311,6 +317,29 @@ const Mutation = new GraphQLObjectType({
         return { userId: user.id, token: token, tokenExpiration: 1 };
       },
     },
+
+
+    logout: {
+
+      type: GraphQLBoolean,
+      args: {},
+      resolve(parent, args, {req, res}) {
+
+
+        res.cookie("jid", ""), {
+          httpOnly: true,
+          // to prevent sending cookie in every request
+          path: "/refresh_token"
+        };
+
+        return true;
+
+      }
+    }
+
+
+
+
   },
 });
 

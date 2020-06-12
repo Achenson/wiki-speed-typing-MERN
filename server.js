@@ -101,6 +101,8 @@ app.post("/refresh_token", async (req, res) => {
 
   res.cookie("jid", createRefreshToken(user), {
     httpOnly: true,
+    path: "/refresh_token"
+    
   });
 
   return res.send({ ok: true, accessToken: createAccessToken(user), userId: payload.userId});

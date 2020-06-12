@@ -66,5 +66,13 @@ export const loginMutation = gql`
       tokenExpiration
     }
   }
-`
+`;
+
+  export const logoutMutation = gql`
+    mutation Logout {
+      logout
+    }
+
+    
+` 
 

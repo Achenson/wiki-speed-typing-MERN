@@ -4,6 +4,9 @@ import { connect } from "react-redux";
 // import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 
+import { logoutMutation } from "../graphql/queries.js";
+import {useMutation } from "@apollo/react-hooks";
+
 // import { useHistory } from "react-router-dom";
 
 function AuthenticationUI({
@@ -24,6 +27,10 @@ function AuthenticationUI({
 }) {
   // let history = useHistory();
   // let isAuthenticated = false;
+
+
+
+  const [logoutMut, {client}] = useMutation(logoutMutation);
 
   function authLinks() {
     if (!isAuthenticated) {
@@ -69,6 +76,14 @@ function AuthenticationUI({
               }
               resetFinalResults();
               logOut();
+              // mutation
+              logoutMut();
+              client.resetStore();
+
+
+
+
+
 
               if (areStatsVisible) {
                 toggleStats();
