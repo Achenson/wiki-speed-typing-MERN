@@ -5,8 +5,7 @@ import { getStatsQuery } from "../../graphql/queries.js";
 export const deleteScore_postAction = (addScore, history) => (dispatch) => {
   // const { loading, error, data } = useQuery(getStatsQuery);
 
-  let stats = store.getState().resultsAndTimerState.stats
-  
+  let stats = store.getState().resultsAndTimerState.stats;
 
   let statsObj = {
     currentStatsKey: stats.currentStatsKey,
@@ -31,70 +30,6 @@ export const deleteScore_postAction = (addScore, history) => (dispatch) => {
   ];
 
 
-
-
-
-
-
-
-
-  /* let finalResultObj = {
-    ...resultsMaker(
-      store.getState().resultsAndTimerState.currentResults.resultsCorrect,
-      store.getState().resultsAndTimerState.currentResults.resultsIncorrect,
-      store.getState().resultsAndTimerState.currentResults.resultsNoPenalty,
-      0
-    ),
-  };
-
-  let statsStateKey;
-
-  switch (finalResultObj["timer length"]) {
-    case "5":
-      // setCurrentTimer(five_s);
-      statsStateKey = "five_s";
-      break;
-    case "30":
-      // setCurrentTimer(thirty_s);
-      statsStateKey = "thirty_s";
-      break;
-    case "60":
-      // setCurrentTimer(one_min);
-      statsStateKey = "one_min";
-      break;
-    case "120":
-      // setCurrentTimer(two_min);
-      statsStateKey = "two_min";
-      break;
-    case "300":
-      // setCurrentTimer(five_min);
-      statsStateKey = "five_min";
-      break;
-
-    default:
-      statsStateKey = "one_min";
-  }
-
-  console.log("statsStateKey");
-
-  console.log(statsStateKey);
-
-  let upd = updateAndSort(
-    store.getState().resultsAndTimerState.stats[statsStateKey],
-    finalResultObj.speed,
-    finalResultObj.accuracy
-  );
-
-  let updatedAndSortedArr = [];
-  for (let i = 0; i < 10; i++) {
-    updatedAndSortedArr.push(upd[i]);
-  }
-
-  let statsObject = {
-    ...store.getState().resultsAndTimerState.stats,
-    [statsStateKey]: updatedAndSortedArr,
-  }; */
-
   dispatch({ type: "UPDATE_STATS", payload: statsObj });
 
   // graphql mutation
@@ -110,66 +45,50 @@ export const deleteScore_postAction = (addScore, history) => (dispatch) => {
         variables: { userId: store.getState().authState.authenticatedUserId },
       },
     ],
-  })
-  .then((res) => {
+  }).then((res) => {
     if (!res.data.addScore) {
+      console.log("there is no res");
 
+      dispatch({ type: "TO_RESET_TRUE" });
+      dispatch({ type: "DISPLAY_TO_RESET_TRUE" });
 
-      console.log('there is no res');
-
-      dispatch({ type: "TO_RESET_TRUE" })
-      dispatch({ type: "DISPLAY_TO_RESET_TRUE" })
-      
       if (store.getState().visibilityState.areResultsVisible) {
-        dispatch({ type: "RESULTS_VISIBILITY" })
-       
+        dispatch({ type: "RESULTS_VISIBILITY" });
       }
-      dispatch({ type: "RESET_FINAL_RESULTS" })
-     
-      
-      dispatch({ type: "LOG_OUT" })
+      dispatch({ type: "RESET_FINAL_RESULTS" });
+
+      dispatch({ type: "LOG_OUT" });
 
       if (store.getState().visibilityState.areStatsVisible) {
         toggleStats();
       }
 
-
-
-      
-      dispatch({ type: "LOGIN_ERROR_TRUE" })
-      dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: "Your session has expired" })
+      dispatch({ type: "LOGIN_ERROR_TRUE" });
+      dispatch({
+        type: "SET_LOGIN_ERROR_MESSAGE",
+        payload: "Your session has expired",
+      });
 
       history.replace("/login");
-
-
-
     } else {
-      console.log('there is a res');
+      console.log("there is a res");
       console.log(res);
-      
     }
   });
-  ;
-
   function toggleStats() {
     if (!store.getState().authState.isAuthenticated) {
       return;
     }
-   
+
     if (!store.getState().resultsAndTimerState.counter.isActive) {
       // toggleAreHintsVisible(h => !h);
 
-
-      dispatch({ type: "STATS_VISIBILITY" })
-
+      dispatch({ type: "STATS_VISIBILITY" });
     } else {
-      
-      dispatch({ type: "STATS_VISIBILITY" })
-      dispatch({ type: "TOGGLE_ACTIVE" })
-      
+      dispatch({ type: "STATS_VISIBILITY" });
+      dispatch({ type: "TOGGLE_ACTIVE" });
     }
   }
-
 
   function updateAndSort(arr, speed, accuracy) {
     let finalArr = [];

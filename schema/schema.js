@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
 
 const createAccessToken = require("../middleware/accessToken.js");
 const createRefreshToken = require("../middleware/refreshToken.js");
-const sendRefreshToken = require("../middleware/sendRefreshToken.js")
+const sendRefreshToken = require("../middleware/sendRefreshToken.js");
 
 const {
   GraphQLObjectType,
@@ -19,8 +19,7 @@ const {
   GraphQLList,
   GraphQLNonNull,
   GraphQLFloat,
-  GraphQLBoolean
-
+  GraphQLBoolean,
 } = graphql;
 
 const UserType = new GraphQLObjectType({
@@ -75,8 +74,6 @@ const AuthData = new GraphQLObjectType({
     tokenExpiration: { type: GraphQLInt },
   }),
 });
-
-
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -205,14 +202,13 @@ const Mutation = new GraphQLObjectType({
         return User.findOneAndUpdate(
           { _id: args.userId },
           { $inc: { tokenVersion: 1 } },
-          {new: true},
+          { new: true },
           (err, response) => {
             if (err) {
               console.log(err);
             } else {
               console.log("response");
               console.log(response);
-              
             }
           }
         );
@@ -287,7 +283,7 @@ const Mutation = new GraphQLObjectType({
 
         // if user is authenticated correctly
 
-     /*    res.cookie(
+        /*    res.cookie(
           "jid",
           createRefreshToken(user),
           {
@@ -306,15 +302,11 @@ const Mutation = new GraphQLObjectType({
       },
     },
 
-
     logout: {
-
       type: GraphQLBoolean,
       args: {},
-      resolve(parent, args, {req, res}) {
-
-
-     /*    res.cookie("jid", ""), {
+      resolve(parent, args, { req, res }) {
+        /*    res.cookie("jid", ""), {
           httpOnly: true,
           // to prevent sending cookie in every request
           path: "/refresh_token"
@@ -322,15 +314,9 @@ const Mutation = new GraphQLObjectType({
  */
         sendRefreshToken(res, "");
 
-
         return true;
-
-      }
-    }
-
-
-
-
+      },
+    },
   },
 });
 

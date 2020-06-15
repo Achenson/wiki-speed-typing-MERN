@@ -62,7 +62,6 @@ export const updateScore_postAction = (addScore, history) => (dispatch) => {
     [statsStateKey]: updatedAndSortedArr,
   };
 
-  
   // graphql mutation
   addScore({
     variables: {
@@ -76,67 +75,51 @@ export const updateScore_postAction = (addScore, history) => (dispatch) => {
         variables: { userId: store.getState().authState.authenticatedUserId },
       },
     ],
-  })
-  .then((res) => {
+  }).then((res) => {
     if (!res.data.addScore) {
-      
-      
-      console.log('there is no res');
-      
-      dispatch({ type: "TO_RESET_TRUE" })
-      dispatch({ type: "DISPLAY_TO_RESET_TRUE" })
-      
+      console.log("there is no res");
+
+      dispatch({ type: "TO_RESET_TRUE" });
+      dispatch({ type: "DISPLAY_TO_RESET_TRUE" });
+
       if (store.getState().visibilityState.areResultsVisible) {
-        dispatch({ type: "RESULTS_VISIBILITY" })
-        
+        dispatch({ type: "RESULTS_VISIBILITY" });
       }
-      dispatch({ type: "RESET_FINAL_RESULTS" })
-      
-      
-      dispatch({ type: "LOG_OUT" })
-      
+      dispatch({ type: "RESET_FINAL_RESULTS" });
+
+      dispatch({ type: "LOG_OUT" });
+
       if (store.getState().visibilityState.areStatsVisible) {
         toggleStats();
       }
-      
-      
-      
-      
-      dispatch({ type: "LOGIN_ERROR_TRUE" })
-      dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: "Your session has expired" })
-      
+
+      dispatch({ type: "LOGIN_ERROR_TRUE" });
+      dispatch({
+        type: "SET_LOGIN_ERROR_MESSAGE",
+        payload: "Your session has expired",
+      });
+
       history.replace("/login");
-      
-      
-      
     } else {
       // dispatch({ type: "UPDATE_STATS", payload: statsObject });
-      console.log('there is a res');
+      console.log("there is a res");
       console.log(res);
-      
     }
   });
-  ;
-
   function toggleStats() {
     if (!store.getState().authState.isAuthenticated) {
       return;
     }
-   
+
     if (!store.getState().resultsAndTimerState.counter.isActive) {
       // toggleAreHintsVisible(h => !h);
 
-
-      dispatch({ type: "STATS_VISIBILITY" })
-
+      dispatch({ type: "STATS_VISIBILITY" });
     } else {
-      
-      dispatch({ type: "STATS_VISIBILITY" })
-      dispatch({ type: "TOGGLE_ACTIVE" })
-      
+      dispatch({ type: "STATS_VISIBILITY" });
+      dispatch({ type: "TOGGLE_ACTIVE" });
     }
   }
-
 
   function updateAndSort(arr, speed, accuracy) {
     let finalArr = [];

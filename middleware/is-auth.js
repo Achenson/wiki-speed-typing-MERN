@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 
+
 module.exports = (req, res, next) => {
   
   // headers are being set in indes.js on the client side!!!
@@ -27,7 +28,8 @@ module.exports = (req, res, next) => {
   }
   let decodedToken;
   try {
-    decodedToken = jwt.verify(token, 'somesupersecretkey');
+    // decodedToken = jwt.verify(token, 'somesupersecretkey');
+    decodedToken = jwt.verify(token, process.env.ACCESS);
   } catch (err) {
     req.isAuth = false;
     return next();

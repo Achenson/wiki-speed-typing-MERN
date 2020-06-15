@@ -12,7 +12,9 @@ const jwt = require("jsonwebtoken");
 const User = require("./mongoModels/user");
 const createAccessToken = require("./middleware/accessToken");
 const createRefreshToken = require("./middleware/refreshToken");
-const sendRefreshToken = require("./middleware/sendRefreshToken.js")
+const sendRefreshToken = require("./middleware/sendRefreshToken.js");
+
+
 
 // const bodyParser = require("body-parser");
 
@@ -72,7 +74,8 @@ app.post("/refresh_token", async (req, res) => {
   let payload = null;
 
   try {
-    payload = jwt.verify(token, "secretKeyForRefreshToken");
+    // payload = jwt.verify(token, "secretKeyForRefreshToken");
+    payload = jwt.verify(token, process.env.REFRESH);
   } catch (err) {
     console.log(err);
     console.log("refresh token erorr2");
@@ -91,19 +94,16 @@ app.post("/refresh_token", async (req, res) => {
   // revoking tokens: tokenVersion == 0 when creating user
   // refreshTokens' tokenVersion == user.tokenVerssion
   // to invalidate user -> increment user's tokenVersion
-  // when the user tries to refresh tokens(login or after accessToken runs out), 
+  // when the user tries to refresh tokens(login or after accessToken runs out),
   // his user.tokenVersion doesn't match the version from the refresh token in his cookies
 
-  if(user.tokenVersion !== payload.tokenVersion) {
+  if (user.tokenVersion !== payload.tokenVersion) {
     console.log("invalid tokenVersion");
-    
-    return res.send({ok: false, accessToken: ""})
+
+    return res.send({ ok: false, accessToken: "" });
   }
 
-
-
-
-/*   res.cookie("jid", createRefreshToken(user), {
+  /*   res.cookie("jid", createRefreshToken(user), {
     httpOnly: true,
     path: "/refresh_token"
     
@@ -111,7 +111,11 @@ app.post("/refresh_token", async (req, res) => {
 
   sendRefreshToken(res, createRefreshToken(user));
 
-  return res.send({ ok: true, accessToken: createAccessToken(user), userId: payload.userId});
+  return res.send({
+    ok: true,
+    accessToken: createAccessToken(user),
+    userId: payload.userId,
+  });
 
   //  testing: send login mutation in graphql, get accessToken
   // testin2: take refresh cookie from res (sieć)
