@@ -38,7 +38,7 @@ https://github.com/apollographql/react-apollo/issues/2202 XX noCache deleted
 8. revokingRefreshTokens -> inc tokenVersion about 3 times instead of 1??
 DONE 9. revoikingRefreshTokens -> no refreshing, but what about login? DONE
 10. same-site cookies?
-11. error when the timer reaches 0 and the user is not logged in
+DONE 11. error when the timer reaches 0 and the user is not logged in DONE
 
 
 to do:
