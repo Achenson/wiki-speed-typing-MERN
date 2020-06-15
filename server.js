@@ -12,6 +12,7 @@ const jwt = require("jsonwebtoken");
 const User = require("./mongoModels/user");
 const createAccessToken = require("./middleware/accessToken");
 const createRefreshToken = require("./middleware/refreshToken");
+const sendRefreshToken = require("./middleware/sendRefreshToken.js")
 
 // const bodyParser = require("body-parser");
 
@@ -99,11 +100,16 @@ app.post("/refresh_token", async (req, res) => {
     return res.send({ok: false, accessToken: ""})
   }
 
-  res.cookie("jid", createRefreshToken(user), {
+
+
+
+/*   res.cookie("jid", createRefreshToken(user), {
     httpOnly: true,
     path: "/refresh_token"
     
-  });
+  }); */
+
+  sendRefreshToken(res, createRefreshToken(user));
 
   return res.send({ ok: true, accessToken: createAccessToken(user), userId: payload.userId});
 

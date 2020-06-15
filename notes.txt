@@ -59,10 +59,13 @@ DONE 6.5 persisting session after accessToken expired (migrating from apollo-boo
 
 10. token will require only ID, not email?
 11. changing module.export to imports?
-[optional] 12. createrefreshToken in a new file 1:15:00
+DONE [optional] 12. createrefreshToken in a new file 1:15:00 DONE
 12. check: network-only policy for useQuery?
 13. style initiall loading in the App
-14 . clean deleteScore postaction!
+14 clear deleteScore postaction!
+15. commentOut Test in the end
+16. change accessToken expiration in the end
+17. notes -> document all the jwt logic
 
 
 

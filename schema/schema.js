@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 
 const createAccessToken = require("../middleware/accessToken.js");
 const createRefreshToken = require("../middleware/refreshToken.js");
+const sendRefreshToken = require("../middleware/sendRefreshToken.js")
 
 const {
   GraphQLObjectType,
@@ -286,15 +287,8 @@ const Mutation = new GraphQLObjectType({
 
         // if user is authenticated correctly
 
-        res.cookie(
+     /*    res.cookie(
           "jid",
-          /*    jwt.sign(
-            { userId: user.id, email: user.email },
-            "secretKeyForRefreshToken",
-            {
-              expiresIn: "7d",
-            }
-           ), */
           createRefreshToken(user),
           {
             //  not accessible by JS
@@ -302,15 +296,9 @@ const Mutation = new GraphQLObjectType({
             // to prevent sending cookie in every request
             path: "/refresh_token"
           }
-        );
-
-        /*    const token = jwt.sign(
-          { userId: user.id, email: user.email },
-          "somesupersecretkey",
-          {
-            expiresIn: "1h",
-          }
         ); */
+
+        sendRefreshToken(res, createRefreshToken(user));
 
         const token = createAccessToken(user);
 
@@ -326,11 +314,14 @@ const Mutation = new GraphQLObjectType({
       resolve(parent, args, {req, res}) {
 
 
-        res.cookie("jid", ""), {
+     /*    res.cookie("jid", ""), {
           httpOnly: true,
           // to prevent sending cookie in every request
           path: "/refresh_token"
         };
+ */
+        sendRefreshToken(res, "");
+
 
         return true;
 
