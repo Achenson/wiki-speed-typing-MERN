@@ -9,13 +9,12 @@ import { useHistory } from "react-router-dom";
 
 import AuthNotification from "./AuthNotification";
 
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import {useMutation } from "@apollo/react-hooks";
 
 
 
 import { addNewUserMutation } from "../graphql/queries.js";
-import { updateStats } from "../graphql/queries.js";
-import { getUserByEmailQuery } from "../graphql/queries.js";
+
 
 function Register({
   showRegisterError,
@@ -25,7 +24,7 @@ function Register({
   loginError_false,
   
 }) {
-  const [addUser, { newData }] = useMutation(addNewUserMutation);
+  const [addUser] = useMutation(addNewUserMutation);
   
   // reseting authState for Login, so auth notifications/warnings disappear
   // when going back to Login

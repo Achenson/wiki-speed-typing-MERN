@@ -1,15 +1,12 @@
 import React from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 
 //ApolloClient & ApolloProvider are in store.js
-import { useQuery, useMutation } from "@apollo/react-hooks";
 
 import "./App.css";
 
 import Main from "./components_links/Main.js";
-
-import Display from "./components/Display.js";
 
 import Login from "./components_links/Login.js";
 import Register from "./components_links/Register.js";
@@ -18,21 +15,14 @@ import CustomRoute from "./components_links/CustomRoute.js";
 import Test from "./components/Test.js";
 
 import { fetchWikiApi } from "./redux/actions/fetchPostAction.js";
-import { updateScore_postAction } from "./redux/actions/updateScore_postAction.js";
 
 // import { BrowserRouter, Route, Link, Switch, Redirect, useHistory, HashRouter } from "react-router-dom";
 import {
   Route,
   Switch,
-  Redirect,
-  HashRouter,
   BrowserRouter,
   Link,
 } from "react-router-dom";
-
-import { getStatsQuery } from "./graphql/queries.js";
-import { updateStats } from "./graphql/queries.js";
-import { loginMutation } from "./graphql/queries.js";
 
 //!!!!! imported actions creators must be passed here as props
 function App({
@@ -43,7 +33,6 @@ function App({
   // imported actionCreator
   fetchingWiki,
   newRandomArticle,
-  setNewRandomArticle_false,
   setWikiButtonClickable_true,
   setWikiButtonClickable_false,
   logIn,
@@ -66,18 +55,15 @@ function App({
       res.json().then((data) => {
         console.log(data);
         console.log("refreshhhinggggg");
-        
 
         if (data.accessToken) {
           logIn({
             authenticatedUserId: data.userId,
             token: data.accessToken,
           });
+        }
 
-        } 
-        
         mainRenderedTrue();
-        
       })
     );
   }, [logIn]);
@@ -172,7 +158,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     // fetch & wikiController
-    setNewRandomArticle_false: () => dispatch({ type: "RANDOM_ARTICLE_FALSE" }),
+
     // !!! dispatching function instead of object thanks to redux-thunk
     fetchingWiki: () => dispatch(fetchWikiApi()),
     setWikiButtonClickable_true: () =>

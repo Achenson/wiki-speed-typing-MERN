@@ -3,15 +3,14 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import SingleStat from "./SingleStat";
 
-// parsing graphql queries
-import { gql } from "apollo-boost";
+
 // connecting graphql to component
 import { useQuery } from "@apollo/react-hooks";
 
-import { getStatsQuery, getUserByEmailQuery } from "../graphql/queries.js";
+import { getStatsQuery} from "../graphql/queries.js";
 import { deleteScore_postAction } from "../redux/actions/deleteScore_postAction.js";
 
-import { useHistory } from "react-router-dom";
+
 
 function Stats({
   areStatsVisible,

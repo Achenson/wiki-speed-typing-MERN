@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 
 //ApolloClient & ApolloProvider are in store.js
@@ -9,21 +9,10 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 
 import Display from "../components/Display.js";
 
-import Login from "../components_links/Login.js";
-import Register from "../components_links/Register.js";
-import CustomRoute from "../components_links/CustomRoute.js";
-
-import { fetchWikiApi } from "../redux/actions/fetchPostAction.js";
 import { updateScore_postAction } from "../redux/actions/updateScore_postAction.js";
 
 // import { BrowserRouter, Route, Link, Switch, Redirect, useHistory, HashRouter } from "react-router-dom";
-import {
-  Route,
-  Switch,
-  Redirect,
-  HashRouter,
-  useHistory,
-} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { getStatsQuery } from "../graphql/queries.js";
 import { updateStats } from "../graphql/queries.js";
@@ -70,9 +59,8 @@ function Main({
   //
   disableFocusTextArea,
   // fetching WikiApi
-  newRandomArticle,
+
   // imported actionCreator
-  fetchingWiki,
 
   updateScore,
   setStats,
@@ -81,46 +69,30 @@ function Main({
 
   logOut,
   setLoginErrorMessage,
-    
-  loginError_true
 
-
+  loginError_true,
 }) {
   let history = useHistory();
 
-
-  const { loading, error, data } = useQuery(getStatsQuery, {
+  const {error} = useQuery(getStatsQuery, {
     // variables: { userId: "5ea96e3da7011208ac9c795d" },
     variables: { userId: authenticatedUserId },
     // fetchPolicy: "no-cache",
   });
 
-  if(error) {
-    if(isAuthenticated) {
-    logOut();
-    loginError_true();
-    setLoginErrorMessage("querying database connection error");
-    history.replace("/login");
+  if (error) {
+    if (isAuthenticated) {
+      logOut();
+      loginError_true();
+      setLoginErrorMessage("querying database connection error");
+      history.replace("/login");
     }
   }
 
-
-
-  function copyNestedArr(arr) {
-    let finalArr = [];
-
-    for (let i = 0; i < arr.length; i++) {
-      finalArr.push(arr[i]);
-    }
-
-    return finalArr;
-  }
 
   // In addition to a mutate function, the useMutation hook returns an object that represents
   //  the current state of the mutation's execution.
-  const [addScore, { newData }] = useMutation(updateStats);
-
- 
+  const [addScore] = useMutation(updateStats);
 
   // for keyboard shortcuts
   useEffect(() => {
@@ -155,7 +127,6 @@ function Main({
       [0, 0],
     ];
   }
-
 
   // display
 
@@ -428,7 +399,7 @@ const mapStateToProps = (state) => {
     displayToReset: state.displayState.textDisplay.displayToReset,
     myText: state.displayState.textDisplay.myText,
     wikiTitle: state.displayState.textDisplay.wikiTitle,
-    newRandomArticle: state.displayState.textDisplay.newRandomArticle,
+
     // hints & results
     areHintsVisible: state.visibilityState.areHintsVisible,
     areResultsVisible: state.visibilityState.areResultsVisible,
@@ -489,7 +460,7 @@ const mapDispatchToProps = (dispatch) => {
     setCurrentStatsKey: (data) =>
       dispatch({ type: "SET_CURRENT_STATS", payload: data }),
     // !!! dispatching function instead of object thanks to redux-thunk
-    fetchingWiki: () => dispatch(fetchWikiApi()),
+    // fetchingWiki: () => dispatch(fetchWikiApi()),
     updateScore: (addScore, history) =>
       dispatch(updateScore_postAction(addScore, history)),
     // initially setting stats from setStatsQuery apollo hook

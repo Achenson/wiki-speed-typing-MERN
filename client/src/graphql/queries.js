@@ -1,3 +1,5 @@
+
+// parsing graphql queries
 import { gql } from "apollo-boost";
 
 export const updateStats = gql`

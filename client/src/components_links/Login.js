@@ -8,26 +8,23 @@ import { useHistory } from "react-router-dom";
 
 import AuthNotification from "./AuthNotification";
 
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 
-import { loginMutation, getUserByEmailQuery } from "../graphql/queries.js";
+import { loginMutation } from "../graphql/queries.js";
 
 function Login({
   logIn,
   isNotificationNeeded,
   showLoginError,
-  notification_true,
+
   notification_false,
   loginError_true,
   loginError_false,
   registerError_false,
   loginErrorMessage,
   setLoginErrorMessage,
-  isAuthenticated,
-  setStats
 }) {
-
-/*   useEffect(() => {
+  /*   useEffect(() => {
     if (!isAuthenticated) {
       setStats({
         // currentStatsKey: "one_min",
@@ -41,7 +38,7 @@ function Login({
     }
   }, [isAuthenticated, setStats]); */
 
- /*  function makeDefaultStats(n) {
+  /*  function makeDefaultStats(n) {
     return [
       [n, n],
       [0, 0],
@@ -56,7 +53,7 @@ function Login({
     ];
   } */
 
-  const [loginMut, { newData }] = useMutation(loginMutation);
+  const [loginMut] = useMutation(loginMutation);
 
   /*   const {loading, err, data} = useQuery(getUserByEmailQuery, {
     variables: {email: "l@l.pl" }, });
@@ -239,23 +236,18 @@ const mapStateToProps = (state) => {
     isNotificationNeeded: state.authState.isNotificationNeeded,
     showLoginError: state.authState.showLoginError,
     loginErrorMessage: state.authState.loginErrorMessage,
-    isAuthenticated: state.authState.isAuthenticated
-    
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     logIn: (dataObj) => dispatch({ type: "LOG_IN", payload: dataObj }),
-    notification_true: () => dispatch({ type: "NOTIFICATION_TRUE" }),
     notification_false: () => dispatch({ type: "NOTIFICATION_FALSE" }),
     loginError_true: () => dispatch({ type: "LOGIN_ERROR_TRUE" }),
     loginError_false: () => dispatch({ type: "LOGIN_ERROR_FALSE" }),
     registerError_false: () => dispatch({ type: "REGISTER_ERROR_FALSE" }),
-    setLoginErrorMessage: (error) => dispatch({type: "SET_LOGIN_ERROR_MESSAGE", payload: error}),
-    setStats: (data) => dispatch({ type: "SET_STATS", payload: data }),
-
-
+    setLoginErrorMessage: (error) =>
+      dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: error }),
   };
 };
 

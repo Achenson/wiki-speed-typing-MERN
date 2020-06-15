@@ -66,6 +66,8 @@ DONE 14 clear deleteScore postaction! DONE
 15. commentOut Test in the end
 16. change accessToken expiration in the end
 17. notes -> document all the jwt logic
+18. fill all useEffect deps
+19. Deployment? 
 
 
 
