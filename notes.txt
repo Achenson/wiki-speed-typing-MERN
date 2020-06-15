@@ -67,7 +67,7 @@ DONE 14 clear deleteScore postaction! DONE
 15. commentOut Test in the end
 16. change accessToken expiration in the end
 17. notes -> document all the jwt logic
-18. fill all useEffect deps
+DONE 18. fill all useEffect deps DONE
 19. Deployment? 
 20. [optional] make 2 files out of schema? (resolvers &  ...)
 21. [optional] show authenticated user name(see jwt video)

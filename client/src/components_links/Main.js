@@ -337,6 +337,7 @@ function Main({
 
     updateScore,
     isAuthenticated,
+    history
   ]);
   // ===========================================
 

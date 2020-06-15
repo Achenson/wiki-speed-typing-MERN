@@ -66,7 +66,7 @@ function App({
         mainRenderedTrue();
       })
     );
-  }, [logIn]);
+  }, [logIn, mainRenderedTrue]);
 
   // fetching WikiApi
 
@@ -93,7 +93,7 @@ function App({
       setWikiButtonClickable_true();
       // }, 5000);
     }
-  }, [newRandomArticle]);
+  }, [newRandomArticle, setWikiButtonClickable_false, setWikiButtonClickable_true]);
 
   if (!isMainRendered) {
     return (
