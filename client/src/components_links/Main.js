@@ -74,7 +74,7 @@ function Main({
 }) {
   let history = useHistory();
 
-  const {error} = useQuery(getStatsQuery, {
+  const { error } = useQuery(getStatsQuery, {
     // variables: { userId: "5ea96e3da7011208ac9c795d" },
     variables: { userId: authenticatedUserId },
     // fetchPolicy: "no-cache",
@@ -88,7 +88,6 @@ function Main({
       history.replace("/login");
     }
   }
-
 
   // In addition to a mutate function, the useMutation hook returns an object that represents
   //  the current state of the mutation's execution.
@@ -316,7 +315,9 @@ function Main({
     if (timerValue <= 0) {
       setFinalResults();
 
-      updateScore(addScore, history);
+      if (isAuthenticated) {
+        updateScore(addScore, history);
+      }
 
       // resultsReset();
 
@@ -335,6 +336,7 @@ function Main({
     addScore,
 
     updateScore,
+    isAuthenticated,
   ]);
   // ===========================================
 
