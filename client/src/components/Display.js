@@ -62,7 +62,7 @@ function Display({
   isAuthenticated,
   // graphql mutation
   addScore,
-  mainHistory
+  mainHistory,
 }) {
   // ===========================================
   // reseting authState, so auth notifications/warnings disappear after going back
@@ -296,8 +296,13 @@ function Display({
           areStatsVisible={areStatsVisible}
           isActive={isActive}
         />
-        {isAuthenticated ? <Stats areStatsVisible={areStatsVisible} addScore={addScore} mainHistory={mainHistory} /> : null}
-        
+        {isAuthenticated ? (
+          <Stats
+            areStatsVisible={areStatsVisible}
+            addScore={addScore}
+            mainHistory={mainHistory}
+          />
+        ) : null}
       </div>
 
       <Results
@@ -319,7 +324,21 @@ const mapStateToProps = (state) => {
     liveResults: state.resultsAndTimerState.liveResults,
     finalResults: state.resultsAndTimerState.finalResults,
 
-    isAuthenticated: state.authState.isAuthenticated
+    isAuthenticated: state.authState.isAuthenticated,
+    //
+    constantTimerValue: state.resultsAndTimerState.counter.constantTimerValue,
+    isActive: state.resultsAndTimerState.counter.isActive,
+    toReset: state.resultsAndTimerState.counter.toReset,
+    displayToReset: state.displayState.textDisplay.displayToReset,
+
+    // hints & results
+    areHintsVisible: state.visibilityState.areHintsVisible,
+    areResultsVisible: state.visibilityState.areResultsVisible,
+    areStatsVisible: state.visibilityState.areStatsVisible,
+
+    myText: state.displayState.textDisplay.myText,
+    wikiTitle: state.displayState.textDisplay.wikiTitle,
+    isCounterRunning: state.resultsAndTimerState.counter.isCounterRunning,
   };
 };
 
@@ -328,12 +347,10 @@ const mapDispatchToProps = (dispatch) => {
     setDisplayToReset_false: () => dispatch({ type: "DISPLAY_TO_RESET_FALSE" }),
     toggleActive: () => dispatch({ type: "TOGGLE_ACTIVE" }),
     toggleAreResultsVisible: () => dispatch({ type: "RESULTS_VISIBILITY" }),
-
     // dispatching plain actions
     resultsCorrect: () => dispatch({ type: "RESULTS_CORRECT" }),
     resultsIncorrect: () => dispatch({ type: "RESULTS_INCORRECT" }),
     resultsNoPenalty: () => dispatch({ type: "RESULTS_NO_PENALTY" }),
-
     // for display only
     setIndexOfPartialTextArr: (data) =>
       dispatch({ type: "INDEX_OF_PARTIAL_TEXTARR", payload: data }),
@@ -347,6 +364,11 @@ const mapDispatchToProps = (dispatch) => {
     notification_false: () => dispatch({ type: "NOTIFICATION_FALSE" }),
     loginError_false: () => dispatch({ type: "LOGIN_ERROR_FALSE" }),
     registerError_false: () => dispatch({ type: "REGISTER_ERROR_FALSE" }),
+    // fetch & wikiController
+    setNewRandomArticle_false: () => dispatch({ type: "RANDOM_ARTICLE_FALSE" }),
+    // wikiController from Display
+    setNewRandomArticle_true: () => dispatch({ type: "RANDOM_ARTICLE_TRUE" }),
+    // for App
   };
 };
 

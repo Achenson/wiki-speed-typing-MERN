@@ -73,8 +73,9 @@ DONE 18. fill all useEffect deps DONE
 21. [optional] show authenticated user name(see jwt video)
 22. password retrieval system?
 23. redux -> importing acions instead of strings?
-24. merge Main & Display?
+XXX 24. merge Main & Display? XXX 
 25. delete unused components (2?)
+DONE 26. Clean props in Main & Display DONE
 
 
 

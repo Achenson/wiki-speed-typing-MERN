@@ -25,16 +25,8 @@ function Main({
   isActive,
   toReset,
   isCounterRunning,
-  displayToReset,
-  myText,
-  wikiTitle,
-  setNewRandomArticle_true,
-  setNewRandomArticle_false,
-  areHintsVisible,
   areResultsVisible,
-  areStatsVisible,
   isAuthenticated,
-
   // from mapDispatchToProps
   toggleAreHintsVisible,
   toggleAreResultsVisible,
@@ -337,7 +329,7 @@ function Main({
 
     updateScore,
     isAuthenticated,
-    history
+    history,
   ]);
   // ===========================================
 
@@ -345,20 +337,10 @@ function Main({
     <div className="App" onKeyDown={handleKeyPress}>
       {/* <div className="app-outer-container">
         <h3 className="title">Wiki Speed Typing</h3> */}
-
       <Display
         // timer
-        timerValue={timerValue}
-        constantTimerValue={constantTimerValue}
-        toggleActive={toggleActive}
         setTimerOnSelect={setTimerOnSelect}
-        isActive={isActive}
-        toReset={toReset}
-        displayToReset={displayToReset}
         // hints & results visibility
-        areHintsVisible={areHintsVisible}
-        areResultsVisible={areResultsVisible}
-        areStatsVisible={areStatsVisible}
         toggleHints={toggleHints}
         // toggleResults={toggleResults}
         toggleStats={toggleStats}
@@ -368,24 +350,13 @@ function Main({
         putFocusOnTextArea={putFocusOnTextArea}
         focusElement={focusElement}
         // results
-        myText={myText}
-        wikiTitle={wikiTitle}
         disablingButton={disablingButton}
-        isCounterRunning={isCounterRunning}
-        // for Display => WikiController
-        setNewRandomArticle_true={setNewRandomArticle_true}
-        // for Fetch
-        setNewRandomArticle_false={setNewRandomArticle_false}
-        // graphql mutation
         addScore={addScore}
         mainHistory={history}
       />
-
       {/* custom routes are used to avoid warning when rendering <Routes> conditionally:
             <Route> elements should not change from controlled to uncontrolled (or vice versa). You provided a "location" prop initially but omitted it on a subsequent render.
-            
              */}
-
       {/* </div> */}
     </div>
   );
