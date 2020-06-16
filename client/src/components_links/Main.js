@@ -1,11 +1,8 @@
 import React from "react";
 import { useEffect, useRef } from "react";
 import { connect } from "react-redux";
-
 //ApolloClient & ApolloProvider are in store.js
 import { useQuery, useMutation } from "@apollo/react-hooks";
-
-// import "./App.css";
 
 import Display from "../components/Display.js";
 
@@ -13,7 +10,6 @@ import { updateScore_postAction } from "../redux/actions/updateScore_postAction.
 
 // import { BrowserRouter, Route, Link, Switch, Redirect, useHistory, HashRouter } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-
 import { getStatsQuery } from "../graphql/queries.js";
 import { updateStats } from "../graphql/queries.js";
 
@@ -46,22 +42,15 @@ function Main({
   setDisplayToReset_true,
   setConstantTimerValue,
   // for Stats
-
   setCurrentStatsKey,
-  //
+
   disableFocusTextArea,
-  // fetching WikiApi
-
-  // imported actionCreator
-
   updateScore,
   setStats,
   authenticatedUserId,
   disablingButton,
-
   logOut,
   setLoginErrorMessage,
-
   loginError_true,
 }) {
   let history = useHistory();
@@ -120,7 +109,6 @@ function Main({
   }
 
   // display
-
   function toggleStats() {
     if (!isAuthenticated) {
       return;
@@ -312,7 +300,6 @@ function Main({
       }
 
       // resultsReset();
-
       // resetLiveResults();
     }
   }, [
