@@ -71,6 +71,11 @@ DONE 18. fill all useEffect deps DONE
 19. Deployment? 
 20. [optional] make 2 files out of schema? (resolvers &  ...)
 21. [optional] show authenticated user name(see jwt video)
+22. password retrieval system?
+23. redux -> importing acions instead of strings?
+24. merge Main & Display?
+25. delete unused components (2?)
+
 
 
 
