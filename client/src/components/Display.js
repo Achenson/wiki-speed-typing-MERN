@@ -2,17 +2,7 @@ import React from "react";
 import { useEffect, useCallback, useRef } from "react";
 import { connect } from "react-redux";
 
-import WikiController from "./WikiController.js";
-import Hints from "./Hints.js";
-import UpperUI from "./UpperUI.js";
-import WikiDisplay from "./WikiDisplay.js";
-import InputArea from "./InputArea.js";
-import Controls from "./Controls.js";
-import LowerUI from "./LowerUI.js";
-import Stats from "./Stats.js";
-import Results from "./Results.js";
-import AuthenticationUI from "./AuthenticationUI.js";
-
+import AllRenders from "./AllRenders.js";
 // const escapeStringRegexp = require("escape-string-regexp");
 
 function Display({
@@ -34,32 +24,22 @@ function Display({
   prevTextAreaValue,
   indexOfPartialTextArr,
   colorForEachLetter,
-  liveResults,
-  finalResults,
 
-  areStatsVisible,
-  areResultsVisible,
   focusElement,
   // toggleResults,
   toggleStats,
   isCounterRunning,
   isActive,
   disablingButton,
-  setNewRandomArticle_true,
-  wikiTitle,
+
   putFocusOnTextArea,
   setTimerOnSelect,
-  toggleActive,
   toggleHints,
-  areHintsVisible,
   focusTextArea,
-  timerValue,
   // for reseting auth
   notification_false,
   loginError_false,
   registerError_false,
-
-  isAuthenticated,
   // graphql mutation
   addScore,
   mainHistory,
@@ -236,82 +216,24 @@ function Display({
   }
 
   // for "..." displaying at the end of wiki-diplay
-  let ellipsis = "...";
+  // let ellipsis = "...";
   return (
-    <div className="outer-container">
-      <div className="main-square">
-        <AuthenticationUI
-          toggleStats={toggleStats}
-          // toggleResults={toggleResults}
-        />
-
-        <UpperUI
-          toggleHints={toggleHints}
-          areResultsVisible={areResultsVisible}
-          areHintsVisible={areHintsVisible}
-          timerValue={timerValue}
-          isActive={isActive}
-          liveResults={liveResults}
-        />
-
-        <Hints areHintsVisible={areHintsVisible} toggleStats={toggleStats} />
-        <WikiDisplay
-          indexOfPartialTextArr={indexOfPartialTextArr}
-          arrToRender={arrToRender}
-          arrOfPartialText={arrOfPartialText}
-          ellipsis={ellipsis}
-        />
-
-        <InputArea
-          setTextAreaValue={setTextAreaValue}
-          toggleActive={toggleActive}
-          focusTextArea={focusTextArea}
-          isActive={isActive}
-          areHintsVisible={areHintsVisible}
-          toggleHints={toggleHints}
-          textAreaValue={textAreaValue}
-        />
-
-        <Controls
-          toggleActive={toggleActive}
-          isActive={isActive}
-          setTimerOnSelect={setTimerOnSelect}
-          isDisabled={isDisabled}
-          putFocusOnTextArea={putFocusOnTextArea}
-        />
-
-        <WikiController
-          wikiTitle={wikiTitle}
-          setNewRandomArticle_true={setNewRandomArticle_true}
-          disablingButton={disablingButton}
-          isActive={isActive}
-          isCounterRunning={isCounterRunning}
-        />
-
-        <LowerUI
-          // toggleResults={toggleResults}
-          toggleStats={toggleStats}
-          areResultsVisible={areResultsVisible}
-          focusElement={focusElement}
-          areStatsVisible={areStatsVisible}
-          isActive={isActive}
-          setTimerOnSelect={setTimerOnSelect}
-        />
-        {isAuthenticated ? (
-          <Stats
-            areStatsVisible={areStatsVisible}
-            addScore={addScore}
-            mainHistory={mainHistory}
-            setTimerOnSelect={setTimerOnSelect}
-          />
-        ) : null}
-      </div>
-
-      <Results
-        areResultsVisible={areResultsVisible}
-        finalResults={finalResults}
-      />
-    </div>
+    <AllRenders
+      mainHistory={mainHistory}
+      arrToRender={arrToRender}
+      arrOfPartialText={arrOfPartialText}
+      addScore={addScore}
+      setTextAreaValue={setTextAreaValue}
+      focusElement={focusElement}
+      toggleStats={toggleStats}
+      disablingButton={disablingButton}
+      putFocusOnTextArea={putFocusOnTextArea}
+      toggleHints={toggleHints}
+      focusTextArea={focusTextArea}
+      setTimerOnSelect={setTimerOnSelect}
+      isDisabled={isDisabled}
+      
+    />
   );
 }
 
@@ -347,7 +269,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setDisplayToReset_false: () => dispatch({ type: "DISPLAY_TO_RESET_FALSE" }),
-    toggleActive: () => dispatch({ type: "TOGGLE_ACTIVE" }),
     toggleAreResultsVisible: () => dispatch({ type: "RESULTS_VISIBILITY" }),
     // dispatching plain actions
     resultsCorrect: () => dispatch({ type: "RESULTS_CORRECT" }),
@@ -368,9 +289,6 @@ const mapDispatchToProps = (dispatch) => {
     registerError_false: () => dispatch({ type: "REGISTER_ERROR_FALSE" }),
     // fetch & wikiController
     setNewRandomArticle_false: () => dispatch({ type: "RANDOM_ARTICLE_FALSE" }),
-    // wikiController from Display
-    setNewRandomArticle_true: () => dispatch({ type: "RANDOM_ARTICLE_TRUE" }),
-    // for App
   };
 };
 

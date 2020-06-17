@@ -79,7 +79,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     disableFocusTextArea: () => dispatch({ type: "DISABLE_FOCUS_TEXT_AREA" }),
     setToReset_true: () => dispatch({ type: "TO_RESET_TRUE" }),
-    setWikiButtonClickable_false: () => dispatch({type: "WIKI_BTN_CLICKABLE_FALSE"})
+    setWikiButtonClickable_false: () => dispatch({type: "WIKI_BTN_CLICKABLE_FALSE"}),
+    setNewRandomArticle_true: () => dispatch({ type: "RANDOM_ARTICLE_TRUE" }),
+
+
   };
 };
 

@@ -76,7 +76,7 @@ DONE 18. fill all useEffect deps DONE
 XXX 24. merge Main & Display? XXX 
 25. delete unused components (2?)
 DONE 26. Clean props in Main & Display DONE
-27. 2 components out of Display?
+DONE 27. 2 components out of Display? DONE AllRenders added
 28. helmet, securtiy
 29. email or username, login consistency
 
