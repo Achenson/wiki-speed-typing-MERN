@@ -3,14 +3,11 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import SingleStat from "./SingleStat";
 
-
 // connecting graphql to component
 import { useQuery } from "@apollo/react-hooks";
 
-import { getStatsQuery} from "../graphql/queries.js";
+import { getStatsQuery } from "../graphql/queries.js";
 import { deleteScore_postAction } from "../redux/actions/deleteScore_postAction.js";
-
-
 
 function Stats({
   areStatsVisible,
@@ -34,7 +31,11 @@ function Stats({
   setLoginErrorMessage,
   loginError_true,
   mainHistory,
-  deleteScore
+  deleteScore,
+  setConstantTimerValue,
+  setTimerOnSelect,
+  constantTimerValue_basedOnStats,
+  setConstantTimerValue_basedOnStats,
 }) {
   // let history = useHistory();
 
@@ -72,8 +73,6 @@ function Stats({
           <span
             className="delete-score-confirm"
             onClick={() => {
-
-              
               // let statsObj = {
               //   five_s: stats["five_s"],
               //   thirty_s: stats["thirty_s"],
@@ -118,10 +117,9 @@ function Stats({
               //     logOut();
               //   }
 
-
               // });
 
-              deleteScore(addScore, mainHistory)
+              deleteScore(addScore, mainHistory);
 
               confirmDeleteVisibility_false();
             }}
@@ -140,32 +138,34 @@ function Stats({
     }
   }
 
-  // inverted version of  changeCurrentStatsKey from resultsAndTimerReducer
+  // same as in  resultsAndTimerReducer
+
+
   function changeCurrentStatsKey(payload) {
     switch (payload) {
-      case "five_s":
-        return "5";
+      case 5:
+        return "five_s";
       // setCurrentStatsArr(five_s);
       // break;
-      case "thirty_s":
+      case 30:
         // setCurrentStatsArr(thirty_s);
-        return "30";
+        return "thirty_s";
       // break;
-      case "one_min":
+      case 60:
         // setCurrentStatsArr(one_min);
-        return "60";
+        return "one_min";
       // break;
-      case "two_min":
+      case 120:
         // setCurrentStatsArr(two_min);
-        return "120";
+        return "two_min";
       // break;
-      case "five_min":
-        return "300";
+      case 300:
+        return "five_min";
       // setCurrentStatsArr(five_min);
       // break;
 
       default:
-        return "60";
+        return "one_min";
     }
     // setCurrentStatsArr(e.target.value)
   }
@@ -208,24 +208,13 @@ function Stats({
 
   if (loading) return <h5>connecting to database...</h5>;
   if (error) {
-    /*  logOut();
-    loginError_true();
-    setLoginErrorMessage("database connection error");
-    history.replace("/login");
-
-    return null; */
+  
     return <h5>database connection error </h5>;
   }
 
   // const { score } = data;
 
   if (!stats) {
-    /*    setStats( { five_s: makeDefaultStats(1),
-    thirty_s: makeDefaultStats(2),
-    one_min: makeDefaultStats(3),
-    two_min: makeDefaultStats(4),
-    five_min: makeDefaultStats(5),
-  }) */
     return null;
   }
 
@@ -261,8 +250,10 @@ function Stats({
             <p>timer length:&nbsp;</p>
             <select
               className="control-item timer-select top-score-timer-select"
-              onChange={(e) => setCurrentStatsKey(e.target.value)}
-              value={changeCurrentStatsKey(currentStatsKey)}
+              onChange={(e) => {
+                setConstantTimerValue_basedOnStats(parseInt(e.target.value));
+              }}
+              value={constantTimerValue_basedOnStats.toString()}
             >
               <option value="5">00:05</option>
               <option value="30">00:30</option>
@@ -275,14 +266,15 @@ function Stats({
 
         <ul className="score-list container">
           {/* !! [] not . */}
-          {/* {currentStats[currentStatsKey].map((el, i) => { */}
-          {stats[currentStatsKey].map((el, i) => {
-            if (i > 9) {
-              return null;
-            } else {
-              return <SingleStat speed={el[0]} accuracy={el[1]} key={i} />;
+          {stats[changeCurrentStatsKey(constantTimerValue_basedOnStats)].map(
+            (el, i) => {
+              if (i > 9) {
+                return null;
+              } else {
+                return <SingleStat speed={el[0]} accuracy={el[1]} key={i} />;
+              }
             }
-          })}
+          )}
         </ul>
 
         {renderDeletion()}
@@ -300,6 +292,8 @@ const mapStateToProps = (state) => {
     areStatsVisible: state.visibilityState.areStatsVisible,
     stats: state.resultsAndTimerState.stats,
     authenticatedUserId: state.authState.authenticatedUserId,
+    constantTimerValue_basedOnStats:
+      state.resultsAndTimerState.constantTimerValue_basedOnStats,
   };
 };
 
@@ -321,8 +315,11 @@ const mapDispatchToProps = (dispatch) => {
     loginError_true: () => dispatch({ type: "LOGIN_ERROR_TRUE" }),
     deleteScore: (addScore, history) =>
       dispatch(deleteScore_postAction(addScore, history)),
+    setConstantTimerValue: (data) =>
+      dispatch({ type: "CONSTANT_TIMER_VALUE", payload: data }),
+    setConstantTimerValue_basedOnStats: (data) =>
+      dispatch({ type: "SET_CONST_TIMER_BASED_ON_STATS", payload: data }),
   };
-  
 };
 
 export default connect(

@@ -41,9 +41,7 @@ function Main({
   setToReset_false,
   setDisplayToReset_true,
   setConstantTimerValue,
-  // for Stats
-  setCurrentStatsKey,
-
+ 
   disableFocusTextArea,
   updateScore,
   setStats,
@@ -215,11 +213,9 @@ function Main({
   ]);
 
   // for time select
-  function setTimerOnSelect(e) {
-    setTimerValue(e.target.value);
-    setConstantTimerValue(e.target.value);
-    // for Stats
-    setCurrentStatsKey(e.target.value);
+  function setTimerOnSelect(value) {
+    setTimerValue(parseInt(value));
+    setConstantTimerValue(parseInt(value));
   }
 
   //  for key press

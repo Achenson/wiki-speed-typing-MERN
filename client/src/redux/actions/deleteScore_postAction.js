@@ -8,7 +8,7 @@ export const deleteScore_postAction = (addScore, history) => (dispatch) => {
   let stats = store.getState().resultsAndTimerState.stats;
 
   let statsObj = {
-    currentStatsKey: stats.currentStatsKey,
+    // currentStatsKey: stats.currentStatsKey,
     five_s: stats["five_s"],
     thirty_s: stats["thirty_s"],
     one_min: stats["one_min"],
@@ -16,7 +16,11 @@ export const deleteScore_postAction = (addScore, history) => (dispatch) => {
     five_min: stats["five_min"],
   };
 
-  statsObj[stats.currentStatsKey] = [
+  statsObj[
+      changeCurrentStatsKey(
+        store.getState().resultsAndTimerState.constantTimerValue_basedOnStats
+      )
+  ] = [
     [0, 0],
     [0, 0],
     [0, 0],
@@ -28,7 +32,6 @@ export const deleteScore_postAction = (addScore, history) => (dispatch) => {
     [0, 0],
     [0, 0],
   ];
-
 
   dispatch({ type: "UPDATE_STATS", payload: statsObj });
 
@@ -90,7 +93,20 @@ export const deleteScore_postAction = (addScore, history) => (dispatch) => {
     }
   }
 
-
-
-  
+  function changeCurrentStatsKey(payload) {
+    switch (payload) {
+      case 5:
+        return "five_s";
+      case 30:
+        return "thirty_s";
+      case 60:
+        return "one_min";
+      case 120:
+        return "two_min";
+      case 300:
+        return "five_min";
+      default:
+        return "one_min";
+    }
+  }
 };

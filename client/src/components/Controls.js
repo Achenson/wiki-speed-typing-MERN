@@ -15,7 +15,12 @@ function Controls(props) {
         </button>
         <select
           className="control-item timer-select"
-          onChange={props.setTimerOnSelect}
+          onChange={(e) => {
+            props.setTimerOnSelect(e.target.value)
+            props.setConstantTimerValue_basedOnStats(parseInt(e.target.value))
+
+            
+            }}
           ref={props.isDisabled}
           // defaultValue="60"
           value={props.constantTimerValue.toString()}
@@ -54,6 +59,7 @@ const mapStateToProps = state => {
  const mapDispatchToProps = dispatch => {
   return {
     setToReset_true: () => dispatch({ type: "TO_RESET_TRUE" }),
+    setConstantTimerValue_basedOnStats: (data) => dispatch({type: "SET_CONST_TIMER_BASED_ON_STATS", payload: data})
   };
 }; 
 

@@ -23,18 +23,15 @@ const initialState = {
 
   // for Stats
   stats: {
-    currentStatsKey: "one_min",
-
+    // currentStatsKey: "one_min",
     five_s: makeDefaultStats(1),
-
     thirty_s: makeDefaultStats(2),
-
     one_min: makeDefaultStats(3),
-
     two_min: makeDefaultStats(4),
-
     five_min: makeDefaultStats(5),
   },
+
+  constantTimerValue_basedOnStats: 60,
 
   counter: {
     timerValue: 60,
@@ -161,7 +158,6 @@ function resultsAndTimerReducer(state = initialState, action) {
     // for Stats
 
     case "UPDATE_STATS":
-  
       return {
         ...state,
         stats: {
@@ -177,9 +173,15 @@ function resultsAndTimerReducer(state = initialState, action) {
       return {
         ...state,
         stats: {
-          currentStatsKey: state.stats.currentStatsKey,
+          // currentStatsKey: state.stats.currentStatsKey,
           ...action.payload,
         },
+      };
+
+    case "SET_CONST_TIMER_BASED_ON_STATS":
+      return {
+        ...state,
+        constantTimerValue_basedOnStats: action.payload,
       };
 
     // for Timer
@@ -252,44 +254,6 @@ function resultsAndTimerReducer(state = initialState, action) {
         },
       };
 
-    case "SET_CURRENT_STATS":
-      return {
-        ...state,
-        stats: {
-          ...state.stats,
-          currentStatsKey: changeCurrentStatsKey(action.payload),
-        },
-      };
-
-      function changeCurrentStatsKey(payload) {
-        switch (payload) {
-          case "5":
-            return "five_s";
-          // setCurrentStatsArr(five_s);
-          // break;
-          case "30":
-            // setCurrentStatsArr(thirty_s);
-            return "thirty_s";
-          // break;
-          case "60":
-            // setCurrentStatsArr(one_min);
-            return "one_min";
-          // break;
-          case "120":
-            // setCurrentStatsArr(two_min);
-            return "two_min";
-          // break;
-          case "300":
-            return "five_min";
-          // setCurrentStatsArr(five_min);
-          // break;
-
-          default:
-            return "one_min";
-        }
-        // setCurrentStatsArr(e.target.value)
-      }
-
     default:
       return state;
   }
@@ -335,7 +299,6 @@ function resultsAndTimerReducer(state = initialState, action) {
       }
     }
   }
-
 }
 
 export default resultsAndTimerReducer;

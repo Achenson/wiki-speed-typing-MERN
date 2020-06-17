@@ -295,12 +295,14 @@ function Display({
           focusElement={focusElement}
           areStatsVisible={areStatsVisible}
           isActive={isActive}
+          setTimerOnSelect={setTimerOnSelect}
         />
         {isAuthenticated ? (
           <Stats
             areStatsVisible={areStatsVisible}
             addScore={addScore}
             mainHistory={mainHistory}
+            setTimerOnSelect={setTimerOnSelect}
           />
         ) : null}
       </div>

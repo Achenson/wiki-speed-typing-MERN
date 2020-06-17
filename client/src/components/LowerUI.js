@@ -18,6 +18,9 @@ function LowerUI({
   notification_true,
   toggleActive,
   isActive,
+  setTimerOnSelect,
+  constantTimerValue_basedOnStats,
+  
 }) {
   let history = useHistory();
 
@@ -101,6 +104,13 @@ function LowerUI({
           icon={faChartBar}
           size="2x"
           onClick={() => {
+
+            if(isAuthenticated && areStatsVisible) {
+              
+              setTimerOnSelect(constantTimerValue_basedOnStats)
+
+            }
+
             if (isAuthenticated) {
               toggleStats();
             } else {
@@ -110,6 +120,9 @@ function LowerUI({
               notification_true();
               history.push("/login");
             }
+
+
+
           }}
         />
       </div>
@@ -120,6 +133,7 @@ function LowerUI({
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.authState.isAuthenticated,
+    constantTimerValue_basedOnStats: state.resultsAndTimerState.constantTimerValue_basedOnStats
     // notificationToggle: () => dispatch({type: "NOTIFICATION_TOGGLE"})
   };
 };
@@ -129,6 +143,9 @@ const mapDispatchToProps = (dispatch) => {
     notification_true: () => dispatch({ type: "NOTIFICATION_TRUE" }),
     toggleActive: () => dispatch({ type: "TOGGLE_ACTIVE" }),
     toggleAreResultsVisible: () => dispatch({ type: "RESULTS_VISIBILITY" }),
+    
+
+    
   };
 };
 
