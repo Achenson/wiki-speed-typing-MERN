@@ -29,7 +29,7 @@ export const updateStats = gql`
 `;
 
 export const addNewUserMutation = gql`
-  mutation AddNewUser($username: String, $email: String!, $password: String!) {
+  mutation AddNewUser($username: String!, $email: String!, $password: String!) {
     addUser(name: $username, email: $email, password: $password) {
       id
       name
@@ -61,8 +61,8 @@ export const getUserByEmailQuery = gql`
 `;
 
 export const loginMutation = gql`
-  mutation Login ($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
+  mutation Login ($email_or_name: String!, $password: String!) {
+    login(email_or_name: $email_or_name, password: $password) {
       userId
       token
       tokenExpiration

@@ -87,11 +87,11 @@ function Login({
 
   // let [error, setError] = useState(null);
 
-  let [email, setEmail] = useState("");
+  let [email_or_name, setEmail_or_name] = useState("");
   let [password, setPassword] = useState("");
 
   function loginValidation() {
-    if (email === "" || password === "") {
+    if (email_or_name=== "" || password === "") {
       // setError("Email or password not provided");
       setLoginErrorMessage("Email or password not provided");
       loginError_true();
@@ -100,7 +100,7 @@ function Login({
 
     loginMut({
       variables: {
-        email: email,
+        email_or_name: email_or_name,
         password: password,
       },
     }).then((res, err) => {
@@ -168,11 +168,11 @@ function Login({
                 Email address / username
                 <input
                   className="input"
-                  type="email"
+                  // type="email"
                   onChange={(e) => {
-                    setEmail(e.target.value);
+                    setEmail_or_name(e.target.value);
                   }}
-                  value={email}
+                  value={email_or_name}
                 />
               </label>
               <br />

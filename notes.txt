@@ -72,14 +72,15 @@ DONE 18. fill all useEffect deps DONE
 20. [optional] make 2 files out of schema? (resolvers &  ...)
 21. [optional] show authenticated user name(see jwt video)
 22. password retrieval system?
+22. email confirmation system?
 23. redux -> importing acions instead of strings?
 XXX 24. merge Main & Display? XXX 
 25. delete unused components (2?)
 DONE 26. Clean props in Main & Display DONE
 DONE 27. 2 components out of Display? DONE AllRenders added
 28. helmet, securtiy
-29. email or username, login consistency
-
+DONE 29. email or username, login consistency (+ proper checking in addUser in schema) DONE
+30. concurrent start in dev mode
 
 
 

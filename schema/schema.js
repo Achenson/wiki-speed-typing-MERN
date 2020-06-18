@@ -114,34 +114,44 @@ const Mutation = new GraphQLObjectType({
     addUser: {
       type: UserType,
       args: {
-        name: { type: GraphQLString },
+        name: { type: new GraphQLNonNull(GraphQLString) },
         email: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
       },
       resolve(parent, args) {
-        /*  try {
-          const existingUser = await User.findOne({ email: args.email });
-          if (existingUser) {
-            throw new Error('User exists already.');
-          }
-        }
+        return Promise.all([
+          new Promise((resolve, reject) => {
+            User.findOne({ name: args.name }, (err, res) => {
+              if (err) console.log(err);
 
-          const hashedPassword = await bcrypt.hash(args.userInput.password, 12); */
+              if (res != null) {
+                console.log("name is already present in DB");
+                resolve(false);
+              } else {
+                resolve(true);
+              }
+            });
+          }),
 
-        /*    let user = new User({
-          name: args.name,
-          email: args.email,
-          password: hashedPassword,
-        });
- */
-        let myPromise = new Promise((resolve, reject) => {
-          User.findOne({ email: args.email }, (err, res) => {
-            if (err) console.log(err);
+          new Promise((resolve, reject) => {
+            User.findOne({ email: args.email }, (err, res) => {
+              if (err) console.log(err);
 
-            console.log("res");
-            console.log(res);
-            // if user  with this email is not found
-            if (res === null) {
+              if (res != null) {
+                console.log("email is already present in DB");
+                resolve(false);
+              } else {
+                resolve(true);
+              }
+            });
+          }),
+        ]).then((data) => {
+          console.log(data);
+
+          return new Promise((resolve, reject) => {
+            if (data[0] && data[1]) {
+              // if user  with this email is not found
+
               bcrypt.hash(args.password, 12).then((hashedPassword) => {
                 let user = new User({
                   name: args.name,
@@ -189,7 +199,45 @@ const Mutation = new GraphQLObjectType({
           });
         });
 
-        return myPromise;
+        /*   BEFORE (only email check):
+        let myPromise = new Promise((resolve, reject) => {
+          User.findOne({ email: args.email }, (err, res) => {
+            if (err) console.log(err);
+            if (res === null) {
+              bcrypt.hash(args.password, 12).then((hashedPassword) => {
+                let user = new User({
+                  name: args.name,
+                  email: args.email,
+                  password: hashedPassword,
+                  tokenVersion: 0,
+                });
+
+                return user.save((err, product) => {
+                  if (err) console.log(err);
+
+                  let arrOfZeros = [
+                    [0, 0],[0, 0],[0, 0],[0, 0],[0, 0],
+                    [0, 0],[0, 0],[0, 0],[0, 0],[0, 0],
+                  ];
+
+                  let newScore = new Score({
+                    userId: product.id, five_s: arrOfZeros,
+                    thirty_s: arrOfZeros, one_min: arrOfZeros,
+                    two_min: arrOfZeros, five_min: arrOfZeros,
+                  });
+
+                  newScore.save();
+                  resolve(product);
+                });
+              });
+            } else {
+              console.log("email already present in DB");
+              resolve(null);
+            }
+          });
+        });  
+        return myPromise
+        */
       },
     },
 
@@ -257,12 +305,21 @@ const Mutation = new GraphQLObjectType({
       // type: UserType,
       type: AuthData,
       args: {
-        email: { type: new GraphQLNonNull(GraphQLString) },
+        email_or_name: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
       },
 
-      async resolve(parent, { email, password }, { req, res }) {
-        const user = await User.findOne({ email: email });
+      async resolve(parent, { email_or_name, password }, { req, res }) {
+        let credential;
+
+        // checking is user entered email or name
+        if (email_or_name.indexOf("@") === -1) {
+          credential = "name";
+        } else {
+          credential = "email";
+        }
+
+        const user = await User.findOne({ [credential]: email_or_name });
         if (!user) {
           // throw new Error("User does not exist!");
           return {

@@ -9,12 +9,9 @@ import { useHistory } from "react-router-dom";
 
 import AuthNotification from "./AuthNotification";
 
-import {useMutation } from "@apollo/react-hooks";
-
-
+import { useMutation } from "@apollo/react-hooks";
 
 import { addNewUserMutation } from "../graphql/queries.js";
-
 
 function Register({
   showRegisterError,
@@ -22,10 +19,9 @@ function Register({
   registerError_false,
   notification_false,
   loginError_false,
-  
 }) {
   const [addUser] = useMutation(addNewUserMutation);
-  
+
   // reseting authState for Login, so auth notifications/warnings disappear
   // when going back to Login
   useEffect(() => {
@@ -45,11 +41,15 @@ function Register({
   let [password, setPassword] = useState("");
   let [confirmation, setConfirmation] = useState("");
 
-  
-
   function registerValidation() {
     if (username === "") {
       setErrorNotification("Invalid username");
+      registerError_true();
+      return;
+    }
+
+    if (username.indexOf("@") > -1) {
+      setErrorNotification("Invalid username - @ symbol is not allowed");
       registerError_true();
       return;
     }
@@ -72,7 +72,6 @@ function Register({
       return;
     }
 
-
     addUser({
       variables: {
         username: username,
@@ -89,9 +88,11 @@ function Register({
       if (res.data.addUser) {
         registerError_false();
         history.push("/login");
+        return;
       } else {
-        setErrorNotification("User with provided email is already registered");
+        setErrorNotification("Username or email is already in use");
         registerError_true();
+        return;
       }
     });
   }
