@@ -14,8 +14,6 @@ const createAccessToken = require("./middleware/accessToken");
 const createRefreshToken = require("./middleware/refreshToken");
 const sendRefreshToken = require("./middleware/sendRefreshToken.js");
 
-
-
 // const bodyParser = require("body-parser");
 
 // bcrypt?
@@ -54,7 +52,10 @@ app.use(isAuth);
   })
 );
  */
-app.use(cookieParser());
+
+// app.use(cookieParser());
+//  parsing cookie only in the context of that particular route
+app.use("/refresh_token", cookieParser());
 
 app.post("/refresh_token", async (req, res) => {
   // 1. testing sending test cookie in request using postman
