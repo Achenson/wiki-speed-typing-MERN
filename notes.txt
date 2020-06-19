@@ -82,7 +82,7 @@ DONE 27. 2 components out of Display? DONE AllRenders added
 DONE 29. email or username, login consistency (+ proper checking in addUser in schema) DONE
 30. concurrent start in dev mode
 DONE 31. check JWT video comments -> changes? DONE (cookieParser only in one route, proper cookie exp date)
-32. clean passed props in components
+DONE 32. clean passed props in components DONE AllRenders cleaned, more component connectet do store
 33. more time options
 34. function imports consistency
 
