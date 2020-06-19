@@ -37,7 +37,7 @@ XX 7. noCache in getStatsQuerry in Stats.js -> only temp solution?
 https://github.com/apollographql/react-apollo/issues/2202 XX noCache deleted
 8. revokingRefreshTokens -> inc tokenVersion about 3 times instead of 1??
 DONE 9. revoikingRefreshTokens -> no refreshing, but what about login? DONE
-10. same-site cookies? !! (frontend console)
+DONE 10. same-site cookies? !! (frontend console) DONE
 DONE 11. error when the timer reaches 0 and the user is not logged in DONE
 
 
@@ -81,6 +81,9 @@ DONE 27. 2 components out of Display? DONE AllRenders added
 28. helmet, securtiy
 DONE 29. email or username, login consistency (+ proper checking in addUser in schema) DONE
 30. concurrent start in dev mode
+31. check JWT video comments -> changes?
+32. clean passed props in components
+33. more time options
 
 
 
