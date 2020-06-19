@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 // import { useState, useEffect} from "react";
 
 function UpperUI(props) {
@@ -78,4 +79,20 @@ function UpperUI(props) {
 }
 
 /*  */
-export default UpperUI;
+
+
+const mapStateToProps = (state) => {
+  return {
+    areStatsVisible: state.visibilityState.areStatsVisible,
+    isActive: state.resultsAndTimerState.counter.isActive,
+    areResultsVisible: state.visibilityState.areResultsVisible,
+    timerValue: state.resultsAndTimerState.counter.timerValue,
+    liveResults: state.resultsAndTimerState.liveResults,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+  // Your component will receive dispatch by default, i.e., when you do not supply a second parameter to connect():
+)(UpperUI);

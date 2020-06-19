@@ -133,7 +133,10 @@ function LowerUI({
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.authState.isAuthenticated,
-    constantTimerValue_basedOnStats: state.resultsAndTimerState.constantTimerValue_basedOnStats
+    constantTimerValue_basedOnStats: state.resultsAndTimerState.constantTimerValue_basedOnStats,
+    isActive: state.resultsAndTimerState.counter.isActive,
+    areResultsVisible: state.visibilityState.areResultsVisible,
+    areStatsVisible: state.visibilityState.areStatsVisible,
     // notificationToggle: () => dispatch({type: "NOTIFICATION_TOGGLE"})
   };
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 //import { useState, useEffect, useRef } from "react";
 
 function Results(props) {
@@ -81,4 +82,14 @@ function Results(props) {
   );
 }
 
-export default Results;
+const mapStateToProps = (state) => {
+  return {
+    finalResults: state.resultsAndTimerState.finalResults,
+    areResultsVisible: state.visibilityState.areResultsVisible,
+  };
+};
+
+export default connect(
+  mapStateToProps
+  // Your component will receive dispatch by default, i.e., when you do not supply a second parameter to connect():
+)(Results); // (3)

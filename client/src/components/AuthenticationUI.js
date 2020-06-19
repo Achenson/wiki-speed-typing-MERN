@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { logoutMutation } from "../graphql/queries.js";
-import {useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 
 // import { useHistory } from "react-router-dom";
 
@@ -21,16 +21,14 @@ function AuthenticationUI({
   toggleAreResultsVisible,
   areResultsVisible,
   resetFinalResults,
-  setDisplayToReset_true
+  setDisplayToReset_true,
 
   // from
 }) {
   // let history = useHistory();
   // let isAuthenticated = false;
 
-
-
-  const [logoutMut, {client}] = useMutation(logoutMutation);
+  const [logoutMut, { client }] = useMutation(logoutMutation);
 
   function authLinks() {
     if (!isAuthenticated) {
@@ -80,11 +78,6 @@ function AuthenticationUI({
               logoutMut();
               client.resetStore();
 
-
-
-
-
-
               if (areStatsVisible) {
                 toggleStats();
               }
@@ -118,7 +111,6 @@ const mapDispatchToProps = (dispatch) => {
     resetFinalResults: () => dispatch({ type: "RESET_FINAL_RESULTS" }),
     toggleAreResultsVisible: () => dispatch({ type: "RESULTS_VISIBILITY" }),
     setDisplayToReset_true: () => dispatch({ type: "DISPLAY_TO_RESET_TRUE" }),
-
   };
 };
 

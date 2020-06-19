@@ -52,14 +52,17 @@ function Controls(props) {
 const mapStateToProps = state => {
   return {
   
-    constantTimerValue: state.resultsAndTimerState.counter.constantTimerValue
+    constantTimerValue: state.resultsAndTimerState.counter.constantTimerValue,
+    isActive: state.resultsAndTimerState.counter.isActive,
+
   };
 };
 
  const mapDispatchToProps = dispatch => {
   return {
     setToReset_true: () => dispatch({ type: "TO_RESET_TRUE" }),
-    setConstantTimerValue_basedOnStats: (data) => dispatch({type: "SET_CONST_TIMER_BASED_ON_STATS", payload: data})
+    setConstantTimerValue_basedOnStats: (data) => dispatch({type: "SET_CONST_TIMER_BASED_ON_STATS", payload: data}),
+    toggleActive: () => dispatch({ type: "TOGGLE_ACTIVE" }),
   };
 }; 
 

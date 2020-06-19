@@ -6,21 +6,17 @@ import { connect } from "react-redux";
 function WikiController(props) {
   // console.log(props.wikiTitle);
 
-  const [wikiButtonCSSClass, setWikiButtonClass] =useState("btn btn-control btn-wiki")
+  const [wikiButtonCSSClass, setWikiButtonClass] = useState(
+    "btn btn-control btn-wiki"
+  );
 
-  useEffect( () => {
-
+  useEffect(() => {
     if (props.isWikiButtonClickable) {
-      setWikiButtonClass("btn btn-control btn-wiki")
+      setWikiButtonClass("btn btn-control btn-wiki");
     } else {
-      setWikiButtonClass("btn btn-wiki-not-active")
+      setWikiButtonClass("btn btn-wiki-not-active");
     }
-
-
-    
-  }, [props.isWikiButtonClickable])
-
-
+  }, [props.isWikiButtonClickable]);
 
   return (
     <div className="wiki-controler container">
@@ -43,7 +39,7 @@ function WikiController(props) {
       </div>
       <button
         // className=`btn btn-control btn-wiki`
-        className = {wikiButtonCSSClass}
+        className={wikiButtonCSSClass}
         onClick={() => {
           console.log("button clicked");
           if (!props.isCounterRunning) {
@@ -70,8 +66,10 @@ function WikiController(props) {
 const mapStateToProps = (state) => {
   return {
     isWikiLinkClickable: state.visibilityState.isWikiLinkClickable,
-    isWikiButtonClickable: state.visibilityState.isWikiButtonClickable
-
+    isWikiButtonClickable: state.visibilityState.isWikiButtonClickable,
+    isActive: state.resultsAndTimerState.counter.isActive,
+    wikiTitle: state.displayState.textDisplay.wikiTitle,
+    isCounterRunning: state.resultsAndTimerState.counter.isCounterRunning,
   };
 };
 
@@ -79,10 +77,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     disableFocusTextArea: () => dispatch({ type: "DISABLE_FOCUS_TEXT_AREA" }),
     setToReset_true: () => dispatch({ type: "TO_RESET_TRUE" }),
-    setWikiButtonClickable_false: () => dispatch({type: "WIKI_BTN_CLICKABLE_FALSE"}),
+    setWikiButtonClickable_false: () =>
+      dispatch({ type: "WIKI_BTN_CLICKABLE_FALSE" }),
     setNewRandomArticle_true: () => dispatch({ type: "RANDOM_ARTICLE_TRUE" }),
-
-
   };
 };
 

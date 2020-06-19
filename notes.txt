@@ -84,6 +84,7 @@ DONE 29. email or username, login consistency (+ proper checking in addUser in s
 DONE 31. check JWT video comments -> changes? DONE (cookieParser only in one route, proper cookie exp date)
 32. clean passed props in components
 33. more time options
+34. function imports consistency
 
 
 

@@ -294,6 +294,7 @@ const mapStateToProps = (state) => {
     authenticatedUserId: state.authState.authenticatedUserId,
     constantTimerValue_basedOnStats:
       state.resultsAndTimerState.constantTimerValue_basedOnStats,
+    
   };
 };
 

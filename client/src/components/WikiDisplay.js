@@ -1,6 +1,7 @@
 import React from "react";
 //import { useState, useEffect, useRef } from "react";
 import SingleLetter from "./SingleLetter.js";
+import { connect } from "react-redux";
 
 function WikiDisplay(props) {
   return (
@@ -20,4 +21,13 @@ function WikiDisplay(props) {
   );
 }
 
-export default WikiDisplay;
+const mapStateToProps = (state) => {
+  return {
+    indexOfPartialTextArr: state.displayState.wikiDisplay.indexOfPartialTextArr
+  };
+};
+
+export default connect(
+  mapStateToProps
+  // Your component will receive dispatch by default, i.e., when you do not supply a second parameter to connect():
+)(WikiDisplay); // (3)
