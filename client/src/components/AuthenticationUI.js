@@ -62,7 +62,7 @@ function AuthenticationUI({
       return (
         <div className="auth-div">
           <span className="main-link" onClick={toggleStats}>
-            Stats
+            Profile
           </span>
           <span
             className="main-link"

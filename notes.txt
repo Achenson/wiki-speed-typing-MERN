@@ -39,6 +39,7 @@ https://github.com/apollographql/react-apollo/issues/2202 XX noCache deleted
 DONE 9. revoikingRefreshTokens -> no refreshing, but what about login? DONE
 DONE 10. same-site cookies? !! (frontend console) DONE
 DONE 11. error when the timer reaches 0 and the user is not logged in DONE
+12. app starting - wrong route?
 
 
 to do:
@@ -85,6 +86,9 @@ DONE 31. check JWT video comments -> changes? DONE (cookieParser only in one rou
 DONE 32. clean passed props in components DONE AllRenders cleaned, more component connectet do store
 33. more time options
 34. function imports consistency
+35. profile insead of stats in authenticationUI
+36. change password
+37. delete account
 
 
 

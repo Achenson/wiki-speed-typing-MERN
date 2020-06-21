@@ -6,6 +6,7 @@ const initialState = {
   isWikiLinkClickable: false,
   isWikiButtonClickable: true,
   isMainRendered: false,
+  isProfileVisible: false,
 };
 
 function visibilityReducer(state = initialState, action) {
@@ -31,6 +32,12 @@ function visibilityReducer(state = initialState, action) {
       return {
         ...state,
         areStatsVisible: !areStatsVisible,
+      };
+
+    case "PROFILE_VISIBILITY":
+      return {
+        ...state,
+        // isProfileVisible: !isProfileVisible,
       };
 
     case "CONFIRM_DELETE_VISIBILITY_TRUE":
@@ -69,13 +76,11 @@ function visibilityReducer(state = initialState, action) {
         isWikiButtonClickable: false,
       };
 
-      case "MAIN_RENDERED_TRUE":
-        return {
-          ...state,
-          isMainRendered: true,
-        };
-
-
+    case "MAIN_RENDERED_TRUE":
+      return {
+        ...state,
+        isMainRendered: true,
+      };
 
     default:
       return state;

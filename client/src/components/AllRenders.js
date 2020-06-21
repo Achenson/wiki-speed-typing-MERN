@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import WikiController from "./WikiController.js";
 import Hints from "./Hints.js";
+import Profile from "./Hints.js";
 import UpperUI from "./UpperUI.js";
 import WikiDisplay from "./WikiDisplay.js";
 import InputArea from "./InputArea.js";
@@ -47,6 +48,7 @@ function AllRenders({
         <UpperUI toggleHints={toggleHints} />
 
         <Hints toggleStats={toggleStats} />
+        <Profile/>
 
         <WikiDisplay
           arrToRender={arrToRender}
