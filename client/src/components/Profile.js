@@ -1,7 +1,7 @@
 import React from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartBar } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faChartBar } from "@fortawesome/free-solid-svg-icons";
 //import { useState, useEffect, useRef } from "react";
 
 import { connect } from "react-redux";
@@ -17,21 +17,18 @@ let history = useHistory();
 
   return (
     <div
-      className="hints"
+      className="profile"
       style={{
         visibility: `${isProfileVisible ? "visible" : "hidden"}`,
       }}
     >
-      <div className="inner-hints container">
-        <p className="hints-title">User profile</p>
-        <ul>
-          <li>Stats</li>
-            <li>Change Password</li>
-            <li>Delete Account</li>
-
-          <li>
-            Register to access your top score &nbsp;
-            <FontAwesomeIcon
+      <div className="inner-profile">
+        <p style={{textAlign: "center", fontSize: "0.8em"}}>Logged in as</p>
+        <p className="profile-title">User profile</p>
+        <ul className="list-profile">
+        <li className="profile-score" >
+            Top score &nbsp;
+      {/*       <FontAwesomeIcon
               icon={faChartBar}
               size="1x"
               onClick={() => {
@@ -42,8 +39,12 @@ let history = useHistory();
                   history.push("/login");
                 }
               }}
-            />
+            /> */}
           </li>
+            <li className="profile-password" >Change Password</li>
+            <li className="profile-delete">Delete Account</li>
+
+      
         </ul>
       </div>
     </div>
