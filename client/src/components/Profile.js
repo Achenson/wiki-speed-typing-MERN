@@ -1,7 +1,7 @@
 import React from "react";
 
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faChartBar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChartBar } from "@fortawesome/free-solid-svg-icons";
 //import { useState, useEffect, useRef } from "react";
 
 import { connect } from "react-redux";

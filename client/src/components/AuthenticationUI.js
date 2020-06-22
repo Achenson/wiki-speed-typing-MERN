@@ -22,6 +22,7 @@ function AuthenticationUI({
   areResultsVisible,
   resetFinalResults,
   setDisplayToReset_true,
+  toggleProfile
 
   // from
 }) {
@@ -61,11 +62,13 @@ function AuthenticationUI({
     } else {
       return (
         <div className="auth-div">
-          <span className="main-link" onClick={toggleStats}>
+          <span className="main-link" onClick={toggleProfile}>
             Profile
           </span>
           <span
             className="main-link"
+
+
             onClick={() => {
               setToReset_true();
               setDisplayToReset_true();
@@ -111,6 +114,7 @@ const mapDispatchToProps = (dispatch) => {
     resetFinalResults: () => dispatch({ type: "RESET_FINAL_RESULTS" }),
     toggleAreResultsVisible: () => dispatch({ type: "RESULTS_VISIBILITY" }),
     setDisplayToReset_true: () => dispatch({ type: "DISPLAY_TO_RESET_TRUE" }),
+    toggleProfile: () => dispatch({type: "PROFILE_VISIBILITY"})
   };
 };
 

@@ -14,6 +14,7 @@ function visibilityReducer(state = initialState, action) {
     areHintsVisible,
     areResultsVisible,
     areStatsVisible,
+    isProfileVisible
     // isConfirmDeleteVisible,
   } = state;
 
@@ -37,7 +38,7 @@ function visibilityReducer(state = initialState, action) {
     case "PROFILE_VISIBILITY":
       return {
         ...state,
-        // isProfileVisible: !isProfileVisible,
+        isProfileVisible: !isProfileVisible,
       };
 
     case "CONFIRM_DELETE_VISIBILITY_TRUE":
