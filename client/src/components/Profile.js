@@ -16,6 +16,7 @@ function Profile({
   let history = useHistory();
 
   const [boxShadow, setBoxShadow] = useState("0px 1px 2px black");
+  // const [boxShadow, setBoxShadow] = useState("none");
 
   return (
     <div
@@ -31,12 +32,18 @@ function Profile({
           <li className="profile-score">
             Top score &nbsp;
           </li>
-          <li className="profile-password">Change Password</li>
+          <li className="profile-password"
+          onClick={() => {
+            history.push("/passchange")
+          }}
+          
+          >Change Password</li>
           <li
             style={{ boxShadow: `${boxShadow}` }}
             className="profile-delete"
             onMouseOver={() => {
               setBoxShadow("none");
+              // setBoxShadow("0px 1px 1px black");
             }}
             onMouseOut={() => {
               setBoxShadow("0px 1px 2px black");

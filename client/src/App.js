@@ -10,6 +10,7 @@ import Main from "./components_links/Main.js";
 
 import Login from "./components_links/Login.js";
 import Register from "./components_links/Register.js";
+import PasswordChange from "./components_links/PasswordChange.js";
 import CustomRoute from "./components_links/CustomRoute.js";
 
 import Test from "./components/Test.js";
@@ -135,6 +136,13 @@ function App({
             path="/login"
             component={Login}
           />
+            <CustomRoute
+            path="/passchange"
+            component={PasswordChange}
+          />
+
+
+
           {/* testing isAuth, has to be clicked on Link to work */}
           <Route path="/test" component={Test} />
 
