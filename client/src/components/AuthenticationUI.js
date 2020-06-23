@@ -22,7 +22,9 @@ function AuthenticationUI({
   areResultsVisible,
   resetFinalResults,
   setDisplayToReset_true,
-  toggleProfile
+  toggleProfile,
+  toggleHints,
+  areHintsVisible,
 
   // from
 }) {
@@ -62,13 +64,20 @@ function AuthenticationUI({
     } else {
       return (
         <div className="auth-div">
-          <span className="main-link" onClick={toggleProfile}>
+          <span
+            className="main-link"
+            onClick={() => {
+              if (areHintsVisible) {
+                toggleHints();
+              }
+
+              toggleProfile();
+            }}
+          >
             Profile
           </span>
           <span
             className="main-link"
-
-
             onClick={() => {
               setToReset_true();
               setDisplayToReset_true();
@@ -102,6 +111,7 @@ const mapStateToProps = (state) => {
     areStatsVisible: state.visibilityState.areStatsVisible,
     isActive: state.resultsAndTimerState.counter.isActive,
     areResultsVisible: state.visibilityState.areResultsVisible,
+    areHintsVisible: state.visibilityState.areHintsVisible,
   };
 };
 
@@ -114,7 +124,8 @@ const mapDispatchToProps = (dispatch) => {
     resetFinalResults: () => dispatch({ type: "RESET_FINAL_RESULTS" }),
     toggleAreResultsVisible: () => dispatch({ type: "RESULTS_VISIBILITY" }),
     setDisplayToReset_true: () => dispatch({ type: "DISPLAY_TO_RESET_TRUE" }),
-    toggleProfile: () => dispatch({type: "PROFILE_VISIBILITY"})
+    toggleProfile: () => dispatch({ type: "PROFILE_VISIBILITY" }),
+    toggleHints: () => dispatch({ type: "HINTS_VISIBILITY" }),
   };
 };
 

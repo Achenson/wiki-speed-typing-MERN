@@ -13,7 +13,7 @@ function Profile({
   isAuthenticated,
   notification_true,
 }) {
-let history = useHistory();
+  let history = useHistory();
 
   return (
     <div
@@ -23,12 +23,12 @@ let history = useHistory();
       }}
     >
       <div className="inner-profile">
-        <p style={{textAlign: "center", fontSize: "0.8em"}}>Logged in as</p>
+        <p style={{ textAlign: "center", fontSize: "0.8em" }}>Logged in as</p>
         <p className="profile-title">User profile</p>
         <ul className="list-profile">
-        <li className="profile-score" >
+          <li className="profile-score">
             Top score &nbsp;
-      {/*       <FontAwesomeIcon
+            {/*       <FontAwesomeIcon
               icon={faChartBar}
               size="1x"
               onClick={() => {
@@ -41,10 +41,8 @@ let history = useHistory();
               }}
             /> */}
           </li>
-            <li className="profile-password" >Change Password</li>
-            <li className="profile-delete">Delete Account</li>
-
-      
+          <li className="profile-password">Change Password</li>
+          <li className="profile-delete">Delete Account</li>
         </ul>
       </div>
     </div>
@@ -55,8 +53,7 @@ const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.authState.isAuthenticated,
     areHintsVisible: state.visibilityState.areHintsVisible,
-    isProfileVisible: state.visibilityState.isProfileVisible
-
+    isProfileVisible: state.visibilityState.isProfileVisible,
   };
 };
 
