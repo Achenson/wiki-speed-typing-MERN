@@ -175,7 +175,7 @@ body {
 .profile-score:hover {
   
  
-  color: lightgreen;
+  color: rgb(93, 195, 139);
 }
 
 .profile-password {
@@ -183,7 +183,7 @@ body {
 }
 
 .profile-password:hover {
-  color:lightblue;
+  color:rgb(154, 199, 214);
 }
 
 .profile-delete {
