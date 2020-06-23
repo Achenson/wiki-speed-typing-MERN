@@ -2,7 +2,7 @@ import React from "react";
 
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faChartBar } from "@fortawesome/free-solid-svg-icons";
-//import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -14,6 +14,8 @@ function Profile({
   notification_true,
 }) {
   let history = useHistory();
+
+  const [boxShadow, setBoxShadow] = useState("0px 1px 2px black");
 
   return (
     <div
@@ -28,21 +30,20 @@ function Profile({
         <ul className="list-profile">
           <li className="profile-score">
             Top score &nbsp;
-            {/*       <FontAwesomeIcon
-              icon={faChartBar}
-              size="1x"
-              onClick={() => {
-                toggleStats();
-
-                if (!isAuthenticated) {
-                  notification_true();
-                  history.push("/login");
-                }
-              }}
-            /> */}
           </li>
           <li className="profile-password">Change Password</li>
-          <li className="profile-delete">Delete Account</li>
+          <li
+            style={{ boxShadow: `${boxShadow}` }}
+            className="profile-delete"
+            onMouseOver={() => {
+              setBoxShadow("none");
+            }}
+            onMouseOut={() => {
+              setBoxShadow("0px 1px 2px black");
+            }}
+          >
+            Delete Account
+          </li>
         </ul>
       </div>
     </div>
