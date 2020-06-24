@@ -36,6 +36,8 @@ function Stats({
   setTimerOnSelect,
   constantTimerValue_basedOnStats,
   setConstantTimerValue_basedOnStats,
+
+  
 }) {
   // let history = useHistory();
 
@@ -44,6 +46,7 @@ function Stats({
 
     confirmDeleteVisibility_false();
   }, [areStatsVisible, confirmDeleteVisibility_false]);
+
 
   function renderDeletion() {
     if (!isConfirmDeleteVisible) {

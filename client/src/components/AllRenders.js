@@ -48,7 +48,7 @@ function AllRenders({
         <UpperUI toggleHints={toggleHints} />
 
         <Hints toggleStats={toggleStats} />
-        <Profile/>
+        <Profile toggleStats={toggleStats}/>
 
         <WikiDisplay
           arrToRender={arrToRender}
@@ -81,6 +81,7 @@ function AllRenders({
             addScore={addScore}
             mainHistory={mainHistory}
             setTimerOnSelect={setTimerOnSelect}
+            
           />
         ) : null}
       </div>

@@ -90,7 +90,10 @@ DONE 32. clean passed props in components DONE AllRenders cleaned, more componen
 36. change password
 37. delete account
 38. consistency - Register can have less store connection same as PasswordChange?
+38.5. reset state when first mounts or when unmounting consistency
 39. PasswordChange - css classes instead of inline?
+40. "x" in Stats?
+41. clean Main props
 
 
 

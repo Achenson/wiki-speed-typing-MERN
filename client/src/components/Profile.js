@@ -29,7 +29,10 @@ function Profile({
         <p style={{ textAlign: "center", fontSize: "0.8em" }}>Logged in as</p>
         <p className="profile-title">User profile</p>
         <ul className="list-profile">
-          <li className="profile-score">Top score &nbsp;</li>
+          <li className="profile-score"
+          
+          onClick={toggleStats}
+          >Top score &nbsp;</li>
           <li
             className="profile-password"
             onClick={() => {
@@ -71,6 +74,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     notification_true: () => dispatch({ type: "NOTIFICATION_TRUE" }),
+
   };
 };
 

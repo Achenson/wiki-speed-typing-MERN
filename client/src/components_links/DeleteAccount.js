@@ -11,12 +11,19 @@ import AuthNotification from "./AuthNotification";
 
 import { useMutation } from "@apollo/react-hooks";
 
-function DeleteAccount({ loginError_false }) {
+function DeleteAccount({ loginError_false, areStatsVisible, toggleAreStatsVisible }) {
   let history = useHistory();
 
   // change to vars??? stays the same!
   let [errorNotification, setErrorNotification] = useState(null);
   let [infoNotification, setInfoNotification] = useState(null);
+
+
+  useEffect( () => {
+    if(areStatsVisible) {
+      toggleAreStatsVisible()
+    }
+  },[areStatsVisible, toggleAreStatsVisible])
 
   useEffect(() => {
     // after the component is unmounted!
@@ -25,6 +32,9 @@ function DeleteAccount({ loginError_false }) {
       setInfoNotification(null);
     };
   }, [setErrorNotification]);
+
+
+  
 
   let [password, setPassword] = useState("");
 
@@ -98,8 +108,8 @@ function DeleteAccount({ loginError_false }) {
               {/* associating label with input without ID -> nesting */}
 
               <label className="label">
-                <p className="delaccount-p">Permanent account deletion:</p>
-                <p className="delaccount-p">1. Enter username password</p>
+                
+                <p>1. Enter password</p>
                 <p className="delaccount-p">2. Click "Delete account"</p>
 
                 <input
@@ -151,6 +161,7 @@ const mapStateToProps = (state) => {
   return {
     // isNotificationNeeded: state.authState.isNotificationNeeded,
     // showChangepassError: state.authState.showChangepassError,
+    areStatsVisible: state.visibilityState.areStatsVisible,
   };
 };
 
@@ -159,6 +170,7 @@ const mapDispatchToProps = (dispatch) => {
     // changepassError_true: () => dispatch({ type: "CHANGEPASS_ERROR_TRUE" }),
     // changepassError_false: () => dispatch({ type: "CHANGEPASS_ERROR_FALSE" }),
     loginError_false: () => dispatch({ type: "LOGIN_ERROR_FALSE" }),
+    toggleAreStatsVisible: () => dispatch({ type: "STATS_VISIBILITY" }),
 
     /* addNewUser: (addUser, addScore, username, email, password) =>
       dispatch(

@@ -41,7 +41,7 @@ function Main({
   setToReset_false,
   setDisplayToReset_true,
   setConstantTimerValue,
- 
+
   disableFocusTextArea,
   updateScore,
   setStats,
@@ -50,6 +50,8 @@ function Main({
   logOut,
   setLoginErrorMessage,
   loginError_true,
+
+  areStatsVisible,
 }) {
   let history = useHistory();
 
