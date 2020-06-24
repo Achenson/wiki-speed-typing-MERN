@@ -26,6 +26,8 @@ function AuthenticationUI({
   toggleHints,
   areHintsVisible,
 
+  isProfileVisible
+
   // from
 }) {
   // let history = useHistory();
@@ -93,6 +95,14 @@ function AuthenticationUI({
               if (areStatsVisible) {
                 toggleStats();
               }
+
+              if(isProfileVisible) {
+                toggleProfile()
+              }
+
+              
+
+
             }}
           >
             Logout
@@ -112,6 +122,7 @@ const mapStateToProps = (state) => {
     isActive: state.resultsAndTimerState.counter.isActive,
     areResultsVisible: state.visibilityState.areResultsVisible,
     areHintsVisible: state.visibilityState.areHintsVisible,
+    isProfileVisible: state.visibilityState.isProfileVisible,
   };
 };
 
