@@ -60,6 +60,17 @@ export const getUserByEmailQuery = gql`
   }
 `;
 
+export const getUserByIdQuery = gql`
+  query UserById($id: ID) {
+    userById(id: $id) {
+      name
+      email
+    }
+  }
+`;
+
+
+
 export const loginMutation = gql`
   mutation Login ($email_or_name: String!, $password: String!) {
     login(email_or_name: $email_or_name, password: $password) {

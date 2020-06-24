@@ -26,7 +26,7 @@ function AuthenticationUI({
   toggleHints,
   areHintsVisible,
 
-  isProfileVisible
+  isProfileVisible,
 
   // from
 }) {
@@ -96,13 +96,9 @@ function AuthenticationUI({
                 toggleStats();
               }
 
-              if(isProfileVisible) {
-                toggleProfile()
+              if (isProfileVisible) {
+                toggleProfile();
               }
-
-              
-
-
             }}
           >
             Logout

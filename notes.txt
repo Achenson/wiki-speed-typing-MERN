@@ -42,6 +42,7 @@ DONE 11. error when the timer reaches 0 and the user is not logged in DONE
 12. app starting - wrong route?
 
 
+
 to do:
 DONE 1. move graphql queries to different file DONE
 
@@ -94,6 +95,7 @@ DONE 32. clean passed props in components DONE AllRenders cleaned, more componen
 39. PasswordChange - css classes instead of inline?
 40. "x" in Stats?
 41. clean Main props
+42. test closing/opening components when the timer is running! (State doensn't work properly?)
 
 
 
