@@ -29,18 +29,21 @@ function Profile({
         <p style={{ textAlign: "center", fontSize: "0.8em" }}>Logged in as</p>
         <p className="profile-title">User profile</p>
         <ul className="list-profile">
-          <li className="profile-score">
-            Top score &nbsp;
+          <li className="profile-score">Top score &nbsp;</li>
+          <li
+            className="profile-password"
+            onClick={() => {
+              history.push("/passchange");
+            }}
+          >
+            Change Password
           </li>
-          <li className="profile-password"
-          onClick={() => {
-            history.push("/passchange")
-          }}
-          
-          >Change Password</li>
           <li
             style={{ boxShadow: `${boxShadow}` }}
             className="profile-delete"
+            onClick={() => {
+              history.push("/delete-account");
+            }}
             onMouseOver={() => {
               setBoxShadow("none");
               // setBoxShadow("0px 1px 1px black");

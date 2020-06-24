@@ -89,6 +89,8 @@ DONE 32. clean passed props in components DONE AllRenders cleaned, more componen
 35. profile insead of stats in authenticationUI
 36. change password
 37. delete account
+38. consistency - Register can have less store connection same as PasswordChange?
+39. PasswordChange - css classes instead of inline?
 
 
 

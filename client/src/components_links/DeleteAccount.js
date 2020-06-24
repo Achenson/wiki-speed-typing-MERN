@@ -11,7 +11,7 @@ import AuthNotification from "./AuthNotification";
 
 import { useMutation } from "@apollo/react-hooks";
 
-function PasswordChange({ loginError_false }) {
+function DeleteAccount({ loginError_false }) {
   let history = useHistory();
 
   // change to vars??? stays the same!
@@ -26,27 +26,24 @@ function PasswordChange({ loginError_false }) {
     };
   }, [setErrorNotification]);
 
-  let [currentPassword, setCurrentPassword] = useState("");
-
-  let [newPassword, setNewPassword] = useState("");
-  let [newConfirmation, setNewConfirmation] = useState("");
+  let [password, setPassword] = useState("");
 
   function formValidation() {
     // password confirmation backend
 
-    if (newPassword === "") {
-      setInfoNotification(null)
+    if (password === "") {
+      setInfoNotification(null);
+      setErrorNotification("Enter your password to delete account");
+      return;
+    }
+
+    if (password === "x") {
+      setInfoNotification(null);
       setErrorNotification("Invalid password");
       return;
     }
 
-    if (newPassword !== newConfirmation) {
-      setInfoNotification(null)
-      setErrorNotification("Password confirmation does not match");
-      return;
-    }
-
-    // updating password backend
+    // deleting user backend
     /*    addUser({
       variables: {
         username: username,
@@ -70,12 +67,8 @@ function PasswordChange({ loginError_false }) {
         return;
       }
     }); */
-    setErrorNotification(null)
-    setInfoNotification("Password successfully changed. Redirecting...")
-
-
-
-
+    setErrorNotification(null);
+    setInfoNotification("Account deleted. Redirecting...");
   }
 
   return (
@@ -98,21 +91,25 @@ function PasswordChange({ loginError_false }) {
         <div className="main-square-auth">
           <div className="form-div">
             <div className="title-auth-div">
-              <h3 className="title title-auth">Password change</h3>
+              <h3 className="title title-auth">Account deletion</h3>
             </div>
+            <br />
             <form className="form">
               {/* associating label with input without ID -> nesting */}
 
               <label className="label">
-                Current password
+                <p className="delaccount-p">Permanent account deletion:</p>
+                <p className="delaccount-p">1. Enter username password</p>
+                <p className="delaccount-p">2. Click "Delete account"</p>
+
                 <input
-                 style={{marginBottom: "1em"}}
+                  style={{ marginBottom: "1em" }}
                   className="input"
                   type="password"
                   onChange={(e) => {
-                    setCurrentPassword(e.target.value);
+                    setPassword(e.target.value);
                   }}
-                  value={currentPassword}
+                  value={password}
                 />
               </label>
 
@@ -120,33 +117,11 @@ function PasswordChange({ loginError_false }) {
               <br />
               {/* <br /> */}
 
-              <label className="label" >
-                New password
-                <input
-                  className="input"
-                  type="password"
-                  onChange={(e) => {
-                    setNewPassword(e.target.value);
-                  }}
-                  value={newPassword}
-                  
-                />
-              </label>
-              <label className="label">
-                Confirm new password
-                <input
-                  className="input"
-                  type="password"
-                  onChange={(e) => {
-                    setNewConfirmation(e.target.value);
-                  }}
-                  value={newConfirmation}
-                />
-              </label>
               <br />
 
               <button
-                className="btn btn-control btn-auth"
+                // className="btn btn-control btn-auth"
+                className="btn btn-control btn-auth btn-reset"
                 type="submit"
                 onClick={(e) => {
                   e.preventDefault();
@@ -154,7 +129,7 @@ function PasswordChange({ loginError_false }) {
                   formValidation();
                 }}
               >
-                Change password
+                Delete account
               </button>
             </form>
             <div className="auth-links-div">
@@ -196,4 +171,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
   // Your component will receive dispatch by default, i.e., when you do not supply a second parameter to connect():
-)(PasswordChange);
+)(DeleteAccount);

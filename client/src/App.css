@@ -190,6 +190,11 @@ body {
   color: tomato
 }
 
+/* DeleteAccount */
+.delaccount-p {
+  margin-top: 0.1rem;
+}
+
 /* ======= main */
 .main-square {
   width: 400px;

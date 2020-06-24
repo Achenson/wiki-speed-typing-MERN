@@ -11,6 +11,7 @@ import Main from "./components_links/Main.js";
 import Login from "./components_links/Login.js";
 import Register from "./components_links/Register.js";
 import PasswordChange from "./components_links/PasswordChange.js";
+import DeleteAccount from "./components_links/DeleteAccount.js";
 import CustomRoute from "./components_links/CustomRoute.js";
 
 import Test from "./components/Test.js";
@@ -18,12 +19,7 @@ import Test from "./components/Test.js";
 import { fetchWikiApi } from "./redux/actions/fetchPostAction.js";
 
 // import { BrowserRouter, Route, Link, Switch, Redirect, useHistory, HashRouter } from "react-router-dom";
-import {
-  Route,
-  Switch,
-  BrowserRouter,
-  Link,
-} from "react-router-dom";
+import { Route, Switch, BrowserRouter, Link } from "react-router-dom";
 
 //!!!!! imported actions creators must be passed here as props
 function App({
@@ -94,7 +90,11 @@ function App({
       setWikiButtonClickable_true();
       // }, 5000);
     }
-  }, [newRandomArticle, setWikiButtonClickable_false, setWikiButtonClickable_true]);
+  }, [
+    newRandomArticle,
+    setWikiButtonClickable_false,
+    setWikiButtonClickable_true,
+  ]);
 
   if (!isMainRendered) {
     return (
@@ -136,12 +136,8 @@ function App({
             path="/login"
             component={Login}
           />
-            <CustomRoute
-            path="/passchange"
-            component={PasswordChange}
-          />
-
-
+          <CustomRoute path="/passchange" component={PasswordChange} />
+          <CustomRoute path="/delete-account" component={DeleteAccount} />
 
           {/* testing isAuth, has to be clicked on Link to work */}
           <Route path="/test" component={Test} />
