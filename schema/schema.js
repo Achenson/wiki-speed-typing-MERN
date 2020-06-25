@@ -93,7 +93,6 @@ const RootQuery = new GraphQLObjectType({
       },
     },
 
-
     score: {
       type: ScoreType,
       // changed from id to userId
@@ -247,6 +246,47 @@ const Mutation = new GraphQLObjectType({
         });  
         return myPromise
         */
+      },
+    },
+
+    changePassword: {
+      type: UserType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+        password: { type: new GraphQLNonNull(GraphQLString) },
+        newPassword: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      async resolve(parent, args) {
+        const user = await User.findById(args.id);
+
+        if (!user) {
+          throw new Error("User not found");
+        }
+
+        const isEqual = await bcrypt.compare(args.password, user.password);
+
+        if (!isEqual) {
+          console.log("incorrect password");
+          return null;
+        }
+
+        
+        let update;
+        await bcrypt.hash(args.newPassword, 12).then((newHashedPassword) => {
+         update = {
+            password: newHashedPassword,
+          };
+
+      
+
+
+        });
+
+        return User.findByIdAndUpdate(user._id, update, {
+          new: true,
+          useFindAndModify: false,
+        });
+      
       },
     },
 

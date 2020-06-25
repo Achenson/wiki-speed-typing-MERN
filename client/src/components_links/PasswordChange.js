@@ -9,36 +9,38 @@ import { useHistory } from "react-router-dom";
 
 import AuthNotification from "./AuthNotification";
 
+import { changePassword } from "../graphql/queries.js";
+
 import { useMutation } from "@apollo/react-hooks";
 import { use } from "passport";
 
-function PasswordChange({ loginError_false, areStatsVisible, toggleAreStatsVisible
- }) {
+function PasswordChange({
+  loginError_false,
+  areStatsVisible,
+  toggleAreStatsVisible,
+  authenticatedUserId,
+}) {
   let history = useHistory();
+
+  const [changePass] = useMutation(changePassword);
 
   // change to vars??? stays the same!
   let [errorNotification, setErrorNotification] = useState(null);
   let [infoNotification, setInfoNotification] = useState(null);
 
-
-
-  useEffect( () => {
-    if(areStatsVisible) {
-      toggleAreStatsVisible()
+  useEffect(() => {
+    if (areStatsVisible) {
+      toggleAreStatsVisible();
     }
-  },[areStatsVisible, toggleAreStatsVisible])
+  }, [areStatsVisible, toggleAreStatsVisible]);
 
   useEffect(() => {
     // after the component is unmounted!
     return () => {
       setErrorNotification(null);
       setInfoNotification(null);
-     
-
     };
   }, [setErrorNotification]);
-
-
 
   let [currentPassword, setCurrentPassword] = useState("");
 
@@ -49,13 +51,13 @@ function PasswordChange({ loginError_false, areStatsVisible, toggleAreStatsVisib
     // password confirmation backend
 
     if (newPassword === "") {
-      setInfoNotification(null)
+      setInfoNotification(null);
       setErrorNotification("Invalid password");
       return;
     }
 
     if (newPassword !== newConfirmation) {
-      setInfoNotification(null)
+      setInfoNotification(null);
       setErrorNotification("Password confirmation does not match");
       return;
     }
@@ -84,12 +86,27 @@ function PasswordChange({ loginError_false, areStatsVisible, toggleAreStatsVisib
         return;
       }
     }); */
-    setErrorNotification(null)
-    setInfoNotification("Password successfully changed. Redirecting...")
 
+    changePass({
+      variables: {
+        id: authenticatedUserId,
+        password: currentPassword,
+        newPassword: newPassword,
+      },
+    }).then((res) => {
 
+      console.log("updatePass ressss");
+      
+      console.log(res);
+      
+      if (!res.data.changePassword) {
+        setErrorNotification("failed to update password");
+        return;
+      }
 
-
+      setErrorNotification(null);
+      setInfoNotification("Password successfully changed. Redirecting...");
+    });
   }
 
   return (
@@ -120,7 +137,7 @@ function PasswordChange({ loginError_false, areStatsVisible, toggleAreStatsVisib
               <label className="label">
                 Current password
                 <input
-                 style={{marginBottom: "1em"}}
+                  style={{ marginBottom: "1em" }}
                   className="input"
                   type="password"
                   onChange={(e) => {
@@ -134,7 +151,7 @@ function PasswordChange({ loginError_false, areStatsVisible, toggleAreStatsVisib
               <br />
               {/* <br /> */}
 
-              <label className="label" >
+              <label className="label">
                 New password
                 <input
                   className="input"
@@ -143,7 +160,6 @@ function PasswordChange({ loginError_false, areStatsVisible, toggleAreStatsVisib
                     setNewPassword(e.target.value);
                   }}
                   value={newPassword}
-                  
                 />
               </label>
               <label className="label">
@@ -191,6 +207,7 @@ const mapStateToProps = (state) => {
     // isNotificationNeeded: state.authState.isNotificationNeeded,
     // showChangepassError: state.authState.showChangepassError,
     areStatsVisible: state.visibilityState.areStatsVisible,
+    authenticatedUserId: state.authState.authenticatedUserId,
   };
 };
 

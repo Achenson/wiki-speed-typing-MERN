@@ -39,6 +39,20 @@ export const addNewUserMutation = gql`
   }
 `;
 
+export const changePassword = gql`
+  mutation ChangePassword($id: ID!, $password: String!, $newPassword: String!) {
+    changePassword(id: $id, password: $password, newPassword: $newPassword) {
+      name
+      email
+    }
+  }
+`;
+
+
+
+
+
+
 export const getStatsQuery = gql`
   query Score($userId: ID) {
     score(userId: $userId) {
