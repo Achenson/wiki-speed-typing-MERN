@@ -1,4 +1,3 @@
-
 // parsing graphql queries
 import { gql } from "apollo-boost";
 
@@ -48,11 +47,6 @@ export const changePassword = gql`
   }
 `;
 
-
-
-
-
-
 export const getStatsQuery = gql`
   query Score($userId: ID) {
     score(userId: $userId) {
@@ -83,10 +77,8 @@ export const getUserByIdQuery = gql`
   }
 `;
 
-
-
 export const loginMutation = gql`
-  mutation Login ($email_or_name: String!, $password: String!) {
+  mutation Login($email_or_name: String!, $password: String!) {
     login(email_or_name: $email_or_name, password: $password) {
       userId
       token
@@ -95,11 +87,8 @@ export const loginMutation = gql`
   }
 `;
 
-  export const logoutMutation = gql`
-    mutation Logout {
-      logout
-    }
-
-    
-` 
-
+export const logoutMutation = gql`
+  mutation Logout {
+    logout
+  }
+`;

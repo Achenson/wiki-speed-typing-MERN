@@ -260,7 +260,8 @@ const Mutation = new GraphQLObjectType({
         const user = await User.findById(args.id);
 
         if (!user) {
-          throw new Error("User not found");
+          console.log("User not found");
+          return null;
         }
 
         const isEqual = await bcrypt.compare(args.password, user.password);
@@ -270,23 +271,17 @@ const Mutation = new GraphQLObjectType({
           return null;
         }
 
-        
         let update;
         await bcrypt.hash(args.newPassword, 12).then((newHashedPassword) => {
-         update = {
+          update = {
             password: newHashedPassword,
           };
-
-      
-
-
         });
 
         return User.findByIdAndUpdate(user._id, update, {
           new: true,
           useFindAndModify: false,
         });
-      
       },
     },
 

@@ -52,7 +52,7 @@ function PasswordChange({
 
     if (newPassword === "") {
       setInfoNotification(null);
-      setErrorNotification("Invalid password");
+      setErrorNotification("Password cannot be blank");
       return;
     }
 
@@ -95,9 +95,8 @@ function PasswordChange({
       },
     }).then((res) => {
 
-      console.log("updatePass ressss");
-      
-      console.log(res);
+      // console.log("updatePass resss");
+      // console.log(res);
       
       if (!res.data.changePassword) {
         setErrorNotification("failed to update password");
