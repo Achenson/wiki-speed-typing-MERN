@@ -14,7 +14,8 @@ function WikiController(props) {
     if (props.isWikiButtonClickable) {
       setWikiButtonClass("btn btn-control btn-wiki");
     } else {
-      setWikiButtonClass("btn btn-wiki-not-active");
+      //setWikiButtonClass("btn btn-wiki-disabled");
+      setWikiButtonClass("btn btn-control-disabled btn-wiki");
     }
   }, [props.isWikiButtonClickable]);
 

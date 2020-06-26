@@ -368,6 +368,15 @@ body {
   background-color: slateblue;
 }
 
+.btn-control-disabled {
+  background-color: darkgrey;
+  display: inline-block;
+  border-radius: 0.5em;
+  color: white;
+  border: 1px solid black;
+  cursor: default;
+}
+
 .btn-reset {
   margin-right: 0;
   background-color: tomato;
@@ -382,18 +391,6 @@ body {
   height: 1.95em;
   display: block;
   margin-left: auto;
-}
-
-.btn-wiki-not-active {
-  /* background-color: steelblue; */
-  background-color: darkgrey;
-  border-radius: 0.5em;
-  color: white;
-  border: 1px solid black;
-  height: 1.95em;
-  display: block;
-  margin-left: auto;
-  cursor: default;
 }
 
 /* bnt-results in lower UI below results-row-container*/

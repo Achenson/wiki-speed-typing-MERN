@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -19,7 +19,32 @@ function PasswordChange({
   areStatsVisible,
   toggleAreStatsVisible,
   authenticatedUserId,
+  logOut,
 }) {
+  const [passchangeCSSClass, setPasschangeCSSClass] = useState(
+    "btn btn-control btn-auth"
+  );
+
+  const [isPasschangeClickable, setIsPasschangeClickable] = useState(true);
+
+  const disablePasschangeBtn = useRef(null);
+
+  if (disablePasschangeBtn.current) {
+    disablePasschangeBtn.current.removeAttribute("disabled");
+  }
+
+  useEffect(() => {
+    if (isPasschangeClickable) {
+      setPasschangeCSSClass("btn btn-control btn-auth");
+      disablePasschangeBtn.current.setAttribute("disabled", true);
+    } else {
+      setPasschangeCSSClass("btn btn-control-disabled btn-auth");
+      if (disablePasschangeBtn.current) {
+        disablePasschangeBtn.current.removeAttribute("disabled");
+      }
+    }
+  }, [isPasschangeClickable]);
+
   let history = useHistory();
 
   const [changePass] = useMutation(changePassword);
@@ -94,10 +119,9 @@ function PasswordChange({
         newPassword: newPassword,
       },
     }).then((res) => {
-
       // console.log("updatePass resss");
       // console.log(res);
-      
+
       if (!res.data.changePassword) {
         setErrorNotification("failed to update password");
         return;
@@ -105,6 +129,14 @@ function PasswordChange({
 
       setErrorNotification(null);
       setInfoNotification("Password successfully changed. Redirecting...");
+
+      setIsPasschangeClickable(false)
+
+      setTimeout(() => {
+        logOut();
+
+        history.replace("/login");
+      }, 2500);
     });
   }
 
@@ -175,7 +207,9 @@ function PasswordChange({
               <br />
 
               <button
-                className="btn btn-control btn-auth"
+                ref={disablePasschangeBtn}
+                // className="btn btn-control btn-auth"
+                className={passchangeCSSClass}
                 type="submit"
                 onClick={(e) => {
                   e.preventDefault();
@@ -216,6 +250,7 @@ const mapDispatchToProps = (dispatch) => {
     // changepassError_false: () => dispatch({ type: "CHANGEPASS_ERROR_FALSE" }),
     loginError_false: () => dispatch({ type: "LOGIN_ERROR_FALSE" }),
     toggleAreStatsVisible: () => dispatch({ type: "STATS_VISIBILITY" }),
+    logOut: () => dispatch({ type: "LOG_OUT" }),
 
     /* addNewUser: (addUser, addScore, username, email, password) =>
       dispatch(
