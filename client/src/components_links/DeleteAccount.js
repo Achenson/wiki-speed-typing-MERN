@@ -47,7 +47,7 @@ function DeleteAccount({
       setDelaccountCSSClass("btn btn-control btn-auth btn-reset");
       disableDelaccountBtn.current.setAttribute("disabled", true);
     } else {
-      setDelaccountCSSClass("btn btn-control-disabled btn-auth btn-reset");
+      setDelaccountCSSClass("btn btn-control-disabled btn-auth");
       if (disableDelaccountBtn.current) {
         disableDelaccountBtn.current.removeAttribute("disabled");
       }
@@ -76,37 +76,6 @@ function DeleteAccount({
       setErrorNotification("Enter your password to delete account");
       return;
     }
-
-    /*   if (password === "x") {
-      setInfoNotification(null);
-      setErrorNotification("Invalid password");
-      return;
-    } */
-
-    // deleting user backend
-    /*    addUser({
-      variables: {
-        username: username,
-        email: email,
-        password: password,
-      },
-      // refetchQueries: [{ query: getStatsQuery }],
-      // useMutation mutate function does not call `onCompleted`!
-      // so onCompleted can only be passed to initial hook
-      // workaround: useMutation returns a Promise
-    }).then((res) => {
-      console.log(res);
-
-      if (res.data.addUser) {
-        registerError_false();
-        history.push("/login");
-        return;
-      } else {
-        setErrorNotification("Username or email is already in use");
-        registerError_true();
-        return;
-      }
-    }); */
 
     delUser({
       variables: {
