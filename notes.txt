@@ -87,8 +87,8 @@ DONE 31. check JWT video comments -> changes? DONE (cookieParser only in one rou
 DONE 32. clean passed props in components DONE AllRenders cleaned, more component connectet do store
 33. more time options
 34. function imports consistency
-35. profile insead of stats in authenticationUI
-36. change password
+DONE 35. profile insead of stats in authenticationUI DONE
+DONE 36. change password DONE
 37. delete account
 38. consistency - Register can have less store connection same as PasswordChange?
 38.5. reset state when first mounts or when unmounting consistency

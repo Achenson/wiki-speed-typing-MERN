@@ -130,7 +130,7 @@ function PasswordChange({
       setErrorNotification(null);
       setInfoNotification("Password successfully changed. Redirecting...");
 
-      setIsPasschangeClickable(false)
+      setIsPasschangeClickable(false);
 
       setTimeout(() => {
         logOut();
@@ -221,12 +221,14 @@ function PasswordChange({
               </button>
             </form>
             <div className="auth-links-div">
-              <p className="auth-link-item">
-                <Link to="/" className="auth-link">
-                  Back
-                </Link>
-                &nbsp;to speed typing
-              </p>
+              {isPasschangeClickable && (
+                <p className="auth-link-item">
+                  <Link to="/" className="auth-link">
+                    Back
+                  </Link>
+                  &nbsp;to speed typing
+                </p>
+              )}
             </div>
           </div>
         </div>
