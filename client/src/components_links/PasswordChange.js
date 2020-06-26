@@ -87,31 +87,6 @@ function PasswordChange({
       return;
     }
 
-    // updating password backend
-    /*    addUser({
-      variables: {
-        username: username,
-        email: email,
-        password: password,
-      },
-      // refetchQueries: [{ query: getStatsQuery }],
-      // useMutation mutate function does not call `onCompleted`!
-      // so onCompleted can only be passed to initial hook
-      // workaround: useMutation returns a Promise
-    }).then((res) => {
-      console.log(res);
-
-      if (res.data.addUser) {
-        registerError_false();
-        history.push("/login");
-        return;
-      } else {
-        setErrorNotification("Username or email is already in use");
-        registerError_true();
-        return;
-      }
-    }); */
-
     changePass({
       variables: {
         id: authenticatedUserId,
@@ -138,6 +113,8 @@ function PasswordChange({
         history.replace("/login");
       }, 2500);
     });
+
+    
   }
 
   return (

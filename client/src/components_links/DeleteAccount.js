@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -9,21 +9,56 @@ import { useHistory } from "react-router-dom";
 
 import AuthNotification from "./AuthNotification";
 
+import { deleteUser } from "../graphql/queries.js";
+
 import { useMutation } from "@apollo/react-hooks";
 
-function DeleteAccount({ loginError_false, areStatsVisible, toggleAreStatsVisible }) {
+function DeleteAccount({
+  loginError_false,
+  areStatsVisible,
+  toggleAreStatsVisible,
+  authenticatedUserId,
+  logOut,
+}) {
   let history = useHistory();
+
+  const [delaccountCSSClass, setDelaccountCSSClass] = useState(
+    "btn btn-control btn-auth btn-reset"
+  );
 
   // change to vars??? stays the same!
   let [errorNotification, setErrorNotification] = useState(null);
   let [infoNotification, setInfoNotification] = useState(null);
 
+  let [password, setPassword] = useState("");
 
-  useEffect( () => {
-    if(areStatsVisible) {
-      toggleAreStatsVisible()
+  const [isDelaccountClickable, setIsDelaccountClickable] = useState(true);
+
+  const disableDelaccountBtn = useRef(null);
+
+  const [delUser] = useMutation(deleteUser);
+
+  if (disableDelaccountBtn.current) {
+    disableDelaccountBtn.current.removeAttribute("disabled");
+  }
+
+  useEffect(() => {
+    if (isDelaccountClickable) {
+      setDelaccountCSSClass("btn btn-control btn-auth btn-reset");
+      disableDelaccountBtn.current.setAttribute("disabled", true);
+    } else {
+      setDelaccountCSSClass("btn btn-control-disabled btn-auth btn-reset");
+      if (disableDelaccountBtn.current) {
+        disableDelaccountBtn.current.removeAttribute("disabled");
+      }
     }
-  },[areStatsVisible, toggleAreStatsVisible])
+  }, [isDelaccountClickable]);
+
+  useEffect(() => {
+    if (areStatsVisible) {
+      toggleAreStatsVisible();
+    }
+  }, [areStatsVisible, toggleAreStatsVisible]);
 
   useEffect(() => {
     // after the component is unmounted!
@@ -32,11 +67,6 @@ function DeleteAccount({ loginError_false, areStatsVisible, toggleAreStatsVisibl
       setInfoNotification(null);
     };
   }, [setErrorNotification]);
-
-
-  
-
-  let [password, setPassword] = useState("");
 
   function formValidation() {
     // password confirmation backend
@@ -47,11 +77,11 @@ function DeleteAccount({ loginError_false, areStatsVisible, toggleAreStatsVisibl
       return;
     }
 
-    if (password === "x") {
+    /*   if (password === "x") {
       setInfoNotification(null);
       setErrorNotification("Invalid password");
       return;
-    }
+    } */
 
     // deleting user backend
     /*    addUser({
@@ -77,8 +107,32 @@ function DeleteAccount({ loginError_false, areStatsVisible, toggleAreStatsVisibl
         return;
       }
     }); */
-    setErrorNotification(null);
-    setInfoNotification("Account deleted. Redirecting...");
+
+    delUser({
+      variables: {
+        id: authenticatedUserId,
+        password: password,
+      },
+    }).then((res) => {
+      if (!res.data.deleteUser) {
+        console.log("failed to delete user");
+        setErrorNotification("failed to delete user");
+        return;
+      }
+
+      console.log(res.data.deleteUser);
+
+      setErrorNotification(null);
+      setInfoNotification("Account deleted. Redirecting...");
+
+      setIsDelaccountClickable(false);
+
+      setTimeout(() => {
+        logOut();
+
+        history.replace("/");
+      }, 2500);
+    });
   }
 
   return (
@@ -108,7 +162,6 @@ function DeleteAccount({ loginError_false, areStatsVisible, toggleAreStatsVisibl
               {/* associating label with input without ID -> nesting */}
 
               <label className="label">
-                
                 <p>1. Enter password</p>
                 <p className="delaccount-p">2. Click "Delete account"</p>
 
@@ -130,8 +183,11 @@ function DeleteAccount({ loginError_false, areStatsVisible, toggleAreStatsVisibl
               <br />
 
               <button
+                ref={disableDelaccountBtn}
                 // className="btn btn-control btn-auth"
-                className="btn btn-control btn-auth btn-reset"
+
+                // className="btn btn-control btn-auth btn-reset"
+                className={delaccountCSSClass}
                 type="submit"
                 onClick={(e) => {
                   e.preventDefault();
@@ -143,12 +199,14 @@ function DeleteAccount({ loginError_false, areStatsVisible, toggleAreStatsVisibl
               </button>
             </form>
             <div className="auth-links-div">
-              <p className="auth-link-item">
-                <Link to="/" className="auth-link">
-                  Back
-                </Link>
-                &nbsp;to speed typing
-              </p>
+              {isDelaccountClickable && (
+                <p className="auth-link-item">
+                  <Link to="/" className="auth-link">
+                    Back
+                  </Link>
+                  &nbsp;to speed typing
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -162,6 +220,7 @@ const mapStateToProps = (state) => {
     // isNotificationNeeded: state.authState.isNotificationNeeded,
     // showChangepassError: state.authState.showChangepassError,
     areStatsVisible: state.visibilityState.areStatsVisible,
+    authenticatedUserId: state.authState.authenticatedUserId,
   };
 };
 
@@ -171,6 +230,7 @@ const mapDispatchToProps = (dispatch) => {
     // changepassError_false: () => dispatch({ type: "CHANGEPASS_ERROR_FALSE" }),
     loginError_false: () => dispatch({ type: "LOGIN_ERROR_FALSE" }),
     toggleAreStatsVisible: () => dispatch({ type: "STATS_VISIBILITY" }),
+    logOut: () => dispatch({ type: "LOG_OUT" }),
 
     /* addNewUser: (addUser, addScore, username, email, password) =>
       dispatch(

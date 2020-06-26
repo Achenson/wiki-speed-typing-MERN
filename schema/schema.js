@@ -285,6 +285,31 @@ const Mutation = new GraphQLObjectType({
       },
     },
 
+    deleteUser: {
+      type: UserType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+        password: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      async resolve(parent, args) {
+        const user = await User.findById(args.id);
+
+        if (!user) {
+          console.log("User not found");
+          return null;
+        }
+
+        const isEqual = await bcrypt.compare(args.password, user.password);
+
+        if (!isEqual) {
+          console.log("incorrect password");
+          return null;
+        }
+
+        return User.findByIdAndDelete(user._id);
+      },
+    },
+
     revokeRefreshTokensForUser: {
       type: UserType,
       args: {

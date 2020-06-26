@@ -47,6 +47,17 @@ export const changePassword = gql`
   }
 `;
 
+export const deleteUser = gql`
+  mutation DeleteUser($id: ID!, $password: String!) {
+    deleteUser(id: $id, password: $password) {
+      name
+      email
+    }
+  }
+`;
+
+
+
 export const getStatsQuery = gql`
   query Score($userId: ID) {
     score(userId: $userId) {

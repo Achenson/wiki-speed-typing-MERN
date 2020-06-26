@@ -72,9 +72,9 @@ DONE 14 clear deleteScore postaction! DONE
 DONE 18. fill all useEffect deps DONE
 19. Deployment? 
 20. [optional] make 2 files out of schema? (resolvers &  ...)
-21. [optional] show authenticated user name(see jwt video)
+DONE 21. [optional] show authenticated user name(see jwt video) DONE
 22. password retrieval system?
-22. email confirmation system?
+XXX 22. email confirmation system?XXX password retrieval will suffice
 23. redux -> importing acions instead of strings?
 XXX 24. merge Main & Display? XXX 
 25. delete unused components (2?)
@@ -98,6 +98,8 @@ DONE 36. change password DONE
 42. test closing/opening components when the timer is running! (State doensn't work properly?)
 43. About text somewhere in Hints or in Header?
 44. test routes when typed in address
+45. final test on chrome
+46. schema - async consistency?
 
 
 
