@@ -14,6 +14,8 @@ const createAccessToken = require("./middleware/accessToken");
 const createRefreshToken = require("./middleware/refreshToken");
 const sendRefreshToken = require("./middleware/sendRefreshToken.js");
 
+const sendEmail = require("./utils/sendEmail.js");
+
 // const bodyParser = require("body-parser");
 
 // bcrypt?
@@ -168,4 +170,5 @@ apolloServer.applyMiddleware({ app, cors: false });
 
 app.listen(4000, () => {
   console.log("now listening for requests on port 4000");
+  sendEmail();
 });
