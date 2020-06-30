@@ -114,3 +114,16 @@ export const forgotPassword = gql`
   }
 `;
 
+
+
+
+export const changePasswordAfterForgot = gql`
+  mutation ChangePasswordAfterForgot($token: Sting, $password: String) {
+    changePasswordAfterForgot(token: $token, password: $password) {
+      name
+      email
+    }
+    
+  }
+`;
+

@@ -289,6 +289,8 @@ const Mutation = new GraphQLObjectType({
           useFindAndModify: false,
         });
       },
+
+
     },
 
     deleteUser: {
@@ -478,7 +480,62 @@ const Mutation = new GraphQLObjectType({
         return true;
       },
     },
-  },
+
+
+    changePasswordAfterForgot: {
+      type: UserType,
+      args: {
+        token: { type: new GraphQLNonNull(GraphQLString) },
+        password: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      async resolve(parent, args, { req, res }) {
+
+        let decodedToken = jwt.verify(args.token, process.env.FORGOT_PASSWORD);
+        
+        // const userId = await User.findOne({ email: args.email });
+
+        let userId = decodedToken.userId;
+
+
+        if (!userId) {
+          return null;
+        }
+
+
+        let user = await User.findById(userId);
+
+        if (!user) {
+          return null;
+        }
+
+        // const token = uuid.v4();
+
+        // await redis.set(forgotPasswordPrefix + token, user.id, "ex", 60 * 60 * 24); // 1 day expiration
+        // await redisInstance.set(token, user.id, "ex", 60 * 15); // 15 min expiration
+
+        let update;
+        await bcrypt.hash(args.password, 12).then((newHashedPassword) => {
+          update = {
+            password: newHashedPassword,
+          };
+        });
+
+        return User.findByIdAndUpdate(userId, update, {
+          new: true,
+          useFindAndModify: false,
+        });
+      },
+
+      
+
+        
+      },
+    },
+
+
+
+
+  
 });
 
 module.exports = new GraphQLSchema({

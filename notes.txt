@@ -101,6 +101,7 @@ DONE 36. change password DONE
 45. final test on chrome
 46. schema - async consistency?
 47. hot module reload?
+48. check redis video
 
 
 
