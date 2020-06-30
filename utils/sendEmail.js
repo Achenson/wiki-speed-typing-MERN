@@ -70,8 +70,8 @@ module.exports = async function sendEmail(email, url) {
 
   const mailOptions = {
     from: '"Fred Foo 👻" <foo@example.com>', // sender address
-    // to: email, // list of receivers
-    to: "bar@example.com, baz@example.com", // list of receivers
+    to: email, // list of receivers
+    // UNCOMMENT FOR TESTING!!! to: "bar@example.com, baz@example.com", // list of receivers
     subject: "Hello ✔", // Subject line
     text: "Hello world?", // plain text body
     html: `<a href="${url}">${url}</a>` // html body

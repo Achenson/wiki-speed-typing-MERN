@@ -7,9 +7,9 @@ module.exports = (user) => {
   return jwt.sign(
     { userId: user.id, email: user.email },
     // "somesupersecretkey",,
-    process.env.ACCESS,
+    process.env.FORGOT_PASSWORD,
     {
-      expiresIn: "15m",
+      expiresIn: "10min",
     }
   );
 };

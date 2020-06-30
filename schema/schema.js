@@ -8,7 +8,13 @@ const jwt = require("jsonwebtoken");
 
 const createAccessToken = require("../middleware/accessToken.js");
 const createRefreshToken = require("../middleware/refreshToken.js");
+const createForgotPasswordToken = require("../middleware/forgotPassToken.js");
 const sendRefreshToken = require("../middleware/sendRefreshToken.js");
+
+const sendEmail = require("../utils/sendEmail.js");
+// const uuid = require("uuid");
+// const redis = require("../utils/redis.js");
+// const redisInstance = redis();
 
 const {
   GraphQLObjectType,
@@ -439,6 +445,35 @@ const Mutation = new GraphQLObjectType({
         };
  */
         sendRefreshToken(res, "");
+
+        return true;
+      },
+    },
+
+    forgotPassword: {
+      type: GraphQLBoolean,
+      args: {
+        email: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      async resolve(parent, args, { req, res }) {
+        const user = await User.findOne({ email: args.email });
+
+        if (!user) {
+          return true;
+        }
+
+        // const token = uuid.v4();
+
+        // await redis.set(forgotPasswordPrefix + token, user.id, "ex", 60 * 60 * 24); // 1 day expiration
+        // await redisInstance.set(token, user.id, "ex", 60 * 15); // 15 min expiration
+
+        const token = createForgotPasswordToken(user);
+
+        await sendEmail(
+          args.email,
+          // `http://localhost:3000/user/passchange/${token}`
+          `http://localhost:3000/passchange/jwt/${token}`
+        );
 
         return true;
       },

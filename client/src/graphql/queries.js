@@ -103,3 +103,14 @@ export const logoutMutation = gql`
     logout
   }
 `;
+
+
+
+
+export const forgotPassword = gql`
+  mutation ForgotPassword($email: String!) {
+    forgotPassword(email: $email)
+    
+  }
+`;
+

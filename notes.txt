@@ -100,6 +100,7 @@ DONE 36. change password DONE
 44. test routes when typed in address
 45. final test on chrome
 46. schema - async consistency?
+47. hot module reload?
 
 
 
