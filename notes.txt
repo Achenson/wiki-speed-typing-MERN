@@ -102,6 +102,7 @@ DONE 36. change password DONE
 46. schema - async consistency?
 47. hot module reload?
 48. check redis video
+49. authData token expiration not needed?
 
 
 

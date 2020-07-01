@@ -11,6 +11,8 @@ import Main from "./components_links/Main.js";
 import Login from "./components_links/Login.js";
 import Register from "./components_links/Register.js";
 import PasswordChange from "./components_links/PasswordChange.js";
+import PasswordRetrieval from "./components_links/PasswordRetrieval";
+
 import DeleteAccount from "./components_links/DeleteAccount.js";
 import CustomRoute from "./components_links/CustomRoute.js";
 
@@ -137,6 +139,7 @@ function App({
             component={Login}
           />
           <CustomRoute path="/passchange" component={PasswordChange} />
+          <CustomRoute path="/passretrieve" component={PasswordRetrieval} />
           <CustomRoute path="/delete-account" component={DeleteAccount} />
 
           {/* testing isAuth, has to be clicked on Link to work */}

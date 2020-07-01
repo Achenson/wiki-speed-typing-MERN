@@ -10,9 +10,9 @@ import AuthNotification from "./AuthNotification";
 
 import { useMutation } from "@apollo/react-hooks";
 
-import { loginMutation } from "../graphql/queries.js";
+import { forgotPassword } from "../graphql/queries.js";
 
-function Login({
+function PasswordRetrieval({
   logIn,
   isNotificationNeeded,
   showLoginError,
@@ -24,36 +24,9 @@ function Login({
   loginErrorMessage,
   setLoginErrorMessage,
 }) {
-  /*   useEffect(() => {
-    if (!isAuthenticated) {
-      setStats({
-        // currentStatsKey: "one_min",
+  
 
-        five_s: makeDefaultStats(1),
-        thirty_s: makeDefaultStats(2),
-        one_min: makeDefaultStats(3),
-        two_min: makeDefaultStats(4),
-        five_min: makeDefaultStats(5),
-      });
-    }
-  }, [isAuthenticated, setStats]); */
-
-  /*  function makeDefaultStats(n) {
-    return [
-      [n, n],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-    ];
-  } */
-
-  const [loginMut] = useMutation(loginMutation);
+  const [forgotPass] = useMutation(forgotPassword);
 
   /*   const {loading, err, data} = useQuery(getUserByEmailQuery, {
     variables: {email: "l@l.pl" }, });
@@ -77,31 +50,23 @@ function Login({
 
   let [notification, setNotification] = useState(null);
 
-  useEffect(() => {
-    if (isNotificationNeeded) {
-      setNotification("Logging in is needed for accessing top score");
-    } else {
-      setNotification(null);
-    }
-  }, [isNotificationNeeded]);
 
-  // let [error, setError] = useState(null);
 
-  let [email_or_name, setEmail_or_name] = useState("");
-  let [password, setPassword] = useState("");
+  let [email, setEmail] = useState("");
+  // let [password, setPassword] = useState("");
 
-  function loginValidation() {
-    if (email_or_name=== "" || password === "") {
+  function emailValidation() {
+    if (email=== "") {
       // setError("Email or password not provided");
-      setLoginErrorMessage("Email or password not provided");
+      setLoginErrorMessage("Email not provided");
       loginError_true();
       return;
     }
 
-    loginMut({
+    forgotPass({
       variables: {
-        email_or_name: email_or_name,
-        password: password,
+        email: email,
+        
       },
     }).then((res, err) => {
       if (err) {
@@ -130,8 +95,8 @@ function Login({
 
       loginError_false();
       logIn({
-        authenticatedUserId: res.data.login.userId,
-        token: res.data.login.token,
+        authenticatedUserId: res.data.forgotPass.userId,
+        token: res.data.forgotPassword.token,
       });
       notification_false();
 
@@ -160,45 +125,39 @@ function Login({
         <div className="main-square-auth">
           <div className="form-div">
             <div className="title-auth-div">
-              <h3 className="title title-auth">Login</h3>
+              <h3 className="title title-auth">Password Retrieval</h3>
             </div>
+            
+            <p style={{color: "steelblue"}}>A password change link will be sent to the provided email address.</p>
+
+            
             <form className="form">
               {/* associating label with input without ID -> nesting */}
               <label className="label">
-                Email address / username
+                Email address
                 <input
                   className="input"
                   // type="email"
                   onChange={(e) => {
-                    setEmail_or_name(e.target.value);
+                    setEmail(e.target.value);
                   }}
-                  value={email_or_name}
+                  value={email}
                 />
               </label>
               <br />
-              <br />
+            
 
-              <label className="label">
-                Password
-                <input
-                  className="input"
-                  type="password"
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                  value={password}
-                />
-              </label>
-              <br />
+         
+             
 
               <button
                 className="btn btn-control btn-auth"
                 onClick={(e) => {
                   e.preventDefault();
-                  loginValidation();
+                  emailValidation();
                 }}
               >
-                Login
+                Send link
               </button>
             </form>
             <div className="auth-links-div">
@@ -214,17 +173,6 @@ function Login({
               </p>
 
               <p className="auth-link-item">
-              Forgot password? Click&nbsp;
-              <Link
-                  to="/passretrieve"
-                  // onClick={notification_false}
-                  className="auth-link"
-                >
-                here
-              </Link>
-              </p>
-              
-              <p className="auth-link-item" style={{marginTop: "1rem"}}>
                 <Link
                   to="/"
                   // onClick={notification_false}
@@ -234,8 +182,6 @@ function Login({
                 </Link>
                 &nbsp;to speed typing
               </p>
-
-
             </div>
           </div>
         </div>
@@ -268,4 +214,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
   // Your component will receive dispatch by default, i.e., when you do not supply a second parameter to connect():
-)(Login);
+)(PasswordRetrieval);

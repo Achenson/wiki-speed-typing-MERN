@@ -526,6 +526,7 @@ const Mutation = new GraphQLObjectType({
         });
       },
 
+      // should return authData instead to automatically login?
       
 
         
