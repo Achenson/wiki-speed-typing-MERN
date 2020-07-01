@@ -103,6 +103,8 @@ DONE 36. change password DONE
 47. hot module reload?
 48. check redis video
 49. authData token expiration not needed?
+50. better email/password validation across the app?
+51. clean PasswordChange & PassRetrival redux connection
 
 
 
