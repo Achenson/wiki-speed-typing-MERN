@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import AuthNotification from "./AuthNotification";
 
@@ -14,7 +14,11 @@ import { changePasswordAfterForgot } from "../graphql/queries.js";
 import { useMutation } from "@apollo/react-hooks";
 import { use } from "passport";
 
-function ForgottenPassChange({ logIn }) {
+function ForgottenPassChange(props) {
+
+
+  let { token } = useParams();
+
   const [passchangeCSSClass, setPasschangeCSSClass] = useState(
     "btn btn-control btn-auth"
   );
@@ -75,7 +79,7 @@ function ForgottenPassChange({ logIn }) {
 
     changePassAfterForgot({
       variables: {
-        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWRlNGQ0Nzc0YmU4NDMxMzQ4MjE5ZGUiLCJlbWFpbCI6Im9Aby5wbCIsImlhdCI6MTU5MzY4MDIxNiwiZXhwIjoxNTkzNjgwODE2fQ.8SKH6RI2768H18J4acrcdUiem934uyAIeTVw",
+        token: token,
         password: newPassword,
       },
     }).then((res, err) => {
@@ -98,7 +102,7 @@ function ForgottenPassChange({ logIn }) {
         return;
       }
 
-      logIn({
+      props.logIn({
         authenticatedUserId: res.data.changePasswordAfterForgot.userId,
         token: res.data.changePasswordAfterForgot.token,
       });
@@ -114,6 +118,9 @@ function ForgottenPassChange({ logIn }) {
     });
   }
 
+  console.log(props);
+  
+  
   return (
     <div>
       {errorNotification ? (
@@ -206,6 +213,8 @@ const mapDispatchToProps = (dispatch) => {
     logIn: (dataObj) => dispatch({ type: "LOG_IN", payload: dataObj }),
   };
 };
+
+// ForgottenPassChange.getInitialProps()
 
 export default connect(
   mapStateToProps,

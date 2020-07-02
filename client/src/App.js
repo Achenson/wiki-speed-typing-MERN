@@ -142,7 +142,7 @@ function App({
           />
           <CustomRoute path="/passchange" component={PasswordChange} />
           <CustomRoute path="/passforgot" component={PasswordForgotten} />
-          <CustomRoute path="/passforgot-change" component={ForgottenPassChange} />
+          <CustomRoute path="/passforgot-change/:token" component={ForgottenPassChange} />
           <CustomRoute path="/delete-account" component={DeleteAccount} />
 
           {/* testing isAuth, has to be clicked on Link to work */}

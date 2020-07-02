@@ -522,17 +522,17 @@ const Mutation = new GraphQLObjectType({
             };
           });
   
-          User.findByIdAndUpdate(userId, update, {
+         let updatedUser = await User.findByIdAndUpdate(userId, update, {
             new: true,
             useFindAndModify: false,
           });
   
   
-          sendRefreshToken(res, createRefreshToken(user));
+          sendRefreshToken(res, createRefreshToken(updatedUser));
   
-          const token = createAccessToken(user);
+          const token = createAccessToken(updatedUser);
   
-          return { userId: user.id, token: token, tokenExpiration: 1 };
+          return { userId: updatedUser.id, token: token, tokenExpiration: 1 };
         } catch (err) {
           console.log(err);
           return null;

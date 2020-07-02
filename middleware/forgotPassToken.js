@@ -9,7 +9,7 @@ module.exports = (user) => {
     // "somesupersecretkey",,
     process.env.FORGOT_PASSWORD,
     {
-      expiresIn: "10min",
+      expiresIn: "30m",
     }
   );
 };
