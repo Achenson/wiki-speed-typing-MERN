@@ -14,11 +14,7 @@ import { changePasswordAfterForgot } from "../graphql/queries.js";
 import { useMutation } from "@apollo/react-hooks";
 import { use } from "passport";
 
-function ForgottenPassChange({
-  
-  authenticatedUserId,
- 
-}) {
+function ForgottenPassChange({ logIn }) {
   const [passchangeCSSClass, setPasschangeCSSClass] = useState(
     "btn btn-control btn-auth"
   );
@@ -79,18 +75,33 @@ function ForgottenPassChange({
 
     changePassAfterForgot({
       variables: {
-        token: "someToken",
+        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWRlNGQ0Nzc0YmU4NDMxMzQ4MjE5ZGUiLCJlbWFpbCI6Im9Aby5wbCIsImlhdCI6MTU5MzY4MDIxNiwiZXhwIjoxNTkzNjgwODE2fQ.8SKH6RI2768H18J4acrcdUiem934uyAIeTVw",
         password: newPassword,
-        
       },
-    }).then((res) => {
+    }).then((res, err) => {
       // console.log("updatePass resss");
-      // console.log(res);
+
+      if (err) {
+        // setError("loginMut Error");
+        console.log(err);
+        setErrorNotification("Server Error");
+        return;
+      }
+
+     
+      console.log("changePassAfterForgot res");
+      console.log(res);
+
 
       if (!res.data.changePasswordAfterForgot) {
         setErrorNotification("failed to change password");
         return;
       }
+
+      logIn({
+        authenticatedUserId: res.data.changePasswordAfterForgot.userId,
+        token: res.data.changePasswordAfterForgot.token,
+      });
 
       setErrorNotification(null);
       setInfoNotification("Password successfully changed. Logging in...");
@@ -98,12 +109,9 @@ function ForgottenPassChange({
       setIsPasschangeClickable(false);
 
       setTimeout(() => {
-
         history.replace("/");
       }, 2500);
     });
-
-    
   }
 
   return (
@@ -131,7 +139,7 @@ function ForgottenPassChange({
             <form className="form">
               {/* associating label with input without ID -> nesting */}
 
-              <br/>
+              <br />
               <label className="label">
                 New password
                 <input
@@ -195,7 +203,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
- 
+    logIn: (dataObj) => dispatch({ type: "LOG_IN", payload: dataObj }),
   };
 };
 
