@@ -474,7 +474,7 @@ const Mutation = new GraphQLObjectType({
         await sendEmail(
           args.email,
           // `http://localhost:3000/user/passchange/${token}`
-          `http://localhost:3000/passchange/jwt/${token}`
+          `http://localhost:3000/passforgot-change/${token}`
         );
 
         return true;
@@ -524,6 +524,9 @@ const Mutation = new GraphQLObjectType({
           new: true,
           useFindAndModify: false,
         });
+
+
+
       },
 
       // should return authData instead to automatically login?

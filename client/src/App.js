@@ -11,7 +11,8 @@ import Main from "./components_links/Main.js";
 import Login from "./components_links/Login.js";
 import Register from "./components_links/Register.js";
 import PasswordChange from "./components_links/PasswordChange.js";
-import PasswordRetrieval from "./components_links/PasswordRetrieval";
+import PasswordForgotten from "./components_links/PasswordForgot.js";
+import ForgottenPassChange from "./components_links/ForgottenPassChange.js";
 
 import DeleteAccount from "./components_links/DeleteAccount.js";
 import CustomRoute from "./components_links/CustomRoute.js";
@@ -22,6 +23,7 @@ import { fetchWikiApi } from "./redux/actions/fetchPostAction.js";
 
 // import { BrowserRouter, Route, Link, Switch, Redirect, useHistory, HashRouter } from "react-router-dom";
 import { Route, Switch, BrowserRouter, Link } from "react-router-dom";
+import PassChangeAfterForgot from "./components_links/ForgottenPassChange";
 
 //!!!!! imported actions creators must be passed here as props
 function App({
@@ -139,7 +141,8 @@ function App({
             component={Login}
           />
           <CustomRoute path="/passchange" component={PasswordChange} />
-          <CustomRoute path="/passretrieve" component={PasswordRetrieval} />
+          <CustomRoute path="/passforgot" component={PasswordForgotten} />
+          <CustomRoute path="/passforgot-change" component={ForgottenPassChange} />
           <CustomRoute path="/delete-account" component={DeleteAccount} />
 
           {/* testing isAuth, has to be clicked on Link to work */}

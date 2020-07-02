@@ -12,7 +12,7 @@ import { useMutation } from "@apollo/react-hooks";
 
 import { forgotPassword } from "../graphql/queries.js";
 
-function PasswordRetrieval({}) {
+function PasswordForgotten({}) {
   const [forgotPass] = useMutation(forgotPassword);
 
   // not {history}!!! because we are not destructuring here,
@@ -161,4 +161,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
   // Your component will receive dispatch by default, i.e., when you do not supply a second parameter to connect():
-)(PasswordRetrieval);
+)(PasswordForgotten);

@@ -105,6 +105,8 @@ DONE 36. change password DONE
 49. authData token expiration not needed?
 50. better email/password validation across the app?
 51. clean PasswordChange & PassRetrival redux connection
+52. passwordRetrieval - better name? component name & header
+53. PasswordForgotten - disabling button
 
 
 

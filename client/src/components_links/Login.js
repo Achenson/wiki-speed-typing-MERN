@@ -216,7 +216,7 @@ function Login({
               <p className="auth-link-item">
               Forgot password? Click&nbsp;
               <Link
-                  to="/passretrieve"
+                  to="/passforgot"
                   // onClick={notification_false}
                   className="auth-link"
                 >
