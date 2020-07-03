@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 // import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -15,10 +15,33 @@ import { forgotPassword } from "../graphql/queries.js";
 function PasswordForgotten({}) {
   const [forgotPass] = useMutation(forgotPassword);
 
+  const [passForgotCSSClass, setPassForgotCSSClass] = useState(
+    "btn btn-control btn-auth"
+  );
+
+  const [isPassForgotClickable, setIsPassForgotClickable] = useState(true);
+
+  const disablePassForgotBtn = useRef(null);
+
+  if (disablePassForgotBtn.current) {
+    disablePassForgotBtn.current.removeAttribute("disabled");
+  }
+
+  useEffect(() => {
+    if (isPassForgotClickable) {
+      setPassForgotCSSClass("btn btn-control btn-auth");
+      disablePassForgotBtn.current.setAttribute("disabled", true);
+    } else {
+      setPassForgotCSSClass("btn btn-control-disabled btn-auth");
+      if (disablePassForgotBtn.current) {
+        disablePassForgotBtn.current.removeAttribute("disabled");
+      }
+    }
+  }, [isPassForgotClickable]);
+
   // not {history}!!! because we are not destructuring here,
   // history is an object!
   let history = useHistory();
-
 
   let [errorNotification, setErrorNotification] = useState(null);
   let [infoNotification, setInfoNotification] = useState(null);
@@ -46,6 +69,9 @@ function PasswordForgotten({}) {
         email: email,
       },
     }).then((res, err) => {
+      
+      setIsPassForgotClickable(true);
+
       if (err) {
         // setError("loginMut Error");
         setErrorNotification("Server error - email not sent");
@@ -105,9 +131,13 @@ function PasswordForgotten({}) {
               <br />
 
               <button
-                className="btn btn-control btn-auth"
+              ref={disablePassForgotBtn}
+                className={passForgotCSSClass}
                 onClick={(e) => {
                   e.preventDefault();
+                  setInfoNotification(null);
+                  setErrorNotification(null);
+                  setIsPassForgotClickable(false);
                   emailValidation();
                 }}
               >
@@ -125,7 +155,6 @@ function PasswordForgotten({}) {
                   here
                 </Link>
               </p>
-
               <p className="auth-link-item">
                 <Link
                   to="/"
