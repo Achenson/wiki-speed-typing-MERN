@@ -109,6 +109,7 @@ DONE 36. change password DONE
 53. PasswordForgotten - disabling button
 54. try catch consistency
 55. Login - not looking good?
+56. test app without net connection
 
 
 

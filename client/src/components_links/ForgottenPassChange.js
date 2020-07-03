@@ -12,11 +12,11 @@ import AuthNotification from "./AuthNotification";
 import { changePasswordAfterForgot } from "../graphql/queries.js";
 
 import { useMutation } from "@apollo/react-hooks";
-import { use } from "passport";
 
 function ForgottenPassChange(props) {
 
 
+  // from ".../passforgot-change/:token"
   let { token } = useParams();
 
   const [passchangeCSSClass, setPasschangeCSSClass] = useState(
@@ -57,7 +57,7 @@ function ForgottenPassChange(props) {
       setErrorNotification(null);
       setInfoNotification(null);
     };
-  }, [setErrorNotification]);
+  }, [setErrorNotification, setInfoNotification]);
 
   let [newPassword, setNewPassword] = useState("");
   let [newConfirmation, setNewConfirmation] = useState("");
@@ -185,16 +185,18 @@ function ForgottenPassChange(props) {
                 Change password
               </button>
             </form>
-            <div className="auth-links-div">
               {isPasschangeClickable && (
+
+            <div className="auth-links-div">
                 <p className="auth-link-item">
                   <Link to="/" className="auth-link">
                     Back
                   </Link>
                   &nbsp;to speed typing
                 </p>
-              )}
+
             </div>
+              )}
           </div>
         </div>
       </div>

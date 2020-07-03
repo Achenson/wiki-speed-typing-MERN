@@ -289,8 +289,6 @@ const Mutation = new GraphQLObjectType({
           useFindAndModify: false,
         });
       },
-
-
     },
 
     deleteUser: {
@@ -481,7 +479,6 @@ const Mutation = new GraphQLObjectType({
       },
     },
 
-
     changePasswordAfterForgot: {
       type: AuthData,
       args: {
@@ -489,73 +486,55 @@ const Mutation = new GraphQLObjectType({
         password: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(parent, args, { req, res }) {
-
-
         try {
-          let decodedToken = jwt.verify(args.token, process.env.FORGOT_PASSWORD);
-        
+          let decodedToken = jwt.verify(
+            args.token,
+            process.env.FORGOT_PASSWORD
+          );
+
           // const userId = await User.findOne({ email: args.email });
-  
+
           let userId = decodedToken.userId;
-  
-  
+
           if (!userId) {
             return null;
           }
-  
-  
+
           let user = await User.findById(userId);
-  
+
           if (!user) {
             return null;
           }
-  
+
           // const token = uuid.v4();
-  
           // await redis.set(forgotPasswordPrefix + token, user.id, "ex", 60 * 60 * 24); // 1 day expiration
           // await redisInstance.set(token, user.id, "ex", 60 * 15); // 15 min expiration
-  
+
           let update;
           await bcrypt.hash(args.password, 12).then((newHashedPassword) => {
             update = {
               password: newHashedPassword,
             };
           });
-  
-         let updatedUser = await User.findByIdAndUpdate(userId, update, {
+
+          let updatedUser = await User.findByIdAndUpdate(userId, update, {
             new: true,
             useFindAndModify: false,
           });
-  
-  
+
+          // automatically logging in
           sendRefreshToken(res, createRefreshToken(updatedUser));
-  
+
           const token = createAccessToken(updatedUser);
-  
+
           return { userId: updatedUser.id, token: token, tokenExpiration: 1 };
         } catch (err) {
           console.log(err);
           return null;
-          
         }
-
-       
-
-
-
-      },
-
-      // should return authData instead to automatically login?
-      
-
-        
       },
     },
-
-
-
-
-  
+  },
 });
 
 module.exports = new GraphQLSchema({
