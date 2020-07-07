@@ -51,7 +51,6 @@ function Main({
   setLoginErrorMessage,
   loginError_true,
 
-  areStatsVisible,
 }) {
   let history = useHistory();
 

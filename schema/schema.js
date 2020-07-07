@@ -77,7 +77,7 @@ const AuthData = new GraphQLObjectType({
   fields: () => ({
     userId: { type: GraphQLID },
     token: { type: GraphQLString },
-    tokenExpiration: { type: GraphQLInt },
+    // tokenExpiration: { type: GraphQLInt },
   }),
 });
 
@@ -400,7 +400,6 @@ const Mutation = new GraphQLObjectType({
           return {
             userId: null,
             token: "User does not exist!",
-            tokenExpiration: null,
           };
         }
         const isEqual = await bcrypt.compare(password, user.password);
@@ -409,7 +408,6 @@ const Mutation = new GraphQLObjectType({
           return {
             userId: null,
             token: "Password is incorrect!",
-            tokenExpiration: null,
           };
         }
 
@@ -430,7 +428,7 @@ const Mutation = new GraphQLObjectType({
 
         const token = createAccessToken(user);
 
-        return { userId: user.id, token: token, tokenExpiration: 1 };
+        return { userId: user.id, token: token };
       },
     },
 
@@ -527,7 +525,7 @@ const Mutation = new GraphQLObjectType({
 
           const token = createAccessToken(updatedUser);
 
-          return { userId: updatedUser.id, token: token, tokenExpiration: 1 };
+          return { userId: updatedUser.id, token: token};
         } catch (err) {
           console.log(err);
           return null;

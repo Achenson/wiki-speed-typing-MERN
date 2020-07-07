@@ -94,15 +94,15 @@ DONE 37. delete account DONE
 38.5. reset state when first mounts or when unmounting consistency
 39. PasswordChange - css classes instead of inline?
 40. "x" in Stats?
-41. clean Main props
-42. test closing/opening components when the timer is running! (State doensn't work properly?)
+DONE 41. clean Main props DONE
+DONE 42. test closing/opening components when the timer is running! (State ?Stats? doensn't work properly?) DONE
 43. About text somewhere in Hints or in Header?
 44. test routes when typed in address
 45. final test on chrome
 46. schema - async consistency?
 47. hot module reload?
 48. check redis video
-49. authData token expiration not needed?
+DONE 49. authData token expiration not needed? DONE
 50. better email/password validation across the app?
 51. clean PasswordChange & PassRetrival redux connection
 52. passwordRetrieval - better name? component name & header
@@ -111,7 +111,9 @@ DONE 37. delete account DONE
 55. Login - not looking good?
 56. test app without net connection
 57. changePassword - "failed to update password" <- more specific?
-
+58. all console warnings
+59. closing Stats should not reset timer!
+60. pausing on clicking profile
 
 
 

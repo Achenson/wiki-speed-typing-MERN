@@ -93,7 +93,6 @@ export const loginMutation = gql`
     login(email_or_name: $email_or_name, password: $password) {
       userId
       token
-      tokenExpiration
     }
   }
 `;
