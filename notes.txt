@@ -60,7 +60,7 @@ DONE 6.5 persisting session after accessToken expired (migrating from apollo-boo
 DONE 7. put (check how to come with proper secret: string min. 32 length, the longer the better) secrets in .env file DONE 
 DONE 8. [old problem?] changing stats don't change timer setting automatically. DONE (changing Stats change timer, but only after
 stats are closed)
-10. token will require only ID, not email?
+DONE 10. token will require only ID, not email? DONE
 11. changing module.export to imports?
 DONE [optional] 12. createrefreshToken in a new file 1:15:00 DONE
 12. check: network-only policy for useQuery?
@@ -89,7 +89,7 @@ DONE 32. clean passed props in components DONE AllRenders cleaned, more componen
 34. function imports consistency
 DONE 35. profile insead of stats in authenticationUI DONE
 DONE 36. change password DONE
-37. delete account
+DONE 37. delete account DONE
 38. consistency - Register can have less store connection same as PasswordChange?
 38.5. reset state when first mounts or when unmounting consistency
 39. PasswordChange - css classes instead of inline?
@@ -110,6 +110,7 @@ DONE 36. change password DONE
 54. try catch consistency
 55. Login - not looking good?
 56. test app without net connection
+57. changePassword - "failed to update password" <- more specific?
 
 
 
