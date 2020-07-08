@@ -108,7 +108,7 @@ DONE 49. authData token expiration not needed? DONE
 52. passwordRetrieval - better name? component name & header
 53. PasswordForgotten - disabling button
 54. try catch consistency
-55. Login - not looking good?
+DONE 55. Login - not looking good? DONE
 56. test app without net connection
 57. changePassword - "failed to update password" <- more specific?
 58. all console warnings

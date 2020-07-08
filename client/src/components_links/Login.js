@@ -202,7 +202,7 @@ function Login({
               </button>
             </form>
             <div className="auth-links-div">
-              <p className="auth-link-item">
+              <p className="auth-link-item" style={{marginBottom: "0.25rem"}}>
                 No account?&nbsp;Register{" "}
                 <Link
                   // onClick={notification_false}
@@ -213,7 +213,7 @@ function Login({
                 </Link>
               </p>
 
-              <p className="auth-link-item">
+              <p className="auth-link-item" style={{marginBottom: "0.75rem"}}>
               Forgot password? Click&nbsp;
               <Link
                   to="/passforgot"
@@ -224,7 +224,7 @@ function Login({
               </Link>
               </p>
               
-              <p className="auth-link-item" style={{marginTop: "1rem"}}>
+              <p className="auth-link-item" >
                 <Link
                   to="/"
                   // onClick={notification_false}
