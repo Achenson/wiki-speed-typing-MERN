@@ -99,7 +99,7 @@ DONE 42. test closing/opening components when the timer is running! (State ?Stat
 43. About text somewhere in Hints or in Header?
 44. test routes when typed in address
 45. final test on chrome
-46. schema - async consistency?
+DONE 46. schema - async consistency? DONE
 47. hot module reload?
 48. check redis video
 DONE 49. authData token expiration not needed? DONE

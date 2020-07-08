@@ -132,8 +132,9 @@ const Mutation = new GraphQLObjectType({
         email: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
       },
-      resolve(parent, args) {
-        return Promise.all([
+      async resolve(parent, args) {
+
+        let arrOfBooleans = await Promise.all([
           new Promise((resolve, reject) => {
             User.findOne({ name: args.name }, (err, res) => {
               if (err) console.log(err);
@@ -159,58 +160,58 @@ const Mutation = new GraphQLObjectType({
               }
             });
           }),
-        ]).then((data) => {
-          console.log(data);
+        ]);
 
-          return new Promise((resolve, reject) => {
-            if (data[0] && data[1]) {
-              // if user  with this email is not found
+        // console.log(arrOfBooleans);
 
-              bcrypt.hash(args.password, 12).then((hashedPassword) => {
-                let user = new User({
-                  name: args.name,
-                  email: args.email,
-                  password: hashedPassword,
-                  tokenVersion: 0,
-                });
+        return new Promise((resolve, reject) => {
+          if (arrOfBooleans[0] && arrOfBooleans[1]) {
+            // if user  with this name & email is not found
 
-                return user.save((err, product) => {
-                  if (err) console.log(err);
-
-                  console.log("product");
-                  console.log(product);
-
-                  let arrOfZeros = [
-                    [0, 0],
-                    [0, 0],
-                    [0, 0],
-                    [0, 0],
-                    [0, 0],
-                    [0, 0],
-                    [0, 0],
-                    [0, 0],
-                    [0, 0],
-                    [0, 0],
-                  ];
-
-                  let newScore = new Score({
-                    userId: product.id,
-                    five_s: arrOfZeros,
-                    thirty_s: arrOfZeros,
-                    one_min: arrOfZeros,
-                    two_min: arrOfZeros,
-                    five_min: arrOfZeros,
-                  });
-
-                  newScore.save();
-
-                  resolve(product);
-                });
+            bcrypt.hash(args.password, 12).then((hashedPassword) => {
+              let user = new User({
+                name: args.name,
+                email: args.email,
+                password: hashedPassword,
+                tokenVersion: 0,
               });
-            } else {
-              resolve(null);
-            }
-          });
+
+              return user.save((err, product) => {
+                if (err) console.log(err);
+
+                console.log("product");
+                console.log(product);
+
+                let arrOfZeros = [
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                  [0, 0],
+                ];
+
+                let newScore = new Score({
+                  userId: product.id,
+                  five_s: arrOfZeros,
+                  thirty_s: arrOfZeros,
+                  one_min: arrOfZeros,
+                  two_min: arrOfZeros,
+                  five_min: arrOfZeros,
+                });
+
+                newScore.save();
+
+                resolve(product);
+              });
+            });
+          } else {
+            resolve(null);
+          }
         });
 
         /*   BEFORE (only email check):
@@ -525,7 +526,7 @@ const Mutation = new GraphQLObjectType({
 
           const token = createAccessToken(updatedUser);
 
-          return { userId: updatedUser.id, token: token};
+          return { userId: updatedUser.id, token: token };
         } catch (err) {
           console.log(err);
           return null;
