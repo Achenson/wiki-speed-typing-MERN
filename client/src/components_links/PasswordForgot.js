@@ -61,6 +61,7 @@ function PasswordForgotten() {
     if (email === "" || email.indexOf("@") === -1) {
       // setError("Email or password not provided");
       setErrorNotification("Invalid email");
+     setIsPassForgotClickable(true);
       return;
     }
 
