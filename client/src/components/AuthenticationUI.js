@@ -73,6 +73,10 @@ function AuthenticationUI({
                 toggleHints();
               }
 
+              if (isActive) {
+                toggleActive();
+              }
+
               toggleProfile();
             }}
           >
