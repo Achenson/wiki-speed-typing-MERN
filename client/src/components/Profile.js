@@ -47,7 +47,10 @@ function Profile({
         <p style={{ textAlign: "center", fontSize: "0.8em" }}>Logged in as</p>
         <p className="profile-title">{displayingName}</p>
         <ul className="list-profile">
-          <li className="profile-score" onClick={toggleStats}>
+          <li className="profile-score" onClick={() => {
+
+            toggleStats()}}
+            >
             Top score &nbsp;
           </li>
           <li

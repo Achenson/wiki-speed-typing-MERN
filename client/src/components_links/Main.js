@@ -51,6 +51,9 @@ function Main({
   setLoginErrorMessage,
   loginError_true,
 
+  constantTimerValue_basedOnStats,
+  areStatsVisible
+
 }) {
   let history = useHistory();
 
@@ -112,6 +115,11 @@ function Main({
     if (!isAuthenticated) {
       return;
     }
+
+    if (areStatsVisible && !isCounterRunning) {
+      setTimerOnSelect(constantTimerValue_basedOnStats);
+    }
+
 
     if (!isActive) {
       // toggleAreHintsVisible(h => !h);
@@ -367,6 +375,10 @@ const mapStateToProps = (state) => {
     authenticatedUserId: state.authState.authenticatedUserId,
     //
     disableFocusTextArea: state.displayState.inputArea.disableFocusTextArea,
+
+    constantTimerValue_basedOnStats:
+      state.resultsAndTimerState.constantTimerValue_basedOnStats,
+
   };
 };
 
@@ -429,6 +441,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: error }),
     loginError_true: () => dispatch({ type: "LOGIN_ERROR_TRUE" }),
   };
+
+  
 };
 
 export default connect(

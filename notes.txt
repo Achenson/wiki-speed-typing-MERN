@@ -112,8 +112,9 @@ DONE 49. authData token expiration not needed? DONE
 56. test app without net connection
 57. changePassword - "failed to update password" <- more specific?
 58. all console warnings
-59. closing Stats should not reset timer!
+DONE 59. closing Stats should not reset timer! DONE
 60. pausing on clicking profile
+61. Stats working consistency in profile * lowerUI
 
 
 

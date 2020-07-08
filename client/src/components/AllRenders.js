@@ -48,7 +48,9 @@ function AllRenders({
         <UpperUI toggleHints={toggleHints} />
 
         <Hints toggleStats={toggleStats} />
-        <Profile toggleStats={toggleStats}/>
+        <Profile toggleStats={toggleStats}
+          setTimerOnSelect={setTimerOnSelect}
+        />
 
         <WikiDisplay
           arrToRender={arrToRender}
