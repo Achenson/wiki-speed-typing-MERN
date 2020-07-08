@@ -15,14 +15,8 @@ import { loginMutation } from "../graphql/queries.js";
 function Login({
   logIn,
   isNotificationNeeded,
-  showLoginError,
-
   notification_false,
-  loginError_true,
-  loginError_false,
-  registerError_false,
-  loginErrorMessage,
-  setLoginErrorMessage,
+
 }) {
   /*   useEffect(() => {
     if (!isAuthenticated) {
@@ -62,19 +56,22 @@ function Login({
     console.log('dataaaa')
     console.log(data)
   } */
+  let history = useHistory();
+  
+  let [loginErrorMessage, setLoginErrorMessage] = useState(null);
+  let [notification, setNotification] = useState(null);
+
 
   // reseting loginError whne unmounting
   useEffect(() => {
      return () => {
-    loginError_false();
+    setLoginErrorMessage(null);
      };
-  }, [loginError_false]);
+  }, [setLoginErrorMessage]);
 
   // not {history}!!! because we are not destructuring here,
   // history is an object!
-  let history = useHistory();
 
-  let [notification, setNotification] = useState(null);
 
   useEffect(() => {
     if (isNotificationNeeded) {
@@ -91,9 +88,7 @@ function Login({
 
   function loginValidation() {
     if (email_or_name=== "" || password === "") {
-      // setError("Email or password not provided");
       setLoginErrorMessage("Email or password not provided");
-      loginError_true();
       return;
     }
 
@@ -106,28 +101,25 @@ function Login({
       if (err) {
         // setError("loginMut Error");
         setLoginErrorMessage("loginMut Error");
-        loginError_true();
         return;
       }
 
       if (res.data.login.token === "User does not exist!") {
         // setError(`${res.data.login.token}`);
         setLoginErrorMessage(`${res.data.login.token}`);
-        loginError_true();
         return;
       }
 
       if (res.data.login.token === "Password is incorrect!") {
         // setError(`${res.data.login.token}`);
         setLoginErrorMessage(`${res.data.login.token}`);
-        loginError_true();
         return;
       }
 
       console.log("loginMut res");
       console.log(res);
 
-      loginError_false();
+      setLoginErrorMessage(null)
       logIn({
         authenticatedUserId: res.data.login.userId,
         token: res.data.login.token,
@@ -148,7 +140,7 @@ function Login({
           colorClass={"auth-notification-info"}
         />
       ) : null}
-      {showLoginError ? (
+      {loginErrorMessage ? (
         <AuthNotification
           notification={loginErrorMessage}
           colorClass={"auth-notification-danger"}
@@ -246,8 +238,6 @@ function Login({
 const mapStateToProps = (state) => {
   return {
     isNotificationNeeded: state.authState.isNotificationNeeded,
-    showLoginError: state.authState.showLoginError,
-    loginErrorMessage: state.authState.loginErrorMessage,
   };
 };
 
@@ -255,14 +245,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     logIn: (dataObj) => dispatch({ type: "LOG_IN", payload: dataObj }),
     notification_false: () => dispatch({ type: "NOTIFICATION_FALSE" }),
-    loginError_true: () => dispatch({ type: "LOGIN_ERROR_TRUE" }),
-    loginError_false: () => dispatch({ type: "LOGIN_ERROR_FALSE" }),
-    registerError_false: () => dispatch({ type: "REGISTER_ERROR_FALSE" }),
-    setLoginErrorMessage: (error) =>
-      dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: error }),
-  };
 };
-
+};
 export default connect(
   mapStateToProps,
   mapDispatchToProps

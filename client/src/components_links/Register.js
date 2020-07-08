@@ -14,26 +14,22 @@ import { useMutation } from "@apollo/react-hooks";
 import { addNewUserMutation } from "../graphql/queries.js";
 
 function Register({
-  showRegisterError,
-  registerError_true,
-  registerError_false,
-  notification_false,
-  loginError_false,
+
 }) {
   const [addUser] = useMutation(addNewUserMutation);
-
+  
+  let [errorNotification, setErrorNotification] = useState(null);
   // resetting register error when unmounting
+
   useEffect(() => {
      return () => {
-    registerError_false();
-    notification_false();
+   setErrorNotification(null)
      };
-  }, [registerError_false, notification_false]);
+  }, [setErrorNotification]);
 
   // let isAuthenticated = false;
   let history = useHistory();
 
-  let [errorNotification, setErrorNotification] = useState(null);
 
   let [username, setUsername] = useState("");
   let [email, setEmail] = useState("");
@@ -43,31 +39,26 @@ function Register({
   function registerValidation() {
     if (username === "") {
       setErrorNotification("Invalid username");
-      registerError_true();
       return;
     }
 
     if (username.indexOf("@") > -1) {
       setErrorNotification("Invalid username - @ symbol is not allowed");
-      registerError_true();
       return;
     }
 
-    if (email === "") {
+    if (email === "" || email.indexOf('@') === -1) {
       setErrorNotification("Invalid email");
-      registerError_true();
       return;
     }
 
     if (password === "") {
       setErrorNotification("Invalid password");
-      registerError_true();
       return;
     }
 
     if (password !== confirmation) {
       setErrorNotification("Password confirmation does not match");
-      registerError_true();
       return;
     }
 
@@ -85,12 +76,11 @@ function Register({
       console.log(res);
 
       if (res.data.addUser) {
-        registerError_false();
+        setErrorNotification(null)
         history.push("/login");
         return;
       } else {
         setErrorNotification("Username or email is already in use");
-        registerError_true();
         return;
       }
     });
@@ -98,7 +88,7 @@ function Register({
 
   return (
     <div>
-      {showRegisterError ? (
+      {errorNotification ? (
         <AuthNotification
           notification={errorNotification}
           colorClass={"auth-notification-danger"}
@@ -198,16 +188,15 @@ function Register({
 const mapStateToProps = (state) => {
   return {
     // isNotificationNeeded: state.authState.isNotificationNeeded,
-    showRegisterError: state.authState.showRegisterError,
+    // showRegisterError: state.authState.showRegisterError,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    registerError_true: () => dispatch({ type: "REGISTER_ERROR_TRUE" }),
-    registerError_false: () => dispatch({ type: "REGISTER_ERROR_FALSE" }),
-    notification_false: () => dispatch({ type: "NOTIFICATION_FALSE" }),
-    loginError_false: () => dispatch({ type: "LOGIN_ERROR_FALSE" }),
+    // registerError_true: () => dispatch({ type: "REGISTER_ERROR_TRUE" }),
+    // registerError_false: () => dispatch({ type: "REGISTER_ERROR_FALSE" }),
+    // loginError_false: () => dispatch({ type: "LOGIN_ERROR_FALSE" }),
 
     /* addNewUser: (addUser, addScore, username, email, password) =>
       dispatch(

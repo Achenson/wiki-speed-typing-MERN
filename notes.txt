@@ -90,7 +90,7 @@ DONE 32. clean passed props in components DONE AllRenders cleaned, more componen
 DONE 35. profile insead of stats in authenticationUI DONE
 DONE 36. change password DONE
 DONE 37. delete account DONE
-38. consistency - Register (Login?) can have less store connection same as PasswordChange? +
+DONE 38. consistency - Register (& Login) can have less store connection same as PasswordChange? + DONE
 DONE 38.25. Register & Login reseting each other -> more logical code needed DONE 
 38.5. reset state when first mounts or when unmounting consistency
 39. PasswordChange, Login - css classes instead of inline?
