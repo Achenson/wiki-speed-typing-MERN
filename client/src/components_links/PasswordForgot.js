@@ -12,7 +12,7 @@ import { useMutation } from "@apollo/react-hooks";
 
 import { forgotPassword } from "../graphql/queries.js";
 
-function PasswordForgotten({}) {
+function PasswordForgotten() {
   const [forgotPass] = useMutation(forgotPassword);
 
   const [passForgotCSSClass, setPassForgotCSSClass] = useState(

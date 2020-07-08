@@ -13,9 +13,7 @@ import { useMutation } from "@apollo/react-hooks";
 
 import { addNewUserMutation } from "../graphql/queries.js";
 
-function Register({
-
-}) {
+function Register() {
   const [addUser] = useMutation(addNewUserMutation);
   
   let [errorNotification, setErrorNotification] = useState(null);
@@ -187,21 +185,13 @@ function Register({
 
 const mapStateToProps = (state) => {
   return {
-    // isNotificationNeeded: state.authState.isNotificationNeeded,
-    // showRegisterError: state.authState.showRegisterError,
+    
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // registerError_true: () => dispatch({ type: "REGISTER_ERROR_TRUE" }),
-    // registerError_false: () => dispatch({ type: "REGISTER_ERROR_FALSE" }),
-    // loginError_false: () => dispatch({ type: "LOGIN_ERROR_FALSE" }),
 
-    /* addNewUser: (addUser, addScore, username, email, password) =>
-      dispatch(
-        addNewUser_postAction(addUser, addScore, username, email, password)
-      ), */
   };
 };
 

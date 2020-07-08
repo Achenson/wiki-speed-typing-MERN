@@ -105,7 +105,7 @@ DONE 46. schema - async consistency? DONE
 48. check redis video
 DONE 49. authData token expiration not needed? DONE
 50. better email/password validation across the app?
-51. clean PasswordChange & PassRetrival redux connection
+DONE 51. clean PasswordChange & PassRetrival redux connection DONE
 52. passwordRetrieval - better name? component name & header
 DONE 53. PasswordForgotten - disabling button DONE
 54. try catch consistency - try catch everywhere?
@@ -116,7 +116,7 @@ DONE 57. changePassword - "failed to update password" <- more specific? DONE
 DONE 59. closing Stats should not reset timer! DONE
 DONE 60. pausing on clicking profile DONE
 DONE 61. Stats working consistency in profile * lowerUI DONE
-62. reseting notification after clicking in Login, Reg....
+63. clean unused store connections in the End (Register, PasswordForgot...)
 
 
 

@@ -12,12 +12,7 @@ import { useMutation } from "@apollo/react-hooks";
 
 import { loginMutation } from "../graphql/queries.js";
 
-function Login({
-  logIn,
-  isNotificationNeeded,
-  notification_false,
-
-}) {
+function Login({ logIn, isNotificationNeeded, notification_false }) {
   /*   useEffect(() => {
     if (!isAuthenticated) {
       setStats({
@@ -57,21 +52,19 @@ function Login({
     console.log(data)
   } */
   let history = useHistory();
-  
+
   let [loginErrorMessage, setLoginErrorMessage] = useState(null);
   let [notification, setNotification] = useState(null);
 
-
   // reseting loginError whne unmounting
   useEffect(() => {
-     return () => {
-    setLoginErrorMessage(null);
-     };
+    return () => {
+      setLoginErrorMessage(null);
+    };
   }, [setLoginErrorMessage]);
 
   // not {history}!!! because we are not destructuring here,
   // history is an object!
-
 
   useEffect(() => {
     if (isNotificationNeeded) {
@@ -87,7 +80,7 @@ function Login({
   let [password, setPassword] = useState("");
 
   function loginValidation() {
-    if (email_or_name=== "" || password === "") {
+    if (email_or_name === "" || password === "") {
       setLoginErrorMessage("Email or password not provided");
       return;
     }
@@ -119,7 +112,7 @@ function Login({
       console.log("loginMut res");
       console.log(res);
 
-      setLoginErrorMessage(null)
+      setLoginErrorMessage(null);
       logIn({
         authenticatedUserId: res.data.login.userId,
         token: res.data.login.token,
@@ -186,14 +179,14 @@ function Login({
                 className="btn btn-control btn-auth"
                 onClick={(e) => {
                   e.preventDefault();
-                  loginValidation();
+                    loginValidation();
                 }}
               >
                 Login
               </button>
             </form>
             <div className="auth-links-div">
-              <p className="auth-link-item" style={{marginBottom: "0.25rem"}}>
+              <p className="auth-link-item" style={{ marginBottom: "0.25rem" }}>
                 No account?&nbsp;Register{" "}
                 <Link
                   // onClick={notification_false}
@@ -204,18 +197,18 @@ function Login({
                 </Link>
               </p>
 
-              <p className="auth-link-item" style={{marginBottom: "0.75rem"}}>
-              Forgot password? Click&nbsp;
-              <Link
+              <p className="auth-link-item" style={{ marginBottom: "0.75rem" }}>
+                Forgot password? Click&nbsp;
+                <Link
                   to="/passforgot"
                   // onClick={notification_false}
                   className="auth-link"
                 >
-                here
-              </Link>
+                  here
+                </Link>
               </p>
-              
-              <p className="auth-link-item" >
+
+              <p className="auth-link-item">
                 <Link
                   to="/"
                   // onClick={notification_false}
@@ -225,8 +218,6 @@ function Login({
                 </Link>
                 &nbsp;to speed typing
               </p>
-
-
             </div>
           </div>
         </div>
@@ -245,7 +236,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     logIn: (dataObj) => dispatch({ type: "LOG_IN", payload: dataObj }),
     notification_false: () => dispatch({ type: "NOTIFICATION_FALSE" }),
-};
+  };
 };
 export default connect(
   mapStateToProps,
