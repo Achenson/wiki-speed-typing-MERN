@@ -63,13 +63,12 @@ function Login({
     console.log(data)
   } */
 
-  // reseting authState for Register, so auth notifications/warnings disappear
-  // when going back to Register
+  // reseting loginError whne unmounting
   useEffect(() => {
-    // return () => {
-    registerError_false();
-    // };
-  }, [registerError_false]);
+     return () => {
+    loginError_false();
+     };
+  }, [loginError_false]);
 
   // not {history}!!! because we are not destructuring here,
   // history is an object!

@@ -90,9 +90,10 @@ DONE 32. clean passed props in components DONE AllRenders cleaned, more componen
 DONE 35. profile insead of stats in authenticationUI DONE
 DONE 36. change password DONE
 DONE 37. delete account DONE
-38. consistency - Register can have less store connection same as PasswordChange?
+38. consistency - Register (Login?) can have less store connection same as PasswordChange? +
+DONE 38.25. Register & Login reseting each other -> more logical code needed DONE 
 38.5. reset state when first mounts or when unmounting consistency
-39. PasswordChange - css classes instead of inline?
+39. PasswordChange, Login - css classes instead of inline?
 40. "x" in Stats?
 DONE 41. clean Main props DONE
 DONE 42. test closing/opening components when the timer is running! (State ?Stats? doensn't work properly?) DONE
@@ -107,7 +108,7 @@ DONE 49. authData token expiration not needed? DONE
 51. clean PasswordChange & PassRetrival redux connection
 52. passwordRetrieval - better name? component name & header
 DONE 53. PasswordForgotten - disabling button DONE
-54. try catch consistency
+54. try catch consistency - try catch everywhere?
 DONE 55. Login - not looking good? DONE
 56. test app without net connection
 DONE 57. changePassword - "failed to update password" <- more specific? DONE

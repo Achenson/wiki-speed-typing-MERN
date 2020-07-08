@@ -22,14 +22,13 @@ function Register({
 }) {
   const [addUser] = useMutation(addNewUserMutation);
 
-  // reseting authState for Login, so auth notifications/warnings disappear
-  // when going back to Login
+  // resetting register error when unmounting
   useEffect(() => {
-    // return () => {
-    loginError_false();
+     return () => {
+    registerError_false();
     notification_false();
-    // };
-  }, [loginError_false, notification_false]);
+     };
+  }, [registerError_false, notification_false]);
 
   // let isAuthenticated = false;
   let history = useHistory();
