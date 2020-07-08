@@ -12,7 +12,6 @@ import AuthNotification from "./AuthNotification";
 import { changePassword } from "../graphql/queries.js";
 
 import { useMutation } from "@apollo/react-hooks";
-import { use } from "passport";
 
 function PasswordChange({
   loginError_false,
@@ -98,7 +97,7 @@ function PasswordChange({
       // console.log(res);
 
       if (!res.data.changePassword) {
-        setErrorNotification("failed to update password");
+        setErrorNotification("Password change failed - recheck current password");
         return;
       }
 
@@ -113,8 +112,6 @@ function PasswordChange({
         history.replace("/login");
       }, 2500);
     });
-
-    
   }
 
   return (
