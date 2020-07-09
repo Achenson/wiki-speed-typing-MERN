@@ -86,14 +86,14 @@ DONE 29. email or username, login consistency (+ proper checking in addUser in s
 DONE 31. check JWT video comments -> changes? DONE (cookieParser only in one route, proper cookie exp date)
 DONE 32. clean passed props in components DONE AllRenders cleaned, more component connectet do store
 33. more time options
-34. function imports consistency
+XXX 34. function imports consistency backend XXX es6 modules still exp in node?
 DONE 35. profile insead of stats in authenticationUI DONE
 DONE 36. change password DONE
 DONE 37. delete account DONE
 DONE 38. consistency - Register (& Login) can have less store connection same as PasswordChange? + DONE
 DONE 38.25. Register & Login reseting each other -> more logical code needed DONE 
 38.5. reset state when first mounts or when unmounting consistency
-39. PasswordChange, Login - css classes instead of inline?
+XXX 39. PasswordChange, Login - css classes instead of inline? XXX
 40. "x" in Stats?
 DONE 41. clean Main props DONE
 DONE 42. test closing/opening components when the timer is running! (State ?Stats? doensn't work properly?) DONE
@@ -118,6 +118,7 @@ DONE 60. pausing on clicking profile DONE
 DONE 61. Stats working consistency in profile * lowerUI DONE
 63. clean unused store connections in the End (Register, PasswordForgot...)
 DONE 64. PasswordForgot error messages & disabling btn problems (btn disabled if error set) DONE
+DONE 65. redux: login & register clean up DONE
 
 
 
