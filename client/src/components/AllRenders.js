@@ -56,6 +56,7 @@ function AllRenders({
           arrToRender={arrToRender}
           arrOfPartialText={arrOfPartialText}
           ellipsis={ellipsis}
+          toggleStats={toggleStats}
         />
 
         <InputArea

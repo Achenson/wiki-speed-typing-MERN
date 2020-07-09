@@ -61,7 +61,7 @@ DONE 7. put (check how to come with proper secret: string min. 32 length, the lo
 DONE 8. [old problem?] changing stats don't change timer setting automatically. DONE (changing Stats change timer, but only after
 stats are closed)
 DONE 10. token will require only ID, not email? DONE
-11. changing module.export to imports?
+XXX 11. changing module.export to imports? XXX
 DONE [optional] 12. createrefreshToken in a new file 1:15:00 DONE
 12. check: network-only policy for useQuery?
 13. style initiall loading in the App
@@ -92,9 +92,9 @@ DONE 36. change password DONE
 DONE 37. delete account DONE
 DONE 38. consistency - Register (& Login) can have less store connection same as PasswordChange? + DONE
 DONE 38.25. Register & Login reseting each other -> more logical code needed DONE 
-38.5. reset state when first mounts or when unmounting consistency
+DONE 38.5. reset state when first mounts or when unmounting consistency (Login, register) DONe
 XXX 39. PasswordChange, Login - css classes instead of inline? XXX
-40. "x" in Stats?
+DONE 40. "x" in Stats? DONE instead -> closing stats by clicking wiki display
 DONE 41. clean Main props DONE
 DONE 42. test closing/opening components when the timer is running! (State ?Stats? doensn't work properly?) DONE
 43. About text somewhere in Hints or in Header?
@@ -106,7 +106,7 @@ DONE 46. schema - async consistency? DONE
 DONE 49. authData token expiration not needed? DONE
 50. better email/password validation across the app?
 DONE 51. clean PasswordChange & PassRetrival redux connection DONE
-52. passwordRetrieval - better name? component name & header
+DONE 52. passwordRetrieval - better name? component name & header DONE
 DONE 53. PasswordForgotten - disabling button DONE
 54. try catch consistency - try catch everywhere?
 DONE 55. Login - not looking good? DONE

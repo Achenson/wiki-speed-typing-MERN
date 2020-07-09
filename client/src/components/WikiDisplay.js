@@ -6,7 +6,13 @@ import { connect } from "react-redux";
 function WikiDisplay(props) {
   return (
     <div className="wiki-display-outer container">
-      <div className="wiki-display">
+      <div className="wiki-display" onClick={ () => {
+
+        if(props.areStatsVisible) {
+          props.toggleStats()
+        }
+
+      }}>
         {props.arrToRender.map((el, i) => {
           return <SingleLetter letterToRender={el[0]} color={el[1]} key={i} />;
         })}
@@ -23,7 +29,8 @@ function WikiDisplay(props) {
 
 const mapStateToProps = (state) => {
   return {
-    indexOfPartialTextArr: state.displayState.wikiDisplay.indexOfPartialTextArr
+    indexOfPartialTextArr: state.displayState.wikiDisplay.indexOfPartialTextArr,
+    areStatsVisible: state.visibilityState.areStatsVisible,
   };
 };
 
