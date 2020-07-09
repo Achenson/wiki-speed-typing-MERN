@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const helmet = require("helmet")
 
 const jwt = require("jsonwebtoken");
 const User = require("./mongoModels/user");
@@ -21,6 +22,8 @@ const sendEmail = require("./utils/sendEmail.js");
 // bcrypt?
 
 const app = express();
+
+app.use(helmet());
 
 app.use(
   cors({

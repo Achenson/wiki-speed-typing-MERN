@@ -1,4 +1,6 @@
-// file not used for now!!! strings are dispatched instead
+
+
+// ========== file not used in the end!!! strings are dispatched instead ========= //
 let actionTypes = {
   RESULTS_CORRECT: "RESULTS_CORRECT",
   RESULTS_INCORRECT: "RESULTS_INCORRECT",
@@ -47,13 +49,6 @@ let actionTypes = {
 
   NOTIFICATION_TRUE: "NOTIFICATION_TRUE",
   NOTIFICATION_FALSE: "NOTIFICATION_TRUE",
-
-  LOGIN_ERROR_TRUE: "LOGIN_ERROR_TRUE",
-
-  LOGIN_ERROR_FALSE: "LOGIN_ERROR_FALSE",
-  REGISTER_ERROR_TRUE: "REGISTER_ERROR_TRUE",
-
-  REGISTER_ERROR_FALSE: "REGISTER_ERROR_FALSE",
 
   //for AuthenficationUI logout
   RESET_FINAL_RESULTS: "RESET_FINAL_RESULTS",
