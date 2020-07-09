@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server.js",
-    "client": "npm start --prefix client"
+    "client": "npm start --prefix client",
+    "dev": "npm-run-all -p server client"
   },
   "author": "",
   "license": "ISC",
@@ -39,5 +40,8 @@
     "passport-local": "^1.0.0",
     "uuid": "^8.2.0",
     "uuidv4": "^6.0.9"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
   }
 }

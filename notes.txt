@@ -82,7 +82,7 @@ DONE 26. Clean props in Main & Display DONE
 DONE 27. 2 components out of Display? DONE AllRenders added
 28. helmet, securtiy
 DONE 29. email or username, login consistency (+ proper checking in addUser in schema) DONE
-30. concurrent start in dev mode
+DONE 30. concurrent start in dev mode DONE npm-run-all used instead
 DONE 31. check JWT video comments -> changes? DONE (cookieParser only in one route, proper cookie exp date)
 DONE 32. clean passed props in components DONE AllRenders cleaned, more component connectet do store
 33. more time options
@@ -119,9 +119,7 @@ DONE 61. Stats working consistency in profile * lowerUI DONE
 63. clean unused store connections in the End (Register, PasswordForgot...)
 DONE 64. PasswordForgot error messages & disabling btn problems (btn disabled if error set) DONE
 DONE 65. redux: login & register clean up DONE
-
-
-
+66. check for vulnerabilities
 
 
 
