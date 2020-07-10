@@ -16,6 +16,7 @@ import ForgottenPassChange from "./components_links/ForgottenPassChange.js";
 
 import DeleteAccount from "./components_links/DeleteAccount.js";
 import CustomRoute from "./components_links/CustomRoute.js";
+import CustomRoute_AuthGuarded from "./components_links/CustomRoute_AuthGuarded.js";
 
 import Test from "./components/Test.js";
 
@@ -128,8 +129,9 @@ function App({
 
           {/* custom routes are used to avoid warning when rendering <Routes> conditionally:
             <Route> elements should not change from controlled to uncontrolled (or vice versa). You provided a "location" prop initially but omitted it on a subsequent render.
-            
              */}
+
+          {/* must NOT be authenticated to access */}
           <CustomRoute
             isAuthenticated={isAuthenticated}
             path="/register"
@@ -140,10 +142,20 @@ function App({
             path="/login"
             component={Login}
           />
-          <CustomRoute path="/passchange" component={PasswordChange} />
-          <CustomRoute path="/passforgot" component={PasswordForgotten} />
-          <CustomRoute path="/passforgot-change/:token" component={ForgottenPassChange} />
-          <CustomRoute path="/delete-account" component={DeleteAccount} />
+          <CustomRoute
+            path="/passforgot"
+            component={PasswordForgotten}
+            isAuthenticated={isAuthenticated}
+          />
+          <CustomRoute
+            path="/passforgot-change/:token"
+            component={ForgottenPassChange}
+            isAuthenticated={isAuthenticated}
+          />
+
+          {/* must be authenticated to access */}
+          <CustomRoute_AuthGuarded path="/passchange" component={PasswordChange} isAuthenticated={isAuthenticated}/>
+          <CustomRoute_AuthGuarded path="/delete-account" component={DeleteAccount} isAuthenticated={isAuthenticated}/>
 
           {/* testing isAuth, has to be clicked on Link to work */}
           <Route path="/test" component={Test} />

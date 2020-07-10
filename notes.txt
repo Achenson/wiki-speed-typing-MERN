@@ -39,13 +39,10 @@ https://github.com/apollographql/react-apollo/issues/2202 XX noCache deleted
 DONE 9. revoikingRefreshTokens -> no refreshing, but what about login? DONE
 DONE 10. same-site cookies? !! (frontend console) DONE
 DONE 11. error when the timer reaches 0 and the user is not logged in DONE
-12. app starting - wrong route?
-
-
+XXX 12. app starting - wrong route? XXx won't matter in production?
 
 to do:
 DONE 1. move graphql queries to different file DONE
-
 DONE 2. set headers in apollo (index.js in client) DONE
 DONE 3. context, req, res? DONE
 DONE 3.5 all route guarding DONE?
@@ -98,10 +95,16 @@ DONE 40. "x" in Stats? DONE instead -> closing stats by clicking wiki display
 DONE 41. clean Main props DONE
 DONE 42. test closing/opening components when the timer is running! (State ?Stats? doensn't work properly?) DONE
 43. About text somewhere in Hints or in Header?
-44. test routes when typed in address
+
+DONE 44. test routes when typed in address DONE CustomRoutes & CustomRoutes_AuthGuarded
+XX score (for Stats) ->new Error when not authenticated not used; XX
+
+44.5. proper route guarding! in schema.js
+
 45. final test on chrome
 DONE 46. schema - async consistency? DONE
-47. hot module reload?
+XXX 47. hot module reload (instead of default live reload that req. refreshing)? XXX in a next project
+-- react-hot-loader && react fast refresh...
 48. check redis video
 DONE 49. authData token expiration not needed? DONE
 50. better email/password validation across the app?

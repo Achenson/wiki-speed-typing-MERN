@@ -107,6 +107,7 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args, { req, res }) {
         if (!req.isAuth) {
           console.log("not authenticated - user isAuth false");
+          // no throwing Error because it causes unhandled error rejection!
           // throw new Error("not authenticated");
           // return null;
         } else {
@@ -133,6 +134,8 @@ const Mutation = new GraphQLObjectType({
         password: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(parent, args) {
+
+
 
         let arrOfBooleans = await Promise.all([
           new Promise((resolve, reject) => {
