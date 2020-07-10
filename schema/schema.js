@@ -135,8 +135,6 @@ const Mutation = new GraphQLObjectType({
       },
       async resolve(parent, args) {
 
-
-
         let arrOfBooleans = await Promise.all([
           new Promise((resolve, reject) => {
             User.findOne({ name: args.name }, (err, res) => {
@@ -266,7 +264,14 @@ const Mutation = new GraphQLObjectType({
         password: { type: new GraphQLNonNull(GraphQLString) },
         newPassword: { type: new GraphQLNonNull(GraphQLString) },
       },
-      async resolve(parent, args) {
+      async resolve(parent, args, {req, res}) {
+
+        if (!req.isAuth) {
+          // throw new Error("not authenticatedddd");
+          console.log("not authenticated");
+          return null;
+        } 
+
         const user = await User.findById(args.id);
 
         if (!user) {
@@ -301,7 +306,13 @@ const Mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
         password: { type: new GraphQLNonNull(GraphQLString) },
       },
-      async resolve(parent, args) {
+      async resolve(parent, args, {req, res}) {
+
+        if (!req.isAuth) {
+          console.log("not authenticated");
+          return null;
+        }
+
         const user = await User.findById(args.id);
 
         if (!user) {
@@ -357,7 +368,7 @@ const Mutation = new GraphQLObjectType({
 
         if (!req.isAuth) {
           // throw new Error("not authenticatedddd");
-          console.log("not authenticatedddd");
+          console.log("not authenticated");
           return null;
         } else {
           console.log("authenticated");
