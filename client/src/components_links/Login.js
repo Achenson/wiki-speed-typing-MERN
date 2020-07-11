@@ -12,7 +12,8 @@ import { useMutation } from "@apollo/react-hooks";
 
 import { loginMutation } from "../graphql/queries.js";
 
-function Login({ logIn, isNotificationNeeded, notification_false }) {
+// function Login({ logIn, isNotificationNeeded, notification_false }) {
+function Login({ logIn, loginNotification, setLoginNotification}) {
   /*   useEffect(() => {
     if (!isAuthenticated) {
       setStats({
@@ -54,25 +55,31 @@ function Login({ logIn, isNotificationNeeded, notification_false }) {
   let history = useHistory();
 
   let [loginErrorMessage, setLoginErrorMessage] = useState(null);
-  let [notification, setNotification] = useState(null);
+  // let [notification, setNotification] = useState(null);
 
-  // reseting loginError whne unmounting
+  // reseting loginError && loginNotification whne unmounting
   useEffect(() => {
     return () => {
       setLoginErrorMessage(null);
+      setLoginNotification(null);
     };
   }, [setLoginErrorMessage]);
 
   // not {history}!!! because we are not destructuring here,
   // history is an object!
 
-  useEffect(() => {
-    if (isNotificationNeeded) {
-      setNotification("Logging in is needed for accessing top score");
+
+
+/*   useEffect(() => {
+    if (loginNotification) {
+      setLoginNotification("Logging in is needed for accessing top score");
     } else {
-      setNotification(null);
+      setLoginNotification(null);
     }
-  }, [isNotificationNeeded]);
+  }, [loginNotification]); */
+
+
+
 
   // let [error, setError] = useState(null);
 
@@ -117,7 +124,7 @@ function Login({ logIn, isNotificationNeeded, notification_false }) {
         authenticatedUserId: res.data.login.userId,
         token: res.data.login.token,
       });
-      notification_false();
+      setLoginNotification(null);
 
       // history.push('/')
       // no going back! not possible to go back to login when logged in
@@ -127,9 +134,9 @@ function Login({ logIn, isNotificationNeeded, notification_false }) {
 
   return (
     <div>
-      {isNotificationNeeded ? (
+      {loginNotification ? (
         <AuthNotification
-          notification={notification}
+          notification={loginNotification}
           colorClass={"auth-notification-info"}
         />
       ) : null}
@@ -229,6 +236,7 @@ function Login({ logIn, isNotificationNeeded, notification_false }) {
 const mapStateToProps = (state) => {
   return {
     isNotificationNeeded: state.authState.isNotificationNeeded,
+    loginNotification: state.authState.loginNotification
   };
 };
 
@@ -236,6 +244,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     logIn: (dataObj) => dispatch({ type: "LOG_IN", payload: dataObj }),
     notification_false: () => dispatch({ type: "NOTIFICATION_FALSE" }),
+    setLoginNotification: (data) => dispatch({ type: "SET_LOGIN_NOTIFICATION", payload: data}),
   };
 };
 export default connect(

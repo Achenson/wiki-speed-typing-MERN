@@ -3,7 +3,8 @@ const initialState = {
   // authenticatedUserId: "5ea96e3da7011208ac9c795d",
   authenticatedUserId: null,
   accessToken: null,
-  isNotificationNeeded: false,
+  loginNotification: null
+
 };
 
 function authReducer(state = initialState, action) {
@@ -29,15 +30,10 @@ function authReducer(state = initialState, action) {
         authenticatedUserId: null,
         accessToken: null,
       };
-    case "NOTIFICATION_TRUE":
+    case "SET_LOGIN_NOTIFICATION":
       return {
         ...state,
-        isNotificationNeeded: true,
-      };
-    case "NOTIFICATION_FALSE":
-      return {
-        ...state,
-        isNotificationNeeded: false,
+        loginNotification: action.payload,
       };
 
     case "SET_AUTHENTICATED_USER_ID":

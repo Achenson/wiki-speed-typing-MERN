@@ -14,7 +14,7 @@ function LowerUI({
   focusElement,
   toggleStats,
   isAuthenticated,
-  notification_true,
+  setLoginNotification,
   toggleActive,
   isActive,
 }) {
@@ -106,7 +106,7 @@ function LowerUI({
               if (isActive) {
                 toggleActive();
               }
-              notification_true();
+              setLoginNotification("Logging in is needed for accessing top score");
               history.push("/login");
             }
           }}
@@ -122,16 +122,14 @@ const mapStateToProps = (state) => {
     isActive: state.resultsAndTimerState.counter.isActive,
     areResultsVisible: state.visibilityState.areResultsVisible,
     areStatsVisible: state.visibilityState.areStatsVisible,
-
-    // notificationToggle: () => dispatch({type: "NOTIFICATION_TOGGLE"})
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    notification_true: () => dispatch({ type: "NOTIFICATION_TRUE" }),
     toggleActive: () => dispatch({ type: "TOGGLE_ACTIVE" }),
     toggleAreResultsVisible: () => dispatch({ type: "RESULTS_VISIBILITY" }),
+    setLoginNotification: (data) => dispatch({ type: "SET_LOGIN_NOTIFICATION", payload: data}),
   };
 };
 
