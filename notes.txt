@@ -123,7 +123,7 @@ DONE 61. Stats working consistency in profile * lowerUI DONE
 DONE 64. PasswordForgot error messages & disabling btn problems (btn disabled if error set) DONE
 DONE 65. redux: login & register clean up DONE
 66. check for vulnerabilities
-67. bring back loginError store connection -> for updateStats!
+DONE 67. bring back loginError store connection -> for updateStats! DONE
 68. how to pass info from backend other then null & properType! optional Types?
 69. consistency -> changePassword & deleteAccount does not redirect to Login if notAuth, but addScore(in updateScore post action) does
 70. test schema.js -> change accessToken to few seconds, delete refresh token cookie

@@ -93,7 +93,6 @@ export const updateScore_postAction = (addScore, history) => (dispatch) => {
         toggleStats();
       }
 
-      dispatch({ type: "LOGIN_ERROR_TRUE" });
       dispatch({
         type: "SET_LOGIN_ERROR_MESSAGE",
         payload: "Your session has expired",

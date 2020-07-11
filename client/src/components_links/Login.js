@@ -13,49 +13,13 @@ import { useMutation } from "@apollo/react-hooks";
 import { loginMutation } from "../graphql/queries.js";
 
 // function Login({ logIn, isNotificationNeeded, notification_false }) {
-function Login({ logIn, loginNotification, setLoginNotification}) {
-  /*   useEffect(() => {
-    if (!isAuthenticated) {
-      setStats({
-        // currentStatsKey: "one_min",
-
-        five_s: makeDefaultStats(1),
-        thirty_s: makeDefaultStats(2),
-        one_min: makeDefaultStats(3),
-        two_min: makeDefaultStats(4),
-        five_min: makeDefaultStats(5),
-      });
-    }
-  }, [isAuthenticated, setStats]); */
-
-  /*  function makeDefaultStats(n) {
-    return [
-      [n, n],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-    ];
-  } */
+function Login({ logIn, loginNotification, setLoginNotification, loginErrorMessage, setLoginErrorMessage}) {
 
   const [loginMut] = useMutation(loginMutation);
 
-  /*   const {loading, err, data} = useQuery(getUserByEmailQuery, {
-    variables: {email: "l@l.pl" }, });
-
-  if (data) {
-    console.log('dataaaa')
-    console.log(data)
-  } */
+   // not {history}!!! because we are not destructuring here,
+  // history is an object!
   let history = useHistory();
-
-  let [loginErrorMessage, setLoginErrorMessage] = useState(null);
-  // let [notification, setNotification] = useState(null);
 
   // reseting loginError && loginNotification whne unmounting
   useEffect(() => {
@@ -63,26 +27,8 @@ function Login({ logIn, loginNotification, setLoginNotification}) {
       setLoginErrorMessage(null);
       setLoginNotification(null);
     };
-  }, [setLoginErrorMessage]);
-
-  // not {history}!!! because we are not destructuring here,
-  // history is an object!
-
-
-
-/*   useEffect(() => {
-    if (loginNotification) {
-      setLoginNotification("Logging in is needed for accessing top score");
-    } else {
-      setLoginNotification(null);
-    }
-  }, [loginNotification]); */
-
-
-
-
-  // let [error, setError] = useState(null);
-
+  }, [setLoginErrorMessage, setLoginNotification]);
+ 
   let [email_or_name, setEmail_or_name] = useState("");
   let [password, setPassword] = useState("");
 
@@ -236,7 +182,8 @@ function Login({ logIn, loginNotification, setLoginNotification}) {
 const mapStateToProps = (state) => {
   return {
     isNotificationNeeded: state.authState.isNotificationNeeded,
-    loginNotification: state.authState.loginNotification
+    loginNotification: state.authState.loginNotification,
+    loginErrorMessage: state.authState.loginErrorMessage,
   };
 };
 
@@ -245,6 +192,7 @@ const mapDispatchToProps = (dispatch) => {
     logIn: (dataObj) => dispatch({ type: "LOG_IN", payload: dataObj }),
     notification_false: () => dispatch({ type: "NOTIFICATION_FALSE" }),
     setLoginNotification: (data) => dispatch({ type: "SET_LOGIN_NOTIFICATION", payload: data}),
+    setLoginErrorMessage: (data) => dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: data}),
   };
 };
 export default connect(
