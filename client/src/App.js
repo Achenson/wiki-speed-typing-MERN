@@ -101,10 +101,20 @@ function App({
     setWikiButtonClickable_true,
   ]);
 
-  if (!isMainRendered) {
+  
+/*   function loopLoading() {
+    let arrOfLoading = ["loading.","loading..", "loading..." ]
+
+    setInterval( () => {
+      return arrOfLoading[]
+    }, 500)
+  } */
+
+  if (isMainRendered) {
     return (
-      <div>
-        <h3 className="title"> loading...</h3>
+      <div className="loading-div">
+        <h3 className="title loading-text"> loading...</h3>
+        <h3 className="title loading-text"> please wait</h3>
       </div>
     );
   }
