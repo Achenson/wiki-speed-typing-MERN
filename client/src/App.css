@@ -226,7 +226,11 @@ body {
 
 .loading-text {
   margin-bottom: auto;
-}
+} 
+.loading-text-top {
+  width: 62px;
+  }
+
 
 .btn {
   /* display: block; */

@@ -61,7 +61,7 @@ DONE 10. token will require only ID, not email? DONE
 XXX 11. changing module.export to imports? XXX
 DONE [optional] 12. createrefreshToken in a new file 1:15:00 DONE
 12. check: network-only policy for useQuery?
-13. style initiall loading in the App
+DONE 13. style initiall loading in the App DONE
 DONE 14 clear deleteScore postaction! DONE
 15. commentOut Test in the end
 16. change accessToken expiration in the end
@@ -122,11 +122,12 @@ DONE 61. Stats working consistency in profile * lowerUI DONE
 63. clean unused store connections in the End (Register, PasswordForgot...)
 DONE 64. PasswordForgot error messages & disabling btn problems (btn disabled if error set) DONE
 DONE 65. redux: login & register clean up DONE
-66. check for vulnerabilities
+66. check npm packages for vulnerabilities
 DONE 67. bring back loginError store connection -> for updateStats! DONE
 68. how to pass info from backend other then null & properType! optional Types?
 69. consistency -> changePassword & deleteAccount does not redirect to Login if notAuth, but addScore(in updateScore post action) does
 70. test schema.js -> change accessToken to few seconds, delete refresh token cookie
+71. passwordForgot email message
 
 
 apollo structure:

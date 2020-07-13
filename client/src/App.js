@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 
 //ApolloClient & ApolloProvider are in store.js
@@ -101,20 +101,27 @@ function App({
     setWikiButtonClickable_true,
   ]);
 
-  
-/*   function loopLoading() {
-    let arrOfLoading = ["loading.","loading..", "loading..." ]
+  const [counter, setCounter] = useState(0);
+  let arrOfLoading = [".", "..", "...", ".", "..", "...", ".", "..", "..."];
 
-    setInterval( () => {
-      return arrOfLoading[]
-    }, 500)
-  } */
+  // interval with notes -> Main.js
+  useEffect(() => {
+    let timerInterval = null;
 
-  if (isMainRendered) {
+    if (!isMainRendered && counter <= 7) {
+      timerInterval = setInterval(() => {
+        setCounter((c) => c + 1);
+      }, 500);
+    }
+
+    return () => clearInterval(timerInterval);
+  }, [counter, isMainRendered]);
+
+  if (!isMainRendered) {
     return (
       <div className="loading-div">
-        <h3 className="title loading-text"> loading...</h3>
-        <h3 className="title loading-text"> please wait</h3>
+        <h3 className="title loading-text loading-text-top">loading{arrOfLoading[counter]}</h3>
+        <h3 className="title loading-text">&nbsp;&nbsp;please wait</h3>
       </div>
     );
   }
@@ -164,8 +171,16 @@ function App({
           />
 
           {/* must be authenticated to access */}
-          <CustomRoute_AuthGuarded path="/passchange" component={PasswordChange} isAuthenticated={isAuthenticated}/>
-          <CustomRoute_AuthGuarded path="/delete-account" component={DeleteAccount} isAuthenticated={isAuthenticated}/>
+          <CustomRoute_AuthGuarded
+            path="/passchange"
+            component={PasswordChange}
+            isAuthenticated={isAuthenticated}
+          />
+          <CustomRoute_AuthGuarded
+            path="/delete-account"
+            component={DeleteAccount}
+            isAuthenticated={isAuthenticated}
+          />
 
           {/* testing isAuth, has to be clicked on Link to work */}
           <Route path="/test" component={Test} />
