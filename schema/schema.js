@@ -106,17 +106,16 @@ const RootQuery = new GraphQLObjectType({
 
       resolve(parent, args, { req, res }) {
         if (!req.isAuth) {
-          console.log("not authenticated - user isAuth false");
-          // no throwing Error because it causes unhandled error rejection!
-          // throw new Error("not authenticated");
-          // return null;
+          console.log("not authenticated");
+          // no throwing Error because it causes unhandled error rejection
+          // so it is possible to check stats even if notAuth but that's fine
         } else {
           if (args.userId) {
             return Score.findOne({ userId: args.userId });
           }
           console.log("user not fount");
+          // error will be handled by useQuery in Stats
           throw new Error("user not found");
-          // return null;
         }
       },
     },
@@ -267,8 +266,6 @@ const Mutation = new GraphQLObjectType({
       async resolve(parent, args, {req, res}) {
 
         if (!req.isAuth) {
-          // throw new Error("not authenticatedddd");
-
           console.log("not authenticated");
           // email will never have @ so it can by used to check auth
           return {email: "not auth"};

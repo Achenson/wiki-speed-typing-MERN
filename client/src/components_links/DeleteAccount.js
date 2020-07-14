@@ -86,7 +86,7 @@ function DeleteAccount({
     }).then((res) => {
       if (!res.data.deleteUser) {
         console.log("failed to delete user");
-        setErrorNotification("failed to delete user - recheck password");
+        setErrorNotification("Failed to delete user - recheck password");
         return;
       }
 

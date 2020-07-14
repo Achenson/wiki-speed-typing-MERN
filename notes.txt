@@ -96,12 +96,10 @@ DONE 40. "x" in Stats? DONE instead -> closing stats by clicking wiki display
 DONE 41. clean Main props DONE
 DONE 42. test closing/opening components when the timer is running! (State ?Stats? doensn't work properly?) DONE
 43. About text somewhere in Hints or in Header?
-
 DONE 44. test routes when typed in address DONE CustomRoutes & CustomRoutes_AuthGuarded
 XX score (for Stats) ->new Error when not authenticated not used; XX
-
-44.5. proper route guarding! in schema.js
-
+DONE 44.5. proper route guarding! in schema.js DONE route guarding for most queries that requires to be logged in
+(except for score query for stats, but it is OK to browse stats even if session expired)
 45. final test on chrome
 DONE 46. schema - async consistency? DONE
 XXX 47. hot module reload (instead of default live reload that req. refreshing)? XXX in a next project
@@ -125,10 +123,13 @@ DONE 64. PasswordForgot error messages & disabling btn problems (btn disabled if
 DONE 65. redux: login & register clean up DONE
 66. check npm packages for vulnerabilities
 DONE 67. bring back loginError store connection -> for updateStats! DONE
-68. how to pass info from backend other then null & properType! optional Types?
-69. consistency -> changePassword & deleteAccount does not redirect to Login if notAuth, but addScore(in updateScore post action) does
-70. tesing schema.js -> change accessToken to few seconds, delete refresh token cookie
-DONE 71. passwordForgot email message DONE
+xxx 68. how to pass info from backend other then null & properType! optional Types? xxx check in the future?
+xx for now logic based on user object is usedx
+DONE 69. consistency -> changePassword & deleteAccount does not redirect to Login if notAuth, but addScore(in updateScore post action) does DONE
+DONE 70. passwordForgot email message DONE
+
+
+tesing schema.js -> change accessToken to few seconds, delete refresh token cookie
 
 
 apollo structure:
