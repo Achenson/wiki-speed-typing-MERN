@@ -92,14 +92,23 @@ function PasswordChange({
         newPassword: newPassword,
       },
     }).then((res) => {
-      // console.log("updatePass resss");
+      console.log("updatePass resss");
       // console.log(res);
+      console.log(res);
+
 
       if (!res.data.changePassword) {
         setErrorNotification("Password change failed - recheck current password");
         return;
       }
 
+      // email will never have @ so it can by used to check auth
+      if(res.data.changePassword.email === "not auth") {
+        setErrorNotification("Your session has expired");
+        return;
+      }
+
+    
       setErrorNotification(null);
       setInfoNotification("Password successfully changed. Redirecting...");
 

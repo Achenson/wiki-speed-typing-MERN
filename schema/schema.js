@@ -268,8 +268,11 @@ const Mutation = new GraphQLObjectType({
 
         if (!req.isAuth) {
           // throw new Error("not authenticatedddd");
+
           console.log("not authenticated");
-          return null;
+          // email will never have @ so it can by used to check auth
+          return {email: "not auth"};
+
         } 
 
         const user = await User.findById(args.id);
@@ -310,7 +313,7 @@ const Mutation = new GraphQLObjectType({
 
         if (!req.isAuth) {
           console.log("not authenticated");
-          return null;
+          return {email: "not auth"};
         }
 
         const user = await User.findById(args.id);

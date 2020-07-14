@@ -66,7 +66,7 @@ DONE 13.5 initiall loading -> delay it? DONE
 DONE 14 clear deleteScore postaction! DONE
 15. commentOut Test in the end
 16. change accessToken expiration in the end
-17. notes -> document all the jwt logic
+17. notes -> document all the jwt logic (also  revoking tokens)
 DONE 18. fill all useEffect deps DONE
 19. Deployment? 
 XXX 20. [optional] make 2 files out of schema? (resolvers &  ...) XX in a next project
@@ -127,7 +127,7 @@ DONE 65. redux: login & register clean up DONE
 DONE 67. bring back loginError store connection -> for updateStats! DONE
 68. how to pass info from backend other then null & properType! optional Types?
 69. consistency -> changePassword & deleteAccount does not redirect to Login if notAuth, but addScore(in updateScore post action) does
-70. test schema.js -> change accessToken to few seconds, delete refresh token cookie
+70. tesing schema.js -> change accessToken to few seconds, delete refresh token cookie
 DONE 71. passwordForgot email message DONE
 
 

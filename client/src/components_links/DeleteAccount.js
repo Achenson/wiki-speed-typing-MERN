@@ -89,6 +89,12 @@ function DeleteAccount({
         return;
       }
 
+      // email will never have @ so it can by used to check auth
+      if (res.data.deleteUser.email === "not auth") {
+        setErrorNotification("Your session has expired");
+        return;
+      }
+
       console.log(res.data.deleteUser);
 
       setErrorNotification(null);
