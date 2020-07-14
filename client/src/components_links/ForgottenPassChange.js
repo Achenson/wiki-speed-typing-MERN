@@ -92,10 +92,8 @@ function ForgottenPassChange(props) {
         return;
       }
 
-     
       console.log("changePassAfterForgot res");
       console.log(res);
-
 
       if (!res.data.changePasswordAfterForgot) {
         setErrorNotification("failed to change password");
