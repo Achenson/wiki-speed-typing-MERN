@@ -49,6 +49,14 @@ function App({
   // const [isLoading, setIsLoading] = useState(true);
   // const [loginMut, { newData }] = useMutation(loginMutation);
 
+  const [isPaused, setIsPaused] = useState(true);
+
+  useEffect(() => {
+    // delay, so the loading text is not seen on every page refresh
+    // but only when the refresh is slow
+    setTimeout(() => setIsPaused(false), 500);
+  }, [setIsPaused]);
+
   useEffect(() => {
     fetch("http://localhost:4000/refresh_token", {
       method: "POST",
@@ -102,25 +110,38 @@ function App({
   ]);
 
   const [counter, setCounter] = useState(0);
-  let arrOfLoading = [".", "..", "...", ".", "..", "...", ".", "..", "..."];
+  const [iter, setIter] = useState(0);
+
+  let arrOfLoading = [".", "..", "..."];
 
   // interval with notes -> Main.js
   useEffect(() => {
     let timerInterval = null;
 
-    if (!isMainRendered && counter <= 7) {
+    if (isMainRendered && counter <= 7) {
       timerInterval = setInterval(() => {
         setCounter((c) => c + 1);
+        if (iter < 2) {
+          setIter((i) => i + 1);
+        } else {
+          setIter(0);
+        }
       }, 500);
     }
 
     return () => clearInterval(timerInterval);
-  }, [counter, isMainRendered]);
+  }, [counter, iter, isMainRendered]);
 
-  if (!isMainRendered) {
+  if (!isMainRendered && isPaused) {
+    return <div></div>;
+  }
+
+  if (!isMainRendered && !isPaused) {
     return (
       <div className="loading-div">
-        <h3 className="title loading-text loading-text-top">loading{arrOfLoading[counter]}</h3>
+        <h3 className="title loading-text loading-text-top">
+          loading{arrOfLoading[iter]}
+        </h3>
         <h3 className="title loading-text">&nbsp;&nbsp;please wait</h3>
       </div>
     );
