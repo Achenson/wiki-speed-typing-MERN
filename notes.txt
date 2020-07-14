@@ -128,7 +128,7 @@ DONE 67. bring back loginError store connection -> for updateStats! DONE
 68. how to pass info from backend other then null & properType! optional Types?
 69. consistency -> changePassword & deleteAccount does not redirect to Login if notAuth, but addScore(in updateScore post action) does
 70. test schema.js -> change accessToken to few seconds, delete refresh token cookie
-71. passwordForgot email message
+DONE 71. passwordForgot email message DONE
 
 
 apollo structure:

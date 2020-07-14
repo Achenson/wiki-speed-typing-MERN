@@ -72,8 +72,8 @@ module.exports = async function sendEmail(email, url) {
     from: '"Fred Foo 👻" <foo@example.com>', // sender address
     to: email, // list of receivers
     // UNCOMMENT FOR TESTING!!! to: "bar@example.com, baz@example.com", // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hello world?", // plain text body
+    subject: "Wiki speed typing - password change", // Subject line
+    text: "Follow the link to change password.", // plain text body
     html: `<a href="${url}">${url}</a>` // html body
   };
 
