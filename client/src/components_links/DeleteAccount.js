@@ -19,6 +19,7 @@ function DeleteAccount({
   toggleAreStatsVisible,
   authenticatedUserId,
   logOut,
+  setLoginErrorMessage
 }) {
   let history = useHistory();
 
@@ -85,13 +86,16 @@ function DeleteAccount({
     }).then((res) => {
       if (!res.data.deleteUser) {
         console.log("failed to delete user");
-        setErrorNotification("failed to delete user");
+        setErrorNotification("failed to delete user - recheck password");
         return;
       }
 
       // email will never have @ so it can by used to check auth
       if (res.data.deleteUser.email === "not auth") {
-        setErrorNotification("Your session has expired");
+        // setErrorNotification("Your session has expired");
+        logOut()
+        setLoginErrorMessage("Your session has expired")
+        history.replace("/login");
         return;
       }
 
@@ -206,6 +210,7 @@ const mapDispatchToProps = (dispatch) => {
     loginError_false: () => dispatch({ type: "LOGIN_ERROR_FALSE" }),
     toggleAreStatsVisible: () => dispatch({ type: "STATS_VISIBILITY" }),
     logOut: () => dispatch({ type: "LOG_OUT" }),
+    setLoginErrorMessage: (data) => dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: data}),
 
     /* addNewUser: (addUser, addScore, username, email, password) =>
       dispatch(

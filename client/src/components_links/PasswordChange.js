@@ -18,6 +18,7 @@ function PasswordChange({
   toggleAreStatsVisible,
   authenticatedUserId,
   logOut,
+  setLoginErrorMessage
 }) {
   const [passchangeCSSClass, setPasschangeCSSClass] = useState(
     "btn btn-control btn-auth"
@@ -104,7 +105,11 @@ function PasswordChange({
 
       // email will never have @ so it can by used to check auth
       if(res.data.changePassword.email === "not auth") {
-        setErrorNotification("Your session has expired");
+
+        logOut()
+        setLoginErrorMessage("Your session has expired")
+        history.replace("/login");
+        // setErrorNotification("Your session has expired");
         return;
       }
 
@@ -234,6 +239,7 @@ const mapDispatchToProps = (dispatch) => {
     // changepassError_false: () => dispatch({ type: "CHANGEPASS_ERROR_FALSE" }),
     toggleAreStatsVisible: () => dispatch({ type: "STATS_VISIBILITY" }),
     logOut: () => dispatch({ type: "LOG_OUT" }),
+    setLoginErrorMessage: (data) => dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: data}),
 
     /* addNewUser: (addUser, addScore, username, email, password) =>
       dispatch(
