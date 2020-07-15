@@ -48,20 +48,20 @@ const UserType = new GraphQLObjectType({
 /* 
 
  "five_s": Array,
-    "thirty_s": Array,
-    "one_min": Array,
-    "two_min": Array,
-    "five_min": Array,
+ "one_min": Array,
+ "two_min": Array,
+ "five_min": Array,
+ "ten_min": Array,
 */
 const ScoreType = new GraphQLObjectType({
   name: "Score",
   fields: () => ({
     id: { type: GraphQLID },
     five_s: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
-    thirty_s: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
     one_min: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
     two_min: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
     five_min: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
+    ten_min: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
 
     user: {
       type: UserType,
@@ -198,10 +198,10 @@ const Mutation = new GraphQLObjectType({
                 let newScore = new Score({
                   userId: product.id,
                   five_s: arrOfZeros,
-                  thirty_s: arrOfZeros,
                   one_min: arrOfZeros,
                   two_min: arrOfZeros,
                   five_min: arrOfZeros,
+                  ten_min: arrOfZeros,
                 });
 
                 newScore.save();
@@ -237,7 +237,7 @@ const Mutation = new GraphQLObjectType({
 
                   let newScore = new Score({
                     userId: product.id, five_s: arrOfZeros,
-                    thirty_s: arrOfZeros, one_min: arrOfZeros,
+                    ten_min: arrOfZeros, one_min: arrOfZeros,
                     two_min: arrOfZeros, five_min: arrOfZeros,
                   });
 
@@ -358,10 +358,10 @@ const Mutation = new GraphQLObjectType({
       args: {
         userId: { type: new GraphQLNonNull(GraphQLString) },
         five_s: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
-        thirty_s: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
         one_min: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
         two_min: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
         five_min: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
+        ten_min: { type: new GraphQLList(new GraphQLList(GraphQLFloat)) },
       },
       resolve(parent, args, { req, res }) {
         // not a new Score!!! to not overwrite id
@@ -375,10 +375,10 @@ const Mutation = new GraphQLObjectType({
 
           let update = {
             five_s: args.five_s,
-            thirty_s: args.thirty_s,
             one_min: args.one_min,
             two_min: args.two_min,
             five_min: args.five_min,
+            ten_min: args.ten_min,
           };
 
           return Score.findOneAndUpdate({ userId: args.userId }, update, {

@@ -6,10 +6,10 @@ const scoreSchema = new Schema({
      id: String,
     userId: String,
     "five_s": Array,
-    "thirty_s": Array,
     "one_min": Array,
     "two_min": Array,
     "five_min": Array,
+    "ten_min": Array,
 
 
 

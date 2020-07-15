@@ -25,10 +25,10 @@ const initialState = {
   stats: {
     // currentStatsKey: "one_min",
     five_s: makeDefaultStats(1),
-    thirty_s: makeDefaultStats(2),
-    one_min: makeDefaultStats(3),
-    two_min: makeDefaultStats(4),
-    five_min: makeDefaultStats(5),
+    one_min: makeDefaultStats(2),
+    two_min: makeDefaultStats(3),
+    five_min: makeDefaultStats(4),
+    ten_min: makeDefaultStats(5),
   },
 
   constantTimerValue_basedOnStats: 60,

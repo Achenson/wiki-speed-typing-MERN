@@ -78,10 +78,10 @@ function Stats({
             onClick={() => {
               // let statsObj = {
               //   five_s: stats["five_s"],
-              //   thirty_s: stats["thirty_s"],
               //   one_min: stats["one_min"],
               //   two_min: stats["two_min"],
               //   five_min: stats["five_min"],
+              //   ten_min: stats["ten_min"],
               // };
 
               // statsObj[stats.currentStatsKey] = [
@@ -150,11 +150,8 @@ function Stats({
         return "five_s";
       // setCurrentStatsArr(five_s);
       // break;
-      case 30:
-        // setCurrentStatsArr(thirty_s);
-        return "thirty_s";
-      // break;
-      case 60:
+        case 60:
+          // setCurrentStatsArr(ten_min);
         // setCurrentStatsArr(one_min);
         return "one_min";
       // break;
@@ -166,6 +163,11 @@ function Stats({
         return "five_min";
       // setCurrentStatsArr(five_min);
       // break;
+      case 600:
+        return "ten_min";
+        // break;
+
+
 
       default:
         return "one_min";
@@ -200,10 +202,10 @@ function Stats({
       } else {
         setStats({
           five_s: makeDefaultStats(1),
-          thirty_s: makeDefaultStats(2),
-          one_min: makeDefaultStats(3),
-          two_min: makeDefaultStats(4),
-          five_min: makeDefaultStats(5),
+          one_min: makeDefaultStats(2),
+          two_min: makeDefaultStats(3),
+          five_min: makeDefaultStats(4),
+          ten_min: makeDefaultStats(5),
         });
       }
     }
@@ -259,10 +261,10 @@ function Stats({
               value={constantTimerValue_basedOnStats.toString()}
             >
               <option value="5">00:05</option>
-              <option value="30">00:30</option>
               <option value="60">01:00</option>
               <option value="120">02:00</option>
               <option value="300">05:00</option>
+              <option value="600">10:00</option>
             </select>
           </div>
         </div>

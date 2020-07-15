@@ -83,7 +83,7 @@ DONE 29. email or username, login consistency (+ proper checking in addUser in s
 DONE 30. concurrent start in dev mode DONE npm-run-all used instead
 DONE 31. check JWT video comments -> changes? DONE (cookieParser only in one route, proper cookie exp date)
 DONE 32. clean passed props in components DONE AllRenders cleaned, more component connectet do store
-33. more time options -> easy way to change/add  time options?
+DONE 33. more time options DONE
 XXX 34. function imports consistency backend XXX es6 modules still exp in node?
 DONE 35. profile insead of stats in authenticationUI DONE
 DONE 36. change password DONE

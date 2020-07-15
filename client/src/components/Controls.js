@@ -26,10 +26,10 @@ function Controls(props) {
           value={props.constantTimerValue.toString()}
         >
           <option value="5">00:05</option>
-          <option value="30">00:30</option>
           <option value="60">01:00</option>
           <option value="120">02:00</option>
           <option value="300">05:00</option>
+          <option value="600">10:00</option>
         </select>
       </div>
 

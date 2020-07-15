@@ -21,10 +21,6 @@ export const updateScore_postAction = (addScore, history) => (dispatch) => {
       // setCurrentTimer(five_s);
       statsStateKey = "five_s";
       break;
-    case "30":
-      // setCurrentTimer(thirty_s);
-      statsStateKey = "thirty_s";
-      break;
     case "60":
       // setCurrentTimer(one_min);
       statsStateKey = "one_min";
@@ -37,6 +33,10 @@ export const updateScore_postAction = (addScore, history) => (dispatch) => {
       // setCurrentTimer(five_min);
       statsStateKey = "five_min";
       break;
+    case "600":
+        // setCurrentTimer(ten_min);
+        statsStateKey = "ten_min";
+        break;
 
     default:
       statsStateKey = "one_min";

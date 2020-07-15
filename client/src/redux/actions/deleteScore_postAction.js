@@ -10,16 +10,16 @@ export const deleteScore_postAction = (addScore, history) => (dispatch) => {
   let statsObj = {
     // currentStatsKey: stats.currentStatsKey,
     five_s: stats["five_s"],
-    thirty_s: stats["thirty_s"],
     one_min: stats["one_min"],
     two_min: stats["two_min"],
     five_min: stats["five_min"],
+    ten_min: stats["ten_min"],
   };
 
   statsObj[
-      changeCurrentStatsKey(
-        store.getState().resultsAndTimerState.constantTimerValue_basedOnStats
-      )
+    changeCurrentStatsKey(
+      store.getState().resultsAndTimerState.constantTimerValue_basedOnStats
+    )
   ] = [
     [0, 0],
     [0, 0],
@@ -97,14 +97,14 @@ export const deleteScore_postAction = (addScore, history) => (dispatch) => {
     switch (payload) {
       case 5:
         return "five_s";
-      case 30:
-        return "thirty_s";
       case 60:
         return "one_min";
       case 120:
         return "two_min";
       case 300:
         return "five_min";
+      case 600:
+        return "ten_min";
       default:
         return "one_min";
     }
