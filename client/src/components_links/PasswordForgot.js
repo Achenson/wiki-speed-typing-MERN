@@ -61,7 +61,7 @@ function PasswordForgotten() {
     if (email === "" || email.indexOf("@") === -1) {
       // setError("Email or password not provided");
       setErrorNotification("Invalid email");
-     setIsPassForgotClickable(true);
+      setIsPassForgotClickable(true);
       return;
     }
 
@@ -69,24 +69,24 @@ function PasswordForgotten() {
       variables: {
         email: email,
       },
-    }).then((res, err) => {
-      
-      setIsPassForgotClickable(true);
+    }).then(
+      (res) => {
+        setIsPassForgotClickable(true);
 
-      if (err) {
-        // setError("loginMut Error");
-        setErrorNotification("Server error - email not sent");
+        console.log("forgotPassword res");
+        console.log(res);
+
+        setErrorNotification(null);
+        setInfoNotification("Email successfully sent");
+
+        // history.replace("/");
+      },
+      (err) => {
+        console.log(err);
+        setErrorNotification("Server connection Error - email not sent");
         return;
       }
-
-      console.log("forgotPassword res");
-      console.log(res);
-
-      setErrorNotification(null);
-      setInfoNotification("Email successfully sent");
-
-      // history.replace("/");
-    });
+    );
   }
 
   return (
@@ -132,7 +132,7 @@ function PasswordForgotten() {
               <br />
 
               <button
-              ref={disablePassForgotBtn}
+                ref={disablePassForgotBtn}
                 className={passForgotCSSClass}
                 onClick={(e) => {
                   e.preventDefault();
@@ -175,16 +175,11 @@ function PasswordForgotten() {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    
-  };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    
-    
-  };
+  return {};
 };
 
 export default connect(

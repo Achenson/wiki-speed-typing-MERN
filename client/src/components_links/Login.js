@@ -13,11 +13,16 @@ import { useMutation } from "@apollo/react-hooks";
 import { loginMutation } from "../graphql/queries.js";
 
 // function Login({ logIn, isNotificationNeeded, notification_false }) {
-function Login({ logIn, loginNotification, setLoginNotification, loginErrorMessage, setLoginErrorMessage}) {
-
+function Login({
+  logIn,
+  loginNotification,
+  setLoginNotification,
+  loginErrorMessage,
+  setLoginErrorMessage,
+}) {
   const [loginMut] = useMutation(loginMutation);
 
-   // not {history}!!! because we are not destructuring here,
+  // not {history}!!! because we are not destructuring here,
   // history is an object!
   let history = useHistory();
 
@@ -28,7 +33,7 @@ function Login({ logIn, loginNotification, setLoginNotification, loginErrorMessa
       setLoginNotification(null);
     };
   }, [setLoginErrorMessage, setLoginNotification]);
- 
+
   let [email_or_name, setEmail_or_name] = useState("");
   let [password, setPassword] = useState("");
 
@@ -43,39 +48,40 @@ function Login({ logIn, loginNotification, setLoginNotification, loginErrorMessa
         email_or_name: email_or_name,
         password: password,
       },
-    }).then((res, err) => {
-      if (err) {
-        // setError("loginMut Error");
-        setLoginErrorMessage("loginMut Error");
+    }).then(
+      (res) => {
+        if (res.data.login.token === "User does not exist!") {
+          // setError(`${res.data.login.token}`);
+          setLoginErrorMessage(`${res.data.login.token}`);
+          return;
+        }
+
+        if (res.data.login.token === "Password is incorrect!") {
+          // setError(`${res.data.login.token}`);
+          setLoginErrorMessage(`${res.data.login.token}`);
+          return;
+        }
+
+        console.log("loginMut res");
+        console.log(res);
+
+        setLoginErrorMessage(null);
+        logIn({
+          authenticatedUserId: res.data.login.userId,
+          token: res.data.login.token,
+        });
+        setLoginNotification(null);
+
+        // history.push('/')
+        // no going back! not possible to go back to login when logged in
+        history.replace("/");
+      },
+      (err) => {
+        console.log(err);
+        setLoginErrorMessage("Server connection Error");
         return;
       }
-
-      if (res.data.login.token === "User does not exist!") {
-        // setError(`${res.data.login.token}`);
-        setLoginErrorMessage(`${res.data.login.token}`);
-        return;
-      }
-
-      if (res.data.login.token === "Password is incorrect!") {
-        // setError(`${res.data.login.token}`);
-        setLoginErrorMessage(`${res.data.login.token}`);
-        return;
-      }
-
-      console.log("loginMut res");
-      console.log(res);
-
-      setLoginErrorMessage(null);
-      logIn({
-        authenticatedUserId: res.data.login.userId,
-        token: res.data.login.token,
-      });
-      setLoginNotification(null);
-
-      // history.push('/')
-      // no going back! not possible to go back to login when logged in
-      history.replace("/");
-    });
+    );
   }
 
   return (
@@ -132,7 +138,7 @@ function Login({ logIn, loginNotification, setLoginNotification, loginErrorMessa
                 className="btn btn-control btn-auth"
                 onClick={(e) => {
                   e.preventDefault();
-                    loginValidation();
+                  loginValidation();
                 }}
               >
                 Login
@@ -191,8 +197,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     logIn: (dataObj) => dispatch({ type: "LOG_IN", payload: dataObj }),
     notification_false: () => dispatch({ type: "NOTIFICATION_FALSE" }),
-    setLoginNotification: (data) => dispatch({ type: "SET_LOGIN_NOTIFICATION", payload: data}),
-    setLoginErrorMessage: (data) => dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: data}),
+    setLoginNotification: (data) =>
+      dispatch({ type: "SET_LOGIN_NOTIFICATION", payload: data }),
+    setLoginErrorMessage: (data) =>
+      dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: data }),
   };
 };
 export default connect(

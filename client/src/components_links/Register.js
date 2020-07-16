@@ -15,19 +15,18 @@ import { addNewUserMutation } from "../graphql/queries.js";
 
 function Register() {
   const [addUser] = useMutation(addNewUserMutation);
-  
+
   let [errorNotification, setErrorNotification] = useState(null);
   // resetting register error when unmounting
 
   useEffect(() => {
-     return () => {
-   setErrorNotification(null)
-     };
+    return () => {
+      setErrorNotification(null);
+    };
   }, [setErrorNotification]);
 
   // let isAuthenticated = false;
   let history = useHistory();
-
 
   let [username, setUsername] = useState("");
   let [email, setEmail] = useState("");
@@ -45,7 +44,7 @@ function Register() {
       return;
     }
 
-    if (email === "" || email.indexOf('@') === -1) {
+    if (email === "" || email.indexOf("@") === -1) {
       setErrorNotification("Invalid email");
       return;
     }
@@ -70,18 +69,25 @@ function Register() {
       // useMutation mutate function does not call `onCompleted`!
       // so onCompleted can only be passed to initial hook
       // workaround: useMutation returns a Promise
-    }).then((res) => {
-      console.log(res);
+    }).then(
+      (res) => {
+        console.log(res);
 
-      if (res.data.addUser) {
-        setErrorNotification(null)
-        history.push("/login");
-        return;
-      } else {
-        setErrorNotification("Username or email is already in use");
+        if (res.data.addUser) {
+          setErrorNotification(null);
+          history.push("/login");
+          return;
+        } else {
+          setErrorNotification("Username or email is already in use");
+          return;
+        }
+      },
+      (err) => {
+        console.log(err);
+        setErrorNotification("Server connection Error");
         return;
       }
-    });
+    );
   }
 
   return (
@@ -184,15 +190,11 @@ function Register() {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    
-  };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-
-  };
+  return {};
 };
 
 export default connect(

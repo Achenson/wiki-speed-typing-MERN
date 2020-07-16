@@ -19,7 +19,7 @@ function DeleteAccount({
   toggleAreStatsVisible,
   authenticatedUserId,
   logOut,
-  setLoginErrorMessage
+  setLoginErrorMessage,
 }) {
   let history = useHistory();
 
@@ -83,35 +83,42 @@ function DeleteAccount({
         id: authenticatedUserId,
         password: password,
       },
-    }).then((res) => {
-      if (!res.data.deleteUser) {
-        console.log("failed to delete user");
-        setErrorNotification("Failed to delete user - recheck password");
+    }).then(
+      (res) => {
+        if (!res.data.deleteUser) {
+          console.log("failed to delete user");
+          setErrorNotification("Failed to delete user - recheck password");
+          return;
+        }
+
+        // email will never have @ so it can by used to check auth
+        if (res.data.deleteUser.email === "not auth") {
+          // setErrorNotification("Your session has expired");
+          logOut();
+          setLoginErrorMessage("Your session has expired");
+          history.replace("/login");
+          return;
+        }
+
+        console.log(res.data.deleteUser);
+
+        setErrorNotification(null);
+        setInfoNotification("Account deleted. Redirecting...");
+
+        setIsDelaccountClickable(false);
+
+        setTimeout(() => {
+          logOut();
+
+          history.replace("/");
+        }, 2500);
+      },
+      (err) => {
+        console.log(err);
+        setErrorNotification("Server connection Error");
         return;
       }
-
-      // email will never have @ so it can by used to check auth
-      if (res.data.deleteUser.email === "not auth") {
-        // setErrorNotification("Your session has expired");
-        logOut()
-        setLoginErrorMessage("Your session has expired")
-        history.replace("/login");
-        return;
-      }
-
-      console.log(res.data.deleteUser);
-
-      setErrorNotification(null);
-      setInfoNotification("Account deleted. Redirecting...");
-
-      setIsDelaccountClickable(false);
-
-      setTimeout(() => {
-        logOut();
-
-        history.replace("/");
-      }, 2500);
-    });
+    );
   }
 
   return (
@@ -210,7 +217,8 @@ const mapDispatchToProps = (dispatch) => {
     loginError_false: () => dispatch({ type: "LOGIN_ERROR_FALSE" }),
     toggleAreStatsVisible: () => dispatch({ type: "STATS_VISIBILITY" }),
     logOut: () => dispatch({ type: "LOG_OUT" }),
-    setLoginErrorMessage: (data) => dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: data}),
+    setLoginErrorMessage: (data) =>
+      dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: data }),
 
     /* addNewUser: (addUser, addScore, username, email, password) =>
       dispatch(

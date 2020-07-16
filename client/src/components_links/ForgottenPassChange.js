@@ -14,8 +14,6 @@ import { changePasswordAfterForgot } from "../graphql/queries.js";
 import { useMutation } from "@apollo/react-hooks";
 
 function ForgottenPassChange(props) {
-
-
   // from ".../passforgot-change/:token"
   let { token } = useParams();
 
@@ -82,43 +80,42 @@ function ForgottenPassChange(props) {
         token: token,
         password: newPassword,
       },
-    }).then((res, err) => {
-      // console.log("updatePass resss");
+    }).then(
+      (res) => {
+        // console.log("updatePass resss");
 
-      if (err) {
-        // setError("loginMut Error");
+        console.log("changePassAfterForgot res");
+        console.log(res);
+
+        if (!res.data.changePasswordAfterForgot) {
+          setErrorNotification("failed to change password");
+          return;
+        }
+
+        props.logIn({
+          authenticatedUserId: res.data.changePasswordAfterForgot.userId,
+          token: res.data.changePasswordAfterForgot.token,
+        });
+
+        setErrorNotification(null);
+        setInfoNotification("Password successfully changed. Logging in...");
+
+        setIsPasschangeClickable(false);
+
+        setTimeout(() => {
+          history.replace("/");
+        }, 2500);
+      },
+      (err) => {
         console.log(err);
-        setErrorNotification("Server Error");
+        setErrorNotification("Server connection Error");
         return;
       }
-
-      console.log("changePassAfterForgot res");
-      console.log(res);
-
-      if (!res.data.changePasswordAfterForgot) {
-        setErrorNotification("failed to change password");
-        return;
-      }
-
-      props.logIn({
-        authenticatedUserId: res.data.changePasswordAfterForgot.userId,
-        token: res.data.changePasswordAfterForgot.token,
-      });
-
-      setErrorNotification(null);
-      setInfoNotification("Password successfully changed. Logging in...");
-
-      setIsPasschangeClickable(false);
-
-      setTimeout(() => {
-        history.replace("/");
-      }, 2500);
-    });
+    );
   }
 
   console.log(props);
-  
-  
+
   return (
     <div>
       {errorNotification ? (
@@ -183,18 +180,16 @@ function ForgottenPassChange(props) {
                 Change password
               </button>
             </form>
-              {isPasschangeClickable && (
-
-            <div className="auth-links-div">
+            {isPasschangeClickable && (
+              <div className="auth-links-div">
                 <p className="auth-link-item">
                   <Link to="/" className="auth-link">
                     Back
                   </Link>
                   &nbsp;to speed typing
                 </p>
-
-            </div>
-              )}
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -41,6 +41,8 @@ DONE 10. same-site cookies? !! (frontend console) DONE
 DONE 11. error when the timer reaches 0 and the user is not logged in DONE
 XXX 12. app starting - wrong route? XXx won't matter in production?
 13. issue when words between 1 & 2 screen are serperated by space.
+14. offline when logout: "database connection error" clash with Results
+16. offline when logout: nothing happens when clicking on Stats
 
 to do:
 DONE 1. move graphql queries to different file DONE
@@ -131,10 +133,12 @@ xxx 68. how to pass info from backend other then null & properType! optional Typ
 xx for now logic based on user object is usedx
 DONE 69. consistency -> changePassword & deleteAccount does not redirect to Login if notAuth, but addScore(in updateScore post action) does DONE
 DONE 70. passwordForgot email message DONE
+71. uninstall unused packages from package.json
+72. ForgottenPassChange -> add session expired error
+73. loading animation -> start & stop at "..."
 
 
 tesing schema.js -> change accessToken to few seconds, delete refresh token cookie
-
 
 apollo structure:
 

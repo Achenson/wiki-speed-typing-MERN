@@ -18,7 +18,7 @@ function PasswordChange({
   toggleAreStatsVisible,
   authenticatedUserId,
   logOut,
-  setLoginErrorMessage
+  setLoginErrorMessage,
 }) {
   const [passchangeCSSClass, setPasschangeCSSClass] = useState(
     "btn btn-control btn-auth"
@@ -92,39 +92,45 @@ function PasswordChange({
         password: currentPassword,
         newPassword: newPassword,
       },
-    }).then((res) => {
-      console.log("updatePass resss");
-      // console.log(res);
-      console.log(res);
+    }).then(
+      (res) => {
+        console.log("updatePass resss");
+        // console.log(res);
+        console.log(res);
 
+        if (!res.data.changePassword) {
+          setErrorNotification(
+            "Password change failed - recheck current password"
+          );
+          return;
+        }
 
-      if (!res.data.changePassword) {
-        setErrorNotification("Password change failed - recheck current password");
+        // email will never have @ so it can by used to check auth
+        if (res.data.changePassword.email === "not auth") {
+          logOut();
+          setLoginErrorMessage("Your session has expired");
+          history.replace("/login");
+          // setErrorNotification("Your session has expired");
+          return;
+        }
+
+        setErrorNotification(null);
+        setInfoNotification("Password successfully changed. Redirecting...");
+
+        setIsPasschangeClickable(false);
+
+        setTimeout(() => {
+          logOut();
+
+          history.replace("/login");
+        }, 2500);
+      },
+      (err) => {
+        console.log(err);
+        setErrorNotification("Server connection Error");
         return;
       }
-
-      // email will never have @ so it can by used to check auth
-      if(res.data.changePassword.email === "not auth") {
-
-        logOut()
-        setLoginErrorMessage("Your session has expired")
-        history.replace("/login");
-        // setErrorNotification("Your session has expired");
-        return;
-      }
-
-    
-      setErrorNotification(null);
-      setInfoNotification("Password successfully changed. Redirecting...");
-
-      setIsPasschangeClickable(false);
-
-      setTimeout(() => {
-        logOut();
-
-        history.replace("/login");
-      }, 2500);
-    });
+    );
   }
 
   return (
@@ -239,7 +245,8 @@ const mapDispatchToProps = (dispatch) => {
     // changepassError_false: () => dispatch({ type: "CHANGEPASS_ERROR_FALSE" }),
     toggleAreStatsVisible: () => dispatch({ type: "STATS_VISIBILITY" }),
     logOut: () => dispatch({ type: "LOG_OUT" }),
-    setLoginErrorMessage: (data) => dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: data}),
+    setLoginErrorMessage: (data) =>
+      dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: data }),
 
     /* addNewUser: (addUser, addScore, username, email, password) =>
       dispatch(
