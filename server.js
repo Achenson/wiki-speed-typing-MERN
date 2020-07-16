@@ -44,7 +44,7 @@ app.use(
 
 const isAuth = require("./middleware/is-auth");
 
-// body parser unnecessary?, express-graphql can parse request according to its body type
+// body parser unnecessary? [uninstalled], express-graphql can parse request according to its body type
 // app.use(bodyParser.json());
 
 app.use(isAuth);

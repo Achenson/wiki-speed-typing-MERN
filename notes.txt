@@ -118,7 +118,8 @@ DONE 52. passwordRetrieval - better name? component name & header DONE
 DONE 53. PasswordForgotten - disabling button DONE
 DONE 54. try catch consistency - try catch everywhere? DONE try catch deleted, err handled client side
 DONE 55. Login - not looking good? DONE
-56. test app without net connection
+DONE 56. test app without net connection - mutations DONE
+56.5 test app without net connection - test usage when logged in
 DONE 57. changePassword - "failed to update password" <- more specific? DONE
 58. all console warnings
 DONE 59. closing Stats should not reset timer! DONE
@@ -133,7 +134,8 @@ xxx 68. how to pass info from backend other then null & properType! optional Typ
 xx for now logic based on user object is usedx
 DONE 69. consistency -> changePassword & deleteAccount does not redirect to Login if notAuth, but addScore(in updateScore post action) does DONE
 DONE 70. passwordForgot email message DONE
-71. uninstall unused packages from package.json
+DONE 71. uninstall unused packages from package.json [ioredis, body-parser, express-session, passport, passport-local, DONE
+loadsh -> for testSchema, not deleted, uuid, uuidv4]
 DONE 72. ForgottenPassChange -> add session expired error DONE
 73. loading animation -> start & stop at "..."
 
@@ -150,3 +152,13 @@ getStatsQuery for setting redux state - stats state is being used in Stats for d
 updating stats after deleting current stats, refetching getStatsQuery
 
 in Register: adding new user and adding empty score right away (addNewUser_postAction not used anymore!)
+
+
+
+//redis: for authentication with express-session
+const Redis = require("ioredis");
+
+module.exports = () => {
+  const redis = new Redis();
+  return redis;
+}
