@@ -112,13 +112,13 @@ function App({
   const [counter, setCounter] = useState(0);
   const [iter, setIter] = useState(0);
 
-  let arrOfLoading = [".", "..", "..."];
+  let arrOfLoading = ["...", ".", ".."];
 
   // interval with notes -> Main.js
   useEffect(() => {
     let timerInterval = null;
 
-    if (isMainRendered && counter <= 7) {
+    if (!isMainRendered && counter <= 8) {
       timerInterval = setInterval(() => {
         setCounter((c) => c + 1);
         if (iter < 2) {

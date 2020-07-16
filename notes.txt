@@ -137,7 +137,7 @@ DONE 70. passwordForgot email message DONE
 DONE 71. uninstall unused packages from package.json [ioredis, body-parser, express-session, passport, passport-local, DONE
 loadsh -> for testSchema, not deleted, uuid, uuidv4]
 DONE 72. ForgottenPassChange -> add session expired error DONE
-73. loading animation -> start & stop at "..."
+DONE 73. loading animation -> start & stop at "..." DONE
 
 
 tesing schema.js -> change accessToken to few seconds, delete refresh token cookie
