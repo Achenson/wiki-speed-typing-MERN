@@ -116,7 +116,7 @@ DONE 49. authData token expiration not needed? DONE
 DONE 51. clean PasswordChange & PassRetrival redux connection DONE
 DONE 52. passwordRetrieval - better name? component name & header DONE
 DONE 53. PasswordForgotten - disabling button DONE
-54. try catch consistency - try catch everywhere? Logic for working offline/server down?
+DONE 54. try catch consistency - try catch everywhere? DONE try catch deleted, err handled client side
 DONE 55. Login - not looking good? DONE
 56. test app without net connection
 DONE 57. changePassword - "failed to update password" <- more specific? DONE

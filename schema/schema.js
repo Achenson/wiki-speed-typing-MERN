@@ -499,7 +499,7 @@ const Mutation = new GraphQLObjectType({
         password: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(parent, args, { req, res }) {
-        try {
+      
           let decodedToken = jwt.verify(
             args.token,
             process.env.FORGOT_PASSWORD
@@ -541,10 +541,8 @@ const Mutation = new GraphQLObjectType({
           const token = createAccessToken(updatedUser);
 
           return { userId: updatedUser.id, token: token };
-        } catch (err) {
-          console.log(err);
-          return null;
-        }
+
+
       },
     },
   },
