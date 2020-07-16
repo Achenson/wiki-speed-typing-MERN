@@ -133,7 +133,6 @@ const Mutation = new GraphQLObjectType({
         password: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(parent, args) {
-
         let arrOfBooleans = await Promise.all([
           new Promise((resolve, reject) => {
             User.findOne({ name: args.name }, (err, res) => {
@@ -263,14 +262,12 @@ const Mutation = new GraphQLObjectType({
         password: { type: new GraphQLNonNull(GraphQLString) },
         newPassword: { type: new GraphQLNonNull(GraphQLString) },
       },
-      async resolve(parent, args, {req, res}) {
-
+      async resolve(parent, args, { req, res }) {
         if (!req.isAuth) {
           console.log("not authenticated");
           // email will never have @ so it can by used to check auth
-          return {email: "not auth"};
-
-        } 
+          return { email: "not auth" };
+        }
 
         const user = await User.findById(args.id);
 
@@ -306,11 +303,10 @@ const Mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
         password: { type: new GraphQLNonNull(GraphQLString) },
       },
-      async resolve(parent, args, {req, res}) {
-
+      async resolve(parent, args, { req, res }) {
         if (!req.isAuth) {
           console.log("not authenticated");
-          return {email: "not auth"};
+          return { email: "not auth" };
         }
 
         const user = await User.findById(args.id);
@@ -499,50 +495,42 @@ const Mutation = new GraphQLObjectType({
         password: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(parent, args, { req, res }) {
-      
-          let decodedToken = jwt.verify(
-            args.token,
-            process.env.FORGOT_PASSWORD
-          );
+        let decodedToken = jwt.verify(args.token, process.env.FORGOT_PASSWORD);
 
-          // const userId = await User.findOne({ email: args.email });
+        let userId = decodedToken.userId;
 
-          let userId = decodedToken.userId;
+        if (!userId) {
+          return null;
+        }
 
-          if (!userId) {
-            return null;
-          }
+        let user = await User.findById(userId);
 
-          let user = await User.findById(userId);
+        if (!user) {
+          return null;
+        }
 
-          if (!user) {
-            return null;
-          }
+        // const token = uuid.v4();
+        // await redis.set(forgotPasswordPrefix + token, user.id, "ex", 60 * 60 * 24); // 1 day expiration
+        // await redisInstance.set(token, user.id, "ex", 60 * 15); // 15 min expiration
 
-          // const token = uuid.v4();
-          // await redis.set(forgotPasswordPrefix + token, user.id, "ex", 60 * 60 * 24); // 1 day expiration
-          // await redisInstance.set(token, user.id, "ex", 60 * 15); // 15 min expiration
+        let update;
+        await bcrypt.hash(args.password, 12).then((newHashedPassword) => {
+          update = {
+            password: newHashedPassword,
+          };
+        });
 
-          let update;
-          await bcrypt.hash(args.password, 12).then((newHashedPassword) => {
-            update = {
-              password: newHashedPassword,
-            };
-          });
+        let updatedUser = await User.findByIdAndUpdate(userId, update, {
+          new: true,
+          useFindAndModify: false,
+        });
 
-          let updatedUser = await User.findByIdAndUpdate(userId, update, {
-            new: true,
-            useFindAndModify: false,
-          });
+        // automatically logging in
+        sendRefreshToken(res, createRefreshToken(updatedUser));
 
-          // automatically logging in
-          sendRefreshToken(res, createRefreshToken(updatedUser));
+        const token = createAccessToken(updatedUser);
 
-          const token = createAccessToken(updatedUser);
-
-          return { userId: updatedUser.id, token: token };
-
-
+        return { userId: updatedUser.id, token: token };
       },
     },
   },

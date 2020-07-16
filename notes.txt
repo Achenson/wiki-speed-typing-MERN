@@ -134,7 +134,7 @@ xx for now logic based on user object is usedx
 DONE 69. consistency -> changePassword & deleteAccount does not redirect to Login if notAuth, but addScore(in updateScore post action) does DONE
 DONE 70. passwordForgot email message DONE
 71. uninstall unused packages from package.json
-72. ForgottenPassChange -> add session expired error
+DONE 72. ForgottenPassChange -> add session expired error DONE
 73. loading animation -> start & stop at "..."
 
 

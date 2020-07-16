@@ -86,7 +86,7 @@ function ForgottenPassChange(props) {
 
         console.log("changePassAfterForgot res");
         console.log(res);
-
+        
         if (!res.data.changePasswordAfterForgot) {
           setErrorNotification("failed to change password");
           return;
@@ -107,14 +107,22 @@ function ForgottenPassChange(props) {
         }, 2500);
       },
       (err) => {
+        console.log('err')
         console.log(err);
+
+        if(err == "Error: GraphQL error: jwt expired") {
+          setErrorNotification("Session expired - redirecting...")
+          setTimeout( () => {
+            history.replace('/passforgot');
+          }, 2500)
+          return;
+        }
+
         setErrorNotification("Server connection Error");
         return;
       }
     );
   }
-
-  console.log(props);
 
   return (
     <div>
