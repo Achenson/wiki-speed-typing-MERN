@@ -41,8 +41,8 @@ DONE 10. same-site cookies? !! (frontend console) DONE
 DONE 11. error when the timer reaches 0 and the user is not logged in DONE
 XXX 12. app starting - wrong route? XXx won't matter in production?
 13. issue when words between 1 & 2 screen are serperated by space.
-14. offline when logout: "database connection error" clash with Results
-16. offline when logout: nothing happens when clicking on Stats
+DONE 14. [after back from PasswordChange or deleteAccount] offline when logout: "database connection error" clash with Results DONE
+16. [after back from PasswordChange or deleteAccount] offline when logout: nothing happens when clicking on Stats
 
 to do:
 DONE 1. move graphql queries to different file DONE
