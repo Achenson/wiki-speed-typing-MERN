@@ -36,8 +36,8 @@ function Stats({
   setTimerOnSelect,
   constantTimerValue_basedOnStats,
   setConstantTimerValue_basedOnStats,
-
-  
+  statsBtnDisabled,
+  statsBtnEnabled,
 }) {
   // let history = useHistory();
 
@@ -46,7 +46,6 @@ function Stats({
 
     confirmDeleteVisibility_false();
   }, [areStatsVisible, confirmDeleteVisibility_false]);
-
 
   function renderDeletion() {
     if (!isConfirmDeleteVisible) {
@@ -143,15 +142,14 @@ function Stats({
 
   // same as in  resultsAndTimerReducer
 
-
   function changeCurrentStatsKey(payload) {
     switch (payload) {
       case 5:
         return "five_s";
       // setCurrentStatsArr(five_s);
       // break;
-        case 60:
-          // setCurrentStatsArr(ten_min);
+      case 60:
+        // setCurrentStatsArr(ten_min);
         // setCurrentStatsArr(one_min);
         return "one_min";
       // break;
@@ -165,9 +163,7 @@ function Stats({
       // break;
       case 600:
         return "ten_min";
-        // break;
-
-
+      // break;
 
       default:
         return "one_min";
@@ -190,6 +186,8 @@ function Stats({
     }
 
     if (data) {
+      statsBtnEnabled();
+
       const { score } = data;
 
       console.log("score");
@@ -211,9 +209,13 @@ function Stats({
     }
   }, [loading, error, data, setStats]);
 
-  if (loading) return <h5>connecting to database...</h5>;
+  if (loading) {
+    statsBtnDisabled();
+    return <h5>connecting to database...</h5>;
+  }
+
   if (error) {
-  
+    statsBtnDisabled();
     return <h5>database connection error </h5>;
   }
 
@@ -299,7 +301,6 @@ const mapStateToProps = (state) => {
     authenticatedUserId: state.authState.authenticatedUserId,
     constantTimerValue_basedOnStats:
       state.resultsAndTimerState.constantTimerValue_basedOnStats,
-    
   };
 };
 
@@ -325,6 +326,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "CONSTANT_TIMER_VALUE", payload: data }),
     setConstantTimerValue_basedOnStats: (data) =>
       dispatch({ type: "SET_CONST_TIMER_BASED_ON_STATS", payload: data }),
+    statsBtnEnabled: () => dispatch({ type: "STATS_BTN_TRUE" }),
+    statsBtnDisabled: () => dispatch({ type: "STATS_BTN_FALSE" }),
   };
 };
 

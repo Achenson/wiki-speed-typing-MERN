@@ -7,6 +7,8 @@ const initialState = {
   isWikiButtonClickable: true,
   isMainRendered: false,
   isProfileVisible: false,
+  // for disabling stats button when db connection error
+  isStatsButtonClickable: true,
 };
 
 function visibilityReducer(state = initialState, action) {
@@ -14,7 +16,7 @@ function visibilityReducer(state = initialState, action) {
     areHintsVisible,
     areResultsVisible,
     areStatsVisible,
-    isProfileVisible
+    isProfileVisible,
     // isConfirmDeleteVisible,
   } = state;
 
@@ -81,6 +83,17 @@ function visibilityReducer(state = initialState, action) {
       return {
         ...state,
         isMainRendered: true,
+      };
+
+    case "STATS_BTN_TRUE":
+      return {
+        ...state,
+        isStatsButtonClickable: true,
+      };
+    case "STATS_BTN_FALSE":
+      return {
+        ...state,
+        isStatsButtonClickable: false,
       };
 
     default:

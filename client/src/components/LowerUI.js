@@ -17,6 +17,7 @@ function LowerUI({
   setLoginNotification,
   toggleActive,
   isActive,
+  isStatsButtonClickable,
 }) {
   let history = useHistory();
 
@@ -32,16 +33,22 @@ function LowerUI({
     setShouldMouseOverWork(false);
     setRenderMouseOverEffect(false);
 
-    if (areStatsVisible) {
-      setFaChartBarClassDefault(false);
-    }
+    if (isStatsButtonClickable) {
+      if (areStatsVisible) {
+        setFaChartBarClassDefault(false);
+      }
 
-    if (!areStatsVisible) {
-      setFaChartBarClassDefault(true);
+      if (!areStatsVisible) {
+        setFaChartBarClassDefault(true);
+      }
     }
-  }, [areStatsVisible]);
+  }, [areStatsVisible, isStatsButtonClickable]);
 
   function faChartBarRendering() {
+    if (!isStatsButtonClickable) {
+      return faChartBar_green;
+    }
+
     if (renderMouseOverEffect) {
       return faChartBarClassDefault ? faChartBar_black : faChartBar_green;
     } else {
@@ -99,14 +106,15 @@ function LowerUI({
           icon={faChartBar}
           size="2x"
           onClick={() => {
-
             if (isAuthenticated) {
               toggleStats();
             } else {
               if (isActive) {
                 toggleActive();
               }
-              setLoginNotification("Logging in is needed for accessing top score");
+              setLoginNotification(
+                "Logging in is needed for accessing top score"
+              );
               history.push("/login");
             }
           }}
@@ -122,6 +130,7 @@ const mapStateToProps = (state) => {
     isActive: state.resultsAndTimerState.counter.isActive,
     areResultsVisible: state.visibilityState.areResultsVisible,
     areStatsVisible: state.visibilityState.areStatsVisible,
+    isStatsButtonClickable: state.visibilityState.isStatsButtonClickable,
   };
 };
 
@@ -129,7 +138,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     toggleActive: () => dispatch({ type: "TOGGLE_ACTIVE" }),
     toggleAreResultsVisible: () => dispatch({ type: "RESULTS_VISIBILITY" }),
-    setLoginNotification: (data) => dispatch({ type: "SET_LOGIN_NOTIFICATION", payload: data}),
+    setLoginNotification: (data) =>
+      dispatch({ type: "SET_LOGIN_NOTIFICATION", payload: data }),
   };
 };
 
