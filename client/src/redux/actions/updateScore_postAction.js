@@ -104,7 +104,16 @@ export const updateScore_postAction = (addScore, history) => (dispatch) => {
       console.log("there is a res");
       console.log(res);
     }
-  });
+  },
+  
+  
+  (err) => {
+    console.log("database connection error");
+    console.log(err);
+
+  }
+  
+  );
   function toggleStats() {
     if (!store.getState().authState.isAuthenticated) {
       return;
