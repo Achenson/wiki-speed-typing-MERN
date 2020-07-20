@@ -112,14 +112,14 @@ XXX 47. hot module reload (instead of default live reload that req. refreshing)?
 -- react-hot-loader && react fast refresh...
 48. check redis video
 DONE 49. authData token expiration not needed? DONE
-50. better email/password validation across the app?
+50. better password validation across the app? Register, changePassword, changePasswordAfterForgot
 DONE 51. clean PasswordChange & PassRetrival redux connection DONE
 DONE 52. passwordRetrieval - better name? component name & header DONE
 DONE 53. PasswordForgotten - disabling button DONE
 DONE 54. try catch consistency - try catch everywhere? DONE try catch deleted, err handled client side
 DONE 55. Login - not looking good? DONE
 DONE 56. test app without net connection - mutations DONE
-56.5 test app without net connection - test usage when logged in
+DONE 56.5 test app without net connection - test usage when logged in DONE
 DONE 57. changePassword - "failed to update password" <- more specific? DONE
 58. all console warnings
 DONE 59. closing Stats should not reset timer! DONE
@@ -128,7 +128,7 @@ DONE 61. Stats working consistency in profile * lowerUI DONE
 63. clean unused store connections in the End (Register, PasswordForgot...)
 DONE 64. PasswordForgot error messages & disabling btn problems (btn disabled if error set) DONE
 DONE 65. redux: login & register clean up DONE
-66. check npm packages for vulnerabilities
+DONE 66. check npm packages for vulnerabilities DONE
 DONE 67. bring back loginError store connection -> for updateStats! DONE
 xxx 68. how to pass info from backend other then null & properType! optional Types? xxx check in the future?
 xx for now logic based on user object is usedx
@@ -139,6 +139,7 @@ loadsh -> for testSchema, not deleted, uuid, uuidv4]
 DONE 72. ForgottenPassChange -> add session expired error DONE
 DONE 73. loading animation -> start & stop at "..." DONE
 74. clear Stats props (...and others?)
+75. check info on other speed typing apps
 
 
 tesing schema.js -> change accessToken to few seconds, delete refresh token cookie
