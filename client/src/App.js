@@ -18,7 +18,7 @@ import DeleteAccount from "./components_links/DeleteAccount.js";
 import CustomRoute from "./components_links/CustomRoute.js";
 import CustomRoute_AuthGuarded from "./components_links/CustomRoute_AuthGuarded.js";
 
-import Test from "./components/Test.js";
+// import Test from "./components/Test.js";
 
 import { fetchWikiApi } from "./redux/actions/fetchPostAction.js";
 
@@ -154,7 +154,7 @@ function App({
       {/* <HashRouter> */}
       <BrowserRouter>
         {/* testing headers */}
-        <Link to="/test">Test</Link>
+        {/* <Link to="/test">Test</Link> */}
         <Switch>
           {/* <Route path="/" exact component={Display}/> */}
           <Route
@@ -204,7 +204,7 @@ function App({
           />
 
           {/* testing isAuth, has to be clicked on Link to work */}
-          <Route path="/test" component={Test} />
+          {/* <Route path="/test" component={Test} /> */}
 
           <Route render={() => <h1>404: page not found</h1>} />
         </Switch>

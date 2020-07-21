@@ -70,8 +70,8 @@ no-cache policy in Profile & Stats
 DONE 13. style initiall loading in the App DONE
 DONE 13.5 initiall loading -> delay it? DONE
 DONE 14 clear deleteScore postaction! DONE
-15. commentOut Test in the end
-16. change accessToken expiration in the end
+DONE 15. commentOut Test (testing isAuth) in the end DONE 
+DONE 16. change accessToken expiration in the end DONE
 17. notes -> document all the jwt logic (also  revoking tokens)
 DONE 18. fill all useEffect deps DONE
 19. Deployment? 
@@ -141,7 +141,7 @@ DONE 73. loading animation -> start & stop at "..." DONE
 74. clear Stats props (...and others?)
 75. check info on other speed typing apps
 76. write down Display text rendering logic
-77. clean mongodb atlas database
+77. clean mongodb atlas database (but preserve user with ID: "5ede4d4774be8431348219de") (for Test.js)
 
 
 tesing schema.js -> change accessToken to few seconds, delete refresh token cookie
