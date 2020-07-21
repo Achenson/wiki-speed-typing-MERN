@@ -125,7 +125,7 @@ DONE 57. changePassword - "failed to update password" <- more specific? DONE
 DONE 59. closing Stats should not reset timer! DONE
 DONE 60. pausing on clicking profile DONE
 DONE 61. Stats working consistency in profile * lowerUI DONE
-63. clean unused store connections in the End (Register, PasswordForgot...)
+DONE 3. clean unused store connections in the End (Register, PasswordForgot...) DONE
 DONE 64. PasswordForgot error messages & disabling btn problems (btn disabled if error set) DONE
 DONE 65. redux: login & register clean up DONE
 DONE 66. check npm packages for vulnerabilities DONE
@@ -141,6 +141,7 @@ DONE 73. loading animation -> start & stop at "..." DONE
 74. clear Stats props (...and others?)
 75. check info on other speed typing apps
 76. write down Display text rendering logic
+77. clean mongodb atlas database
 
 
 tesing schema.js -> change accessToken to few seconds, delete refresh token cookie

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 // import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import AuthNotification from "./AuthNotification";
@@ -189,16 +189,5 @@ function Register() {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {};
-};
 
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-  // Your component will receive dispatch by default, i.e., when you do not supply a second parameter to connect():
-)(Register);
+export default Register;
