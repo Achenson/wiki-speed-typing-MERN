@@ -62,7 +62,7 @@ function Display({
   let textDividedByLength_floor = Math.floor(
     myTextToArr.length / lengthOfSinglePart
   );
-
+  // contains arrays make out of whole text
   let arrOfPartialText = makeArrOfPartialText(lengthOfSinglePart, myTextToArr);
   let textToRender = arrOfPartialText[indexOfPartialTextArr];
   let arrOutOfText = textToRender.split("");
@@ -199,7 +199,8 @@ function Display({
 
       arrOfPartialText.push(joinedNewArr);
     }
-    //console.log(arrOfPartialText);
+    console.log(arrOfPartialText);
+    console.log("arrOfPartialText");
     return arrOfPartialText;
   }
 

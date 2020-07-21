@@ -18,7 +18,9 @@ function SingleLetter(props) {
       style={{
         color: `${props.color}`,
         textDecoration: `${textDecoration}`,
-        fontWeight: `${fontWeight}`
+        fontWeight: `${fontWeight}`,
+        // ...Any sequence of preserved white space always takes up space...
+        whiteSpace: `break-spaces`
       }}
     >
       {props.letterToRender}

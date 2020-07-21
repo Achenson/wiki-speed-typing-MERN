@@ -40,7 +40,7 @@ DONE 9. revoikingRefreshTokens -> no refreshing, but what about login? DONE
 DONE 10. same-site cookies? !! (frontend console) DONE
 DONE 11. error when the timer reaches 0 and the user is not logged in DONE
 XXX 12. app starting - wrong route? XXx won't matter in production?
-13. issue when words between 1 & 2 screen are serperated by space.
+DONE 13. issue when words between 1 & 2 screen are serperated by space. DONE whiteSpace: `break-spaces`
 DONE 14. [after back from PasswordChange or deleteAccount] offline when logout: "database connection error" clash with Results DONE
 DONE 16. [after back from PasswordChange or deleteAccount] offline when logout: nothing happens when clicking on Stats DONE isStatsButtonClickable added
 
@@ -140,6 +140,7 @@ DONE 72. ForgottenPassChange -> add session expired error DONE
 DONE 73. loading animation -> start & stop at "..." DONE
 74. clear Stats props (...and others?)
 75. check info on other speed typing apps
+76. write down Display text rendering logic
 
 
 tesing schema.js -> change accessToken to few seconds, delete refresh token cookie
