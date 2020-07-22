@@ -1,29 +1,29 @@
 import React from "react";
 //import { useState, useEffect, useRef } from "react";
 
-function SingleLetter(props) {
+function SingleLetter({ color, letterToRender }) {
   let textDecoration = "none";
   let fontWeight = "normal";
 
-  if (props.color === "red") {
+  if (color === "red") {
     textDecoration = "underline";
   }
 
-  if (props.color === "blue" && props.letterToRender === " ") {
+  if (color === "blue" && letterToRender === " ") {
     textDecoration = "underline";
   }
 
   return (
     <span
       style={{
-        color: `${props.color}`,
+        color: `${color}`,
         textDecoration: `${textDecoration}`,
         fontWeight: `${fontWeight}`,
         // ...Any sequence of preserved white space always takes up space...
-        whiteSpace: `break-spaces`
+        whiteSpace: `break-spaces`,
       }}
     >
-      {props.letterToRender}
+      {letterToRender}
     </span>
   );
 }

@@ -14,7 +14,6 @@ import { deleteUser } from "../graphql/queries.js";
 import { useMutation } from "@apollo/react-hooks";
 
 function DeleteAccount({
-  loginError_false,
   areStatsVisible,
   toggleAreStatsVisible,
   authenticatedUserId,
@@ -214,7 +213,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     // changepassError_true: () => dispatch({ type: "CHANGEPASS_ERROR_TRUE" }),
     // changepassError_false: () => dispatch({ type: "CHANGEPASS_ERROR_FALSE" }),
-    loginError_false: () => dispatch({ type: "LOGIN_ERROR_FALSE" }),
     toggleAreStatsVisible: () => dispatch({ type: "STATS_VISIBILITY" }),
     logOut: () => dispatch({ type: "LOG_OUT" }),
     setLoginErrorMessage: (data) =>

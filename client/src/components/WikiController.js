@@ -3,7 +3,16 @@ import { useState, useEffect } from "react";
 
 import { connect } from "react-redux";
 
-function WikiController(props) {
+function WikiController({
+  isWikiButtonClickable,
+  isWikiLinkClickable,
+  wikiTitle,
+  isCounterRunning,
+  disableFocusTextArea,
+  setNewRandomArticle_true,
+  disablingButton,
+  setToReset_true,
+}) {
   // console.log(props.wikiTitle);
 
   const [wikiButtonCSSClass, setWikiButtonClass] = useState(
@@ -11,30 +20,30 @@ function WikiController(props) {
   );
 
   useEffect(() => {
-    if (props.isWikiButtonClickable) {
+    if (isWikiButtonClickable) {
       setWikiButtonClass("btn btn-control btn-wiki");
     } else {
       //setWikiButtonClass("btn btn-wiki-disabled");
       setWikiButtonClass("btn btn-control-disabled btn-wiki");
     }
-  }, [props.isWikiButtonClickable]);
+  }, [isWikiButtonClickable]);
 
   return (
     <div className="wiki-controler container">
       <div className="wiki-title-container">
         <p className="wiki-title-label">Current wikipedia article</p>
         <div className="wiki-title-display">
-          {props.isWikiLinkClickable ? (
+          {isWikiLinkClickable ? (
             <a
               className="wiki-title-display-link"
-              href={`https://en.wikipedia.org/wiki/${props.wikiTitle}`}
+              href={`https://en.wikipedia.org/wiki/${wikiTitle}`}
               target="_blank"
               rel="noopener noreferrer"
             >
-              {props.wikiTitle}
+              {wikiTitle}
             </a>
           ) : (
-            <p>{props.wikiTitle}</p>
+            <p>{wikiTitle}</p>
           )}
         </div>
       </div>
@@ -43,20 +52,20 @@ function WikiController(props) {
         className={wikiButtonCSSClass}
         onClick={() => {
           console.log("button clicked");
-          if (!props.isCounterRunning) {
-            props.disableFocusTextArea();
-            props.setNewRandomArticle_true();
-            props.disablingButton.current.setAttribute("disabled", true);
+          if (!isCounterRunning) {
+            disableFocusTextArea();
+            setNewRandomArticle_true();
+            disablingButton.current.setAttribute("disabled", true);
             // props.setWikiButtonClickable_false();
           } else {
-            props.disableFocusTextArea();
-            props.setToReset_true();
-            props.setNewRandomArticle_true();
-            props.disablingButton.current.setAttribute("disabled", true);
+            disableFocusTextArea();
+            setToReset_true();
+            setNewRandomArticle_true();
+            disablingButton.current.setAttribute("disabled", true);
             // props.setWikiButtonClickable_false();
           }
         }}
-        ref={props.disablingButton}
+        ref={disablingButton}
       >
         Random Wiki Article
       </button>
@@ -68,7 +77,6 @@ const mapStateToProps = (state) => {
   return {
     isWikiLinkClickable: state.visibilityState.isWikiLinkClickable,
     isWikiButtonClickable: state.visibilityState.isWikiButtonClickable,
-    isActive: state.resultsAndTimerState.counter.isActive,
     wikiTitle: state.displayState.textDisplay.wikiTitle,
     isCounterRunning: state.resultsAndTimerState.counter.isCounterRunning,
   };
@@ -78,8 +86,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     disableFocusTextArea: () => dispatch({ type: "DISABLE_FOCUS_TEXT_AREA" }),
     setToReset_true: () => dispatch({ type: "TO_RESET_TRUE" }),
-    setWikiButtonClickable_false: () =>
-      dispatch({ type: "WIKI_BTN_CLICKABLE_FALSE" }),
     setNewRandomArticle_true: () => dispatch({ type: "RANDOM_ARTICLE_TRUE" }),
   };
 };

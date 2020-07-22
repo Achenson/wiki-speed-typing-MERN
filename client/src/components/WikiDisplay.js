@@ -3,25 +3,31 @@ import React from "react";
 import SingleLetter from "./SingleLetter.js";
 import { connect } from "react-redux";
 
-function WikiDisplay(props) {
+function WikiDisplay({
+  areStatsVisible,
+  indexOfPartialTextArr,
+  toggleStats,
+  arrToRender,
+  arrOfPartialText,
+  ellipsis,
+}) {
   return (
     <div className="wiki-display-outer container">
-      <div className="wiki-display" onClick={ () => {
-
-        if(props.areStatsVisible) {
-          props.toggleStats()
-        }
-
-      }}>
-        {props.arrToRender.map((el, i) => {
+      <div
+        className="wiki-display"
+        onClick={() => {
+          if (areStatsVisible) {
+            toggleStats();
+          }
+        }}
+      >
+        {arrToRender.map((el, i) => {
           return <SingleLetter letterToRender={el[0]} color={el[1]} key={i} />;
         })}
-        {props.indexOfPartialTextArr !== props.arrOfPartialText.length - 1
-          ? props.ellipsis
-          : ""}
+        {indexOfPartialTextArr !== arrOfPartialText.length - 1 ? ellipsis : ""}
       </div>
       <div className="wiki-display-page-counter">
-        {props.indexOfPartialTextArr + 1}/{props.arrOfPartialText.length}
+        {indexOfPartialTextArr + 1}/{arrOfPartialText.length}
       </div>
     </div>
   );

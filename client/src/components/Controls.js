@@ -2,33 +2,40 @@ import React from "react";
 //import { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 
-
-function Controls(props) {
+function Controls({
+  isActive,
+  setTimerOnSelect,
+  setConstantTimerValue_basedOnStats,
+  isDisabled,
+  toggleActive,
+  constantTimerValue,
+  setToReset_true,
+  putFocusOnTextArea,
+}) {
   return (
     <div className="control-buttons-row container">
       <div className="column-left">
         <button
           className="btn btn-control control-item"
-          onClick={() => props.toggleActive()}
+          onClick={() => toggleActive()}
         >
-          {props.isActive ? "Pause" : "Run"}
+          {isActive ? "Pause" : "Run"}
         </button>
         <select
           className="control-item timer-select"
           onChange={(e) => {
-            props.setTimerOnSelect(e.target.value)
-            props.setConstantTimerValue_basedOnStats(parseInt(e.target.value))
-
-            
-            }}
-          ref={props.isDisabled}
+            setTimerOnSelect(e.target.value);
+            setConstantTimerValue_basedOnStats(parseInt(e.target.value));
+          }}
+          ref={isDisabled}
           // defaultValue="60"
-          value={props.constantTimerValue.toString()}
+          value={constantTimerValue.toString()}
         >
           <option value="5">00:05</option>
           <option value="60">01:00</option>
           <option value="120">02:00</option>
           <option value="300">05:00</option>
+
           <option value="600">10:00</option>
         </select>
       </div>
@@ -36,9 +43,9 @@ function Controls(props) {
       <div className="column-right">
         <button
           className="btn btn-control control-item btn-reset"
-          onClick={event => {
-            props.setToReset_true();
-            props.putFocusOnTextArea();
+          onClick={(event) => {
+            setToReset_true();
+            putFocusOnTextArea();
           }}
         >
           Reset
@@ -48,24 +55,21 @@ function Controls(props) {
   );
 }
 
-
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-  
     constantTimerValue: state.resultsAndTimerState.counter.constantTimerValue,
     isActive: state.resultsAndTimerState.counter.isActive,
-
   };
 };
 
- const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     setToReset_true: () => dispatch({ type: "TO_RESET_TRUE" }),
-    setConstantTimerValue_basedOnStats: (data) => dispatch({type: "SET_CONST_TIMER_BASED_ON_STATS", payload: data}),
+    setConstantTimerValue_basedOnStats: (data) =>
+      dispatch({ type: "SET_CONST_TIMER_BASED_ON_STATS", payload: data }),
     toggleActive: () => dispatch({ type: "TOGGLE_ACTIVE" }),
   };
-}; 
-
+};
 
 export default connect(
   mapStateToProps,

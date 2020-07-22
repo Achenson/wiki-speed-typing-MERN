@@ -2,11 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 // import { useState, useEffect} from "react";
 
-function UpperUI(props) {
+function UpperUI({
+  timerValue,
+  liveResults,
+  toggleHints,
+  areHintsVisible,
+}) {
   // counter display ================================
 
-  let minutesInt = Math.floor(props.timerValue / 60);
-  let secondsInt = props.timerValue - minutesInt * 60;
+  let minutesInt = Math.floor(timerValue / 60);
+  let secondsInt = timerValue - minutesInt * 60;
 
   let minutesStr = minutesInt.toString();
   let secondsStr = secondsInt.toString();
@@ -44,30 +49,30 @@ function UpperUI(props) {
           <p className="upper-ui-item-label">Speed (KPM)</p>
 
           <p className="upper-ui-item display-speed">
-            {props.liveResults.speed}
+            {liveResults.speed}
           </p>
         </div>
         <div className="upper-ui-inner">
           <p className="upper-ui-item-label">Accuracy</p>
           <p className="upper-ui-item display-accuracy">
-            {props.liveResults.accuracy} %
+            {liveResults.accuracy} %
           </p>
         </div>
 
         <button
           className="btn btn-display-hints"
-          onClick={props.toggleHints}
+          onClick={toggleHints}
           style={{
-            backgroundColor: `${props.areHintsVisible ? "black" : "green"}`
+            backgroundColor: `${areHintsVisible ? "black" : "green"}`
           }}
           onMouseEnter={e => {
             e.target.style.backgroundColor = `${
-              props.areHintsVisible ? "green" : "black"
+              areHintsVisible ? "green" : "black"
             }`;
           }}
           onMouseLeave={e => {
             e.target.style.backgroundColor = `${
-              props.areHintsVisible ? "black" : "green"
+              areHintsVisible ? "black" : "green"
             }`;
           }}
         >
@@ -83,9 +88,8 @@ function UpperUI(props) {
 
 const mapStateToProps = (state) => {
   return {
-    areStatsVisible: state.visibilityState.areStatsVisible,
+    areHintsVisible: state.visibilityState.areHintsVisible,
     isActive: state.resultsAndTimerState.counter.isActive,
-    areResultsVisible: state.visibilityState.areResultsVisible,
     timerValue: state.resultsAndTimerState.counter.timerValue,
     liveResults: state.resultsAndTimerState.liveResults,
   };

@@ -11,13 +11,6 @@ import { deleteScore_postAction } from "../redux/actions/deleteScore_postAction.
 
 function Stats({
   areStatsVisible,
-  constantTimerValue,
-  // from statsReducer
-  currentStatsKey,
-
-  setCurrentStatsKey,
-  // currentStats,
-  // deleteCurrentStatsArr,
 
   isConfirmDeleteVisible,
   confirmDeleteVisibility_true,
@@ -27,13 +20,8 @@ function Stats({
   stats,
   authenticatedUserId,
   setStats,
-  logOut,
-  setLoginErrorMessage,
-  loginError_true,
   mainHistory,
   deleteScore,
-  setConstantTimerValue,
-  setTimerOnSelect,
   constantTimerValue_basedOnStats,
   setConstantTimerValue_basedOnStats,
   statsBtnDisabled,
@@ -292,9 +280,7 @@ function Stats({
 
 const mapStateToProps = (state) => {
   return {
-    currentStatsKey: state.resultsAndTimerState.stats.currentStatsKey,
     // currentStats: state.resultsAndTimerState.stats,
-    constantTimerValue: state.resultsAndTimerState.counter.constantTimerValue,
     isConfirmDeleteVisible: state.visibilityState.isConfirmDeleteVisible,
     areStatsVisible: state.visibilityState.areStatsVisible,
     stats: state.resultsAndTimerState.stats,
@@ -306,8 +292,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setCurrentStatsKey: (data) =>
-      dispatch({ type: "SET_CURRENT_STATS", payload: data }),
     // deleteCurrentStatsArr: () => dispatch({ type: "DELETE_CURRENT_STATS" }),
     /*  confirmDeleteVisibility: () =>
       dispatch({ type: "CONFIRM_DELETE_VISIBILITY" }), */
@@ -316,14 +300,8 @@ const mapDispatchToProps = (dispatch) => {
     confirmDeleteVisibility_false: () =>
       dispatch({ type: "CONFIRM_DELETE_VISIBILITY_FALSE" }),
     setStats: (data) => dispatch({ type: "SET_STATS", payload: data }),
-    logOut: () => dispatch({ type: "LOG_OUT" }),
-    setLoginErrorMessage: (error) =>
-      dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: error }),
-    loginError_true: () => dispatch({ type: "LOGIN_ERROR_TRUE" }),
     deleteScore: (addScore, history) =>
       dispatch(deleteScore_postAction(addScore, history)),
-    setConstantTimerValue: (data) =>
-      dispatch({ type: "CONSTANT_TIMER_VALUE", payload: data }),
     setConstantTimerValue_basedOnStats: (data) =>
       dispatch({ type: "SET_CONST_TIMER_BASED_ON_STATS", payload: data }),
     statsBtnEnabled: () => dispatch({ type: "STATS_BTN_TRUE" }),

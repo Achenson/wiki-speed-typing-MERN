@@ -13,8 +13,6 @@ import { useQuery } from "@apollo/react-hooks";
 function Profile({
   toggleStats,
   isProfileVisible,
-  isAuthenticated,
-  notification_true,
   authenticatedUserId,
 }) {
   let history = useHistory();
@@ -86,20 +84,14 @@ function Profile({
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.authState.isAuthenticated,
-    areHintsVisible: state.visibilityState.areHintsVisible,
     isProfileVisible: state.visibilityState.isProfileVisible,
     authenticatedUserId: state.authState.authenticatedUserId,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    notification_true: () => dispatch({ type: "NOTIFICATION_TRUE" }),
-  };
-};
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
   // Your component will receive dispatch by default, i.e., when you do not supply a second parameter to connect():
 )(Profile);

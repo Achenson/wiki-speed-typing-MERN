@@ -143,7 +143,7 @@ DONE 44.5. proper route guarding! in schema.js DONE route guarding for most quer
 DONE 46. schema - async consistency? DONE
 XXX 47. hot module reload (instead of default live reload that req. refreshing)? XXX in a next project
 -- react-hot-loader && react fast refresh...
-48. check redis video
+XX 48. check redis video XX
 DONE 49. authData token expiration not needed? DONE
 50. better password validation across the app? Register, changePassword, changePasswordAfterForgot
 DONE 51. clean PasswordChange & PassRetrival redux connection DONE
@@ -172,11 +172,14 @@ loadsh -> for testSchema, not deleted, uuid, uuidv4]
 DONE 72. ForgottenPassChange -> add session expired error DONE
 DONE 73. loading animation -> start & stop at "..." DONE
 74. clear Stats props (...and others?)
+74.5 change props to proper var names?
 75. check info on other speed typing apps
 76. write down Display text rendering logic
 77. clean mongodb atlas database (but preserve user with ID: "5ede4d4774be8431348219de") (for Test.js)
 78. make list of change for next project
 79. revokeToken mutation -> should be protected somehow??
+80. clean comments.
+81. clear console logs
 
 tesing schema.js -> change accessToken to few seconds, delete refresh token cookie
 

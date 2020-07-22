@@ -187,7 +187,6 @@ function Login({
 
 const mapStateToProps = (state) => {
   return {
-    isNotificationNeeded: state.authState.isNotificationNeeded,
     loginNotification: state.authState.loginNotification,
     loginErrorMessage: state.authState.loginErrorMessage,
   };
@@ -196,7 +195,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     logIn: (dataObj) => dispatch({ type: "LOG_IN", payload: dataObj }),
-    notification_false: () => dispatch({ type: "NOTIFICATION_FALSE" }),
     setLoginNotification: (data) =>
       dispatch({ type: "SET_LOGIN_NOTIFICATION", payload: data }),
     setLoginErrorMessage: (data) =>
