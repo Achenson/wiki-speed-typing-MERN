@@ -4,8 +4,6 @@ DB='mongodb+srv://Achenson:<password>@mongo-for-fcc-13gh5.mongodb.net/graphql_te
 
 ^graphql_test - name of the db that the document will we saved to! name of the collection will be infered automatically
 
-GraphQLNonNull - preventing users from not entering all data in mutation
-
 client -> clone from repo, then hidden folder .git was deleted so this could be one repo consisting of client and server
 
 // useMutation mutate function does not call `onCompleted`!
@@ -21,6 +19,41 @@ testing tokens with postman:
 3. make protected querry
 no body-pareser being used
 
+jwt logic (+ revoking tokens):
+1. user logging in -> 
+->refresh token is stored in a cookie,
+->access token is set in memory(redux store).
+
+2. headers (sent with every request to the server)with accessToken
+ are being set in index.jx client side
+ (in there the access token is being taken from the redux store)
+
+3. Preserving session (still logged in after reload):
+ App.js -> checks is there is a valid refresh token in a cookie by fetching "/refresh_token"
+  (an actual second route in server.js)
+  and logs In with accessToken if everything is OK
+  (another login, so new refreshToken will be stored in a cookie)
+
+4. Handling accessToken expiration during app use -> creating new accessToken if refreshToken is OK
+  plus 
+  "apollo-link-token-refresh" (ApolloLink -> type of middleware only better) in index.js client-side
+
+5. different mutations/queries in schema.js are being protected by isAuth,
+which checks if there is proper accessToken is set in the headers (equivalent of route guarding)
+
+6. logOut -> setting empty string in a cookie instead of token
+
+7. revokingToken: current refresh token won't work 
+
+tokenVersion == 0 when creating user
+when creating refreshToken ->refreshTokens' tokenVersion == user.tokenVerssion
+to invalidate user -> mutation to increment user's tokenVersion in db
+when the user tries to refresh tokens(reloading or after the accessToken runs out),
+/refresh_token path checks if his user.tokenVersion match the version from the refresh token in his cookies
+if not: new accessToken & refreshToken is not being sent
+-user can still use App until accessToken run out (or until he reloads)
+BUT new refreshToken would still be created if the user Logs in again -
+so password has to be changed first
 
 
 
@@ -72,7 +105,7 @@ DONE 13.5 initiall loading -> delay it? DONE
 DONE 14 clear deleteScore postaction! DONE
 DONE 15. commentOut Test (testing isAuth) in the end DONE 
 DONE 16. change accessToken expiration in the end DONE
-17. notes -> document all the jwt logic (also  revoking tokens)
+DONE 17. notes(above) -> document all the jwt logic (also  revoking tokens) DONE
 DONE 18. fill all useEffect deps DONE
 19. Deployment? 
 XXX 20. [optional] make 2 files out of schema? (resolvers &  ...) XX in a next project
@@ -142,7 +175,8 @@ DONE 73. loading animation -> start & stop at "..." DONE
 75. check info on other speed typing apps
 76. write down Display text rendering logic
 77. clean mongodb atlas database (but preserve user with ID: "5ede4d4774be8431348219de") (for Test.js)
-
+78. make list of change for next project
+79. revokeToken mutation -> should be protected somehow??
 
 tesing schema.js -> change accessToken to few seconds, delete refresh token cookie
 

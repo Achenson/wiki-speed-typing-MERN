@@ -100,7 +100,7 @@ app.post("/refresh_token", async (req, res) => {
   // revoking tokens: tokenVersion == 0 when creating user
   // refreshTokens' tokenVersion == user.tokenVerssion
   // to invalidate user -> increment user's tokenVersion
-  // when the user tries to refresh tokens(login or after accessToken runs out),
+  // when the user tries to refresh tokens(refreshing or after accessToken runs out),
   // his user.tokenVersion doesn't match the version from the refresh token in his cookies
 
   if (user.tokenVersion !== payload.tokenVersion) {
