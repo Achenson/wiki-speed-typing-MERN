@@ -176,7 +176,7 @@ DONE 74. clear Stats props (...and others?) DONE
 DONE 74.5 change props to proper var names? DONE
 75. check info on other speed typing apps
 76. write down Display text rendering logic
-77. clean mongodb atlas database (but preserve user with ID: "5ede4d4774be8431348219de") (for Test.js)
+DONE 77. clean mongodb atlas database (but preserve ID for Test.js) DONE
 DONE 78. make list of changes for next project: DONE
 Redux: action types as variables, mapDispatchToProps -> imported action variables instead of writing whole funcions
 Apollo: schema.js divided to Types & Resolvers
