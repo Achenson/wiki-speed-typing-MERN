@@ -2,12 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 // import { useState, useEffect} from "react";
 
-function UpperUI({
-  timerValue,
-  liveResults,
-  toggleHints,
-  areHintsVisible,
-}) {
+function UpperUI({ timerValue, liveResults, toggleHints, areHintsVisible }) {
   // counter display ================================
 
   let minutesInt = Math.floor(timerValue / 60);
@@ -48,9 +43,7 @@ function UpperUI({
         <div className="upper-ui-inner">
           <p className="upper-ui-item-label">Speed (KPM)</p>
 
-          <p className="upper-ui-item display-speed">
-            {liveResults.speed}
-          </p>
+          <p className="upper-ui-item display-speed">{liveResults.speed}</p>
         </div>
         <div className="upper-ui-inner">
           <p className="upper-ui-item-label">Accuracy</p>
@@ -63,14 +56,14 @@ function UpperUI({
           className="btn btn-display-hints"
           onClick={toggleHints}
           style={{
-            backgroundColor: `${areHintsVisible ? "black" : "green"}`
+            backgroundColor: `${areHintsVisible ? "black" : "green"}`,
           }}
-          onMouseEnter={e => {
+          onMouseEnter={(e) => {
             e.target.style.backgroundColor = `${
               areHintsVisible ? "green" : "black"
             }`;
           }}
-          onMouseLeave={e => {
+          onMouseLeave={(e) => {
             e.target.style.backgroundColor = `${
               areHintsVisible ? "black" : "green"
             }`;
@@ -82,9 +75,6 @@ function UpperUI({
     </div>
   );
 }
-
-/*  */
-
 
 const mapStateToProps = (state) => {
   return {

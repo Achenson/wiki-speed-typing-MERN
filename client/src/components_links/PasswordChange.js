@@ -48,7 +48,6 @@ function PasswordChange({
 
   const [changePass] = useMutation(changePassword);
 
-  // change to vars??? stays the same!
   let [errorNotification, setErrorNotification] = useState(null);
   let [infoNotification, setInfoNotification] = useState(null);
 
@@ -95,7 +94,6 @@ function PasswordChange({
     }).then(
       (res) => {
         console.log("updatePass resss");
-        // console.log(res);
         console.log(res);
 
         if (!res.data.changePassword) {
@@ -110,7 +108,6 @@ function PasswordChange({
           logOut();
           setLoginErrorMessage("Your session has expired");
           history.replace("/login");
-          // setErrorNotification("Your session has expired");
           return;
         }
 
@@ -201,12 +198,10 @@ function PasswordChange({
 
               <button
                 ref={disablePasschangeBtn}
-                // className="btn btn-control btn-auth"
                 className={passchangeCSSClass}
                 type="submit"
                 onClick={(e) => {
                   e.preventDefault();
-                  // history.push("/login");
                   formValidation();
                 }}
               >
@@ -232,8 +227,6 @@ function PasswordChange({
 
 const mapStateToProps = (state) => {
   return {
-    // isNotificationNeeded: state.authState.isNotificationNeeded,
-    // showChangepassError: state.authState.showChangepassError,
     areStatsVisible: state.visibilityState.areStatsVisible,
     authenticatedUserId: state.authState.authenticatedUserId,
   };
@@ -241,17 +234,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // changepassError_true: () => dispatch({ type: "CHANGEPASS_ERROR_TRUE" }),
-    // changepassError_false: () => dispatch({ type: "CHANGEPASS_ERROR_FALSE" }),
     toggleAreStatsVisible: () => dispatch({ type: "STATS_VISIBILITY" }),
     logOut: () => dispatch({ type: "LOG_OUT" }),
     setLoginErrorMessage: (data) =>
       dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: data }),
-
-    /* addNewUser: (addUser, addScore, username, email, password) =>
-      dispatch(
-        addNewUser_postAction(addUser, addScore, username, email, password)
-      ), */
   };
 };
 

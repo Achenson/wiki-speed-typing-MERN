@@ -25,7 +25,6 @@ function Register() {
     };
   }, [setErrorNotification]);
 
-  // let isAuthenticated = false;
   let history = useHistory();
 
   let [username, setUsername] = useState("");
@@ -160,7 +159,6 @@ function Register() {
                 type="submit"
                 onClick={(e) => {
                   e.preventDefault();
-                  // history.push("/login");
                   registerValidation();
                 }}
               >
@@ -188,6 +186,5 @@ function Register() {
     </div>
   );
 }
-
 
 export default Register;

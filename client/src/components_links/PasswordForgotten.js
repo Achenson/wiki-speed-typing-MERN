@@ -55,11 +55,9 @@ function PasswordForgotten() {
   }, [setErrorNotification, setInfoNotification]);
 
   let [email, setEmail] = useState("");
-  // let [password, setPassword] = useState("");
 
   function emailValidation() {
     if (email === "" || email.indexOf("@") === -1) {
-      // setError("Email or password not provided");
       setErrorNotification("Invalid email");
       setIsPassForgotClickable(true);
       return;
@@ -78,8 +76,6 @@ function PasswordForgotten() {
 
         setErrorNotification(null);
         setInfoNotification("Email successfully sent");
-
-        // history.replace("/");
       },
       (err) => {
         console.log(err);
@@ -148,20 +144,12 @@ function PasswordForgotten() {
             <div className="auth-links-div">
               <p className="auth-link-item">
                 No account?&nbsp;Register{" "}
-                <Link
-                  // onClick={notification_false}
-                  to="/register"
-                  className="auth-link"
-                >
+                <Link to="/register" className="auth-link">
                   here
                 </Link>
               </p>
               <p className="auth-link-item">
-                <Link
-                  to="/"
-                  // onClick={notification_false}
-                  className="auth-link"
-                >
+                <Link to="/" className="auth-link">
                   Back
                 </Link>
                 &nbsp;to speed typing
@@ -174,7 +162,4 @@ function PasswordForgotten() {
   );
 }
 
-
 export default PasswordForgotten;
-
-

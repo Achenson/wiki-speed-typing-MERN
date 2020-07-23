@@ -15,7 +15,6 @@ function SingleStat({ speed, accuracy }) {
     <Fragment>
       {isThisARecord ? (
         <li>
-          {/* <span>{speed} KPM &nbsp;|&nbsp; </span> */}
           <div className="tooltip" style={{ display: "inline-block" }}>
             <span>{speed} KPM</span>
             <span className="tooltip-text tooltip-text-stats">

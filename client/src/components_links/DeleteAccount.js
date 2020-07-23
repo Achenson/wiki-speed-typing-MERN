@@ -2,9 +2,9 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 
 // import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
-import { Link } from "react-router-dom";
-
 import { connect } from "react-redux";
+
+import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 import AuthNotification from "./AuthNotification";
@@ -26,7 +26,6 @@ function DeleteAccount({
     "btn btn-control btn-auth btn-reset"
   );
 
-  // change to vars??? stays the same!
   let [errorNotification, setErrorNotification] = useState(null);
   let [infoNotification, setInfoNotification] = useState(null);
 
@@ -70,7 +69,6 @@ function DeleteAccount({
 
   function formValidation() {
     // password confirmation backend
-
     if (password === "") {
       setInfoNotification(null);
       setErrorNotification("Enter your password to delete account");
@@ -163,20 +161,14 @@ function DeleteAccount({
 
               <br />
               <br />
-              {/* <br /> */}
-
               <br />
 
               <button
                 ref={disableDelaccountBtn}
-                // className="btn btn-control btn-auth"
-
-                // className="btn btn-control btn-auth btn-reset"
                 className={delaccountCSSClass}
                 type="submit"
                 onClick={(e) => {
                   e.preventDefault();
-                  // history.push("/login");
                   formValidation();
                 }}
               >
@@ -202,8 +194,6 @@ function DeleteAccount({
 
 const mapStateToProps = (state) => {
   return {
-    // isNotificationNeeded: state.authState.isNotificationNeeded,
-    // showChangepassError: state.authState.showChangepassError,
     areStatsVisible: state.visibilityState.areStatsVisible,
     authenticatedUserId: state.authState.authenticatedUserId,
   };
@@ -211,17 +201,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // changepassError_true: () => dispatch({ type: "CHANGEPASS_ERROR_TRUE" }),
-    // changepassError_false: () => dispatch({ type: "CHANGEPASS_ERROR_FALSE" }),
     toggleAreStatsVisible: () => dispatch({ type: "STATS_VISIBILITY" }),
     logOut: () => dispatch({ type: "LOG_OUT" }),
     setLoginErrorMessage: (data) =>
       dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: data }),
-
-    /* addNewUser: (addUser, addScore, username, email, password) =>
-      dispatch(
-        addNewUser_postAction(addUser, addScore, username, email, password)
-      ), */
   };
 };
 

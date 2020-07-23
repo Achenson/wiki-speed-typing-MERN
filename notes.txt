@@ -179,6 +179,9 @@ DONE 74.5 change props to proper var names? DONE
 DONE 78. make list of changes for next project: DONE
 Redux: action types as variables, mapDispatchToProps -> imported action variables instead of writing whole funcions
 Apollo: schema.js divided to Types & Resolvers
+Apollo: schema -> different types returning, for better err handling
+Hot module reloadinh
+ES modules in node
 79. revokeToken mutation -> should be protected somehow??
 80. clean comments.
 81. clear console logs

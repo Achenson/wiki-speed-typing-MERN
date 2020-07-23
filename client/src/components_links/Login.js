@@ -12,7 +12,6 @@ import { useMutation } from "@apollo/react-hooks";
 
 import { loginMutation } from "../graphql/queries.js";
 
-// function Login({ logIn, isNotificationNeeded, notification_false }) {
 function Login({
   logIn,
   loginNotification,
@@ -51,13 +50,11 @@ function Login({
     }).then(
       (res) => {
         if (res.data.login.token === "User does not exist!") {
-          // setError(`${res.data.login.token}`);
           setLoginErrorMessage(`${res.data.login.token}`);
           return;
         }
 
         if (res.data.login.token === "Password is incorrect!") {
-          // setError(`${res.data.login.token}`);
           setLoginErrorMessage(`${res.data.login.token}`);
           return;
         }
@@ -147,32 +144,20 @@ function Login({
             <div className="auth-links-div">
               <p className="auth-link-item" style={{ marginBottom: "0.25rem" }}>
                 No account?&nbsp;Register{" "}
-                <Link
-                  // onClick={notification_false}
-                  to="/register"
-                  className="auth-link"
-                >
+                <Link to="/register" className="auth-link">
                   here
                 </Link>
               </p>
 
               <p className="auth-link-item" style={{ marginBottom: "0.75rem" }}>
                 Forgot password? Click&nbsp;
-                <Link
-                  to="/passforgot"
-                  // onClick={notification_false}
-                  className="auth-link"
-                >
+                <Link to="/passforgot" className="auth-link">
                   here
                 </Link>
               </p>
 
               <p className="auth-link-item">
-                <Link
-                  to="/"
-                  // onClick={notification_false}
-                  className="auth-link"
-                >
+                <Link to="/" className="auth-link">
                   Back
                 </Link>
                 &nbsp;to speed typing

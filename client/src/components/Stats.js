@@ -27,8 +27,6 @@ function Stats({
   statsBtnDisabled,
   statsBtnEnabled,
 }) {
-  // let history = useHistory();
-
   useEffect(() => {
     console.log("render");
 
@@ -40,7 +38,6 @@ function Stats({
       return (
         <div className="delete-score-div  delete-score-initial-div">
           <span className="delete-score-text">
-            {/* Delete top score for selected timer length -&nbsp; */}
             Delete top score for selected timer length&nbsp;&nbsp;
           </span>
           <button
@@ -57,58 +54,11 @@ function Stats({
       return (
         <div className="delete-score-div delete-score-confirmation-div ">
           <span className="delete-score-text">
-            {/* Delete top score for selected timer length -&nbsp; */}
             Confirm deletion: &nbsp;&nbsp;
           </span>
           <span
             className="delete-score-confirm"
             onClick={() => {
-              // let statsObj = {
-              //   five_s: stats["five_s"],
-              //   one_min: stats["one_min"],
-              //   two_min: stats["two_min"],
-              //   five_min: stats["five_min"],
-              //   ten_min: stats["ten_min"],
-              // };
-
-              // statsObj[stats.currentStatsKey] = [
-              //   [0, 0],
-              //   [0, 0],
-              //   [0, 0],
-              //   [0, 0],
-              //   [0, 0],
-              //   [0, 0],
-              //   [0, 0],
-              //   [0, 0],
-              //   [0, 0],
-              //   [0, 0],
-              // ];
-
-              // not adding here, but reseting
-
-              // addScore({
-              //   variables: {
-              //     // userId: "5ea96e3da7011208ac9c795d",
-              //     userId: authenticatedUserId,
-
-              //     ...statsObj,
-              //   },
-              //   refetchQueries: [
-              //     {
-              //       query: getStatsQuery,
-              //       variables: { userId: authenticatedUserId },
-              //     },
-              //   ],
-              //   update: {
-
-              //   }
-              // }).then((res) => {
-              //   if (!res) {
-              //     logOut();
-              //   }
-
-              // });
-
               deleteScore(addScore, mainHistory);
 
               confirmDeleteVisibility_false();
@@ -129,38 +79,25 @@ function Stats({
   }
 
   // same as in  resultsAndTimerReducer
-
   function changeCurrentStatsKey(payload) {
     switch (payload) {
       case 5:
         return "five_s";
-      // setCurrentStatsArr(five_s);
-      // break;
       case 60:
-        // setCurrentStatsArr(ten_min);
-        // setCurrentStatsArr(one_min);
         return "one_min";
-      // break;
       case 120:
-        // setCurrentStatsArr(two_min);
         return "two_min";
-      // break;
       case 300:
         return "five_min";
-      // setCurrentStatsArr(five_min);
-      // break;
       case 600:
         return "ten_min";
-      // break;
 
       default:
         return "one_min";
     }
-    // setCurrentStatsArr(e.target.value)
   }
 
   const { loading, error, data } = useQuery(getStatsQuery, {
-    // variables: { userId: "5ea96e3da7011208ac9c795d" },
     variables: { userId: authenticatedUserId },
     fetchPolicy: "no-cache",
   });
@@ -207,8 +144,6 @@ function Stats({
     return <h5>database connection error </h5>;
   }
 
-  // const { score } = data;
-
   if (!stats) {
     return null;
   }
@@ -227,9 +162,6 @@ function Stats({
       [0, 0],
     ];
   }
-
-  // console.log("stats score");
-  // console.log(score);
 
   return (
     <div
@@ -280,7 +212,6 @@ function Stats({
 
 const mapStateToProps = (state) => {
   return {
-    // currentStats: state.resultsAndTimerState.stats,
     isConfirmDeleteVisible: state.visibilityState.isConfirmDeleteVisible,
     areStatsVisible: state.visibilityState.areStatsVisible,
     stats: state.resultsAndTimerState.stats,
@@ -292,9 +223,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // deleteCurrentStatsArr: () => dispatch({ type: "DELETE_CURRENT_STATS" }),
-    /*  confirmDeleteVisibility: () =>
-      dispatch({ type: "CONFIRM_DELETE_VISIBILITY" }), */
     confirmDeleteVisibility_true: () =>
       dispatch({ type: "CONFIRM_DELETE_VISIBILITY_TRUE" }),
     confirmDeleteVisibility_false: () =>

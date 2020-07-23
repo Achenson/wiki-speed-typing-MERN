@@ -45,7 +45,6 @@ function ForgottenPassChange({ logIn }) {
 
   const [changePassAfterForgot] = useMutation(changePasswordAfterForgot);
 
-  // change to vars??? stays the same!
   let [errorNotification, setErrorNotification] = useState(null);
   let [infoNotification, setInfoNotification] = useState(null);
 
@@ -82,8 +81,6 @@ function ForgottenPassChange({ logIn }) {
       },
     }).then(
       (res) => {
-        // console.log("updatePass resss");
-
         console.log("changePassAfterForgot res");
         console.log(res);
 
@@ -148,7 +145,6 @@ function ForgottenPassChange({ logIn }) {
             </div>
             <form className="form">
               {/* associating label with input without ID -> nesting */}
-
               <br />
               <label className="label">
                 New password
@@ -176,12 +172,10 @@ function ForgottenPassChange({ logIn }) {
 
               <button
                 ref={disablePasschangeBtn}
-                // className="btn btn-control btn-auth"
                 className={passchangeCSSClass}
                 type="submit"
                 onClick={(e) => {
                   e.preventDefault();
-                  // history.push("/login");
                   formValidation();
                 }}
               >
@@ -210,8 +204,6 @@ const mapDispatchToProps = (dispatch) => {
     logIn: (dataObj) => dispatch({ type: "LOG_IN", payload: dataObj }),
   };
 };
-
-// ForgottenPassChange.getInitialProps()
 
 export default connect(
   null,

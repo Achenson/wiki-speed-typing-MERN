@@ -200,8 +200,6 @@ function Display({
     return arrToSet;
   }
 
-  // for "..." displaying at the end of wiki-diplay
-  // let ellipsis = "...";
   return (
     <AllRenders
       mainHistory={mainHistory}
@@ -217,7 +215,6 @@ function Display({
       focusTextArea={focusTextArea}
       setTimerOnSelect={setTimerOnSelect}
       isDisabled={isDisabled}
-      
     />
   );
 }

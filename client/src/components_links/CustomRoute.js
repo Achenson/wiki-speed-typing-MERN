@@ -2,11 +2,8 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
 const CustomRoute = (props) => {
-
-  
   if (props.isAuthenticated) {
     return <Redirect to="/" />;
-
     //  return <Route {...props} />
   } else {
     return <Route {...props} />;
@@ -20,17 +17,11 @@ export default CustomRoute;
 
 /* route guarding <> & </>!!!!*/
 /* {isAuthenticated ? ( */
-
 /* <Redirect to="/" /> */
-
 /* ) : ( */
-
 /* <> */
-
 /* <Route path="/register" component={Register} /> */
-
 /* <Route path="/login" component={Login} /> */
-
 /*        render={(props) => (
               <Register
               path="/register"
@@ -38,7 +29,5 @@ export default CustomRoute;
               resetTimer={resetTimer}
               />
             )} */
-
 /* </> */
-
 /* )} */

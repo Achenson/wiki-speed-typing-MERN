@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faChartBar } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 import { connect } from "react-redux";
@@ -10,20 +8,14 @@ import { useHistory } from "react-router-dom";
 import { getUserByIdQuery } from "../graphql/queries.js";
 import { useQuery } from "@apollo/react-hooks";
 
-function Profile({
-  toggleStats,
-  isProfileVisible,
-  authenticatedUserId,
-}) {
+function Profile({ toggleStats, isProfileVisible, authenticatedUserId }) {
   let history = useHistory();
 
   const [boxShadow, setBoxShadow] = useState("0px 1px 2px black");
-  // const [boxShadow, setBoxShadow] = useState("none");
 
   const [displayingName, setDisplayingName] = useState("Unknown");
 
   const { loading, error, data } = useQuery(getUserByIdQuery, {
-    // variables: { userId: "5ea96e3da7011208ac9c795d" },
     variables: { userId: authenticatedUserId },
     fetchPolicy: "no-cache",
   });
@@ -45,10 +37,12 @@ function Profile({
         <p style={{ textAlign: "center", fontSize: "0.8em" }}>Logged in as</p>
         <p className="profile-title">{displayingName}</p>
         <ul className="list-profile">
-          <li className="profile-score" onClick={() => {
-
-            toggleStats()}}
-            >
+          <li
+            className="profile-score"
+            onClick={() => {
+              toggleStats();
+            }}
+          >
             Top score &nbsp;
           </li>
           <li
@@ -67,7 +61,6 @@ function Profile({
             }}
             onMouseOver={() => {
               setBoxShadow("none");
-              // setBoxShadow("0px 1px 1px black");
             }}
             onMouseOut={() => {
               setBoxShadow("0px 1px 2px black");
@@ -88,7 +81,6 @@ const mapStateToProps = (state) => {
     authenticatedUserId: state.authState.authenticatedUserId,
   };
 };
-
 
 export default connect(
   mapStateToProps,

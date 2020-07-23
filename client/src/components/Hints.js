@@ -60,7 +60,6 @@ const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.authState.isAuthenticated,
     areHintsVisible: state.visibilityState.areHintsVisible,
-
   };
 };
 

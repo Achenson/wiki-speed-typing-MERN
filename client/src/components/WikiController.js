@@ -13,8 +13,6 @@ function WikiController({
   disablingButton,
   setToReset_true,
 }) {
-  // console.log(props.wikiTitle);
-
   const [wikiButtonCSSClass, setWikiButtonClass] = useState(
     "btn btn-control btn-wiki"
   );
@@ -23,7 +21,6 @@ function WikiController({
     if (isWikiButtonClickable) {
       setWikiButtonClass("btn btn-control btn-wiki");
     } else {
-      //setWikiButtonClass("btn btn-wiki-disabled");
       setWikiButtonClass("btn btn-control-disabled btn-wiki");
     }
   }, [isWikiButtonClickable]);
@@ -56,13 +53,11 @@ function WikiController({
             disableFocusTextArea();
             setNewRandomArticle_true();
             disablingButton.current.setAttribute("disabled", true);
-            // props.setWikiButtonClickable_false();
           } else {
             disableFocusTextArea();
             setToReset_true();
             setNewRandomArticle_true();
             disablingButton.current.setAttribute("disabled", true);
-            // props.setWikiButtonClickable_false();
           }
         }}
         ref={disablingButton}

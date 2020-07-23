@@ -52,13 +52,11 @@ function Main({
   loginError_true,
 
   constantTimerValue_basedOnStats,
-  areStatsVisible
-
+  areStatsVisible,
 }) {
   let history = useHistory();
 
   const { error } = useQuery(getStatsQuery, {
-    // variables: { userId: "5ea96e3da7011208ac9c795d" },
     variables: { userId: authenticatedUserId },
     // fetchPolicy: "no-cache",
   });
@@ -120,7 +118,6 @@ function Main({
       setTimerOnSelect(constantTimerValue_basedOnStats);
     }
 
-
     if (!isActive) {
       // toggleAreHintsVisible(h => !h);
       toggleAreStatsVisible();
@@ -138,6 +135,7 @@ function Main({
   }
 
   // for turning results off when the timer is running  =========
+  // BEFORE: useCallback used
   //useCallback is used so useEffect below won't run on every every time toggleResults function is called
   /*   const toggleResults = useCallback(() => {
     // functional update(r=>!r) so the useCallback don't depend on areResultsVisible
@@ -181,7 +179,6 @@ function Main({
         toggleIsCounterRunning();
       }
 
-      // setToReset(false);
       setToReset_false();
     }
     // turning interval off on pause
@@ -250,8 +247,6 @@ function Main({
     return;
   }
 
-  // isDisabled for disabling select -> moved to <Display/>
-
   // useRef unfocusing btn-hints on textarea focus
   // useRef focusin on textArea if the timer is active
   const focusElement = useRef(null);
@@ -303,9 +298,6 @@ function Main({
       if (isAuthenticated) {
         updateScore(addScore, history);
       }
-
-      // resultsReset();
-      // resetLiveResults();
     }
   }, [
     timerValue,
@@ -334,7 +326,6 @@ function Main({
         setTimerOnSelect={setTimerOnSelect}
         // hints & results visibility
         toggleHints={toggleHints}
-        // toggleResults={toggleResults}
         toggleStats={toggleStats}
         // disabling select, menaging focus
         // isDisabled={isDisabled} isDisabled moved to Display!
@@ -378,7 +369,6 @@ const mapStateToProps = (state) => {
 
     constantTimerValue_basedOnStats:
       state.resultsAndTimerState.constantTimerValue_basedOnStats,
-
   };
 };
 
@@ -421,10 +411,6 @@ const mapDispatchToProps = (dispatch) => {
     toggleAreResultsVisible: () => dispatch({ type: "RESULTS_VISIBILITY" }),
     toggleAreStatsVisible: () => dispatch({ type: "STATS_VISIBILITY" }),
 
-    // setIndexOfPartialTextArr, setTextAreaValue, setPrevTextAreaValue,
-    //  setColorForEachLetter, setDisplayToReset_false for <Display only/>,
-    //  here deleted
-
     // for Stats
     // for synchronizing select timer with select from Stats
     setCurrentStatsKey: (data) =>
@@ -441,8 +427,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: error }),
     loginError_true: () => dispatch({ type: "LOGIN_ERROR_TRUE" }),
   };
-
-  
 };
 
 export default connect(
