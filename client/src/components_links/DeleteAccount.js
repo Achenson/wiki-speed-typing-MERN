@@ -83,7 +83,7 @@ function DeleteAccount({
     }).then(
       (res) => {
         if (!res.data.deleteUser) {
-          console.log("failed to delete user");
+          // console.log("failed to delete user");
           setErrorNotification("Failed to delete user - recheck password");
           return;
         }
@@ -97,7 +97,7 @@ function DeleteAccount({
           return;
         }
 
-        console.log(res.data.deleteUser);
+        // console.log(res.data.deleteUser);
 
         setErrorNotification(null);
         setInfoNotification("Account deleted. Redirecting...");

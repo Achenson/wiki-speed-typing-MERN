@@ -71,8 +71,8 @@ function PasswordForgotten() {
       (res) => {
         setIsPassForgotClickable(true);
 
-        console.log("forgotPassword res");
-        console.log(res);
+        // console.log("forgotPassword res");
+        // console.log(res);
 
         setErrorNotification(null);
         setInfoNotification("Email successfully sent");

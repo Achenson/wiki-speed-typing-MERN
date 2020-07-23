@@ -59,8 +59,8 @@ function App({
       credentials: "include",
     }).then((res) =>
       res.json().then((data) => {
-        console.log(data);
-        console.log("refreshhhinggggg");
+        // console.log(data);
+        // console.log("refreshhhing");
 
         if (data.accessToken) {
           logIn({

@@ -184,7 +184,7 @@ Hot module reloadinh
 ES modules in node
 79. revokeToken mutation -> should be protected somehow??
 DONE 80. clean comments. DONE
-81. clear console logs
+DONE 81. clear console logs DONE
 82. appTree modify
 83. test models & test schemas
 

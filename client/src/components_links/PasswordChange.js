@@ -93,8 +93,8 @@ function PasswordChange({
       },
     }).then(
       (res) => {
-        console.log("updatePass resss");
-        console.log(res);
+        // console.log("updatePass resss");
+        // console.log(res);
 
         if (!res.data.changePassword) {
           setErrorNotification(

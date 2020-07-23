@@ -28,8 +28,7 @@ function Stats({
   statsBtnEnabled,
 }) {
   useEffect(() => {
-    console.log("render");
-
+    // console.log("render");
     confirmDeleteVisibility_false();
   }, [areStatsVisible, confirmDeleteVisibility_false]);
 
@@ -104,10 +103,10 @@ function Stats({
 
   useEffect(() => {
     if (loading) {
-      console.log("loading");
+      // console.log("loading");
     }
     if (error) {
-      console.log("error");
+      // console.log("error");
     }
 
     if (data) {
@@ -115,10 +114,9 @@ function Stats({
 
       const { score } = data;
 
-      console.log("score");
-      console.log(data);
-
-      console.log(score);
+      // console.log("score");
+      // console.log(data);
+      // console.log(score);
 
       if (score) {
         setStats(score);

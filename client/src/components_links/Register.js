@@ -70,7 +70,7 @@ function Register() {
       // workaround: useMutation returns a Promise
     }).then(
       (res) => {
-        console.log(res);
+        // console.log(res);
 
         if (res.data.addUser) {
           setErrorNotification(null);

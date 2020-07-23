@@ -183,8 +183,6 @@ function Display({
 
       arrOfPartialText.push(joinedNewArr);
     }
-    console.log(arrOfPartialText);
-    console.log("arrOfPartialText");
     return arrOfPartialText;
   }
 

@@ -81,8 +81,8 @@ function ForgottenPassChange({ logIn }) {
       },
     }).then(
       (res) => {
-        console.log("changePassAfterForgot res");
-        console.log(res);
+        // console.log("changePassAfterForgot res");
+        // console.log(res);
 
         if (!res.data.changePasswordAfterForgot) {
           setErrorNotification("failed to change password");

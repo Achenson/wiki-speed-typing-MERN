@@ -48,7 +48,6 @@ function WikiController({
         // className=`btn btn-control btn-wiki`
         className={wikiButtonCSSClass}
         onClick={() => {
-          console.log("button clicked");
           if (!isCounterRunning) {
             disableFocusTextArea();
             setNewRandomArticle_true();

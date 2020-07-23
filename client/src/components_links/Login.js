@@ -59,8 +59,8 @@ function Login({
           return;
         }
 
-        console.log("loginMut res");
-        console.log(res);
+        // console.log("loginMut res");
+        // console.log(res);
 
         setLoginErrorMessage(null);
         logIn({

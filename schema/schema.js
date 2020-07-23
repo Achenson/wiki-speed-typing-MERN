@@ -102,7 +102,7 @@ const RootQuery = new GraphQLObjectType({
           if (args.userId) {
             return Score.findOne({ userId: args.userId });
           }
-          console.log("user not fount");
+          console.log("user not found");
           // error will be handled by useQuery in Stats
           throw new Error("user not found");
         }
