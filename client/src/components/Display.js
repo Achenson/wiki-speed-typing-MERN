@@ -8,7 +8,6 @@ import AllRenders from "./AllRenders.js";
 function Display({
   myText,
   displayToReset,
-  // setDisplayToReset_true,
   setDisplayToReset_false,
 
   resultsCorrect,
@@ -36,25 +35,10 @@ function Display({
   setTimerOnSelect,
   toggleHints,
   focusTextArea,
-  // for reseting auth
-  notification_false,
-  loginError_false,
-  registerError_false,
   // graphql mutation
   addScore,
   mainHistory,
 }) {
-  // ===========================================
-  // reseting authState, so auth notifications/warnings disappear after going back
-  // in the browser
-  useEffect(() => {
-    // return () => {
-    notification_false();
-    loginError_false();
-    registerError_false();
-    // };
-  }, [notification_false, loginError_false, registerError_false]);
-
   // rendering text ============================
   const lengthOfSinglePart = 363;
 
@@ -284,10 +268,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "PREV_TEXT_AREA_VALUE", payload: data }),
     setColorForEachLetter: (data) =>
       dispatch({ type: "COLOR_FOR_EACH_LETTER", payload: data }),
-    // reseting auth
-    notification_false: () => dispatch({ type: "NOTIFICATION_FALSE" }),
-    loginError_false: () => dispatch({ type: "LOGIN_ERROR_FALSE" }),
-    registerError_false: () => dispatch({ type: "REGISTER_ERROR_FALSE" }),
     // fetch & wikiController
     setNewRandomArticle_false: () => dispatch({ type: "RANDOM_ARTICLE_FALSE" }),
   };

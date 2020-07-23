@@ -1,13 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 
-// import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import { logoutMutation } from "../graphql/queries.js";
 import { useMutation } from "@apollo/react-hooks";
-
-// import { useHistory } from "react-router-dom";
 
 function AuthenticationUI({
   isAuthenticated,
@@ -17,7 +14,6 @@ function AuthenticationUI({
   isActive,
   toggleActive,
   setToReset_true,
-  // toggleResults,
   toggleAreResultsVisible,
   areResultsVisible,
   resetFinalResults,
@@ -25,14 +21,8 @@ function AuthenticationUI({
   toggleProfile,
   toggleHints,
   areHintsVisible,
-
   isProfileVisible,
-
-  // from
 }) {
-  // let history = useHistory();
-  // let isAuthenticated = false;
-
   const [logoutMut, { client }] = useMutation(logoutMutation);
 
   function authLinks() {

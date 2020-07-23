@@ -142,8 +142,6 @@ function displayReducer(state = initialState, action) {
         },
       };
 
-      
-
     default:
       return state;
   }

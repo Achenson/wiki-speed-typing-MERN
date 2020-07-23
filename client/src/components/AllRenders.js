@@ -40,15 +40,13 @@ function AllRenders({
   return (
     <div className="outer-container">
       <div className="main-square">
-        <AuthenticationUI
-          toggleStats={toggleStats}
-          // toggleResults={toggleResults}
-        />
+        <AuthenticationUI toggleStats={toggleStats} />
 
         <UpperUI toggleHints={toggleHints} />
 
         <Hints toggleStats={toggleStats} />
-        <Profile toggleStats={toggleStats}
+        <Profile
+          toggleStats={toggleStats}
           setTimerOnSelect={setTimerOnSelect}
         />
 
@@ -74,7 +72,6 @@ function AllRenders({
         <WikiController disablingButton={disablingButton} />
 
         <LowerUI
-          // toggleResults={toggleResults}
           toggleStats={toggleStats}
           focusElement={focusElement}
           setTimerOnSelect={setTimerOnSelect}
@@ -84,7 +81,6 @@ function AllRenders({
             addScore={addScore}
             mainHistory={mainHistory}
             setTimerOnSelect={setTimerOnSelect}
-            
           />
         ) : null}
       </div>

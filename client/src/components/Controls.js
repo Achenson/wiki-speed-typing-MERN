@@ -75,6 +75,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
   // Your component will receive dispatch by default, i.e., when you do not supply a second parameter to connect():
-)(Controls); // (3)
-
-// export default Controls;
+)(Controls);
