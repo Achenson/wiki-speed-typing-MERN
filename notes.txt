@@ -183,9 +183,10 @@ Apollo: schema -> different types returning, for better err handling
 Hot module reloadinh
 ES modules in node
 79. revokeToken mutation -> should be protected somehow??
-80. clean comments.
+DONE 80. clean comments. DONE
 81. clear console logs
 82. appTree modify
+83. test models & test schemas
 
 tesing schema.js -> change accessToken to few seconds, delete refresh token cookie
 

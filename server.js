@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const helmet = require("helmet")
+const helmet = require("helmet");
 
 const jwt = require("jsonwebtoken");
 const User = require("./mongoModels/user");
@@ -15,11 +15,10 @@ const createAccessToken = require("./middleware/accessToken");
 const createRefreshToken = require("./middleware/refreshToken");
 const sendRefreshToken = require("./middleware/sendRefreshToken.js");
 
-const sendEmail = require("./utils/sendEmail.js");
+// UNCOMMENT for testing!!!
+// const sendEmail = require("./utils/sendEmail.js");
 
 // const bodyParser = require("body-parser");
-
-// bcrypt?
 
 const app = express();
 
@@ -74,7 +73,6 @@ app.post("/refresh_token", async (req, res) => {
 
   if (!token) {
     return res.send({ ok: false, accessToken: "" });
-    console.log("refresh token erorr");
   }
 
   let payload = null;
@@ -108,12 +106,6 @@ app.post("/refresh_token", async (req, res) => {
 
     return res.send({ ok: false, accessToken: "" });
   }
-
-  /*   res.cookie("jid", createRefreshToken(user), {
-    httpOnly: true,
-    path: "/refresh_token"
-    
-  }); */
 
   sendRefreshToken(res, createRefreshToken(user));
 
@@ -152,8 +144,6 @@ app.use('/graphql', graphqlHTTP(
     // graphiql testing when we go to this address
     graphiql: true,
     context: ({ req, res }) => buildContext({ req, res }),
-
-
 }));
  */
 
@@ -173,6 +163,6 @@ apolloServer.applyMiddleware({ app, cors: false });
 
 app.listen(4000, () => {
   console.log("now listening for requests on port 4000");
-  // UNCOMMENT FOR TESTING!!! 
+  // UNCOMMENT FOR TESTING!!!
   // sendEmail();
 });

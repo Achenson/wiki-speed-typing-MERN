@@ -12,9 +12,6 @@ const createForgotPasswordToken = require("../middleware/forgotPassToken.js");
 const sendRefreshToken = require("../middleware/sendRefreshToken.js");
 
 const sendEmail = require("../utils/sendEmail.js");
-// const uuid = require("uuid");
-// const redis = require("../utils/redis.js");
-// const redisInstance = redis();
 
 const {
   GraphQLObjectType,
@@ -45,14 +42,6 @@ const UserType = new GraphQLObjectType({
   }),
 });
 
-/* 
-
- "five_s": Array,
- "one_min": Array,
- "two_min": Array,
- "five_min": Array,
- "ten_min": Array,
-*/
 const ScoreType = new GraphQLObjectType({
   name: "Score",
   fields: () => ({
@@ -160,8 +149,6 @@ const Mutation = new GraphQLObjectType({
             });
           }),
         ]);
-
-        // console.log(arrOfBooleans);
 
         return new Promise((resolve, reject) => {
           if (arrOfBooleans[0] && arrOfBooleans[1]) {
@@ -422,19 +409,6 @@ const Mutation = new GraphQLObjectType({
           };
         }
 
-        // if user is authenticated correctly
-
-        /*    res.cookie(
-          "jid",
-          createRefreshToken(user),
-          {
-            //  not accessible by JS
-            httpOnly: true,
-            // to prevent sending cookie in every request
-            path: "/refresh_token"
-          }
-        ); */
-
         sendRefreshToken(res, createRefreshToken(user));
 
         const token = createAccessToken(user);
@@ -447,12 +421,6 @@ const Mutation = new GraphQLObjectType({
       type: GraphQLBoolean,
       args: {},
       resolve(parent, args, { req, res }) {
-        /*    res.cookie("jid", ""), {
-          httpOnly: true,
-          // to prevent sending cookie in every request
-          path: "/refresh_token"
-        };
- */
         sendRefreshToken(res, "");
 
         return true;
@@ -471,16 +439,10 @@ const Mutation = new GraphQLObjectType({
           return true;
         }
 
-        // const token = uuid.v4();
-
-        // await redis.set(forgotPasswordPrefix + token, user.id, "ex", 60 * 60 * 24); // 1 day expiration
-        // await redisInstance.set(token, user.id, "ex", 60 * 15); // 15 min expiration
-
         const token = createForgotPasswordToken(user);
 
         await sendEmail(
           args.email,
-          // `http://localhost:3000/user/passchange/${token}`
           `http://localhost:3000/passforgot-change/${token}`
         );
 
@@ -508,10 +470,6 @@ const Mutation = new GraphQLObjectType({
         if (!user) {
           return null;
         }
-
-        // const token = uuid.v4();
-        // await redis.set(forgotPasswordPrefix + token, user.id, "ex", 60 * 60 * 24); // 1 day expiration
-        // await redisInstance.set(token, user.id, "ex", 60 * 15); // 15 min expiration
 
         let update;
         await bcrypt.hash(args.password, 12).then((newHashedPassword) => {
