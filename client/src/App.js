@@ -11,7 +11,7 @@ import Main from "./components_links/Main.js";
 import Login from "./components_links/Login.js";
 import Register from "./components_links/Register.js";
 import PasswordChange from "./components_links/PasswordChange.js";
-import PasswordForgotten from "./components_links/PasswordForgot.js";
+import PasswordForgotten from "./components_links/PasswordForgotten.js";
 import ForgottenPassChange from "./components_links/ForgottenPassChange.js";
 
 import DeleteAccount from "./components_links/DeleteAccount.js";

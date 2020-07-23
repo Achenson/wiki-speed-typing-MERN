@@ -13,7 +13,7 @@ import { changePasswordAfterForgot } from "../graphql/queries.js";
 
 import { useMutation } from "@apollo/react-hooks";
 
-function ForgottenPassChange(props) {
+function ForgottenPassChange({ logIn }) {
   // from ".../passforgot-change/:token"
   let { token } = useParams();
 
@@ -86,13 +86,13 @@ function ForgottenPassChange(props) {
 
         console.log("changePassAfterForgot res");
         console.log(res);
-        
+
         if (!res.data.changePasswordAfterForgot) {
           setErrorNotification("failed to change password");
           return;
         }
 
-        props.logIn({
+        logIn({
           authenticatedUserId: res.data.changePasswordAfterForgot.userId,
           token: res.data.changePasswordAfterForgot.token,
         });
@@ -107,14 +107,14 @@ function ForgottenPassChange(props) {
         }, 2500);
       },
       (err) => {
-        console.log('err')
+        console.log("err");
         console.log(err);
 
-        if(err == "Error: GraphQL error: jwt expired") {
-          setErrorNotification("Session expired - redirecting...")
-          setTimeout( () => {
-            history.replace('/passforgot');
-          }, 2500)
+        if (err == "Error: GraphQL error: jwt expired") {
+          setErrorNotification("Session expired - redirecting...");
+          setTimeout(() => {
+            history.replace("/passforgot");
+          }, 2500);
           return;
         }
 
@@ -205,12 +205,6 @@ function ForgottenPassChange(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    authenticatedUserId: state.authState.authenticatedUserId,
-  };
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     logIn: (dataObj) => dispatch({ type: "LOG_IN", payload: dataObj }),
@@ -220,7 +214,7 @@ const mapDispatchToProps = (dispatch) => {
 // ForgottenPassChange.getInitialProps()
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
   // Your component will receive dispatch by default, i.e., when you do not supply a second parameter to connect():
 )(ForgottenPassChange);
