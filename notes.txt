@@ -185,6 +185,7 @@ ES modules in node
 79. revokeToken mutation -> should be protected somehow??
 80. clean comments.
 81. clear console logs
+82. appTree modify
 
 tesing schema.js -> change accessToken to few seconds, delete refresh token cookie
 

@@ -29,7 +29,6 @@ import PassChangeAfterForgot from "./components_links/ForgottenPassChange";
 //!!!!! imported actions creators must be passed here as props
 function App({
   //  from mapStateToProps
-
   isAuthenticated,
 
   // imported actionCreator
@@ -45,9 +44,6 @@ function App({
 
   // disabling random wiki article button in <Fetch/>
   const disablingButton = useRef(null);
-
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [loginMut, { newData }] = useMutation(loginMutation);
 
   const [isPaused, setIsPaused] = useState(true);
 

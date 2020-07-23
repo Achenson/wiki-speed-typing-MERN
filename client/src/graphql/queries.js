@@ -56,8 +56,6 @@ export const deleteUser = gql`
   }
 `;
 
-
-
 export const getStatsQuery = gql`
   query Score($userId: ID) {
     score(userId: $userId) {
@@ -103,18 +101,11 @@ export const logoutMutation = gql`
   }
 `;
 
-
-
-
 export const forgotPassword = gql`
   mutation ForgotPassword($email: String!) {
     forgotPassword(email: $email)
-    
   }
 `;
-
-
-
 
 export const changePasswordAfterForgot = gql`
   mutation ChangePasswordAfterForgot($token: String!, $password: String!) {
@@ -122,7 +113,5 @@ export const changePasswordAfterForgot = gql`
       userId
       token
     }
-    
   }
 `;
-

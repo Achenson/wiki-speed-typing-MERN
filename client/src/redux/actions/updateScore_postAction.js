@@ -3,8 +3,6 @@ import store from "../store.js";
 import { getStatsQuery } from "../../graphql/queries.js";
 
 export const updateScore_postAction = (addScore, history) => (dispatch) => {
-  // const { loading, error, data } = useQuery(getStatsQuery);
-
   let finalResultObj = {
     ...resultsMaker(
       store.getState().resultsAndTimerState.currentResults.resultsCorrect,
@@ -18,32 +16,25 @@ export const updateScore_postAction = (addScore, history) => (dispatch) => {
 
   switch (finalResultObj["timer length"]) {
     case "5":
-      // setCurrentTimer(five_s);
       statsStateKey = "five_s";
       break;
     case "60":
-      // setCurrentTimer(one_min);
       statsStateKey = "one_min";
       break;
     case "120":
-      // setCurrentTimer(two_min);
       statsStateKey = "two_min";
       break;
     case "300":
-      // setCurrentTimer(five_min);
       statsStateKey = "five_min";
       break;
     case "600":
-        // setCurrentTimer(ten_min);
-        statsStateKey = "ten_min";
-        break;
-
+      statsStateKey = "ten_min";
+      break;
     default:
       statsStateKey = "one_min";
   }
 
   console.log("statsStateKey");
-
   console.log(statsStateKey);
 
   let upd = updateAndSort(
@@ -65,7 +56,6 @@ export const updateScore_postAction = (addScore, history) => (dispatch) => {
   // graphql mutation
   addScore({
     variables: {
-      // userId: "5ea96e3da7011208ac9c795d",
       userId: store.getState().authState.authenticatedUserId,
       ...statsObject,
     },
@@ -75,44 +65,41 @@ export const updateScore_postAction = (addScore, history) => (dispatch) => {
         variables: { userId: store.getState().authState.authenticatedUserId },
       },
     ],
-  }).then((res) => {
-    if (!res.data.addScore) {
-      console.log("there is no res");
+  }).then(
+    (res) => {
+      if (!res.data.addScore) {
+        console.log("there is no res");
 
-      dispatch({ type: "TO_RESET_TRUE" });
-      dispatch({ type: "DISPLAY_TO_RESET_TRUE" });
+        dispatch({ type: "TO_RESET_TRUE" });
+        dispatch({ type: "DISPLAY_TO_RESET_TRUE" });
 
-      if (store.getState().visibilityState.areResultsVisible) {
-        dispatch({ type: "RESULTS_VISIBILITY" });
+        if (store.getState().visibilityState.areResultsVisible) {
+          dispatch({ type: "RESULTS_VISIBILITY" });
+        }
+        dispatch({ type: "RESET_FINAL_RESULTS" });
+
+        dispatch({ type: "LOG_OUT" });
+
+        if (store.getState().visibilityState.areStatsVisible) {
+          toggleStats();
+        }
+
+        dispatch({
+          type: "SET_LOGIN_ERROR_MESSAGE",
+          payload: "Your session has expired",
+        });
+
+        history.replace("/login");
+      } else {
+        console.log("there is a res");
+        console.log(res);
       }
-      dispatch({ type: "RESET_FINAL_RESULTS" });
+    },
 
-      dispatch({ type: "LOG_OUT" });
-
-      if (store.getState().visibilityState.areStatsVisible) {
-        toggleStats();
-      }
-
-      dispatch({
-        type: "SET_LOGIN_ERROR_MESSAGE",
-        payload: "Your session has expired",
-      });
-
-      history.replace("/login");
-    } else {
-      // dispatch({ type: "UPDATE_STATS", payload: statsObject });
-      console.log("there is a res");
-      console.log(res);
+    (err) => {
+      console.log("database connection error");
+      console.log(err);
     }
-  },
-  
-  
-  (err) => {
-    console.log("database connection error");
-    console.log(err);
-
-  }
-  
   );
   function toggleStats() {
     if (!store.getState().authState.isAuthenticated) {

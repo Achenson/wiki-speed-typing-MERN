@@ -1,11 +1,9 @@
 const initialState = {
   isAuthenticated: false,
-  // authenticatedUserId: "5ea96e3da7011208ac9c795d",
   authenticatedUserId: null,
   accessToken: null,
   loginNotification: null,
   loginErrorMessage: null,
-
 };
 
 function authReducer(state = initialState, action) {
@@ -13,7 +11,6 @@ function authReducer(state = initialState, action) {
     case "LOG_IN":
       return {
         ...state,
-
         isAuthenticated: true,
         authenticatedUserId: action.payload.authenticatedUserId,
         accessToken: action.payload.token,
@@ -23,7 +20,6 @@ function authReducer(state = initialState, action) {
         ...state,
         accessToken: action.payload,
       };
-
     case "LOG_OUT":
       return {
         ...state,
@@ -36,11 +32,11 @@ function authReducer(state = initialState, action) {
         ...state,
         loginNotification: action.payload,
       };
-      case "SET_LOGIN_ERROR_MESSAGE":
-        return {
-          ...state,
-          loginErrorMessage: action.payload,
-        };
+    case "SET_LOGIN_ERROR_MESSAGE":
+      return {
+        ...state,
+        loginErrorMessage: action.payload,
+      };
     case "SET_AUTHENTICATED_USER_ID":
       return {
         ...state,

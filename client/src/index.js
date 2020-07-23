@@ -107,8 +107,6 @@ const client = new ApolloClient({
 
 // =======
 
-
-
 // ApolloClient from apolloBoost, before migrating to Apollo-client with apollo-link
 // reason for migrating: to use apollo-link which works similar to middleware, only better
 

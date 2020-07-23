@@ -3,7 +3,6 @@ import store from "../store.js";
 import loremText from "../../components/_defaultText.js";
 
 export const fetchWikiApi = () => (dispatch) => {
-  
   // fetching data from wiki API ===============
 
   // Multiple extracts can only be returned if exintro is set to true.! (if only first part of wiki article is considered)
@@ -85,10 +84,6 @@ export const fetchWikiApi = () => (dispatch) => {
           dispatch({ type: "RANDOM_ARTICLE_FALSE" });
           dispatch({ type: "WIKILINK_CLICKABLE_TRUE" });
           dispatch({ type: "WIKILINK_CLICKABLE_TRUE" });
-          
-          
-       
-
         })
 
         .catch(() => {
@@ -101,15 +96,7 @@ export const fetchWikiApi = () => (dispatch) => {
           dispatch({ type: "ENABLE_FOCUS_TEXT_AREA" });
           dispatch({ type: "RANDOM_ARTICLE_FALSE" });
           dispatch({ type: "WIKILINK_CLICKABLE_FALSE" });
-          
-          
-          
-
         });
     }
   }
-
-
-
-
 };

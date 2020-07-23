@@ -23,7 +23,6 @@ const initialState = {
 
   // for Stats
   stats: {
-    // currentStatsKey: "one_min",
     five_s: makeDefaultStats(1),
     one_min: makeDefaultStats(2),
     two_min: makeDefaultStats(3),
@@ -156,15 +155,10 @@ function resultsAndTimerReducer(state = initialState, action) {
       };
 
     // for Stats
-
     case "UPDATE_STATS":
       return {
         ...state,
         stats: {
-          // ...action.payload
-          /*  ...state.stats,
-          [statsStateKey]: updatedAndSortedArr */
-
           ...action.payload,
         },
       };
@@ -173,7 +167,6 @@ function resultsAndTimerReducer(state = initialState, action) {
       return {
         ...state,
         stats: {
-          // currentStatsKey: state.stats.currentStatsKey,
           ...action.payload,
         },
       };

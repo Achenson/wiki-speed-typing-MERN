@@ -23,8 +23,6 @@ li {
 /* main css */
 
 :root {
-  /* --results-bg:  rgba(111, 198, 219, 0.431); */
-  /* --results-bg:  #6FC6DB6E; */
   --results-bg: rgb(192, 224, 231);
 }
 
@@ -72,9 +70,7 @@ body {
 
 /* ==== Hints */
 .hints {
-  /* visibility: hidden; */
   width: 420px;
-  /* min-height: 158px; */
   height: 169px;
   margin-left: auto;
   margin-right: auto;
@@ -82,9 +78,7 @@ body {
   background-color: rgba(228, 240, 237, 1);
   border: 2px solid green;
   border-radius: 2px;
-  /* absolute would be better if there are more hints */
   position: absolute;
-  /* top: 285px; */
   top: 50px;
   left: -10px;
   z-index: 1;
@@ -106,49 +100,33 @@ body {
 /* =======   Profile*/
 
 .profile {
-  /* visibility: hidden; */
   width: 173px;
-  /* min-height: 158px; */
   min-height: 106px;
-  /* 400px - 170px */
-  /* margin-left: 240px; */
-  /* margin-left: auto; */
-  /* margin-right: auto; */
   color: black;
-  /* background-color: rgba(228, 240, 237, 1); */
   background-color: white;
   border: 1px solid black;
   border-radius: 2px;
   position: absolute;
-  /* top: 285px; */
   top: -2px;
-  /* left: -10px; */
   right: -2px;
   z-index: 1;
-  /* box-shadow: 0px 1px 2px black; */
-  /* box-shadow: none; */
 }
 
 .inner-profile {
-  /* padding-left: 0.1em; */
   padding-top: 0.25em;
-  /* padding-bottom: 0.5em; */
 }
 
 .profile-title {
   text-align: center;
   font-weight: bold;
   font-size: 1em;
-  /* padding-bottom: 0.1em; */
   padding-top: 0.1em;
-  /* border-bottom: 1px solid black; */
 }
 
 .list-profile {
   padding-top: 0.5em;
   text-transform: uppercase;
   text-align: center;
- 
 }
 
 .list-profile > li {
@@ -173,21 +151,19 @@ body {
 }
 
 .profile-score:hover {
-  
- 
   color: rgb(93, 195, 139);
 }
 
 .profile-password {
- color: steelblue;
+  color: steelblue;
 }
 
 .profile-password:hover {
-  color:rgb(154, 199, 214);
+  color: rgb(154, 199, 214);
 }
 
 .profile-delete {
-  color: tomato
+  color: tomato;
 }
 
 /* DeleteAccount */
@@ -226,11 +202,10 @@ body {
 
 .loading-text {
   margin-bottom: auto;
-} 
+}
 .loading-text-top {
   width: 62px;
-  }
-
+}
 
 .btn {
   /* display: block; */
@@ -445,8 +420,6 @@ body {
   color: rgb(37, 111, 172);
 }
 
-/*  */
-
 .wiki-title-display {
   background-color: aliceblue;
 }
@@ -460,7 +433,6 @@ body {
   margin-right: auto;
   padding: 2px 2px;
   color: black;
-  /* background-color: rgba(111, 198, 219, 0.431); */
   background-color: var(--results-bg);
   opacity: 1;
   border: 1px solid steelblue;
@@ -483,7 +455,6 @@ body {
   display: flex;
   justify-content: space-evenly;
   font-size: 1.1rem;
-  /* font-weight: bold; */
   margin-top: 0.5em;
   margin-bottom: 0.5em;
   border-bottom: 1px solid black;
@@ -551,7 +522,6 @@ body {
 /* Stats */
 
 .stats {
-  /* visibility: hidden; */
   width: 420px;
   /* min-height: 320px; */
   /* min-height: 310px; */
@@ -565,8 +535,6 @@ body {
   /* .main-square set to relative */
   position: absolute;
   left: -10px;
-
-  /* bottom: 35px; */
   bottom: 45px;
   z-index: 1;
 }
@@ -575,7 +543,6 @@ body {
   padding-left: 10px;
   padding-top: 0.5em;
   /* padding-bottom: 0.5em; */
-
   /* position: absolute; */
 }
 
@@ -595,7 +562,6 @@ body {
   display: flex;
   justify-content: space-around;
   /* align-items: center; */
-
   /* font-weight: bold; */
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -619,12 +585,10 @@ body {
   /* left: 50px; */
   /* float: right; */
   justify-content: center;
-  /* margin-top: 1.8rem; */
   margin-top: 1.6rem;
 }
 
 .delete-score-confirmation-div {
-  /* margin-top: 1.9rem; */
   margin-top: 1.7rem;
 }
 
@@ -687,7 +651,6 @@ body {
   position: absolute;
   top: -21px;
   right: 0px;
-  /* border-top: 0px solid blue; */
   border-bottom: 20px solid black;
   border-left: 20px solid transparent;
   border-right: 15px solid transparent;
@@ -716,7 +679,6 @@ body {
   width: 400px;
   /* min-height: 578px; */
   min-height: 260px;
-  /* background-color: #afd9d0; */
   background-color: white;
   margin-bottom: 10%;
   margin-left: auto;
@@ -746,22 +708,13 @@ body {
 }
 
 .btn-auth {
-  /* display: inline-block; */
   display: block;
-  /* background-color: steelblue;
-  border-radius: 0.5em;
-  color: white;
-  border: 1px solid black; */
   width: 100%;
   height: 2rem;
   font-size: 0.9rem;
   margin-top: 0.5rem;
   transition: all 0.1s linear;
 }
-
-/* .label {
-  margin: 0.rem auto;
-} */
 
 .input {
   margin: 0.3rem auto;
@@ -802,13 +755,8 @@ body {
   padding: 0.5rem 0;
   width: 400px;
   color: white;
-  /* background-color: dodgerblue; */
   text-align: center;
-
   border-radius: 4px;
-  /* font-weight: 500; */
-  /* box-shadow: 1px 1px 1px black; */
-  /* box-shadow: 2px 2px 2px black; */
 }
 
 .auth-notification-info {

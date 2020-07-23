@@ -7,14 +7,10 @@ import authReducer from "./reducers/authReducer.js";
 // import store from "./store.js";
 // import actionTypes from "./actionTypes";
 
-
-
 //object with reducers, totalState - arbitrary
 export default combineReducers({
-  
   visibilityState: visibilityReducer,
   resultsAndTimerState: resultsAndTimerReducer,
   displayState: displayReducer,
-  authState: authReducer
-  
+  authState: authReducer,
 });

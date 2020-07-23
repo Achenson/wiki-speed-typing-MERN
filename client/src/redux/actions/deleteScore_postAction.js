@@ -3,8 +3,6 @@ import store from "../store.js";
 import { getStatsQuery } from "../../graphql/queries.js";
 
 export const deleteScore_postAction = (addScore, history) => (dispatch) => {
-  // const { loading, error, data } = useQuery(getStatsQuery);
-
   let stats = store.getState().resultsAndTimerState.stats;
 
   let statsObj = {
@@ -38,7 +36,6 @@ export const deleteScore_postAction = (addScore, history) => (dispatch) => {
   // graphql mutation
   addScore({
     variables: {
-      // userId: "5ea96e3da7011208ac9c795d",
       userId: store.getState().authState.authenticatedUserId,
       ...statsObj,
     },
