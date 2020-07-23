@@ -76,6 +76,7 @@ XXX 12. app starting - wrong route? XXx won't matter in production?
 DONE 13. issue when words between 1 & 2 screen are serperated by space. DONE whiteSpace: `break-spaces`
 DONE 14. [after back from PasswordChange or deleteAccount] offline when logout: "database connection error" clash with Results DONE
 DONE 16. [after back from PasswordChange or deleteAccount] offline when logout: nothing happens when clicking on Stats DONE isStatsButtonClickable added
+DONE 17. not displaying current user in Profile DONE
 
 to do:
 DONE 1. move graphql queries to different file DONE
@@ -187,6 +188,7 @@ DONE 80. clean comments. DONE
 DONE 81. clear console logs DONE
 82. appTree modify
 83. test models & test schemas
+84. changeLog file client
 
 tesing schema.js -> change accessToken to few seconds, delete refresh token cookie
 
@@ -200,13 +202,3 @@ getStatsQuery for setting redux state - stats state is being used in Stats for d
 updating stats after deleting current stats, refetching getStatsQuery
 
 in Register: adding new user and adding empty score right away (addNewUser_postAction not used anymore!)
-
-
-
-//redis: for authentication with express-session
-const Redis = require("ioredis");
-
-module.exports = () => {
-  const redis = new Redis();
-  return redis;
-}
