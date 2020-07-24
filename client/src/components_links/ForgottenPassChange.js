@@ -68,6 +68,12 @@ function ForgottenPassChange({ logIn }) {
       return;
     }
 
+    if (newPassword.length < 8) {
+      setInfoNotification(null);
+      setErrorNotification("Password must contain at least 8 characters");
+      return;
+    }
+
     if (newPassword !== newConfirmation) {
       setInfoNotification(null);
       setErrorNotification("Password confirmation does not match");

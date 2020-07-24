@@ -53,6 +53,11 @@ function Register() {
       return;
     }
 
+    if (password.length < 8) {
+      setErrorNotification("Password must contain at least 8 characters");
+      return;
+    }
+
     if (password !== confirmation) {
       setErrorNotification("Password confirmation does not match");
       return;

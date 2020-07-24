@@ -156,7 +156,7 @@ XXX 47. hot module reload (instead of default live reload that req. refreshing)?
 -- react-hot-loader && react fast refresh...
 XX 48. check redis video XX
 DONE 49. authData token expiration not needed? DONE
-50. better password validation across the app? Register, changePassword, changePasswordAfterForgot
+DONE 50. better password validation across the app? Register, changePassword, changePasswordAfterForgot DONE
 DONE 51. clean PasswordChange & PassRetrival redux connection DONE
 DONE 52. passwordRetrieval - better name? component name & header DONE
 DONE 53. PasswordForgotten - disabling button DONE
