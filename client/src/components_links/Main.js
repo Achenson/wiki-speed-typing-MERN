@@ -79,11 +79,10 @@ function Main({
     document.addEventListener("keypress", handleKeyPress);
   });
 
+  // not crucial, Stats shouldn't be accessed in not authenticated
   useEffect(() => {
     if (!isAuthenticated) {
       setStats({
-        // currentStatsKey: "one_min",
-
         five_s: makeDefaultStats(1),
         thirty_s: makeDefaultStats(2),
         one_min: makeDefaultStats(3),
