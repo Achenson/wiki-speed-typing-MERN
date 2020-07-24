@@ -2,6 +2,7 @@ const initialState = {
   currentResults: {
     resultsCorrect: 0,
     resultsIncorrect: 0,
+    // all entries
     resultsNoPenalty: 0,
   },
   liveResults: {

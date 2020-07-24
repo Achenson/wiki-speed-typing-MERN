@@ -19,6 +19,7 @@ testing tokens with postman:
 3. make protected querry
 no body-pareser being used
 
+===============================
 jwt logic (+ revoking tokens):
 1. user logging in -> 
 ->refresh token is stored in a cookie,
@@ -55,8 +56,17 @@ if not: new accessToken & refreshToken is not being sent
 BUT new refreshToken would still be created if the user Logs in again -
 so password has to be changed first
 
+=============================
+Display text rendering logic:
 
-
+1. passing arrToRender [ [letter, color for the letter], ... ]... 
+  - used to color each letter properly
+  1.5 results & making colors: if the textArea test is getting longer(so no calculations when using backspace):
+  - compare last letter of textArea to corresponding letter in WikiDisplay
+  - assign proper color & resultCorrect or resultIncorrect
+2. ... & arrOfPartialText [array containing arrays containing parts of whole text] & indexOfPartialTextArr
+- to properly display ellipsis & page counter
+to WikiDisplay
 
 issues:
 DONE 1. React: Login <Route> warning DONE
@@ -175,7 +185,7 @@ DONE 73. loading animation -> start & stop at "..." DONE
 DONE 74. clear Stats props (...and others?) DONE 
 DONE 74.5 change props to proper var names? DONE
 75. check info on other speed typing apps
-76. write down Display text rendering logic
+DONE 76. write down Display text rendering logic DONE
 DONE 77. clean mongodb atlas database (but preserve ID for Test.js) DONE
 DONE 78. make list of changes for next project: DONE
 Redux: action types as variables, mapDispatchToProps -> imported action variables instead of writing whole funcions
