@@ -197,8 +197,8 @@ ES modules in node
 DONE 80. clean comments. DONE
 DONE 81. clear console logs DONE
 DONE 82. appTree modify DONE
-83. test models & test schemas
-84. changeLog file client
+XXX 83. test models & test schemas XXX left as it is
+DONE 84. changeLog file client DONE
 
 tesing schema.js -> change accessToken to few seconds, delete refresh token cookie
 

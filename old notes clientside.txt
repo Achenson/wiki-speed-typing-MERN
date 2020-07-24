@@ -41,10 +41,10 @@ DONE 15. placeholder text DONE
 DONE 16. typing are get the scroll in the end -> different  font? DONE
 DONE 17. timer value styling DONE
 DONE 18. btn text not centered? FIrefox only? CSS reset? DONE
-? 19. scroll to results if they are not visible?
+XX 19. scroll to results if they are not visible?XX
 DONE 20. speed only 1 afer . DONE
-?21. transition for results?
-?22. implement phase transition?
+XX 21. transition for results?XX
+XX22. implement phase transition XX
 DONE 23. wikipedia text length display? DONE
 DONE 24. what if text is too short DONE
 DONE 25. no "..." if case of last part of text DONE
@@ -66,8 +66,6 @@ DONE 39. proper App tree in notes.txt DONE
 DONE 40. final test
 DONE 41. chrome & firefox inconsistencies fixed DONE
 DONE 42. merge branches
-
-
 */
 
 
@@ -75,7 +73,7 @@ REDUX_FULLSTACK:
 
 toChange:
 DONE 1. split reducers in seperate files? DONE
-2. toggleHints - change from function to action creator?
+XX 2. toggleHints - change from function to action creator?XX
 DONE 3. bar-chart onhover does not work perfectly DONE this behaviour is expected actually
 DONE 3.5 onhover not consistent for toggleable buttons DONE
 XXX 4. stats/ top-score naming consistency? XXX
@@ -97,7 +95,7 @@ XXX 19. info that you need to login when hover/click on chartBar XXX
  XXX DONE 20. reset if login/register/logout is clicked DONE XXX pause instead, reset on logout only
 DONE 21. lower the main app display? DONE
 DONE 22. pause on clicking stats/login/register DONE
-23. no class in Hints' chartBar but it behave the same?
+DONE 23. no class in Hints' chartBar but it behave the same? DONE
 DONE 24. clicking results is still making results visible for a moment DONE now it is pausing instead
 DONE 25. change toggleTimer to toggleActive in App.js, ... DONE
 DONE 25. toggleResult useCallbacks is App.js is not needed?? DONE action creator used instead
@@ -110,7 +108,7 @@ DONE 28. toReset should resetDisplay by default DONE
 isseus:
 DONE 1. reloadin/typing address cause error DONE fixed: hashRouter instead of BrowserRouter,
 (everything after # is ignored by the server) may cause problem later???
-?? 2. no first letter if typing after clicking reset but not focusing on input with mouse ??
+XXX ?? 2. no first letter if typing after clicking reset but not focusing on input with mouse ?? XXX 
 DONE 3. disable wiki link if data is loading DONE
 
 
