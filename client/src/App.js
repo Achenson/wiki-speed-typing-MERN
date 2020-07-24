@@ -16,15 +16,14 @@ import ForgottenPassChange from "./components_links/ForgottenPassChange.js";
 
 import DeleteAccount from "./components_links/DeleteAccount.js";
 import CustomRoute from "./components_links/CustomRoute.js";
-import CustomRoute_AuthGuarded from "./components_links/CustomRoute_AuthGuarded.js";
+import CustomRouteAuthGuarded from "./components_links/CustomRoute_AuthGuarded.js";
 
 // import Test from "./components/Test.js";
 
 import { fetchWikiApi } from "./redux/actions/fetchPostAction.js";
 
 // import { BrowserRouter, Route, Link, Switch, Redirect, useHistory, HashRouter } from "react-router-dom";
-import { Route, Switch, BrowserRouter, Link } from "react-router-dom";
-import PassChangeAfterForgot from "./components_links/ForgottenPassChange";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
 
 //!!!!! imported actions creators must be passed here as props
 function App({
@@ -188,12 +187,12 @@ function App({
           />
 
           {/* must be authenticated to access */}
-          <CustomRoute_AuthGuarded
+          <CustomRouteAuthGuarded
             path="/passchange"
             component={PasswordChange}
             isAuthenticated={isAuthenticated}
           />
-          <CustomRoute_AuthGuarded
+          <CustomRouteAuthGuarded
             path="/delete-account"
             component={DeleteAccount}
             isAuthenticated={isAuthenticated}

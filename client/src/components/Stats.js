@@ -130,7 +130,7 @@ function Stats({
         });
       }
     }
-  }, [loading, error, data, setStats]);
+  }, [loading, error, data, setStats, statsBtnEnabled]);
 
   if (loading) {
     statsBtnDisabled();

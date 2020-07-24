@@ -165,7 +165,7 @@ DONE 55. Login - not looking good? DONE
 DONE 56. test app without net connection - mutations DONE
 DONE 56.5 test app without net connection - test usage when logged in DONE
 DONE 57. changePassword - "failed to update password" <- more specific? DONE
-58. all console warnings
+DONE 58. all console warnings DONE
 DONE 59. closing Stats should not reset timer! DONE
 DONE 60. pausing on clicking profile DONE
 DONE 61. Stats working consistency in profile * lowerUI DONE

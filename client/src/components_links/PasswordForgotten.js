@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 // import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
 
 import AuthNotification from "./AuthNotification";
 
@@ -38,10 +37,6 @@ function PasswordForgotten() {
       }
     }
   }, [isPassForgotClickable]);
-
-  // not {history}!!! because we are not destructuring here,
-  // history is an object!
-  let history = useHistory();
 
   let [errorNotification, setErrorNotification] = useState(null);
   let [infoNotification, setInfoNotification] = useState(null);

@@ -113,7 +113,7 @@ function ForgottenPassChange({ logIn }) {
         console.log("err");
         console.log(err);
 
-        if (err == "Error: GraphQL error: jwt expired") {
+        if (err === "Error: GraphQL error: jwt expired") {
           setErrorNotification("Session expired - redirecting...");
           setTimeout(() => {
             history.replace("/passforgot");

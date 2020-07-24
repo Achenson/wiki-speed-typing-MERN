@@ -8,14 +8,19 @@ import { useHistory } from "react-router-dom";
 import { getUserByIdQuery } from "../graphql/queries.js";
 import { useQuery } from "@apollo/react-hooks";
 
-function Profile({ toggleStats, isProfileVisible, authenticatedUserId, isAuthenticated }) {
+function Profile({
+  toggleStats,
+  isProfileVisible,
+  authenticatedUserId,
+  isAuthenticated,
+}) {
   let history = useHistory();
 
   const [boxShadow, setBoxShadow] = useState("0px 1px 2px black");
 
   const [displayingName, setDisplayingName] = useState("Unknown");
 
-  const { loading, error, data } = useQuery(getUserByIdQuery, {
+  const { data } = useQuery(getUserByIdQuery, {
     variables: { id: authenticatedUserId },
     fetchPolicy: "no-cache",
   });
@@ -26,7 +31,7 @@ function Profile({ toggleStats, isProfileVisible, authenticatedUserId, isAuthent
         setDisplayingName(data.userById.name);
       }
     }
-  }, [data]);
+  }, [data, isAuthenticated]);
 
   return (
     <div
