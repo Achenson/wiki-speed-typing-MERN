@@ -204,6 +204,7 @@ DONE 84. changeLog file client DONE
 86. penalize only uncorrected errors?
 87. change error counting -> do not count corrected errors! BUT count it still for accuracy?
 88. make live results show "-" when the timer is finished
+89. resultsMaker func -> duplicate code!
 
 tesing schema.js -> change accessToken to few seconds, delete refresh token cookie
 

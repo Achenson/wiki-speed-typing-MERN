@@ -7,6 +7,7 @@ export const updateScore_postAction = (addScore, history) => (dispatch) => {
     ...resultsMaker(
       store.getState().resultsAndTimerState.currentResults.resultsCorrect,
       store.getState().resultsAndTimerState.currentResults.resultsIncorrect,
+      store.getState().resultsAndTimerState.currentResults.resultsIncorrect_correctable,
       store.getState().resultsAndTimerState.currentResults.resultsNoPenalty,
       0
     ),
@@ -144,7 +145,7 @@ export const updateScore_postAction = (addScore, history) => (dispatch) => {
     return finalArr;
   }
 
-  function resultsMaker(correct, incorrect, allEntries, timerValue_current) {
+  function resultsMaker(correct, incorrect, unfixed, allEntries, timerValue_current) {
     // (constantTimerValue-timerValue) !!! crucial for displaying proper speed&accuracy live
     let noPenaltyKPM =
       Math.round(
@@ -154,12 +155,19 @@ export const updateScore_postAction = (addScore, history) => (dispatch) => {
           100
       ) / 100;
 
-    let incorrectPerMinute =
-      (incorrect * 60) /
-      (store.getState().resultsAndTimerState.counter.constantTimerValue -
-        timerValue_current);
-    // speed penalty: -5 per incorrectEntry/minute (20% or more mistakes === 0KPM!)
-    let penaltyKPM = noPenaltyKPM - 5 * incorrectPerMinute;
+      // older version -> counting also unfixed mistakes for speed
+    // let incorrectPerMinute =
+    //   (incorrect * 60) /
+    //   (store.getState().resultsAndTimerState.counter.constantTimerValue -
+    //     timerValue_current);
+    // // speed penalty: -5 per incorrectEntry/minute (20% or more mistakes === 0KPM!)
+    // let penaltyKPM = noPenaltyKPM - 5 * incorrectPerMinute;
+
+    let unfixedPerMinute =
+    (unfixed * 60) /
+    (store.getState().resultsAndTimerState.counter.constantTimerValue - timerValue_current);
+  // speed penalty: -5 per incorrectEntry/minute (20% or more mistakes === 0KPM!)
+  let penaltyKPM = noPenaltyKPM - 5 * unfixedPerMinute;
 
     return {
       speed: calcSpeed(),

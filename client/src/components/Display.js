@@ -141,6 +141,10 @@ function Display({
     prevTextAreaValue.length,
     textDividedByLength_floor,
     textToRender.length,
+
+    prevTextAreaValue,
+    resultsIncorrect_correctable_dec,
+    resultsIncorrect_correctable_inc
   ]);
 
   // reseting display

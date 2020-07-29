@@ -4,8 +4,7 @@ const initialState = {
     // unchanging mistakes for counting accuracy
     resultsIncorrect: 0,
     // correctable mistakes for counting speed
-    resultsIncorrect_correctable_inc: 0,
-    resultsIncorrect_correctable_dec: 0,
+    resultsIncorrect_correctable: 0,
     // all entries
     resultsNoPenalty: 0,
   },
@@ -105,7 +104,14 @@ function resultsAndTimerReducer(state = initialState, action) {
         },
       };
 
-
+    case "RESULTS_INCORRECT_CORRECTABLE_DEC":
+      return {
+        ...state,
+        currentResults: {
+          ...state.currentResults,
+          resultsIncorrect_correctable: resultsIncorrect_correctable - 1,
+        },
+      };
 
     case "RESULTS_NO_PENALTY":
       return {
@@ -122,6 +128,7 @@ function resultsAndTimerReducer(state = initialState, action) {
         currentResults: {
           resultsCorrect: 0,
           resultsIncorrect: 0,
+          resultsIncorrect_correctable: 0,
           resultsNoPenalty: 0,
         },
       };
@@ -133,6 +140,7 @@ function resultsAndTimerReducer(state = initialState, action) {
           ...resultsMaker(
             state.currentResults.resultsCorrect,
             state.currentResults.resultsIncorrect,
+            state.currentResults.resultsIncorrect_correctable,
             state.currentResults.resultsNoPenalty,
             state.counter.timerValue
           ),
@@ -143,7 +151,7 @@ function resultsAndTimerReducer(state = initialState, action) {
       return {
         ...state,
         liveResults: {
-          ...resultsMaker(0, 0, 0, 0),
+          ...resultsMaker(0, 0, 0, 0, 0),
         },
       };
 
@@ -156,6 +164,7 @@ function resultsAndTimerReducer(state = initialState, action) {
           ...resultsMaker(
             state.currentResults.resultsCorrect,
             state.currentResults.resultsIncorrect,
+            state.currentResults.resultsIncorrect_correctable,
             state.currentResults.resultsNoPenalty,
             0
           ),
@@ -272,7 +281,14 @@ function resultsAndTimerReducer(state = initialState, action) {
       return state;
   }
 
-  function resultsMaker(correct, incorrect, allEntries, timerValue_current) {
+  function resultsMaker(
+    correct,
+    incorrect,
+    // unfixed mistakes (incorrectEntries_changable that are left unfixed)
+    unfixed,
+    allEntries,
+    timerValue_current
+  ) {
     // (constantTimerValue-timerValue) !!! crucial for displaying proper speed&accuracy live
     let noPenaltyKPM =
       Math.round(
@@ -281,11 +297,27 @@ function resultsAndTimerReducer(state = initialState, action) {
           100
       ) / 100;
 
-    let incorrectPerMinute =
+    // older version -> counting also unfixed mistakes for speed
+    /*   let incorrectPerMinute =
       (incorrect * 60) /
       (state.counter.constantTimerValue - timerValue_current);
     // speed penalty: -5 per incorrectEntry/minute (20% or more mistakes === 0KPM!)
-    let penaltyKPM = noPenaltyKPM - 5 * incorrectPerMinute;
+    let penaltyKPM = noPenaltyKPM - 5 * incorrectPerMinute; */
+
+    let unfixedPerMinute;
+
+    if (unfixed <= 0) {
+      unfixedPerMinute = 0;
+    } else {
+      unfixedPerMinute =
+        (unfixed * 60) /
+        (state.counter.constantTimerValue - timerValue_current);
+    }
+
+    // speed penalty: -5 per incorrectEntry/minute (20% or more mistakes === 0KPM!)
+    console.log("unfixedPerMinute");
+    console.log(unfixedPerMinute);
+    let penaltyKPM = noPenaltyKPM - (5 * unfixedPerMinute);
 
     return {
       speed: calcSpeed(),
@@ -305,6 +337,7 @@ function resultsAndTimerReducer(state = initialState, action) {
     }
 
     function calcAccuracy() {
+      // correct and incorrect entries(also fixed mistakes count in this case!)
       if (allEntries > 0) {
         let accuracyResult = Math.round((correct / allEntries) * 1000) / 10;
         return accuracyResult;
