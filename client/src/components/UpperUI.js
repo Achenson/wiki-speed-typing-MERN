@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useState, useEffect } from "react";
 
 function UpperUI({ timerValue, liveResults, toggleHints, areHintsVisible }) {
   // counter display ================================
@@ -27,19 +26,6 @@ function UpperUI({ timerValue, liveResults, toggleHints, areHintsVisible }) {
   }
 
   let counterDisplay = `${minutesFormatted}:${secondsFormatted}`;
-
-  // const [speedDisplayed, setSpeedDisplayed] = useState("-");
-  // const [accuracyDisplayed, setAccuracyDisplayed] = useState("-");
-
-  // useEffect( () => {
-  //   if (timerValue <= 0) {
-  //     setSpeedDisplayed("-");
-  //     setAccuracyDisplayed("-");
-  //   } else {
-  //     setSpeedDisplayed(liveResults.speed);
-  //     setAccuracyDisplayed(liveResults.accuracy);
-  //   }
-  // }, [setSpeedDisplayed, setAccuracyDisplayed, timerValue])
 
   return (
     <div className="upper-ui container">

@@ -54,7 +54,7 @@ function Main({
   constantTimerValue_basedOnStats,
   areStatsVisible,
 
-  setLiveResultsFinal
+  setLiveResultsFinal,
 }) {
   let history = useHistory();
 
@@ -288,14 +288,12 @@ function Main({
 
       // for live results display every 2s  ==============
     } else if (isActive && timerValue % 2 === 0) {
-
-      if(timerValue > 0) {
+      if (timerValue > 0) {
         setLiveResults();
       } else {
         // setting the same results as finalResults
         setLiveResultsFinal();
       }
-
     }
     if (toReset) {
       resetLiveResults();
@@ -434,7 +432,7 @@ const mapDispatchToProps = (dispatch) => {
     setLoginErrorMessage: (error) =>
       dispatch({ type: "SET_LOGIN_ERROR_MESSAGE", payload: error }),
     loginError_true: () => dispatch({ type: "LOGIN_ERROR_TRUE" }),
-    setLiveResultsFinal: () => dispatch({type: "SET_LIVE_RESULTS_FINAL"})
+    setLiveResultsFinal: () => dispatch({ type: "SET_LIVE_RESULTS_FINAL" }),
   };
 };
 
