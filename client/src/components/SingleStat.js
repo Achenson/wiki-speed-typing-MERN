@@ -16,9 +16,9 @@ function SingleStat({ speed, accuracy }) {
       {isThisARecord ? (
         <li>
           <div className="tooltip" style={{ display: "inline-block" }}>
-            <span>{speed} KPM</span>
+            <span>{speed} CPM</span>
             <span className="tooltip-text tooltip-text-stats">
-              Speed - keys per minute with penalties
+              Speed - characters per minute with penalties
             </span>
           </div>
           <span> &nbsp;|&nbsp; </span>

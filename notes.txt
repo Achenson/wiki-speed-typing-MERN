@@ -200,7 +200,7 @@ DONE 81. clear console logs DONE
 DONE 82. appTree modify DONE
 XXX 83. test models & test schemas XXX left as it is
 DONE 84. changeLog file client DONE
-85. CPM instead of KPMs
+DONE 85. CPM instead of KPMs DONE
 DONE 86. change error counting -> do not count corrected errors! BUT count it still for accuracy? DONE
 DONE 87. make live results show the same as finalResults when the timer is finished DONE
 88. change Results -> displaying unfixed mistakes, change tooltips text, change app view to accomodate for changes?

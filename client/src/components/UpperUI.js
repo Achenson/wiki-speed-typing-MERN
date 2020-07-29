@@ -40,7 +40,7 @@ function UpperUI({ timerValue, liveResults, toggleHints, areHintsVisible }) {
       </div>
       <div className="upper-ui-right">
         <div className="upper-ui-inner">
-          <p className="upper-ui-item-label">Speed (KPM)</p>
+          <p className="upper-ui-item-label">Speed (CPM)</p>
 
           <p className="upper-ui-item display-speed">{liveResults.speed}</p>
         </div>
