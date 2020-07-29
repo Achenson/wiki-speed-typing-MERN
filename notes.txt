@@ -87,6 +87,7 @@ DONE 13. issue when words between 1 & 2 screen are serperated by space. DONE whi
 DONE 14. [after back from PasswordChange or deleteAccount] offline when logout: "database connection error" clash with Results DONE
 DONE 16. [after back from PasswordChange or deleteAccount] offline when logout: nothing happens when clicking on Stats DONE isStatsButtonClickable added
 DONE 17. not displaying current user in Profile DONE
+18. SHIFT is starting app not typed character, change!!!!
 
 to do:
 DONE 1. move graphql queries to different file DONE
@@ -199,6 +200,10 @@ DONE 81. clear console logs DONE
 DONE 82. appTree modify DONE
 XXX 83. test models & test schemas XXX left as it is
 DONE 84. changeLog file client DONE
+85. CPM instead of KPMs
+86. penalize only uncorrected errors?
+87. change error counting -> do not count corrected errors! BUT count it still for accuracy?
+88. make live results show "-" when the timer is finished
 
 tesing schema.js -> change accessToken to few seconds, delete refresh token cookie
 

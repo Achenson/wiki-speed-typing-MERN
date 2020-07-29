@@ -33,13 +33,14 @@ _defaultText.js -> default text to load in case of fetch error
           -counter
           -hints & results & stats (+ setTimerOnSelect) visibility toggling,
           -focusTextArea
-          -setting live & final results
+          -setting live & final results (logic in resultsAndTimerReducer)
           -updateScore_postAction(func from updateStateMutation hook being passed down)
             <Display/>
             - handling text to render
             - changing parts of text to display
             - reseting display
             - array with colorred letters to be passed to WikiDisplay according to mistakes
+            - counting correct, incorrect, all entries
                 <AllRenders/>
                 - rendering most components
                     <AuthenticationUI> - links for login, register, stats toggle on/off
