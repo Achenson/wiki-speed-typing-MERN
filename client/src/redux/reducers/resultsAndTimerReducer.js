@@ -1,7 +1,11 @@
 const initialState = {
   currentResults: {
     resultsCorrect: 0,
+    // unchanging mistakes for counting accuracy
     resultsIncorrect: 0,
+    // correctable mistakes for counting speed
+    resultsIncorrect_correctable_inc: 0,
+    resultsIncorrect_correctable_dec: 0,
     // all entries
     resultsNoPenalty: 0,
   },
@@ -64,7 +68,12 @@ function resultsAndTimerReducer(state = initialState, action) {
   } = state;
 
   const {
-    currentResults: { resultsCorrect, resultsIncorrect, resultsNoPenalty },
+    currentResults: {
+      resultsCorrect,
+      resultsIncorrect,
+      resultsIncorrect_correctable,
+      resultsNoPenalty,
+    },
   } = state;
 
   switch (action.type) {
@@ -86,6 +95,17 @@ function resultsAndTimerReducer(state = initialState, action) {
           resultsIncorrect: resultsIncorrect + 1,
         },
       };
+
+    case "RESULTS_INCORRECT_CORRECTABLE_INC":
+      return {
+        ...state,
+        currentResults: {
+          ...state.currentResults,
+          resultsIncorrect_correctable: resultsIncorrect_correctable + 1,
+        },
+      };
+
+
 
     case "RESULTS_NO_PENALTY":
       return {

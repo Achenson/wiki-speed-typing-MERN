@@ -38,6 +38,10 @@ function Display({
   // graphql mutation
   addScore,
   mainHistory,
+
+  resultsIncorrect_correctable_inc,
+  resultsIncorrect_correctable_dec,
+
 }) {
   // rendering text ============================
   const lengthOfSinglePart = 363;
@@ -82,6 +86,7 @@ function Display({
         arrOutOfText[textAreaValue.length - 1]
       ) {
         resultsIncorrect();
+        resultsIncorrect_correctable_inc();
         colorForEachLetter_2[textAreaValue.length - 1] = "red";
       }
 
@@ -106,6 +111,13 @@ function Display({
     }
 
     if (textAreaValue.length < prevTextAreaValue.length) {
+
+      // if mistake was corrected, decrement number of mistakes for speed (but not for accuracy)
+      if(prevTextAreaValue[prevTextAreaValue.length-1] !== arrOutOfText[prevTextAreaValue.length - 1] ) {
+        resultsIncorrect_correctable_dec()
+      }
+
+
       let colorForEachLetter_3 = [...colorForEachLetter];
       colorForEachLetter_3[textAreaValue.length] = "DimGray";
       setColorForEachLetter([...colorForEachLetter_3]);
@@ -265,6 +277,9 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "COLOR_FOR_EACH_LETTER", payload: data }),
     // fetch & wikiController
     setNewRandomArticle_false: () => dispatch({ type: "RANDOM_ARTICLE_FALSE" }),
+
+    resultsIncorrect_correctable_inc: () => dispatch({type: "RESULTS_INCORRECT_CORRECTABLE_INC"}),
+    resultsIncorrect_correctable_dec: () => dispatch({type: "RESULTS_INCORRECT_CORRECTABLE_DEC"})
   };
 };
 
