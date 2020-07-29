@@ -146,6 +146,20 @@ function resultsAndTimerReducer(state = initialState, action) {
           ),
         },
       };
+    // setting liveResults same as final results if timer hits 0
+    case "SET_LIVE_RESULTS_FINAL":
+      return {
+        ...state,
+        liveResults: {
+          ...resultsMaker(
+            state.currentResults.resultsCorrect,
+            state.currentResults.resultsIncorrect,
+            state.currentResults.resultsIncorrect_correctable,
+            state.currentResults.resultsNoPenalty,
+            0
+          ),
+        },
+      };
 
     case "RESET_LIVE_RESULTS":
       return {
@@ -317,7 +331,7 @@ function resultsAndTimerReducer(state = initialState, action) {
     // speed penalty: -5 per incorrectEntry/minute (20% or more mistakes === 0KPM!)
     console.log("unfixedPerMinute");
     console.log(unfixedPerMinute);
-    let penaltyKPM = noPenaltyKPM - (5 * unfixedPerMinute);
+    let penaltyKPM = noPenaltyKPM - 5 * unfixedPerMinute;
 
     return {
       speed: calcSpeed(),
