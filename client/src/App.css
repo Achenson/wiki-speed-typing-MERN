@@ -504,12 +504,17 @@ body {
   border-radius: 5px;
   border: 1px solid black;
   left: 0px;
-  bottom: 1.55rem;
+  bottom: 1.45rem;
   font-size: 1rem;
   font-weight: normal;
   /* min-width: 200px; */
   white-space: nowrap;
 }
+
+.tooltip-text-other {
+  bottom: 1.2rem;
+}
+
 
 .tooltip:hover .tooltip-text {
   visibility: visible;
