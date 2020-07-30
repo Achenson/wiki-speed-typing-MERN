@@ -50,7 +50,7 @@ function Results({ finalResults, areResultsVisible }) {
           <div className="tooltip">
             <p>Accuracy: {finalResults.accuracy}%</p>
             <span className="tooltip-text">
-              Incorrect entries/total entries
+              Correct entries/total entries
             </span>
           </div>
         </div>

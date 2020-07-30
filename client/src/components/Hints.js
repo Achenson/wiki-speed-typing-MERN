@@ -23,9 +23,9 @@ function Hints({
       }}
     >
       <div className="inner-hints container">
-        <p className="hints-title">Hints</p>
+        <p className="hints-title">Quick Tips</p>
         <ul>
-          <li>Change the timer value (optional)</li>
+          {/* <li>Change the timer value (optional)</li> */}
           <li>Type in typing area to start/resume</li>
           <li>
             Press <b>Tab</b> once to pause, <b>Enter</b> to resume
@@ -51,6 +51,33 @@ function Hints({
             />
           </li>
         </ul>
+        <hr />
+        <p className="hints-title">About Wiki Speed Typing</p>
+        <p>
+          Spice up your typing speed practice using random* articles from
+          English Wikipedia.
+        </p>
+        <p style={{ fontSize: "0.8em", marginTop: "0.1em" }}>
+          * - articles shorter than 370 characters or containing non-english
+          characters are skipped. All text in brackets is edited out.
+        </p>
+        <p style={{ marginTop: "0.5em" }}>
+          Results calculation follows logic described {" "}
+          <a
+            target="_blank"
+            href="https://www.speedtypingonline.com/typing-equations"
+          >
+            here
+          </a>
+          . Main results consist of <b>Speed</b> - raw speed of
+          characters typed minus 5 for each unfixed mistake per minute and{" "}
+          <b>Accuracy</b> - proportion of correct entries to total
+          correct and incorrect entries combined. To convert speed to Words Per Minute, simply divide it by 5.
+           <b> NOTE</b>: In this system{" "}
+          <b>Speed</b> is uneffected by corrected mistakes. However, both
+          uncorrected and corrected mistakes affect <b>Accuracy</b>.{" "}
+          
+        </p>
       </div>
     </div>
   );

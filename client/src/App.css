@@ -71,7 +71,7 @@ body {
 /* ==== Hints */
 .hints {
   width: 420px;
-  height: 169px;
+  height: 469px;
   margin-left: auto;
   margin-right: auto;
   color: black;
@@ -92,10 +92,10 @@ body {
 
 .hints-title {
   text-align: center;
-  font-weight: bold;
   font-size: 1.1em;
   padding-bottom: 0.1em;
 }
+
 
 /* =======   Profile*/
 
