@@ -42,7 +42,7 @@ function Results({ finalResults, areResultsVisible }) {
           <div className="tooltip">
             <p>Speed: {finalResults.speed} CPM</p>
             <span className="tooltip-text">
-              Characters per minute - with penalties (minus 5 for 1 mistake/minute)
+              Characters per minute - with penalties (minus 5 for 1 uncorrected mistake/minute)
             </span>
           </div>
 
@@ -69,7 +69,7 @@ function Results({ finalResults, areResultsVisible }) {
             </span>
           </div>
           <div className="tooltip">
-            <p>Raw Key Speed: {finalResults.noPenalty} CPM</p>
+            <p>Raw Speed: {finalResults.noPenalty} CPM</p>
             <span className="tooltip-text">
               Characters per minute - without penalties for mistakes
             </span>

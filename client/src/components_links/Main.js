@@ -233,7 +233,6 @@ function Main({
     if (constantTimerValue !== timerValue) {
       keysPressed[event.key] = true;
 
-      //if (keysPressed["Shift"] && event.key == "Pause") {
       if (event.key === "Tab" && isActive) {
         toggleActive();
         delete keysPressed[event.key];
