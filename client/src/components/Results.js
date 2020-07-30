@@ -42,7 +42,7 @@ function Results({ finalResults, areResultsVisible }) {
           <div className="tooltip">
             <p>Speed: {finalResults.speed} CPM</p>
             <span className="tooltip-text">
-              Characters per minute - with penalties (minus 5 for 1 uncorrected mistake/minute)
+              Characters per minute - with penalties (minus 5 for 1 unfixed mistake/minute)
             </span>
           </div>
 
@@ -66,6 +66,12 @@ function Results({ finalResults, areResultsVisible }) {
             <p>Incorrect Entries: {finalResults.incorrect}</p>
             <span className="tooltip-text">
               Total incorrect entries (including backspace corrected)
+            </span>
+          </div>
+          <div className="tooltip">
+            <p>Unfixed Mistakes: {finalResults.incorrect}</p>
+            <span className="tooltip-text">
+              Incorrect entries left unfixed
             </span>
           </div>
           <div className="tooltip">

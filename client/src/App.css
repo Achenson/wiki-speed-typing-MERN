@@ -516,7 +516,11 @@ body {
 }
 
 .results-other > .tooltip {
-  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+.results-other > :last-child {
+  margin-bottom: 0em;
 }
 
 /* Stats */

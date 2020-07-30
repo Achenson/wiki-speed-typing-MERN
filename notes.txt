@@ -87,7 +87,8 @@ DONE 13. issue when words between 1 & 2 screen are serperated by space. DONE whi
 DONE 14. [after back from PasswordChange or deleteAccount] offline when logout: "database connection error" clash with Results DONE
 DONE 16. [after back from PasswordChange or deleteAccount] offline when logout: nothing happens when clicking on Stats DONE isStatsButtonClickable added
 DONE 17. not displaying current user in Profile DONE
-18. sometimes typed character don't start counter at first! InputArea
+-X18. sometimes typed character don't start counter at first! InputArea left -> only happens
+sometime & only if shift isn't pressed at the beginning(unlikely)X- 
 
 to do:
 DONE 1. move graphql queries to different file DONE
@@ -204,8 +205,9 @@ DONE 84. changeLog file client DONE
 DONE 85. CPM instead of KPMs DONE
 DONE 86. change error counting -> do not count corrected errors! BUT count it still for accuracy? DONE
 DONE 87. make live results show the same as finalResults when the timer is finished DONE
-88. change Results -> displaying unfixed mistakes, change tooltips text, change app view to accomodate for changes?
+DONE 88. change Results -> displaying unfixed mistakes, change tooltips text DONE
 89. resultsMaker func -> duplicate code!
+90. tooltips height
 
 tesing schema.js -> change accessToken to few seconds, delete refresh token cookie
 
