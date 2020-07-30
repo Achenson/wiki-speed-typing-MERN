@@ -313,6 +313,7 @@ function Main({
     resultsReset,
     setFinalResults,
     setLiveResults,
+    setLiveResultsFinal,
     setStats,
     addScore,
 

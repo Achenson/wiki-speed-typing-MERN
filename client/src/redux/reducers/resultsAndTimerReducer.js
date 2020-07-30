@@ -13,6 +13,7 @@ const initialState = {
     accuracy: "- ",
     correct: "-",
     incorrect: "-",
+    unfixed: "-",
     noPenalty: "-",
     "timer length": 60,
   },
@@ -21,6 +22,7 @@ const initialState = {
     accuracy: "- ",
     correct: "-",
     incorrect: "-",
+    unfixed: "-",
     noPenalty: "-",
     "timer length": "",
   },
@@ -338,6 +340,7 @@ function resultsAndTimerReducer(state = initialState, action) {
       accuracy: calcAccuracy(),
       correct: correct,
       incorrect: incorrect,
+      unfixed: unfixed,
       noPenalty: noPenaltyKPM,
       "timer length": state.counter.constantTimerValue.toString(),
     };

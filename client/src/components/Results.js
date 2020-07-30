@@ -69,7 +69,7 @@ function Results({ finalResults, areResultsVisible }) {
             </span>
           </div>
           <div className="tooltip">
-            <p>Unfixed Mistakes: {finalResults.incorrect}</p>
+            <p>Unfixed Mistakes: {finalResults.unfixed}</p>
             <span className="tooltip-text">
               Incorrect entries left unfixed
             </span>
