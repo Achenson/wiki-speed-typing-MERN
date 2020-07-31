@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useState, useEffect } from "react";
 
 function UpperUI({
   timerValue,
@@ -8,6 +9,7 @@ function UpperUI({
   areHintsVisible,
   toggleStats,
   areStatsVisible,
+  isAuthenticated,
 }) {
   // counter display ================================
 
@@ -33,6 +35,22 @@ function UpperUI({
   }
 
   let counterDisplay = `${minutesFormatted}:${secondsFormatted}`;
+
+  const [flashingOrNot, setFlashingOrNot] = useState(false);
+
+  useEffect(() => {
+    let timerInterval = null;
+
+    if (!isAuthenticated) {
+      timerInterval = setInterval(() => setFlashingOrNot((b) => !b), 1000);
+      setTimeout(() => {
+        clearInterval(timerInterval);
+        setFlashingOrNot(false);
+      }, 5000);
+    }
+
+    return () => clearInterval(timerInterval);
+  }, [isAuthenticated]);
 
   return (
     <div className="upper-ui container">
@@ -65,6 +83,7 @@ function UpperUI({
             }
           }}
           style={{
+            color: `${flashingOrNot ? "#FFCC00" : "white"}`,
             backgroundColor: `${areHintsVisible ? "black" : "green"}`,
           }}
           onMouseEnter={(e) => {
@@ -92,6 +111,7 @@ const mapStateToProps = (state) => {
     timerValue: state.resultsAndTimerState.counter.timerValue,
     liveResults: state.resultsAndTimerState.liveResults,
     areStatsVisible: state.visibilityState.areStatsVisible,
+    isAuthenticated: state.authState.isAuthenticated,
   };
 };
 

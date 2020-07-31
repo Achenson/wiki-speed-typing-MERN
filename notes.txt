@@ -149,8 +149,8 @@ DONE 40. "x" in Stats? DONE instead -> closing stats by clicking wiki display
 DONE 41. clean Main props DONE
 DONE 42. test closing/opening components when the timer is running! (State ?Stats? doensn't work properly?) DONE
 DONE 43. About text somewhere in Hints or in Header? DONE
-43.25 Hints & Stats toggling each other
-43.5 animationa on "?" on start?
+DONE 43.25 Hints & Stats toggling each other DONE
+DONE 43.5 animationa on "?" on start? DONE
 DONE 44. test routes when typed in address DONE CustomRoutes & CustomRoutes_AuthGuarded
 XX score (for Stats) ->new Error when not authenticated not used; XX
 DONE 44.5. proper route guarding! in schema.js DONE route guarding for most queries that requires to be logged in
