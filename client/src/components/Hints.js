@@ -24,13 +24,7 @@ function Hints({
     >
       <div className="inner-hints container">
         <p className="hints-title">Quick Tips</p>
-        <ul
-          style={{
-            borderBottom: "2px gray solid",
-            paddingBottom: "0.6em",
-            marginBottom: "0.6em",
-          }}
-        >
+        <ul className="hints-quicktips">
           {/* <li>Change the timer value (optional)</li> */}
           <li>Type in typing area to start/resume</li>
           <li>
@@ -70,6 +64,7 @@ function Hints({
         <p style={{ marginTop: "0.5em" }}>
           Results calculation follows logic described{" "}
           <a
+            className="auth-link"
             target="_blank"
             href="https://www.speedtypingonline.com/typing-equations"
           >
@@ -83,7 +78,17 @@ function Hints({
           <b>Accuracy</b>. To convert speed to words per minute, simply divide
           it by 5.
         </p>
-        <p style={{textAlign: "center", marginTop: "1em"}}>Contact me: <a href="https://github.com/Achenson" target="_blank">My github profile</a></p>
+        <p style={{ textAlign: "center", marginTop: "1em" }}>
+          {" "}
+          Contact me:{" "}
+          <a
+            href="https://github.com/Achenson"
+            target="_blank"
+            className="auth-link"
+          >
+            My github profile
+          </a>
+        </p>
       </div>
     </div>
   );

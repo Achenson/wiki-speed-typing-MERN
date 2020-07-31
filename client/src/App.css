@@ -71,7 +71,7 @@ body {
 /* ==== Hints */
 .hints {
   width: 420px;
-  height: 459px;
+  height: 472px;
   margin-left: auto;
   margin-right: auto;
   color: black;
@@ -86,17 +86,22 @@ body {
 
 .inner-hints {
   padding-left: 10px;
-  padding-top: 0.5em;
+  padding-top: 1em;
   padding-bottom: 0.5em;
 }
 
 .hints-title {
   text-align: center;
   font-size: 1.1em;
-  padding-bottom: 0.1em;
+  /* padding-bottom: 0.1em; */
+  padding-bottom: 0.2em;
 }
 
-
+.hints-quicktips {
+  border-bottom: 2px gray solid;
+  padding-bottom: 0.6em;
+  margin-bottom: 1em;
+}
 /* =======   Profile*/
 
 .profile {
@@ -751,7 +756,6 @@ body {
 
 .auth-link:hover {
   color: chocolate;
-
   text-decoration: none;
 }
 
