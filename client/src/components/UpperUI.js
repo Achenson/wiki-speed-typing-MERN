@@ -83,7 +83,8 @@ function UpperUI({
             }
           }}
           style={{
-            color: `${flashingOrNot ? "#FFCC00" : "white"}`,
+            color: `${flashingOrNot ? "#ff9b70" : "white"}`,
+            // color: `${flashingOrNot ? "#FF7B2D" : "white"}`,
             backgroundColor: `${areHintsVisible ? "black" : "green"}`,
           }}
           onMouseEnter={(e) => {
