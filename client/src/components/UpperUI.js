@@ -42,11 +42,11 @@ function UpperUI({
     let timerInterval = null;
 
     if (!isAuthenticated) {
-      timerInterval = setInterval(() => setFlashingOrNot((b) => !b), 1000);
+      timerInterval = setInterval(() => setFlashingOrNot((b) => !b), 500);
       setTimeout(() => {
         clearInterval(timerInterval);
         setFlashingOrNot(false);
-      }, 5000);
+      }, 3000);
     }
 
     return () => clearInterval(timerInterval);
@@ -83,8 +83,8 @@ function UpperUI({
             }
           }}
           style={{
-            color: `${flashingOrNot ? "#ff9b70" : "white"}`,
-            // color: `${flashingOrNot ? "#FF7B2D" : "white"}`,
+            // color: `${flashingOrNot ? "cyan" : "white"}`,
+            color: `${flashingOrNot ? "Aqua" : "white"}`,
             backgroundColor: `${areHintsVisible ? "black" : "green"}`,
           }}
           onMouseEnter={(e) => {
