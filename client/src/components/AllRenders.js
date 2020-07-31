@@ -41,50 +41,31 @@ function AllRenders({
     <div className="outer-container">
       <div className="main-square">
         <AuthenticationUI toggleStats={toggleStats} />
-
-        <UpperUI toggleHints={toggleHints} />
-
+        <UpperUI toggleHints={toggleHints} toggleStats={toggleStats} />
         <Hints toggleStats={toggleStats} />
-        <Profile
-          toggleStats={toggleStats}
-          setTimerOnSelect={setTimerOnSelect}
-        />
-
+        <Profile toggleStats={toggleStats} />
         <WikiDisplay
           arrToRender={arrToRender}
           arrOfPartialText={arrOfPartialText}
           ellipsis={ellipsis}
           toggleStats={toggleStats}
         />
-
         <InputArea
           setTextAreaValue={setTextAreaValue}
           focusTextArea={focusTextArea}
           toggleHints={toggleHints}
         />
-
         <Controls
           setTimerOnSelect={setTimerOnSelect}
           isDisabled={isDisabled}
           putFocusOnTextArea={putFocusOnTextArea}
         />
-
         <WikiController disablingButton={disablingButton} />
-
-        <LowerUI
-          toggleStats={toggleStats}
-          focusElement={focusElement}
-          setTimerOnSelect={setTimerOnSelect}
-        />
+        <LowerUI toggleStats={toggleStats} focusElement={focusElement} />
         {isAuthenticated ? (
-          <Stats
-            addScore={addScore}
-            mainHistory={mainHistory}
-            setTimerOnSelect={setTimerOnSelect}
-          />
+          <Stats addScore={addScore} mainHistory={mainHistory} />
         ) : null}
       </div>
-
       <Results />
     </div>
   );

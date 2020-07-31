@@ -89,6 +89,7 @@ DONE 16. [after back from PasswordChange or deleteAccount] offline when logout: 
 DONE 17. not displaying current user in Profile DONE
 -X18. sometimes typed character don't start counter at first! InputArea left -> only happens
 sometime & only if shift isn't pressed at the beginning(unlikely)X- 
+-X 19. Sometime the textArea is not resetting itself? X- currently cannot replicate the issue
 
 to do:
 DONE 1. move graphql queries to different file DONE
@@ -147,7 +148,8 @@ XXX 39. PasswordChange, Login - css classes instead of inline? XXX
 DONE 40. "x" in Stats? DONE instead -> closing stats by clicking wiki display
 DONE 41. clean Main props DONE
 DONE 42. test closing/opening components when the timer is running! (State ?Stats? doensn't work properly?) DONE
-43. About text somewhere in Hints or in Header?
+DONE 43. About text somewhere in Hints or in Header? DONE
+43.25 Hints & Stats toggling each other
 43.5 animationa on "?" on start?
 DONE 44. test routes when typed in address DONE CustomRoutes & CustomRoutes_AuthGuarded
 XX score (for Stats) ->new Error when not authenticated not used; XX
@@ -187,7 +189,7 @@ DONE 72. ForgottenPassChange -> add session expired error DONE
 DONE 73. loading animation -> start & stop at "..." DONE
 DONE 74. clear Stats props (...and others?) DONE 
 DONE 74.5 change props to proper var names? DONE
-75. check info on other speed typing apps
+DONE 75. check info on other speed typing apps DONE
 DONE 76. write down Display text rendering logic DONE
 DONE 77. clean mongodb atlas database (but preserve ID for Test.js) DONE
 DONE 78. make list of changes for next project: DONE

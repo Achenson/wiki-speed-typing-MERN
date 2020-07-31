@@ -1,7 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 
-function UpperUI({ timerValue, liveResults, toggleHints, areHintsVisible }) {
+function UpperUI({
+  timerValue,
+  liveResults,
+  toggleHints,
+  areHintsVisible,
+  toggleStats,
+  areStatsVisible,
+}) {
   // counter display ================================
 
   let minutesInt = Math.floor(timerValue / 60);
@@ -41,7 +48,6 @@ function UpperUI({ timerValue, liveResults, toggleHints, areHintsVisible }) {
       <div className="upper-ui-right">
         <div className="upper-ui-inner">
           <p className="upper-ui-item-label">Speed (CPM)</p>
-
           <p className="upper-ui-item display-speed">{liveResults.speed}</p>
         </div>
         <div className="upper-ui-inner">
@@ -50,10 +56,14 @@ function UpperUI({ timerValue, liveResults, toggleHints, areHintsVisible }) {
             {liveResults.accuracy} %
           </p>
         </div>
-
         <button
           className="btn btn-display-hints"
-          onClick={toggleHints}
+          onClick={() => {
+            toggleHints();
+            if (areStatsVisible) {
+              toggleStats();
+            }
+          }}
           style={{
             backgroundColor: `${areHintsVisible ? "black" : "green"}`,
           }}
@@ -81,6 +91,7 @@ const mapStateToProps = (state) => {
     isActive: state.resultsAndTimerState.counter.isActive,
     timerValue: state.resultsAndTimerState.counter.timerValue,
     liveResults: state.resultsAndTimerState.liveResults,
+    areStatsVisible: state.visibilityState.areStatsVisible,
   };
 };
 

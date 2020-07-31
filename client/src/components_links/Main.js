@@ -23,6 +23,7 @@ function Main({
   isCounterRunning,
   areResultsVisible,
   isAuthenticated,
+  areHintsVisible,
   // from mapDispatchToProps
   toggleAreHintsVisible,
   toggleAreResultsVisible,
@@ -53,7 +54,6 @@ function Main({
 
   constantTimerValue_basedOnStats,
   areStatsVisible,
-
   setLiveResultsFinal,
 }) {
   let history = useHistory();
@@ -113,6 +113,10 @@ function Main({
   function toggleStats() {
     if (!isAuthenticated) {
       return;
+    }
+
+    if (areHintsVisible) {
+      toggleHints();
     }
 
     if (areStatsVisible && !isCounterRunning) {
@@ -359,10 +363,6 @@ const mapStateToProps = (state) => {
     isActive: state.resultsAndTimerState.counter.isActive, // (1)
     toReset: state.resultsAndTimerState.counter.toReset, // (1)
     isCounterRunning: state.resultsAndTimerState.counter.isCounterRunning, // (1)
-    displayToReset: state.displayState.textDisplay.displayToReset,
-    myText: state.displayState.textDisplay.myText,
-    wikiTitle: state.displayState.textDisplay.wikiTitle,
-
     // hints & results
     areHintsVisible: state.visibilityState.areHintsVisible,
     areResultsVisible: state.visibilityState.areResultsVisible,
@@ -382,24 +382,18 @@ const mapDispatchToProps = (dispatch) => {
   return {
     //  resultsCorrect, resultsIncorrect, resultsNoPenalty in for <Display>,
     // here deleted
-
     resultsReset: () => dispatch({ type: "RESULTS_RESET" }),
     setLiveResults: () => dispatch({ type: "SET_LIVE_RESULTS" }),
     resetLiveResults: () => dispatch({ type: "RESET_LIVE_RESULTS" }),
     setFinalResults: () => dispatch({ type: "SET_FINAL_RESULTS" }),
-
     //setMyText & setWikiTitle in <Fetch/> only, here deleted
-
     // fetch & wikiController
     setNewRandomArticle_false: () => dispatch({ type: "RANDOM_ARTICLE_FALSE" }),
-
     // wikiController from Display
     setNewRandomArticle_true: () => dispatch({ type: "RANDOM_ARTICLE_TRUE" }),
-
     // for App
     setDisplayToReset_true: () => dispatch({ type: "DISPLAY_TO_RESET_TRUE" }),
     //
-
     toggleActive: () => dispatch({ type: "TOGGLE_ACTIVE" }),
     setIsActiveToFalse: () => dispatch({ type: "SET_IS_ACTIVE_TO_FALSE" }),
     setTimerValue: (data) => dispatch({ type: "TIMER_VALUE", payload: data }),
@@ -416,7 +410,6 @@ const mapDispatchToProps = (dispatch) => {
     toggleAreHintsVisible: () => dispatch({ type: "HINTS_VISIBILITY" }),
     toggleAreResultsVisible: () => dispatch({ type: "RESULTS_VISIBILITY" }),
     toggleAreStatsVisible: () => dispatch({ type: "STATS_VISIBILITY" }),
-
     // for Stats
     // for synchronizing select timer with select from Stats
     setCurrentStatsKey: (data) =>
