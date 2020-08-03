@@ -72,13 +72,13 @@ issues:
 DONE 1. React: Login <Route> warning DONE
 DONE 2. warning: SingleStat "key" DONE
 DONE 3. problems with undefined for disable button itp? DONE (if statements moved to useEffect)
-4. changePassword! other repos won't work!
+DONE 4. changePassword! other repos won't work! DONE
 DONE 5. clicking Login it the article is not loaded yet couse errors DONE
 DONE 6. checking if email is already taken: is in Register component, but it would be better if it was in schema.js?
 but problems with addingScore to user automatically DONE (partially checked in schema, partially on the frontend)
 XX 7. noCache in getStatsQuerry in Stats.js -> only temp solution? 
 https://github.com/apollographql/react-apollo/issues/2202 XX noCache deleted
-8. revokingRefreshTokens -> inc tokenVersion about 3 times instead of 1??
+-X 8. revokingRefreshTokens -> inc tokenVersion about 3 times instead of 1?? X- issue, but not breaking
 DONE 9. revoikingRefreshTokens -> no refreshing, but what about login? DONE
 DONE 10. same-site cookies? !! (frontend console) DONE
 DONE 11. error when the timer reaches 0 and the user is not logged in DONE
