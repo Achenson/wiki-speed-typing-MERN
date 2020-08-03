@@ -208,7 +208,7 @@ DONE 85. CPM instead of KPMs DONE
 DONE 86. change error counting -> do not count corrected errors! BUT count it still for accuracy? DONE
 DONE 87. make live results show the same as finalResults when the timer is finished DONE
 DONE 88. change Results -> displaying unfixed mistakes, change tooltips text DONE
-89. resultsMaker func -> almost duplicate code!
+DONE 89. resultsMaker func -> almost duplicate code! DONE
 DONE 90. tooltips height DONE
 
 tesing schema.js -> change accessToken to few seconds, delete refresh token cookie
