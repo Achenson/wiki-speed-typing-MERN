@@ -67,6 +67,7 @@ function Hints({
             className="auth-link"
             target="_blank"
             href="https://www.speedtypingonline.com/typing-equations"
+            rel="noopener noreferrer"
           >
             here
           </a>
@@ -85,6 +86,7 @@ function Hints({
             href="https://github.com/Achenson"
             target="_blank"
             className="auth-link"
+            rel="noopener noreferrer"
           >
             My github profile
           </a>

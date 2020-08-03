@@ -155,7 +155,7 @@ DONE 44. test routes when typed in address DONE CustomRoutes & CustomRoutes_Auth
 XX score (for Stats) ->new Error when not authenticated not used; XX
 DONE 44.5. proper route guarding! in schema.js DONE route guarding for most queries that requires to be logged in
 (except for score query for stats, but it is OK to browse stats even if session expired)
-45. final test on chrome
+DONE 45. final test on chrome DONE
 DONE 46. schema - async consistency? DONE
 XXX 47. hot module reload (instead of default live reload that req. refreshing)? XXX in a next project
 -- react-hot-loader && react fast refresh...
@@ -198,7 +198,8 @@ Apollo: schema.js divided to Types & Resolvers
 Apollo: schema -> different types returning, for better err handling
 Hot module reloadinh
 ES modules in node
-79. revokeToken mutation -> should be protected somehow??
+handle mutation accessable by admin only somehow?
+-X 79. revokeToken mutation -> should be protected somehow?? X-
 DONE 80. clean comments. DONE
 DONE 81. clear console logs DONE
 DONE 82. appTree modify DONE
