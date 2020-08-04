@@ -21,6 +21,8 @@ const sendRefreshToken = require("./middleware/sendRefreshToken.js");
 // const bodyParser = require("body-parser");
 
 const app = express();
+// 1 step Heroku
+const PORT = process.env.PORT || 4000
 
 app.use(helmet());
 
@@ -161,7 +163,17 @@ app.use('/graphql', graphqlHTTP(
 
 apolloServer.applyMiddleware({ app, cors: false });
 
-app.listen(4000, () => {
+
+// 2(3) step heroku
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static('client/build'))
+}
+
+// 3 step heroku -> scripts, so npm run build in the client run automatically on heroku
+// script "heroku-postbuild" <- this exact name!
+// scirpt "start" <- also for heroku
+
+app.listen(PORT, () => {
   console.log("now listening for requests on port 4000");
   // UNCOMMENT FOR TESTING!!!
   // sendEmail();
