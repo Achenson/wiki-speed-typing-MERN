@@ -75,7 +75,8 @@ const client = new ApolloClient({
         }
       },
       fetchAccessToken: () => {
-        return fetch("http://localhost:4000/refresh_token", {
+        // return fetch("http://localhost:4000/refresh_token", {
+        return fetch("/refresh_token", {
           method: "POST",
           credentials: "include"
         });

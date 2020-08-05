@@ -53,7 +53,8 @@ function App({
   }, [setIsPaused]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/refresh_token", {
+    // fetch("http://localhost:4000/refresh_token", {
+    fetch("/refresh_token", {
       method: "POST",
       credentials: "include",
     }).then((res) =>
