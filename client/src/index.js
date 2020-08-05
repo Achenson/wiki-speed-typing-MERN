@@ -97,10 +97,12 @@ const client = new ApolloClient({
       console.log(networkError);
     }),
     requestLink,
-    new HttpLink({
-      uri: "http://localhost:4000/graphql",
-      credentials: "include"
-    })
+
+    // new HttpLink({
+    //   uri: "http://localhost:4000/graphql",
+    //   credentials: "include"
+    // })
+
   ]),
   cache
 });
