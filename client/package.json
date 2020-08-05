@@ -1,6 +1,5 @@
 {
   "name": "wiki-type",
-  "homepage": "https://achenson.github.io/wiki-speed-typing",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
