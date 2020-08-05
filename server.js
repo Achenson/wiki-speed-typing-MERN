@@ -28,10 +28,15 @@ app.use(helmet());
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "http://localhost:4000", "http://localhost:5000"],
     credentials: true,
   })
 );
+
+// 2(3) step heroku
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static('client/build'))
+}
 
 /* app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -164,17 +169,14 @@ app.use('/graphql', graphqlHTTP(
 apolloServer.applyMiddleware({ app, cors: false });
 
 
-// 2(3) step heroku
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static('client/build'))
-}
+
 
 // 3 step heroku -> scripts, so npm run build in the client run automatically on heroku
 // script "heroku-postbuild" <- this exact name!
 // scirpt "start" <- also for heroku
 
 app.listen(PORT, () => {
-  console.log("now listening for requests on port 4000");
+  console.log(`now listening for requests on port ${PORT}`);
   // UNCOMMENT FOR TESTING!!!
   // sendEmail();
 });
