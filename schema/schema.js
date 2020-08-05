@@ -443,7 +443,8 @@ const Mutation = new GraphQLObjectType({
 
         await sendEmail(
           args.email,
-          `http://localhost:3000/passforgot-change/${token}`
+          // `http://localhost:3000/passforgot-change/${token}`
+          `/passforgot-change/${token}`
         );
 
         return true;
