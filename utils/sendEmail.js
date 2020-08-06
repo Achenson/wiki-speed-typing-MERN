@@ -77,7 +77,7 @@ module.exports = async function sendEmail(email, url) {
     // UNCOMMENT FOR TESTING!!! to: "bar@example.com, baz@example.com", // list of receivers
     subject: "Wiki speed typing - password change", // Subject line
     text: "Follow the link to change password.", // plain text body
-    html: `<a href="https://wikispeedtyping.herokuapp.com${url}">${url}</a>`, // html body
+    html: `<a href="${url}">${url}</a>`, // html body
   };
 
   // send mail with defined transport object
