@@ -1,6 +1,9 @@
 {
   "name": "typing-wiki-fullstack",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.x"
+  },
   "description": "backend",
   "main": "index.js",
   "scripts": {
