@@ -23,7 +23,6 @@ const sendEmail = require("../utils/sendEmail.js");
   passforgotUri = "http://localhost:3000/passforgot-change/";
 } */
 
-
 const {
   GraphQLObjectType,
   GraphQLSchema,

@@ -31,11 +31,10 @@ import { Route, Switch, BrowserRouter } from "react-router-dom";
 /* let refreshtokenUri;
 
 if (environment === "production") {
-  refreshtokenUri = "/refresh_token"
+  refreshtokenUri = "/refresh_token";
 } else {
   refreshtokenUri = "http://localhost:4000/refresh_token"
 } */
-
 
 //!!!!! imported actions creators must be passed here as props
 function App({
