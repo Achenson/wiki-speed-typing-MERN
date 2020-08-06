@@ -42,13 +42,15 @@ main().catch(console.error); */
 const nodemailer = require("nodemailer");
 
 module.exports = async function sendEmail(email, url) {
+  const nodemailerPass = process.env.NODEMAILER_PASS;
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
   const account = await nodemailer.createTestAccount();
 
   // create reusable transporter object using the default SMTP transport
   const transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
+    // uncomment for testing!
+    /*     host: "smtp.ethereal.email",
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
@@ -59,10 +61,18 @@ module.exports = async function sendEmail(email, url) {
     tls: {
       rejectUnauthorized: false,
     },
+ */
+    service: "gmail",
+    auth: {
+      user: "wikispeedtyping@gmail.com",
+      pass: nodemailerPass,
+    },
   });
 
   const mailOptions = {
-    from: '"Fred Foo 👻" <foo@example.com>', // sender address
+    // uncomment for testing
+    // from: '"Fred Foo 👻" <foo@example.com>', // sender address
+    from: "wikispeedtyping@gmail.com",
     to: email, // list of receivers
     // UNCOMMENT FOR TESTING!!! to: "bar@example.com, baz@example.com", // list of receivers
     subject: "Wiki speed typing - password change", // Subject line

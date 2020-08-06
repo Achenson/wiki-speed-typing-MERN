@@ -18,11 +18,10 @@ const environment = process.env.NODE_ENV;
 let passforgotUri;
 
 if (environment === "production") {
-  passforgotUri = "/passforgot-change/"
+  passforgotUri = "/passforgot-change/";
 } else {
   passforgotUri = "http://localhost:3000/passforgot-change/";
 }
-
 
 const {
   GraphQLObjectType,

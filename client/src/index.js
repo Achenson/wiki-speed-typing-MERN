@@ -7,9 +7,9 @@ import "./index.css";
 import AppContainer from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from "@apollo/react-hooks";
 // import ApolloClient from 'apollo-boost';
-import {ApolloClient} from "apollo-client";
+import { ApolloClient } from "apollo-client";
 import { ApolloLink, Observable } from "apollo-link";
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 import jwtDecode from "jwt-decode";
@@ -22,7 +22,7 @@ const environment = process.env.NODE_ENV;
 let graphqlUri;
 
 if (environment === "production") {
-  graphqlUri = "/graphql"
+  graphqlUri = "/graphql";
 } else {
   graphqlUri = "http://localhost:4000/graphql";
 }
@@ -30,25 +30,25 @@ if (environment === "production") {
 let refreshtokenUri;
 
 if (environment === "production") {
-  refreshtokenUri = "/refresh_token"
+  refreshtokenUri = "/refresh_token";
 } else {
-  refreshtokenUri = "http://localhost:4000/refresh_token"
+  refreshtokenUri = "http://localhost:4000/refresh_token";
 }
 
 //  ========= refreshin token benawad
 
 const requestLink = new ApolloLink(
   (operation, forward) =>
-    new Observable(observer => {
+    new Observable((observer) => {
       let handle;
       Promise.resolve(operation)
-        .then(operation => {
-          const accessToken = store.getState().authState.accessToken;;
+        .then((operation) => {
+          const accessToken = store.getState().authState.accessToken;
           if (accessToken) {
             operation.setContext({
               headers: {
-                authorization: `Bearer ${accessToken}`
-              }
+                authorization: `Bearer ${accessToken}`,
+              },
             });
           }
         })
@@ -56,7 +56,7 @@ const requestLink = new ApolloLink(
           handle = forward(operation).subscribe({
             next: observer.next.bind(observer),
             error: observer.error.bind(observer),
-            complete: observer.complete.bind(observer)
+            complete: observer.complete.bind(observer),
           });
         })
         .catch(observer.error.bind(observer));
@@ -97,19 +97,17 @@ const client = new ApolloClient({
         // return fetch("/refresh_token", {
         return fetch(`${refreshtokenUri}`, {
           method: "POST",
-          credentials: "include"
+          credentials: "include",
         });
       },
-      handleFetch: accessToken => {
-
-
+      handleFetch: (accessToken) => {
         // setAccessToken(accessToken);
-        store.dispatch({type: "SET_ACCESS_TOKEN", payload: accessToken})
+        store.dispatch({ type: "SET_ACCESS_TOKEN", payload: accessToken });
       },
-      handleError: err => {
+      handleError: (err) => {
         console.warn("Your refresh token is invalid. Try to relogin");
         console.error(err);
-      }
+      },
     }),
     onError(({ graphQLErrors, networkError }) => {
       console.log(graphQLErrors);
@@ -121,13 +119,11 @@ const client = new ApolloClient({
       // uri: "http://localhost:4000/graphql",
       // uri: "/graphql",
       uri: `${graphqlUri}`,
-      credentials: "include"
-    })
-
+      credentials: "include",
+    }),
   ]),
-  cache
+  cache,
 });
-
 
 // =======
 
@@ -156,12 +152,11 @@ const client = new ApolloClient({
   }
 }); */
 
-
 ReactDOM.render(
-<ApolloProvider client={client}>
-  <Provider store={store}>
-    <AppContainer />
-  </Provider>
+  <ApolloProvider client={client}>
+    <Provider store={store}>
+      <AppContainer />
+    </Provider>
   </ApolloProvider>,
   document.getElementById("root")
 );

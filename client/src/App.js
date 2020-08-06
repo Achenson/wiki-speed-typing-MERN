@@ -25,17 +25,15 @@ import { fetchWikiApi } from "./redux/actions/fetchPostAction.js";
 // import { BrowserRouter, Route, Link, Switch, Redirect, useHistory, HashRouter } from "react-router-dom";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 
-
 const environment = process.env.NODE_ENV;
 
 let refreshtokenUri;
 
 if (environment === "production") {
-  refreshtokenUri = "/refresh_token"
+  refreshtokenUri = "/refresh_token";
 } else {
-  refreshtokenUri = "http://localhost:4000/refresh_token"
+  refreshtokenUri = "http://localhost:4000/refresh_token";
 }
-
 
 //!!!!! imported actions creators must be passed here as props
 function App({
