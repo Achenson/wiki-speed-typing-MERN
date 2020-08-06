@@ -13,15 +13,15 @@ const sendRefreshToken = require("../middleware/sendRefreshToken.js");
 
 const sendEmail = require("../utils/sendEmail.js");
 
-const environment = process.env.NODE_ENV;
+// const environment = process.env.NODE_ENV;
 
-let passforgotUri;
+// let passforgotUri;
 
-if (environment === "production") {
+/* if (environment === "production") {
   passforgotUri = "/passforgot-change/"
 } else {
   passforgotUri = "http://localhost:3000/passforgot-change/";
-}
+} */
 
 
 const {
@@ -455,8 +455,8 @@ const Mutation = new GraphQLObjectType({
         await sendEmail(
           args.email,
           // `http://localhost:3000/passforgot-change/${token}`
-          // `/passforgot-change/${token}`
-          `${passforgotUri}${token}`
+          `/passforgot-change/${token}`
+          // `${passforgotUri}${token}`
         );
 
         return true;

@@ -26,15 +26,15 @@ import { fetchWikiApi } from "./redux/actions/fetchPostAction.js";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 
 
-const environment = process.env.NODE_ENV;
+// const environment = process.env.NODE_ENV;
 
-let refreshtokenUri;
+/* let refreshtokenUri;
 
 if (environment === "production") {
   refreshtokenUri = "/refresh_token"
 } else {
   refreshtokenUri = "http://localhost:4000/refresh_token"
-}
+} */
 
 
 //!!!!! imported actions creators must be passed here as props
@@ -66,8 +66,8 @@ function App({
 
   useEffect(() => {
     // fetch("http://localhost:4000/refresh_token", {
-    // fetch("/refresh_token", {
-    fetch(`${refreshtokenUri}`, {
+    fetch("/refresh_token", {
+    // fetch(`${refreshtokenUri}`, {
       method: "POST",
       credentials: "include",
     }).then((res) =>
