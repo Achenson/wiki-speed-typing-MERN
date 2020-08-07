@@ -93,6 +93,7 @@ and link send by email(password change) won't work
 
 7. app.js, index.js, schema.js -> logic dependent on if app is in production or development mode
 
+8 !!!!! store.js redux.devtools -> uncomment when in development!!!!
 
 issues:
 DONE 1. React: Login <Route> warning DONE
