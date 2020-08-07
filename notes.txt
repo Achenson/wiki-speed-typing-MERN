@@ -68,6 +68,32 @@ Display text rendering logic:
 - to properly display ellipsis & page counter
 to WikiDisplay
 
+============================
+Heroku deployment:
+
+0.heroku account
+1. server.js:
+- const PORT = process.env.PORT || 4000;
+- if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+} [heroku will autumaticaly config its vars so that NODE_ENV === "production"]
+
+2. scripts, so npm run build in the client run automatically on heroku
+// script "heroku-postbuild" <- this exact name!
+// script "start" <- also for heroku
+
+3. heroku site -> setting -> config vars -> add the save vars as in .env
+
+4. HashRouter instead of BrowserRouter!!! otherwise you won't be able to refresh routes other than main,
+and link send by email(password change) won't work
+
+5. heroku login -> heroku create... -> git push heroku master
+
+6.integrating with github -> heroku site -> deploy
+
+ 
+
+
 issues:
 DONE 1. React: Login <Route> warning DONE
 DONE 2. warning: SingleStat "key" DONE
@@ -122,7 +148,7 @@ DONE 16. change accessToken expiration in the end DONE
 DONE 17. notes(above) -> document all the jwt logic (also  revoking tokens) DONE
 DONE 18. fill all useEffect deps DONE
 DONE 19. Deployment? DONE
-19.5 write Deployment logic
+DONE 19.5 write Deployment logic DONE
 XXX 20. [optional] make 2 files out of schema? (resolvers &  ...) XX in a next project
 DONE 21. [optional] show authenticated user name(see jwt video) DONE
 DONE 22. password retrieval system? DONE 
