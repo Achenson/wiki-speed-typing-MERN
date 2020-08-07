@@ -454,7 +454,8 @@ const Mutation = new GraphQLObjectType({
         await sendEmail(
           args.email,
           // `http://localhost:3000/passforgot-change/${token}`
-          `https://wikispeedtyping.herokuapp.com/passforgot-change/${token}`
+          // `http://localhost:3000/#/passforgot-change/${token}`
+          `https://wikispeedtyping.herokuapp.com/#/passforgot-change/${token}`
           // `${passforgotUri}${token}`
         );
 
