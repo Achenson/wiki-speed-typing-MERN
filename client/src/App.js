@@ -33,7 +33,6 @@ let refreshtokenUri;
 if (environment === "production") {
   refreshtokenUri = "/refresh_token";
 } else {
-  // refreshtokenUri = "http://localhost:4000/refresh_token"
   refreshtokenUri = "http://localhost:4000/refresh_token"
 }
 
@@ -66,7 +65,6 @@ function App({
 
   useEffect(() => {
     // fetch("http://localhost:4000/refresh_token", {
-
     // fetch("/refresh_token", {
     fetch(`${refreshtokenUri}`, {
       method: "POST",

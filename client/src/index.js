@@ -24,7 +24,6 @@ let graphqlUri;
 if (environment === "production") {
   graphqlUri = "/graphql";
 } else {
-  // graphqlUri = "http://localhost:4000/graphql";
   graphqlUri = "http://localhost:4000/graphql";
 }
 
@@ -34,7 +33,6 @@ if (environment === "production") {
   refreshtokenUri = "/refresh_token";
 } else {
   refreshtokenUri = "http://localhost:4000/refresh_token"
-  // refreshtokenUri = "http://localhost:4000/refresh_token"
 }
 
 //  ========= refreshin token benawad
@@ -121,7 +119,6 @@ const client = new ApolloClient({
 
     new HttpLink({
       // uri: "http://localhost:4000/graphql",
-      
       // uri: "/graphql",
       uri: `${graphqlUri}`,
       credentials: "include"

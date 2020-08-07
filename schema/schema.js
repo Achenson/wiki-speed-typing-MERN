@@ -20,7 +20,6 @@ let passforgotUri;
 if (environment === "production") {
   passforgotUri = "https://wikispeedtyping.herokuapp.com/#/passforgot-change/"
 } else {
-  // passforgotUri = "http://localhost:3000/passforgot-change/";
   passforgotUri = "http://localhost:3000/passforgot-change/";
 }
 
@@ -455,8 +454,6 @@ const Mutation = new GraphQLObjectType({
         await sendEmail(
           args.email,
           // `http://localhost:3000/passforgot-change/${token}`
-          // `http://localhost:3000/#/passforgot-change/${token}`
-
           // `https://wikispeedtyping.herokuapp.com/#/passforgot-change/${token}`
           `${passforgotUri}${token}`
         );
