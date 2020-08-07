@@ -23,7 +23,7 @@ import CustomRouteAuthGuarded from "./components_links/CustomRoute_AuthGuarded.j
 import { fetchWikiApi } from "./redux/actions/fetchPostAction.js";
 
 // import { BrowserRouter, Route, Link, Switch, Redirect, useHistory, HashRouter } from "react-router-dom";
-import { Route, Switch, BrowserRouter } from "react-router-dom";
+import { Route, Switch, HashRouter} from "react-router-dom";
 
 
 // const environment = process.env.NODE_ENV;
@@ -159,8 +159,8 @@ function App({
     <div className="app-outer-container">
       <h3 className="title">Wiki Speed Typing</h3>
 
-      {/* <HashRouter> */}
-      <BrowserRouter>
+      <HashRouter>
+      {/* <BrowserRouter> */}
         {/* testing headers */}
         {/* <Link to="/test">Test</Link> */}
         <Switch>
@@ -216,8 +216,8 @@ function App({
 
           <Route render={() => <h1>404: page not found</h1>} />
         </Switch>
-      </BrowserRouter>
-      {/* </HashRouter> */}
+      {/* </BrowserRouter> */}
+      </HashRouter>
     </div>
   );
 }
