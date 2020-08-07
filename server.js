@@ -22,20 +22,28 @@ const sendRefreshToken = require("./middleware/sendRefreshToken.js");
 
 const app = express();
 // 1 step Heroku
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 4000;
 
 app.use(helmet());
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://localhost:4000", "http://localhost:5000"],
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:4000",
+      "http://localhost:5000",
+    ],
     credentials: true,
   })
 );
 
 // 2(3) step heroku
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static('client/build'))
+  app.use(express.static("client/build"));
+
+  app.get("/*", function (req, res) {
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
+  });
 }
 
 /* app.use((req, res, next) => {
@@ -167,9 +175,6 @@ app.use('/graphql', graphqlHTTP(
 // server.applyMiddleware({ app });
 
 apolloServer.applyMiddleware({ app, cors: false });
-
-
-
 
 // 3 step heroku -> scripts, so npm run build in the client run automatically on heroku
 // script "heroku-postbuild" <- this exact name!
