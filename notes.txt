@@ -121,7 +121,8 @@ DONE 15. commentOut Test (testing isAuth) in the end DONE
 DONE 16. change accessToken expiration in the end DONE
 DONE 17. notes(above) -> document all the jwt logic (also  revoking tokens) DONE
 DONE 18. fill all useEffect deps DONE
-19. Deployment? 
+DONE 19. Deployment? DONE
+19.5 write Deployment logic
 XXX 20. [optional] make 2 files out of schema? (resolvers &  ...) XX in a next project
 DONE 21. [optional] show authenticated user name(see jwt video) DONE
 DONE 22. password retrieval system? DONE 
