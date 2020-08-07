@@ -17,13 +17,14 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
 import { onError } from "apollo-link-error";
 
-// const environment = process.env.NODE_ENV;
+const environment = process.env.NODE_ENV;
 
-/* let graphqlUri;
+let graphqlUri;
 
 if (environment === "production") {
   graphqlUri = "/graphql";
 } else {
+  // graphqlUri = "http://localhost:4000/graphql";
   graphqlUri = "http://localhost:4000/graphql";
 }
 
@@ -33,7 +34,8 @@ if (environment === "production") {
   refreshtokenUri = "/refresh_token";
 } else {
   refreshtokenUri = "http://localhost:4000/refresh_token"
-} */
+  // refreshtokenUri = "http://localhost:4000/refresh_token"
+}
 
 //  ========= refreshin token benawad
 
@@ -94,8 +96,10 @@ const client = new ApolloClient({
       },
       fetchAccessToken: () => {
         // return fetch("http://localhost:4000/refresh_token", {
-        return fetch("/refresh_token", {
-        // return fetch(`${refreshtokenUri}`, {
+
+
+        // return fetch("/refresh_token", {
+        return fetch(`${refreshtokenUri}`, {
           method: "POST",
           credentials: "include",
         });
@@ -117,8 +121,9 @@ const client = new ApolloClient({
 
     new HttpLink({
       // uri: "http://localhost:4000/graphql",
-      uri: "/graphql",
-      // uri: `${graphqlUri}`,
+      
+      // uri: "/graphql",
+      uri: `${graphqlUri}`,
       credentials: "include"
     })
 

@@ -91,7 +91,7 @@ and link send by email(password change) won't work
 
 6.integrating with github -> heroku site -> deploy
 
- 
+7. app.js, index.js, schema.js -> logic dependent on if app is in production or development mode
 
 
 issues:
