@@ -39,7 +39,7 @@
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.19",
     "mongoose": "^5.9.10",
-    "nodemailer": "^6.4.10",
+    "nodemailer": "^6.4.16",
     "nodemon": "^2.0.3"
   },
   "devDependencies": {
