@@ -33,7 +33,3 @@ Open [http://localhost:4000/graphql](http://localhost:3000/graphql) for graphql 
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
-
-## License
-
-This project is licensed under the GNU General Public License, version 3 (GPLv3) - see the [LICENSE.md](LICENSE.md) file for details
