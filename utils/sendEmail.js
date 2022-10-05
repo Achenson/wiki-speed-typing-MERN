@@ -42,7 +42,11 @@ main().catch(console.error); */
 const nodemailer = require("nodemailer");
 
 module.exports = async function sendEmail(email, url) {
-  const nodemailerPass = process.env.NODEMAILER_PASS;
+
+  // const nodemailerPass = process.env.NODEMAILER_PASS;
+  const nodemailerAppPass = process.env.NODEMAILER_APP_PASS;
+
+
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
   const account = await nodemailer.createTestAccount();
@@ -62,11 +66,21 @@ module.exports = async function sendEmail(email, url) {
       rejectUnauthorized: false,
     },
  */
-    service: "gmail",
-    auth: {
-      user: "wikispeedtyping@gmail.com",
-      pass: nodemailerPass,
-    },
+
+// worked before, not anymore 
+    // service: "gmail",
+    // auth: {
+    //   user: "wikispeedtyping@gmail.com",
+    //   pass: nodemailerPass,
+    // },
+
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: 'wikispeedtyping@gmail.com',
+        pass: nodemailerAppPass,
+      },
   });
 
   const mailOptions = {
